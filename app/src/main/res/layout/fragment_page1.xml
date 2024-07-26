@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#3A55A0">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:src="@drawable/b" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="𝙍𝙀𝙎𝙐𝙈𝙀 𝘽𝙐𝙄𝙇𝘿𝙀𝙍"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text=" 𝐂𝐫𝐞𝐚𝐭𝐞 𝐚 𝐣𝐨𝐛 𝐰𝐢𝐧𝐧𝐢𝐧𝐠 𝐑𝐞𝐬𝐮𝐦𝐞 𝐢𝐧 𝐦𝐢𝐧𝐮𝐭𝐞𝐬"
+        android:textColor="@color/white"
+        android:textSize="19dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/swipebg"
+        android:gravity="center"
+        android:text="Swipe Next>>"
+        android:textColor="#021768"
+        android:textSize="20dp"
+        android:textStyle="italic" />
+</LinearLayout>

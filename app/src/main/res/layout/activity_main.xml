@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="800dp"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:backgroundTint="#3A55A0">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_weight="1"
+        android:src="@drawable/a" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="426dp"
+        android:background="#3A55A0"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="16dp"
+                android:text="ᴊᴜꜱᴛ ᴛʜʀᴇᴇ ꜱɪᴍᴘʟᴇ ꜱᴛᴇᴘꜱ"
+                android:textColor="#FBFBFB"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:paddingBottom="8dp"
+                android:text="𝟏. 𝐒𝐞𝐥𝐞𝐜𝐭 𝐓𝐞𝐦𝐩𝐥𝐚𝐭𝐞 𝐃𝐞𝐬𝐢𝐠𝐧"
+                android:textColor="#F6F4F4"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:paddingBottom="8dp"
+                android:text="𝟐. 𝐁𝐮𝐢𝐥𝐝 𝐲𝐨𝐮𝐫 𝐫𝐞𝐬𝐮𝐦𝐞"
+                android:textColor="#F6F6F6"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:paddingBottom="16dp"
+                android:text="𝟑. 𝐒𝐚𝐯𝐞 - 𝐝𝐨𝐰𝐧𝐥𝐨𝐚𝐝"
+                android:textColor="#FAF6F6"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:backgroundTint="#032E63"
+            android:id="@+id/continuee"
+            android:padding="16dp"
+            android:text="Continue"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+    </LinearLayout>
+</LinearLayout>
