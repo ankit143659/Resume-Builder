@@ -28,7 +28,7 @@
         android:padding="20dp" />
     <Button
         android:layout_width="match_parent"
-        android:id="@+id/home"
+        android:id="@+id/homebutton"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
