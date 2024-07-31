@@ -1,13 +1,16 @@
 package com.example.minorproject_resumebuilder
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 
 class RegistrationPage : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_page)
@@ -16,17 +19,23 @@ class RegistrationPage : AppCompatActivity() {
         val username : EditText = findViewById(R.id.editTextUsername)
         val emailId : EditText = findViewById(R.id.editTextEmail)
         val password : EditText = findViewById(R.id.editTextPassword)
-        val cpassword : EditText = findViewById(R.id.editTextConfirmPassword)
+        val phone : EditText = findViewById(R.id.ph)
+
+
+
 
         login.setOnClickListener{
+
             if(username.length()==0 || emailId.length()==0 || password.length()==0){
                 username.setError("Username required")
                 emailId.setError("EmailId required")
                 password.setError("Password required")
 
             }
-            else if(cpassword!==password){
-                cpassword.setError("Password does not match")
+
+            else if(phone.length()!=10){
+                phone.setError("10 digit phone number allowed")
+
             }
             else{
                 val I= Intent(this,LoginPage::class.java)

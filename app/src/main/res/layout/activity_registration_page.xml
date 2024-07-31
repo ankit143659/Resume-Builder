@@ -91,28 +91,29 @@
         android:inputType="textPassword" />
 
     <EditText
-        android:id="@+id/editTextConfirmPassword"
+        android:id="@+id/ph"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_below="@id/editTextPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/text_background"
-        android:drawableLeft="@drawable/baseline_lock_24"
+        android:drawableLeft="@drawable/baseline_phone_24"
         android:drawablePadding="10dp"
-        android:hint="Confirm password"
+        android:hint="Phone Number"
+        android:maxLength="10"
         android:textStyle="bold"
         android:padding="10dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="16sp"
-        android:inputType="textPassword" />
+        android:inputType="phone" />
 
     <TextView
         android:id="@+id/textViewTerms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextConfirmPassword"
+        android:layout_below="@id/ph"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:text="By registering, you are agreeing to our\nTerms of use and Privacy Policy."
