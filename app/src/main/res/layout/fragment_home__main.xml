@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".HomePage">
+
+
+    <TextView
+        android:id="@+id/tv_my_recent_cvs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="My Recent CVs"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+
+    <Button
+        android:id="@+id/btn_create_cv"
+        android:layout_width="377dp"
+        android:layout_height="75dp"
+        android:layout_below="@id/tv_my_recent_cvs"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:drawablePadding="50dp"
+        android:text="CREATE CV"
+        android:backgroundTint="#09388A"
+        android:paddingLeft="100dp"
+        android:paddingRight="130dp"
+        android:drawableLeft="@drawable/baseline_add_box_24"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="223dp"
+        android:layout_below="@id/btn_create_cv"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="190dp"
+            android:layout_height="150dp"
+            android:src="@drawable/main_bg" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="No recent CVs yet"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Start by creating your first CV!"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</RelativeLayout>
