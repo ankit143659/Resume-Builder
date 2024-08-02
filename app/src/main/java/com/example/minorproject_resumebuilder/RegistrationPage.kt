@@ -24,6 +24,7 @@ class RegistrationPage : AppCompatActivity() {
 
 
 
+
         login.setOnClickListener{
 
             if(username.length()==0 || emailId.length()==0 || password.length()==0){
@@ -38,8 +39,13 @@ class RegistrationPage : AppCompatActivity() {
 
             }
             else{
-                val I= Intent(this,LoginPage::class.java)
-                startActivity(I)
+                val User= username.text.toString()
+                val pass = password.text.toString()
+                val intent= Intent(this,LoginPage::class.java).apply {
+                    putExtra("user",User)
+                    putExtra("pass",pass)
+                }
+                startActivity(intent)
             }
         }
         regis.setOnClickListener{

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@id/imageViewHeader"
         android:text="𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐁𝐚𝐜𝐤"
         android:textColor="#FFFFFF"
@@ -37,24 +36,34 @@
         android:text="𝐋𝐨𝐠𝐢𝐧 𝐭𝐨 𝐲𝐨𝐮𝐫 𝐚𝐜𝐜𝐨𝐮𝐧𝐭"
         android:textColor="#FFFFFF"
         android:textSize="16sp" />
+    <TextView
+        android:id="@+id/usernotexit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewSubtitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:textColor="#F60707"
+        android:textSize="13sp" />
 
     <EditText
         android:id="@+id/Username"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_below="@id/textViewSubtitle"
+        android:layout_below="@id/usernotexit"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/black"
         android:layout_centerHorizontal="true"
         android:drawableLeft="@drawable/baseline_person_24"
         android:hint="Username"
         android:textStyle="bold"
-        android:inputType="textPassword"
+        android:inputType="text"
         android:drawablePadding="17dp"
+        android:textColor="@color/black"
         android:paddingLeft="10dp"
         android:textColorHint="@color/black"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/text_background"></EditText>
+        android:layout_marginTop="5dp"
+        android:background="@drawable/text_background" />
 
     <EditText
         android:id="@+id/Password"
@@ -70,6 +79,7 @@
         android:inputType="textPassword"
         android:drawablePadding="17dp"
         android:paddingLeft="10dp"
+        android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:layout_marginTop="30dp"
         android:background="@drawable/text_background">
@@ -85,9 +95,8 @@
         android:layout_marginTop="10dp"
         android:layout_alignParentStart="true"
         android:layout_marginStart="50dp"
-        android:buttonTint="@color/black"
         android:text="Remember me"
-        android:textColor="#FFFFFF" />
+        android:textColor="#AEAFB1" />
 
     <TextView
         android:id="@+id/textViewForgotPassword"
@@ -111,7 +120,7 @@
         android:backgroundTint="#032E63"
         android:text="LOGIN"
         android:onClick="log"
-        android:textColor="#FFFFFF"
+        android:textColor="#D7D0D0"
         android:textSize="18sp" />
 
     <TextView
