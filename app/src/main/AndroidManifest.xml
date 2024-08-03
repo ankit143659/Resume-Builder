@@ -13,7 +13,7 @@
         android:theme="@style/Theme.MinorProject_ResumeBuilder"
         tools:targetApi="31">
         <activity
-            android:name=".Loading_page"
+            android:name=".MainActivity"
             android:exported="true">
         </activity>
         <activity
@@ -32,7 +32,7 @@
             android:name=".LoginPage"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Loading_page"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
