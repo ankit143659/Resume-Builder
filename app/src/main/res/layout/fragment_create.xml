@@ -12,13 +12,15 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        android:padding="7dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_marginTop="14dp"
+            android:layout_gravity="start"
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -35,7 +37,7 @@
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/card_background"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="9dp">
 
                 <ImageView
                     android:layout_width="40dp"
@@ -58,13 +60,13 @@
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/card_background"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="9dp">
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginEnd="16dp"
-                    android:src="@drawable/education" />
+                    android:src="@drawable/ed" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -80,7 +82,7 @@
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/card_background"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="9dp">
 
                 <ImageView
                     android:layout_width="40dp"
@@ -102,7 +104,7 @@
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/card_background"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="9dp">
 
                 <ImageView
                     android:layout_width="40dp"
@@ -124,7 +126,7 @@
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/card_background"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="9dp">
 
                 <ImageView
                     android:layout_width="40dp"
