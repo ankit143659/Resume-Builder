@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:backgroundTint="#3A55A0"
+    android:background="@drawable/header_background"
     tools:context=".Create">
 
 
@@ -18,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="30dp"
             android:layout_gravity="start"
             >
             <TextView
@@ -37,6 +36,9 @@
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/card_background"
                 android:orientation="horizontal"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:padding="9dp">
 
                 <ImageView
@@ -59,6 +61,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/card_background"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:orientation="horizontal"
                 android:padding="9dp">
 
@@ -81,6 +85,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/card_background"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:orientation="horizontal"
                 android:padding="9dp">
 
@@ -103,6 +109,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/card_background"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:orientation="horizontal"
                 android:padding="9dp">
 
@@ -125,6 +133,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/card_background"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:orientation="horizontal"
                 android:padding="9dp">
 
@@ -146,7 +156,7 @@
                 android:layout_width="150dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="50dp"
                 android:backgroundTint="#093889"
                 android:padding="10dp"
                 android:text="Save"
