@@ -52,21 +52,21 @@
             android:id="@+id/instagram_icon"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="16dp"
+
             android:src="@drawable/insta" />
 
         <ImageView
             android:id="@+id/twitter_icon"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="16dp"
+
             android:src="@drawable/twitter" />
 
         <ImageView
             android:id="@+id/facebook_icon"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="16dp"
+
             android:src="@drawable/facebook" />
 
         <ImageView
@@ -88,39 +88,39 @@
 
         <Button
             android:id="@+id/join_contest_button"
-            android:layout_width="match_parent"
-            android:layout_height="61dp"
-            android:layout_marginTop="17dp"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"
+            android:layout_marginTop="17dp"
             android:layout_marginRight="18dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/white"
             android:text="Guide Lines"
             android:textColor="@color/black"
-            android:textSize="23sp" />
+            android:textSize="17sp" />
 
         <Button
             android:id="@+id/sponsored_products_button"
-            android:layout_width="match_parent"
-            android:layout_height="61dp"
-            android:text="About us"
-            android:textSize="23sp"
+            android:layout_width="349dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"
             android:layout_marginRight="18dp"
-            android:textColor="@color/black"
+            android:layout_marginBottom="16dp"
             android:backgroundTint="@color/white"
-            android:layout_marginBottom="16dp" />
+            android:text="About us"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
 
         <Button
             android:id="@+id/partnerships_button"
-            android:layout_width="match_parent"
-            android:layout_height="61dp"
+            android:layout_width="351dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"
             android:layout_marginRight="18dp"
-            android:textSize="23sp"
             android:backgroundTint="@color/white"
+            android:text="Help ?"
             android:textColor="@color/black"
-            android:text="Help ?" />
+            android:textSize="17sp" />
 
 
         <Button
