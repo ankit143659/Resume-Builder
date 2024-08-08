@@ -1,5 +1,6 @@
 package com.example.minorproject_resumebuilder
 
+
 import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +28,8 @@ class RegistrationPage : AppCompatActivity() {
 
         login.setOnClickListener{
 
+
+
             if(username.length()==0 || emailId.length()==0 || password.length()==0){
                 username.setError("Username required")
                 emailId.setError("EmailId required")
@@ -39,18 +42,28 @@ class RegistrationPage : AppCompatActivity() {
 
             }
             else{
+                Dataholder.username = username.text.toString()
+                Dataholder.email = emailId.text.toString()
+                Dataholder.ph = phone.text.toString()
+
                 val User= username.text.toString()
                 val pass = password.text.toString()
+
                 val intent= Intent(this,LoginPage::class.java).apply {
                     putExtra("user",User)
                     putExtra("pass",pass)
                 }
                 startActivity(intent)
+
             }
+
         }
         regis.setOnClickListener{
             val I= Intent(this,LoginPage::class.java)
             startActivity(I)
         }
+
     }
+
+
 }
