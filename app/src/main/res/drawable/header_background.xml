@@ -8,6 +8,7 @@
             <solid android:color="@color/black">
 
             </solid>
+            <corners android:radius="10dp"></corners>
         </shape>
 
     </item>
@@ -16,7 +17,7 @@
             <size
                 android:width="30dp"
                 android:height="5dp" />
-            <solid android:color="@color/black">
+            <solid android:color="#050A3A">
 
             </solid>
         </shape>
