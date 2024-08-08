@@ -44,7 +44,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/l1"
@@ -58,6 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_marginLeft="2dp"
+                android:textColor="@color/black"
                 android:gravity="center"
                 android:text="𝐔𝐬𝐞𝐫𝐧𝐚𝐦𝐞 :"
                 android:textSize="23sp" />
@@ -91,12 +92,13 @@
                 android:layout_marginLeft="2dp"
                 android:gravity="center"
                 android:text="𝐄𝐦𝐚𝐢𝐥 𝐈𝐝  :"
+                android:textColor="@color/black"
                 android:textSize="23sp" />
 
             <TextView
                 android:layout_width="193dp"
                 android:layout_height="45dp"
-                android:layout_marginLeft="23dp"
+                android:layout_marginLeft="25dp"
                 android:background="@drawable/textviewbg"
                 android:gravity="center"
                 android:paddingLeft="6dp"
@@ -123,7 +125,7 @@
                 android:layout_height="35dp"
                 android:layout_marginLeft="2dp"
                 android:gravity="center"
-                android:text="Phone No :"
+                android:text="𝐏𝐡𝐨𝐧𝐞 𝐍𝐨 :"
                 android:textSize="23sp" />
 
             <TextView
@@ -148,7 +150,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/l3"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
             android:backgroundTint="#0A1B57"
             android:text="About Us"
             android:textSize="17sp" />
@@ -170,7 +173,7 @@
             android:layout_height="120px"
             android:layout_below="@id/help"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="8dp"
             android:backgroundTint="#A60606"
