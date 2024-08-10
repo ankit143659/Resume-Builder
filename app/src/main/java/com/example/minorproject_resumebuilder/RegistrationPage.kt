@@ -20,13 +20,12 @@ class RegistrationPage : AppCompatActivity() {
         setContentView(R.layout.activity_registration_page)
         val login: Button =findViewById(R.id.buttonRegister);
         val regis: TextView =findViewById(R.id.textViewLogin);
+        dbHelper=SQLiteHelper(this)
 
         val Username : EditText = findViewById(R.id.editTextUsername)
         val emailId : EditText = findViewById(R.id.editTextEmail)
         val Password : EditText = findViewById(R.id.editTextPassword)
         val phone : EditText = findViewById(R.id.ph)
-
-        dbHelper=SQLiteHelper(this)
 
 
 
@@ -52,7 +51,7 @@ class RegistrationPage : AppCompatActivity() {
             else{
                 val user = User(username = username, password = password, email = email, phone = Phone)
                 val result = dbHelper.addUser(user)
-                if (result > -1) {
+                if (result > 0) {
                     Toast.makeText(this, "Registration Successful", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, LoginPage::class.java)
                     startActivity(intent)

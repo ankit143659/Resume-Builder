@@ -27,23 +27,6 @@ class LoginPage : AppCompatActivity() {
         login.setOnClickListener{
             val username=Username.text.toString()
             val password = Password.text.toString()
-
-            if (username.isNotEmpty() && password.isNotEmpty()) {
-                val isValidUser = dbHelper.checkUser(username, password)
-                if (isValidUser) {
-                    Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, ViewPager::class.java)
-                    intent.putExtra("username", username)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    usernotexit.setText("Invalid username or Password")
-                    Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
-            }
-
         }
         regis.setOnClickListener{
             val I= Intent(this,RegistrationPage::class.java)
