@@ -132,7 +132,7 @@
                 android:textSize="23sp" />
 
             <TextView
-                android:id="@+id/phno"
+                android:id="@+id/phone"
                 android:layout_width="193dp"
                 android:layout_height="45dp"
                 android:layout_marginLeft="20dp"

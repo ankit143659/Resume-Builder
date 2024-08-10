@@ -22,6 +22,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.util.Base64
@@ -29,6 +30,8 @@ import java.util.Base64
 
 @Suppress("DEPRECATION")
 class Profile : Fragment() {
+
+    private lateinit var dbHelper: SQLiteHelper
 
     private lateinit var imageView: ImageView
     private lateinit var button: Button
@@ -38,6 +41,13 @@ class Profile : Fragment() {
 
     companion object{
         val IMAGE_REQUEST_CODE=100
+        fun newInstance(username: String): Profile {
+            val fragment = Profile()
+            val args = Bundle()
+            args.putString("username", username)
+            fragment.arguments = args
+            return fragment
+        }
     }
 
     @SuppressLint("MissingInflatedId")
@@ -46,17 +56,22 @@ class Profile : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view :View= inflater.inflate(R.layout.fragment_profile, container, false)
-
-       /* val name : TextView = view.findViewById(R.id.name)
-        val email : TextView = view.findViewById(R.id.email)
-        val phone : TextView = view.findViewById(R.id.ph)
-
-        name.text= Dataholder.username ?: "N/A"
-        email.text = Dataholder.email ?: "N/A"
-        phone.text = Dataholder.ph ?: "N/A"*/
-
-
         val btn : Button = view.findViewById(R.id.logout)
+        val name : Button = view.findViewById(R.id.name)
+        val email : Button = view.findViewById(R.id.email)
+        val phone : Button = view.findViewById(R.id.phone)
+
+        val username = arguments?.getString("username")
+
+        if ( username!= null) {
+            val user = dbHelper.getUserDetails(username)
+            if (user != null) {
+                name.text = user.username
+                email.text = user.email
+                phone.text= user.phone
+
+            }
+        }
 
 
 
@@ -87,6 +102,8 @@ class Profile : Fragment() {
             imageView.setImageURI(data?.data)
             }
         }
+
+
     }
 
 

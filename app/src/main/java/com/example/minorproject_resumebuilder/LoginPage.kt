@@ -8,9 +8,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
 
 class LoginPage : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
+    private lateinit var dbHelper: SQLiteHelper
+    @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_page)
@@ -18,25 +20,28 @@ class LoginPage : AppCompatActivity() {
         val regis: TextView =findViewById(R.id.textViewSignUp);
         val Username: EditText=findViewById(R.id.Username)
         val Password : EditText = findViewById(R.id.Password)
-        val intent=intent
-        val user = intent.getStringExtra("user")
-        val pass = intent.getStringExtra("pass")
         val usernotexit :TextView = findViewById(R.id.usernotexit)
 
-
+        dbHelper=SQLiteHelper(this)
 
         login.setOnClickListener{
             val username=Username.text.toString()
             val password = Password.text.toString()
-            if(username!=user || password!=pass ){
-                usernotexit.setText("* Invalid username or password !!")
-                Username.setText("")
-                Password.setText("")
-            }
-            else{
-                Toast.makeText(this, "Succesfully Login", Toast.LENGTH_SHORT).show()
-                val I= Intent(this,ViewPager::class.java)
-                startActivity(I)
+
+            if (username.isNotEmpty() && password.isNotEmpty()) {
+                val isValidUser = dbHelper.checkUser(username, password)
+                if (isValidUser) {
+                    Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, ViewPager::class.java)
+                    intent.putExtra("username", username)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    usernotexit.setText("Invalid username or Password")
+                    Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
 
         }

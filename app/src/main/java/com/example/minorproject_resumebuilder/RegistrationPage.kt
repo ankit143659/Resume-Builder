@@ -9,31 +9,39 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.User
 
 class RegistrationPage : AppCompatActivity() {
+    private lateinit var dbHelper: SQLiteHelper
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_page)
         val login: Button =findViewById(R.id.buttonRegister);
         val regis: TextView =findViewById(R.id.textViewLogin);
-        val username : EditText = findViewById(R.id.editTextUsername)
+
+        val Username : EditText = findViewById(R.id.editTextUsername)
         val emailId : EditText = findViewById(R.id.editTextEmail)
-        val password : EditText = findViewById(R.id.editTextPassword)
+        val Password : EditText = findViewById(R.id.editTextPassword)
         val phone : EditText = findViewById(R.id.ph)
 
-
+        dbHelper=SQLiteHelper(this)
 
 
 
         login.setOnClickListener{
 
+            val username = Username.text.toString()
+            val password = Password.text.toString()
+            val email = emailId.text.toString()
+            val Phone = phone.text.toString()
 
 
-            if(username.length()==0 || emailId.length()==0 || password.length()==0){
-                username.setError("Username required")
+            if(Username.length()==0 || emailId.length()==0 || Password.length()==0){
+                Username.setError("Username required")
                 emailId.setError("EmailId required")
-                password.setError("Password required")
+                Password.setError("Password required")
 
             }
 
@@ -42,18 +50,17 @@ class RegistrationPage : AppCompatActivity() {
 
             }
             else{
-                Dataholder.username = username.text.toString()
-                Dataholder.email = emailId.text.toString()
-                Dataholder.ph = phone.text.toString()
-
-                val User= username.text.toString()
-                val pass = password.text.toString()
-
-                val intent= Intent(this,LoginPage::class.java).apply {
-                    putExtra("user",User)
-                    putExtra("pass",pass)
+                val user = User(username = username, password = password, email = email, phone = Phone)
+                val result = dbHelper.addUser(user)
+                if (result > -1) {
+                    Toast.makeText(this, "Registration Successful", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, LoginPage::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    Toast.makeText(this, "Registration Failed", Toast.LENGTH_SHORT).show()
                 }
-                startActivity(intent)
+
 
             }
 
