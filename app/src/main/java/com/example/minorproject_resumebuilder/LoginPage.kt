@@ -27,6 +27,14 @@ class LoginPage : AppCompatActivity() {
         login.setOnClickListener{
             val username=Username.text.toString()
             val password = Password.text.toString()
+
+            val userExists = dbHelper.checkUser(username,password)
+
+            if (userExists){
+                Toast.makeText(this,"login SuccesFully",Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, HomePage::class.java)
+                startActivity(intent)
+            }
         }
         regis.setOnClickListener{
             val I= Intent(this,RegistrationPage::class.java)

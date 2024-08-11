@@ -9,8 +9,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import android.util.Patterns
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
-import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.User
 
 class RegistrationPage : AppCompatActivity() {
     private lateinit var dbHelper: SQLiteHelper
@@ -37,21 +37,29 @@ class RegistrationPage : AppCompatActivity() {
             val Phone = phone.text.toString()
 
 
-            if(Username.length()==0 || emailId.length()==0 || Password.length()==0){
+            if(Username.length()<3 && Username.length()>15 || emailId.length()==0 || Password.length()==0){
                 Username.setError("Username required")
                 emailId.setError("EmailId required")
                 Password.setError("Password required")
-
-            }
-
-            else if(phone.length()!=10){
+            }else if(phone.length()!=10){
                 phone.setError("10 digit phone number allowed")
-
+            }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                emailId.setError("Invalid Email Format")
+            }else if (!password.matches(Regex(".*[A-Z].*"))){
+                Password.setError("Passwor must contain a Capital Letter,small letter.digits and atleast a single special Charachter")
+            }else if (!password.matches(Regex(".*[a-z].*"))){
+                Password.setError("Passwor must contain a Capital Letter,small letter.digits and atleast a single special Charachter")
+            }else if (!password.matches(Regex(".*[0-9].*"))){
+                Password.setError("Passwor must contain a Capital Letter,small letter.digits and atleast a single special Charachter")
+            }else if (!password.matches(Regex(".*[!@#$%^&*()_+=|<>{}\\[\\]~-].*"))){
+                Password.setError("Passwor must contain a Capital Letter,small letter.digits and atleast a single special Charachter")
+            }else if (!username.matches(Regex(".^[a-zA-z0-9]+$"))){
+                Password.setError("Username can contain only letters and alphabets")
             }
+
             else{
-                val user = User(username = username, password = password, email = email, phone = Phone)
-                val result = dbHelper.addUser(user)
-                if (result > 0) {
+                val result = dbHelper.addUser(username,password,email,Phone)
+                if (result != -1L) {
                     Toast.makeText(this, "Registration Successful", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, LoginPage::class.java)
                     startActivity(intent)

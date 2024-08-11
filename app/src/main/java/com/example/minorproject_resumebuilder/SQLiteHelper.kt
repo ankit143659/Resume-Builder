@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 
-data class User(val id: Int = 0, val username: String, val password: String, val email: String, val phone:String)
 
 class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -20,7 +19,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         private const val COLUMN_PASSWORD = "password"
         private const val COLUMN_EMAIL = "email"
         private const val COLUMN_PHONE = "phone"
-        private const val COLUMN_NAME = "name"
+
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -28,65 +27,47 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COLUMN_USERNAME + " TEXT UNIQUE NOT NULL"
                 + COLUMN_PASSWORD + " TEXT NOT NULL,"
-                + COLUMN_NAME + " TEXT NOT NULL,"
                 + COLUMN_EMAIL + " TEXT UNIQUE NOT NULL,"
                 + COLUMN_PHONE + " TEXT UNIQUE NOT NULL," + " )")
-        db.execSQL(createTable)
+        db?.execSQL(createTable)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
+        db?.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
         onCreate(db)
     }
 
-    fun addUser(user: User): Long {
-        val db = this.writableDatabase
+    fun addUser(username : String, password : String, email:String, phone : String): Long {
         val contentValues = ContentValues()
-        contentValues.put(COLUMN_USERNAME, user.username)
-        contentValues.put(COLUMN_PASSWORD, user.password)
-        contentValues.put(COLUMN_EMAIL, user.email)
-        contentValues.put(COLUMN_PHONE, user.phone)
+        contentValues.put(COLUMN_USERNAME,username)
+        contentValues.put(COLUMN_PASSWORD,password)
+        contentValues.put(COLUMN_EMAIL,email)
+        contentValues.put(COLUMN_PHONE,phone)
 
-        val success = db.insert(TABLE_NAME, null, contentValues)
-        db.close()
-        return success
+        val db = writableDatabase
+        return db.insert(TABLE_NAME, null, contentValues)
     }
 
     fun checkUser(username: String, password: String): Boolean {
-        val db = this.readableDatabase
-        val cursor: Cursor = db.query(
-            TABLE_NAME, arrayOf(COLUMN_ID),
-            "$COLUMN_USERNAME = ? AND $COLUMN_PASSWORD = ?", arrayOf(username, password),
-            null, null, null
+        val db = readableDatabase
+        val selection = "$COLUMN_USERNAME = ? AND $COLUMN_PASSWORD"
+        val selectionArgs = arrayOf(username,password)
+        val cursor: Cursor = db.query( TABLE_NAME,null,selection,selectionArgs,null,null,null
         )
 
         val count = cursor.count
         cursor.close()
-        db.close()
-        return count > 0
+        return count
     }
 
-    fun getUserDetails(username: String): User? {
-        val db = this.readableDatabase
-        var user: User? = null
-        val cursor: Cursor = db.query(
+    fun getUserDetails(username: String): Cursor? {
+        val db = readableDatabase
+        return db.query(
             TABLE_NAME,
             arrayOf(COLUMN_ID, COLUMN_USERNAME, COLUMN_PASSWORD, COLUMN_EMAIL, COLUMN_PHONE),
             "$COLUMN_USERNAME = ?",
             arrayOf(username),
             null, null, null
         )
-
-        if (cursor.moveToFirst()) {
-            val id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID))
-            val fetchedUsername = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_USERNAME))
-            val password = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD))
-            val email = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL))
-            val phone = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PHONE))
-            user = User(id, fetchedUsername, password, email,phone)
-        }
-        cursor.close()
-        db.close()
-        return user
     }
 }

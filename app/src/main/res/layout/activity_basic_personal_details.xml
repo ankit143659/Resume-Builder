@@ -7,10 +7,10 @@
     android:layout_height="match_parent">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:textColor="@color/white"
         android:id="@+id/a"
-        android:paddingTop="15dp"
+        android:paddingTop="19dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:paddingLeft="17dp"
@@ -34,14 +34,23 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_picture"
                 android:layout_width="118dp"
                 android:layout_height="101dp"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="60dp"
-                android:src="@drawable/resumr">
+                android:src="@mipmap/ic_launcher"
+                app:civ_border_color="@color/black"
+                app:civ_border_width="5dp" />
 
-            </ImageView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Add profile Picture"
+                android:layout_gravity="center"
+                android:gravity="start"
+                android:textStyle="bold"
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -54,14 +63,20 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/resumr" />
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/baseline_person_24" />
 
                 <EditText
                     android:layout_width="229dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:hint="First Name"
-                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:gravity="start"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
                     android:background="@drawable/edit_bg" />
 
             </LinearLayout>
@@ -74,17 +89,19 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/resumr" />
+
 
                 <EditText
                     android:layout_width="229dp"
                     android:layout_height="50dp"
                     android:hint="Last Name"
-                    android:gravity="center"
-                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:gravity="start"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:layout_marginLeft="40dp"
                     android:background="@drawable/edit_bg" />
 
             </LinearLayout>
@@ -100,14 +117,20 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/resumr" />
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/baseline_email_24" />
 
                 <EditText
                     android:layout_width="229dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:hint="Email Address"
-                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:gravity="start"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
                     android:background="@drawable/edit_bg" />
 
             </LinearLayout>
@@ -123,14 +146,20 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/resumr" />
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/baseline_phone_24" />
 
                 <EditText
                     android:layout_width="229dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:hint="Phone"
-                    android:gravity="center"
+                    android:gravity="start"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
                     android:background="@drawable/edit_bg" />
 
             </LinearLayout>
@@ -146,14 +175,20 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/resumr" />
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/baseline_flag_24" />
 
                 <EditText
                     android:layout_width="229dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:hint="Nationality"
-                    android:gravity="center"
+                    android:gravity="start"
+                    android:paddingLeft="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:paddingTop="10dp"
                     android:background="@drawable/edit_bg" />
 
             </LinearLayout>
@@ -169,24 +204,72 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/resumr" />
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/baseline_calendar_month_24" />
 
                 <EditText
                     android:layout_width="229dp"
                     android:layout_height="50dp"
                     android:hint="D.O.B"
-                    android:gravity="center"
+                    android:gravity="start"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/edit_bg" />
 
             </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="start"
+                android:padding="10dp"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/baseline_lock_24" />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginLeft="25dp"
+                    android:text="Male" />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="15dp"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:text="Female" />
+
+
+            </LinearLayout>
+
             <Button
-                android:layout_width="109dp"
-                android:layout_height="50dp"
+                android:layout_width="129dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#050A3A"
+                android:textColor="@color/white"
+                android:textSize="20sp"
                 android:text="Save" />
 
 

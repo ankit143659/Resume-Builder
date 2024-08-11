@@ -63,7 +63,7 @@ class Profile : Fragment() {
 
         val username = arguments?.getString("username")
 
-        if ( username!= null) {
+        /*if ( username!= null) {
             val user = dbHelper.getUserDetails(username)
             if (user != null) {
                 name.text = user.username
@@ -71,7 +71,7 @@ class Profile : Fragment() {
                 phone.text= user.phone
 
             }
-        }
+        }*/
 
 
 
