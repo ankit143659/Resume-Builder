@@ -15,10 +15,7 @@
         android:label="Downloads"
         tools:layout="@layout/fragment_downloads"/>
 
-    <fragment android:id="@+id/navigation_create"
-        android:name="com.example.minorproject_resumebuilder.Create"
-        android:label="Create"
-        tools:layout="@layout/fragment_create"/>
+
 
 
     <fragment android:id="@+id/navigation_settings"

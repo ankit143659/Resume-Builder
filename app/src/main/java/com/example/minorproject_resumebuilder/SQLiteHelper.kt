@@ -28,7 +28,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                 + COLUMN_USERNAME + " TEXT UNIQUE NOT NULL"
                 + COLUMN_PASSWORD + " TEXT NOT NULL,"
                 + COLUMN_EMAIL + " TEXT UNIQUE NOT NULL,"
-                + COLUMN_PHONE + " TEXT UNIQUE NOT NULL," + " )")
+                + COLUMN_PHONE + " NUMBER UNIQUE NOT NULL," + " )")
         db?.execSQL(createTable)
     }
 

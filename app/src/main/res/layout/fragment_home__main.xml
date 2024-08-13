@@ -34,7 +34,7 @@
         android:text="CREATE CV"
         android:backgroundTint="#09388A"
         android:paddingLeft="100dp"
-        android:paddingRight="130dp"
+        android:paddingRight="100dp"
         android:drawableLeft="@drawable/baseline_add_box_24"
         android:textColor="@color/white"
         android:textSize="15dp"
