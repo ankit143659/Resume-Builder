@@ -15,7 +15,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.minorproject_resumebuilder.Profile.Companion.IMAGE_REQUEST_CODE
+
 
 class Basic_personal_details : AppCompatActivity() {
 
@@ -36,12 +36,11 @@ class Basic_personal_details : AppCompatActivity() {
         }
 
         photo.setOnClickListener {
-            // Launch the image picker
+
             imagePickerLauncher.launch("image/*")
         }
     }
 
-    // Define ActivityResultLauncher for image picking
     private val imagePickerLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         if (uri != null) {
             photo.setImageURI(uri)

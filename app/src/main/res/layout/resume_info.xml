@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="25dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:text="Enter Resume Details">
+
+        </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:text="Resume Name:">
+            </TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/edit_bg">
+
+            </EditText>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Date:"
+                android:textColor="@color/black"
+                android:textSize="20dp"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/edit_bg">
+
+            </EditText>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/yes"
+                android:textColor="@color/white"
+                android:backgroundTint="#E20808"
+                android:text="Create"
+                android:textSize="20sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/no"
+                android:backgroundTint="#636161"
+                android:layout_marginLeft="20dp"
+                android:text="Cancel"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
