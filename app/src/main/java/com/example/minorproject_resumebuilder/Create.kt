@@ -10,16 +10,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Create.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Create : Fragment() {
 
 
@@ -35,7 +25,6 @@ class Create : Fragment() {
         Btn.setOnClickListener {
             val intent = Intent(activity, Basic_personal_details::class.java)
             startActivity(intent)
-            activity?.finish()
         }
 
         return view

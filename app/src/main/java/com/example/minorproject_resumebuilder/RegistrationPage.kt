@@ -58,15 +58,15 @@ class RegistrationPage : AppCompatActivity() {
             }*/
 
             else{
-                val result = dbHelper.addUser(username,password,email,Phone)
-                if (result != -1L) {
+               // val result = dbHelper.addUser(username,password,email,Phone)
+                //if (result != -1L) {
                     Toast.makeText(this, "Registration Successful", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, LoginPage::class.java)
                     startActivity(intent)
-                    finish()
-                } else {
-                    Toast.makeText(this, "Registration Failed", Toast.LENGTH_SHORT).show()
-                }
+                    //finish()
+                //} else {
+                  //  Toast.makeText(this, "Registration Failed", Toast.LENGTH_SHORT).show()
+                //}
 
 
             }

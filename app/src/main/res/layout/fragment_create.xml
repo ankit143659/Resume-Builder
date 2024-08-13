@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:paddingLeft="17dp"
-        android:background="@drawable/header_background"
+        android:background="#093889"
         android:text="Enter Your Details"
         android:textSize="25sp">
     </TextView>
@@ -40,7 +40,8 @@
                 android:layout_width="match_parent"
                 android:layout_marginBottom="10dp"
                 android:elevation="20dp"
-                android:background="@drawable/card_background"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -74,6 +75,7 @@
                 android:layout_marginBottom="10dp"
                 android:elevation="20dp"
                 app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@color/white"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -92,7 +94,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginEnd="16dp"
-                        android:src="@drawable/personal" />
+                        android:src="@drawable/education" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -105,6 +107,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="@color/white"
                 android:elevation="20dp"
                 android:layout_marginTop="10dp"
                 app:cardCornerRadius="16dp"
@@ -125,7 +128,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginEnd="16dp"
-                        android:src="@drawable/personal" />
+                        android:src="@drawable/skill_vd" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -140,6 +143,7 @@
                 android:layout_marginBottom="10dp"
                 android:elevation="20dp"
                 android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -158,7 +162,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginEnd="16dp"
-                        android:src="@drawable/personal" />
+                        android:src="@drawable/pj" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -175,6 +179,7 @@
                 android:layout_marginTop="10dp"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
+                app:cardBackgroundColor="@color/white"
                 android:layout_marginRight="10dp"
                 android:padding="10dp"
                 android:layout_height="wrap_content">
@@ -191,7 +196,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginEnd="16dp"
-                        android:src="@drawable/personal" />
+                        android:src="@drawable/exp" />
 
                     <TextView
                         android:layout_width="wrap_content"
