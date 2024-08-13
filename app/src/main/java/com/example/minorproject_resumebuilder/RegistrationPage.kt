@@ -53,9 +53,9 @@ class RegistrationPage : AppCompatActivity() {
                 Password.setError("Passwor must contain a Capital Letter,small letter.digits and atleast a single special Charachter")
             }else if (!password.matches(Regex(".*[!@#$%^&*()_+=|<>{}\\[\\]~-].*"))){
                 Password.setError("Passwor must contain a Capital Letter,small letter.digits and atleast a single special Charachter")
-            }else if (!username.matches(Regex(".^[a-zA-z0-9]+$"))){
-                Password.setError("Username can contain only letters and alphabets")
-            }
+            }/*else if (!username.matches(Regex(".^[a-zA-z0-9]+$"))){
+                Username.setError("Username can contain only letters and alphabets")
+            }*/
 
             else{
                 val result = dbHelper.addUser(username,password,email,Phone)

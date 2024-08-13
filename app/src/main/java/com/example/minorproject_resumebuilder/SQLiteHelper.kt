@@ -55,7 +55,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         val cursor: Cursor = db.query( TABLE_NAME,null,selection,selectionArgs,null,null,null
         )
 
-        val count = cursor.count
+        val count = cursor.count>0
         cursor.close()
         return count
     }
