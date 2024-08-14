@@ -32,7 +32,7 @@ class LoginPage : AppCompatActivity() {
 
             //if (userExists){
                 Toast.makeText(this,"login SuccesFully",Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, HomePage::class.java)
+                val intent = Intent(this, ViewPager::class.java)
                 startActivity(intent)
             //}
         }

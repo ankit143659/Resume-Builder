@@ -1,17 +1,24 @@
 package com.example.minorproject_resumebuilder
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
-import android.app.AlertDialog
+
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import java.text.SimpleDateFormat
+import java.util.*
 
-class home_Main : Fragment(R.layout.fragment_home__main) {
+class home_Main : Fragment() {
+
+    private val calendar = Calendar.getInstance()
 
 
     @SuppressLint("MissingInflatedId")
@@ -29,13 +36,26 @@ class home_Main : Fragment(R.layout.fragment_home__main) {
             val create : Button= dailogView.findViewById(R.id.create)
             val cancle : Button= dailogView.findViewById(R.id.no)
             val name : EditText = dailogView.findViewById(R.id.et1)
-            val date: EditText = dailogView.findViewById(R.id.et2)
+            val date : TextView = dailogView.findViewById(R.id.et2)
 
             val alertDialog = dailog.create()
+
+            date.setOnClickListener{
+                val datepicker = DatePickerDialog(requireContext(),{ _,year,month,dayOfmonth ->
+                    val selectDate = Calendar.getInstance()
+                    selectDate.set(year,month,dayOfmonth)
+                    val dateFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
+                    date.setText(dateFormat.format(selectDate.time))
+                }, calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH)
+                )
+                datepicker.show()
+            }
             create.setOnClickListener{
                 if(name.length()!=0)
                 {
-                    val intent = Intent(activity,Basic_personal_details::class.java)
+                    val intent = Intent(activity,Create_resume::class.java)
                     startActivity(intent)
                     alertDialog.dismiss()
                 }
@@ -48,7 +68,12 @@ class home_Main : Fragment(R.layout.fragment_home__main) {
                 alertDialog.dismiss()
             }
 
+            alertDialog.show()
+
         }
+
+
+
         return view
     }
 
