@@ -11,63 +11,45 @@ import android.database.sqlite.SQLiteOpenHelper
 class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
-        private const val DATABASE_VERSION = 3
-        private const val DATABASE_NAME = "UserDatabase.db"
-        private const val TABLE_NAME = "Users"
+        private const val DATABASE_VERSION = 1
+        private const val DATABASE_NAME = "UserDB.db"
+        const val TABLE_USERS = "users"
         private const val COLUMN_ID = "id"
-        private const val COLUMN_USERNAME = "username"
-        private const val COLUMN_PASSWORD = "password"
-        private const val COLUMN_EMAIL = "email"
-        private const val COLUMN_PHONE = "phone"
+        const val COLUMN_USERNAME = "username"
+        const val COLUMN_PASSWORD = "password"
+        const val COLUMN_PHONE = "phone"
+        const val COLUMN_EMAIL = "email"
 
+        private const val TABLE_CREATE = (
+                "CREATE TABLE $TABLE_USERS (" +
+                        "$COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "$COLUMN_USERNAME TEXT UNIQUE, " +
+                        "$COLUMN_PASSWORD TEXT, " +
+                        "$COLUMN_PHONE TEXT, " +
+                        "$COLUMN_EMAIL TEXT);")
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        val createTable = ("CREATE TABLE " + TABLE_NAME + "("
-                + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + COLUMN_USERNAME + " TEXT UNIQUE NOT NULL"
-                + COLUMN_PASSWORD + " TEXT NOT NULL,"
-                + COLUMN_EMAIL + " TEXT UNIQUE NOT NULL,"
-                + COLUMN_PHONE + " NUMBER UNIQUE NOT NULL," + " )")
-        db?.execSQL(createTable)
+        db.execSQL(TABLE_CREATE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db?.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_USERS")
         onCreate(db)
     }
 
-    fun addUser(username : String, password : String, email:String, phone : String): Long {
-        val contentValues = ContentValues()
-        contentValues.put(COLUMN_USERNAME,username)
-        contentValues.put(COLUMN_PASSWORD,password)
-        contentValues.put(COLUMN_EMAIL,email)
-        contentValues.put(COLUMN_PHONE,phone)
-
-        val db = writableDatabase
-        return db.insert(TABLE_NAME, null, contentValues)
-    }
-
     fun checkUser(username: String, password: String): Boolean {
-        val db = readableDatabase
-        val selection = "$COLUMN_USERNAME = ? AND $COLUMN_PASSWORD"
-        val selectionArgs = arrayOf(username,password)
-        val cursor: Cursor = db.query( TABLE_NAME,null,selection,selectionArgs,null,null,null
-        )
+        val db = this.readableDatabase
+        val query = "SELECT * FROM $TABLE_USERS WHERE $COLUMN_USERNAME = ? AND $COLUMN_PASSWORD = ?"
+        val cursor: Cursor = db.rawQuery(query, arrayOf(username, password))
 
-        val count = cursor.count>0
+        val userExists = cursor.count > 0
         cursor.close()
-        return count
+        db.close()
+
+        return userExists
     }
 
-    fun getUserDetails(username: String): Cursor? {
-        val db = readableDatabase
-        return db.query(
-            TABLE_NAME,
-            arrayOf(COLUMN_ID, COLUMN_USERNAME, COLUMN_PASSWORD, COLUMN_EMAIL, COLUMN_PHONE),
-            "$COLUMN_USERNAME = ?",
-            arrayOf(username),
-            null, null, null
-        )
-    }
+
+
 }

@@ -28,13 +28,15 @@ class LoginPage : AppCompatActivity() {
             val username=Username.text.toString()
             val password = Password.text.toString()
 
-            //val userExists = dbHelper.checkUser(username,password)
 
-            //if (userExists){
-                Toast.makeText(this,"login SuccesFully",Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, ViewPager::class.java)
-                startActivity(intent)
-            //}
+             if(dbHelper.checkUser(username,password)){
+                 Toast.makeText(this, "login SuccesFully", Toast.LENGTH_SHORT).show()
+                 val intent = Intent(this, ViewPager::class.java)
+                 startActivity(intent)
+             }
+            else{
+                 Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show()
+             }
         }
         regis.setOnClickListener{
             val I= Intent(this,RegistrationPage::class.java)
