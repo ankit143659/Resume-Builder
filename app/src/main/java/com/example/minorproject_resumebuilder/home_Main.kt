@@ -44,7 +44,7 @@ class home_Main : Fragment() {
                 val datepicker = DatePickerDialog(requireContext(),{ _,year,month,dayOfmonth ->
                     val selectDate = Calendar.getInstance()
                     selectDate.set(year,month,dayOfmonth)
-                    val dateFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
+                    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                     date.setText(dateFormat.format(selectDate.time))
                 }, calendar.get(Calendar.YEAR),
                     calendar.get(Calendar.MONTH),

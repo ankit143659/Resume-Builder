@@ -50,6 +50,22 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         return userExists
     }
 
+    fun getpasswordbyemail(email:String):String?{
+        val db = this.readableDatabase
+        var password : String? = null
+
+        val cursor = db.query(TABLE_USERS, arrayOf(COLUMN_PASSWORD), "$COLUMN_EMAIL=?", arrayOf(email),
+            null,null,null)
+
+
+        if(cursor!=null && cursor.moveToFirst()){
+            password = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD))
+            cursor.close()
+        }
+        db.close()
+        return password
+    }
+
 
 
 }
