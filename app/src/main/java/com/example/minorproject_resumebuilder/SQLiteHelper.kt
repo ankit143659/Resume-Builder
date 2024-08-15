@@ -38,16 +38,27 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         onCreate(db)
     }
 
-    fun checkUser(username: String, password: String): Boolean {
+    fun checkUser(username: String, password: String): Map<String,String>? {
         val db = this.readableDatabase
         val query = "SELECT * FROM $TABLE_USERS WHERE $COLUMN_USERNAME = ? AND $COLUMN_PASSWORD = ?"
         val cursor: Cursor = db.rawQuery(query, arrayOf(username, password))
+        var userdetails:Map<String,String>?=null
+        if(cursor.moveToFirst()){
+            val email = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL))
+            val phone = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PHONE))
 
-        val userExists = cursor.count > 0
+            userdetails= mapOf(
+                "username" to username,
+                "email" to email,
+                "phone" to phone
+            )
+        }
+
+
         cursor.close()
         db.close()
 
-        return userExists
+        return userdetails
     }
 
     fun getpasswordbyemail(email:String):String?{
@@ -65,7 +76,5 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         db.close()
         return password
     }
-
-
 
 }
