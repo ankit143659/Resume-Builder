@@ -16,10 +16,16 @@ class Create_resume : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_create_resume)
-        val btn = findViewById<LinearLayout>(R.id.personal)
+        val btn_per = findViewById<LinearLayout>(R.id.personal)
+        val btn_edu = findViewById<LinearLayout>(R.id.education)
 
-        btn.setOnClickListener{
+        btn_per.setOnClickListener{
             val intent = Intent(this,Basic_personal_details::class.java)
+            startActivity(intent)
+        }
+
+        btn_edu.setOnClickListener{
+            val intent = Intent(this,Education_details::class.java)
             startActivity(intent)
         }
     }
