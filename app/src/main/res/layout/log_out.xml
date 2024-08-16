@@ -20,7 +20,7 @@
             android:textColor="@color/black"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Resume Builder"
+            android:text="𝐑𝐞𝐬𝐮𝐦𝐞 𝐁𝐮𝐢𝐥𝐝𝐞𝐫"
             android:textSize="23sp" />
 
         <TextView
@@ -30,7 +30,7 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/black"
             android:gravity="center"
-            android:text="Are you sure you want to Logout ?"
+            android:text="𝐀𝐫𝐞 𝐲𝐨𝐮 𝐬𝐮𝐫𝐞 𝐲𝐨𝐮 𝐰𝐚𝐧𝐭 𝐭𝐨 𝐋𝐨𝐠𝐨𝐮𝐭 ?"
             android:textSize="23sp" />
 
         <LinearLayout
@@ -47,7 +47,7 @@
                 android:id="@+id/yes"
                 android:textColor="@color/white"
                 android:backgroundTint="#E20808"
-                android:text="Yes"
+                android:text="𝐘𝐞𝐬"
                 android:textSize="20sp" />
 
             <Button
@@ -56,7 +56,7 @@
                 android:id="@+id/no"
                 android:backgroundTint="#636161"
                 android:layout_marginLeft="20dp"
-                android:text="No"
+                android:text="𝐍𝐨"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
         </LinearLayout>

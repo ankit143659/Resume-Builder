@@ -1,5 +1,6 @@
 package com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 
@@ -16,20 +17,21 @@ class SharePrefrence (context: Context) {
         return prefs.getBoolean("isLoggedIn",false)
     }
 
+    @SuppressLint("CommitPrefEdits")
     fun saveUserDetails(userDetails : Map<String,String>){
         val editor = prefs.edit()
-        editor.putString("username",userDetails["username"])
-        editor.putString("email",userDetails["email"])
-        editor.putString("phone",userDetails["phone"])
+        editor.putString("user",userDetails["username"])
+        editor.putString("emailId",userDetails["email"])
+        editor.putString("Phone",userDetails["phone"])
     }
 
     fun getUsername() : String{
-        return prefs.getString("username","")?:""
+        return prefs.getString("user","")?:""
     }
     fun getemail() : String{
-        return prefs.getString("email","")?:""
+        return prefs.getString("emailId","")?:""
     }
     fun getphone() : String{
-        return prefs.getString("phone","")?:""
+        return prefs.getString("Phone","")?:""
     }
 }

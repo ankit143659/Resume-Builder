@@ -77,6 +77,8 @@ class LoginPage : AppCompatActivity() {
                 val password = dbHelper.getpasswordbyemail(email.text.toString())
                 if (password!=null){
                     showpasswordDialog(password)
+                    alert.dismiss()
+                    
                 }
                 else{
                     Toast.makeText(this,"Email not found",Toast.LENGTH_SHORT).show()

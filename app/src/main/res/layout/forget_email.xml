@@ -15,7 +15,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:text="Forgot Password?"
+            android:text="𝐅𝐨𝐫𝐠𝐨𝐭 𝐏𝐚𝐬𝐬𝐰𝐨𝐫𝐝?"
             android:textSize="26sp"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
@@ -30,8 +30,9 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@drawable/edit_bg"
-            android:hint="Enter your email"
+            android:hint="𝐄𝐧𝐭𝐞𝐫 𝐲𝐨𝐮𝐫 𝐞𝐦𝐚𝐢𝐥"
             android:paddingLeft="10dp"
+            android:textColor="@color/black"
             android:textColorHint="@color/black" />
 
         <LinearLayout
@@ -46,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:backgroundTint="#F44336"
                 android:id="@+id/recover"
-                android:text="Recover"
+                android:text="𝐑𝐞𝐜𝐨𝐯𝐞𝐫"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:layout_height="50dp" />
@@ -57,7 +58,7 @@
                 android:id="@+id/cancle"
                 android:layout_marginLeft="40dp"
                 android:backgroundTint="#D6D3D3"
-                android:text="Cancle"
+                    android:text="𝐂𝐚𝐧𝐜𝐥𝐞"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
