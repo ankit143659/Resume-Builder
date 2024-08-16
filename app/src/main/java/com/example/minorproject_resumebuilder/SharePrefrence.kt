@@ -21,6 +21,7 @@ class SharePrefrence (context: Context) {
         editor.putString("username",userDetails["username"])
         editor.putString("email",userDetails["email"])
         editor.putString("phone",userDetails["phone"])
+        editor.apply()
     }
 
     fun getUsername() : String{
