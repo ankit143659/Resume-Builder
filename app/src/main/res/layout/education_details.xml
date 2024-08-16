@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:elevation="10dp"
+        app:cardCornerRadius="16dp"
+        android:padding="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:layout_gravity="center"
+                android:text="𝐄𝐝𝐮𝐜𝐚𝐭𝐢𝐨𝐧 𝐃𝐞𝐭𝐚𝐢𝐥𝐬">
+
+            </TextView>
+
+            <LinearLayout
+                android:layout_width="336dp"
+                android:gravity="center"
+                android:layout_height="71dp"
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="𝐃𝐞𝐠𝐫𝐞𝐞 :"
+                    android:layout_marginRight="50dp"
+                    android:textColor="@color/black"
+                    android:textSize="19sp" />
+
+                <EditText
+                    android:layout_width="189dp"
+                    android:layout_height="45dp"
+                    android:textColorHint="@color/black"
+                    android:layout_marginLeft="22dp"
+                    android:gravity="center"
+                    android:background="@drawable/edit_bg"
+                    android:hint="𝐄𝐧𝐭𝐞𝐫 𝐃𝐞𝐠𝐫𝐞𝐞 𝐍𝐚𝐦𝐞" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="336dp"
+                android:gravity="center"
+                android:layout_height="71dp"
+                android:layout_marginTop="1dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="𝐈𝐧𝐬𝐭𝐢𝐭𝐮𝐭𝐞 𝐍𝐚𝐦𝐞:"
+                    android:textColor="@color/black"
+                    android:textSize="19sp" />
+
+                <EditText
+                    android:layout_width="189dp"
+                    android:layout_height="45dp"
+                    android:textColorHint="@color/black"
+                    android:layout_marginLeft="17dp"
+                    android:gravity="center"
+                    android:background="@drawable/edit_bg"
+                    android:hint="𝐈𝐧𝐬𝐭𝐢𝐭𝐮𝐭𝐞 𝐍𝐚𝐦𝐞" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="336dp"
+                android:gravity="center"
+                android:layout_height="71dp"
+                android:layout_marginTop="1dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="𝐏𝐚𝐬𝐬𝐢𝐧𝐠 𝐘𝐞𝐚𝐫 :"
+                    android:textColor="@color/black"
+                    android:textSize="19sp" />
+
+                <EditText
+                    android:layout_width="189dp"
+                    android:layout_height="45dp"
+                    android:textColorHint="@color/black"
+                    android:layout_marginLeft="24dp"
+                    android:gravity="center"
+                    android:background="@drawable/edit_bg"
+                    android:hint="𝐘𝐞𝐚𝐫 𝐎𝐟 𝐏𝐚𝐬𝐬𝐢𝐧𝐠" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="336dp"
+                android:gravity="center"
+                android:layout_height="71dp"
+                android:layout_marginTop="1dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="𝐋𝐨𝐜𝐚𝐭𝐢𝐨𝐧 :"
+                    android:textColor="@color/black"
+                    android:textSize="19sp" />
+
+                <EditText
+                    android:layout_width="189dp"
+                    android:layout_height="45dp"
+                    android:textColorHint="@color/black"
+                    android:layout_marginLeft="55dp"
+                    android:gravity="center"
+                    android:background="@drawable/edit_bg"
+                    android:hint="𝐃𝐞𝐠𝐫𝐞𝐞 𝐋𝐨𝐜𝐚𝐭𝐢𝐨𝐧" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="336dp"
+                android:gravity="center"
+                android:layout_height="71dp"
+                android:layout_marginTop="1dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="𝐆𝐫𝐚𝐝𝐞:"
+                    android:textColor="@color/black"
+                    android:textSize="19sp" />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:text="𝐀"
+                    android:layout_marginLeft="75dp"
+                    android:textSize="20sp"
+                    android:layout_height="wrap_content" />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:text="𝐁"
+                    android:textSize="20sp"
+                    android:layout_height="wrap_content" />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:text="𝐂"
+                    android:textSize="20sp"
+                    android:layout_height="wrap_content" />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:text="𝐃"
+                    android:textSize="20sp"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

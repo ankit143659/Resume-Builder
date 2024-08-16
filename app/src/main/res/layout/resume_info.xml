@@ -17,7 +17,7 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/black"
             android:layout_height="wrap_content"
-            android:text="Enter Resume Details">
+            android:text="𝐄𝐧𝐭𝐞𝐫 𝐑𝐞𝐬𝐮𝐦𝐞 𝐃𝐞𝐭𝐚𝐢𝐥𝐬">
 
         </TextView>
         <LinearLayout
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:textColor="@color/black"
-                android:text="Resume Name :">
+                android:text="𝐑𝐞𝐬𝐮𝐦𝐞 𝐍𝐚𝐦𝐞 :">
             </TextView>
 
             <EditText
@@ -43,7 +43,7 @@
                 android:textColor="@color/black"
                 android:paddingLeft="10dp"
                 android:textColorHint="@color/black"
-                android:hint="Enter name"
+                android:hint="𝐄𝐧𝐭𝐞𝐫 𝐧𝐚𝐦𝐞"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/edit_bg">
 
@@ -52,9 +52,9 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="377dp"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
             android:orientation="horizontal">
@@ -62,20 +62,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Create Date :"
+                android:text="𝐂𝐫𝐞𝐚𝐭𝐞 𝐃𝐚𝐭𝐞 :"
                 android:textColor="@color/black"
                 android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/et2"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="44dp"
                 android:layout_marginLeft="35dp"
                 android:background="@drawable/edit_bg"
                 android:clickable="true"
                 android:focusable="true"
-                android:textSize="16sp"
-                android:hint="Enter creating Date"
+                android:textSize="15sp"
+                android:hint="𝐄𝐧𝐭𝐞𝐫 𝐜𝐫𝐞𝐚𝐭𝐢𝐧𝐠 𝐃𝐚𝐭𝐞"
                 android:inputType="date"
                 android:padding="10dp"
                 android:textColor="@color/black"
@@ -100,7 +100,7 @@
                 android:id="@+id/create"
                 android:textColor="@color/white"
                 android:backgroundTint="#E20808"
-                android:text="Create"
+                android:text="𝐂𝐫𝐞𝐚𝐭𝐞"
                 android:textSize="20sp" />
 
             <Button
@@ -109,7 +109,7 @@
                 android:id="@+id/no"
                 android:backgroundTint="#636161"
                 android:layout_marginLeft="20dp"
-                android:text="Cancel"
+                android:text="𝐂𝐚𝐧𝐜𝐞𝐥"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
         </LinearLayout>

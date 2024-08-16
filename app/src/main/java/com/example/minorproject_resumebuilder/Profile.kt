@@ -46,13 +46,17 @@ class Profile : Fragment() {
 
         val view :View= inflater.inflate(R.layout.fragment_profile, container, false)
         val btn : Button = view.findViewById(R.id.logout)
-       val name : Button = view.findViewById(R.id.name)
-        val email : Button = view.findViewById(R.id.email)
-        val phone : Button = view.findViewById(R.id.phone)
+       val name : TextView = view.findViewById(R.id.name)
+        val email : TextView = view.findViewById(R.id.email)
+        val phone : TextView = view.findViewById(R.id.phone)
 
-        name.text=prefrence.getUsername()
-        email.text=prefrence.getemail()
-        phone.text=prefrence.getphone()
+       val Name : String = prefrence.getUsername()
+       val Email : String = prefrence.getemail()
+       val Phone : String = prefrence.getphone()
+
+        name.text = Name
+        email.text=Email
+        phone.text=Phone
 
         btn.setOnClickListener {
             showCustomDailogBox()
