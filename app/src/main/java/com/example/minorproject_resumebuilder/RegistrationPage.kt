@@ -2,6 +2,7 @@ package com.example.minorproject_resumebuilder
 
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -58,14 +59,11 @@ class RegistrationPage : AppCompatActivity() {
             }*/
 
             else{
-                val result = dbHelper.addUser(username,password,email,Phone)
-                if (result > 0) {
-                    Toast.makeText(this, "Registration Successful", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, LoginPage::class.java)
-                    startActivity(intent)
-                    finish()
+                if (addUser(username, password, Phone, email)) {
+                    Toast.makeText(this, "SuccessFully Register", Toast.LENGTH_SHORT).show()
+                    finish() // Close the activity
                 } else {
-                   Toast.makeText(this, "Registration Failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "User already exists or error!", Toast.LENGTH_SHORT).show()
                 }
 
 
@@ -77,6 +75,22 @@ class RegistrationPage : AppCompatActivity() {
             startActivity(I)
         }
 
+    }
+
+    private fun addUser(username: String, password: String, phone: String, email: String): Boolean {
+        val db = dbHelper.writableDatabase
+        return try {
+            val values = ContentValues().apply {
+                put(SQLiteHelper.COLUMN_USERNAME, username)
+                put(SQLiteHelper.COLUMN_PASSWORD, password)
+                put(SQLiteHelper.COLUMN_PHONE, phone)
+                put(SQLiteHelper.COLUMN_EMAIL, email)
+            }
+            val result = db.insert(SQLiteHelper.TABLE_USERS, null, values)
+            result != -1L // Return true if the insert was successful
+        } catch (e: Exception) {
+            false
+        }
     }
 
 

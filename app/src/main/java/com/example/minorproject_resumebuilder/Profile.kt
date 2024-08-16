@@ -26,6 +26,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.util.Base64
@@ -34,17 +35,25 @@ import java.util.Base64
 @Suppress("DEPRECATION")
 class Profile : Fragment() {
 
-
+    private lateinit var prefrence: SharePrefrence
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        prefrence=SharePrefrence(requireContext())
+
         val view :View= inflater.inflate(R.layout.fragment_profile, container, false)
         val btn : Button = view.findViewById(R.id.logout)
-       // val name : Button = view.findViewById(R.id.name)
-        //val email : Button = view.findViewById(R.id.email)
-        //val phone : Button = view.findViewById(R.id.phone)
+       val name : Button = view.findViewById(R.id.name)
+        val email : Button = view.findViewById(R.id.email)
+        val phone : Button = view.findViewById(R.id.phone)
+
+        name.text=prefrence.getUsername()
+        email.text=prefrence.getemail()
+        phone.text=prefrence.getphone()
+
         btn.setOnClickListener {
             showCustomDailogBox()
         }
@@ -63,6 +72,7 @@ class Profile : Fragment() {
         val alertBox = dialog.create()
 
         yes.setOnClickListener{
+            prefrence.setLoggedIn(false)
             val intent= Intent(activity,LoginPage::class.java)
             startActivity(intent)
             alertBox.dismiss()
