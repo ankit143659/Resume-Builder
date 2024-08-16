@@ -37,8 +37,16 @@ class Education_details : AppCompatActivity() {
 
     }
 
+    @SuppressLint("MissingInflatedId")
     fun addEducation(){
-        val educationDetailsView : View = LayoutInflater.from(this). inflate(R.layout.education_details,null)
+        val educationDetailsView : View = LayoutInflater.from(this). inflate(R.layout.education_details,layoutcontainer,false)
+
+
+        val delete : Button = educationDetailsView.findViewById(R.id.delete)
+        delete.setOnClickListener{
+            layoutcontainer.removeView(educationDetailsView)
+        }
+
         layoutcontainer.addView(educationDetailsView)
     }
 }
