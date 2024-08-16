@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 
 class Education_details : AppCompatActivity() {
     private lateinit var addLayout : Button
+    private lateinit var save : Button
     private lateinit var layoutcontainer : LinearLayout
 
 
@@ -30,6 +31,7 @@ class Education_details : AppCompatActivity() {
 
         addLayout= findViewById(R.id.addEducation)
         layoutcontainer = findViewById(R.id.layoutContainer)
+        save= findViewById(R.id.savebtn)
 
         addLayout.setOnClickListener{
             addEducation()
@@ -45,8 +47,12 @@ class Education_details : AppCompatActivity() {
         val delete : Button = educationDetailsView.findViewById(R.id.delete)
         delete.setOnClickListener{
             layoutcontainer.removeView(educationDetailsView)
+            if(layoutcontainer.childCount==0){
+                save.visibility=View.GONE
+            }
         }
 
         layoutcontainer.addView(educationDetailsView)
+        save.visibility=View.VISIBLE
     }
 }
