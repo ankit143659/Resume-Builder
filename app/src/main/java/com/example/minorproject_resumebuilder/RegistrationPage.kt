@@ -61,7 +61,9 @@ class RegistrationPage : AppCompatActivity() {
             else{
                 if (addUser(username, password, Phone, email)) {
                     Toast.makeText(this, "SuccessFully Register", Toast.LENGTH_SHORT).show()
-                    finish() // Close the activity
+                    val I= Intent(this,LoginPage::class.java)
+                    startActivity(I)
+                    finish()
                 } else {
                     Toast.makeText(this, "User already exists or error!", Toast.LENGTH_SHORT).show()
                 }
@@ -87,7 +89,7 @@ class RegistrationPage : AppCompatActivity() {
                 put(SQLiteHelper.COLUMN_EMAIL, email)
             }
             val result = db.insert(SQLiteHelper.TABLE_USERS, null, values)
-            result != -1L // Return true if the insert was successful
+            result != -1L
         } catch (e: Exception) {
             false
         }
