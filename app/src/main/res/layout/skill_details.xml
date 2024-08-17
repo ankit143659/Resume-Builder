@@ -1,10 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/white"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:elevation="20dp"
+    app:cardBackgroundColor="@color/white"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="20dp"
 
-</RelativeLayout>
+    android:layout_marginRight="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:background="@drawable/card_background"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:textColorHint="#867F7F"
+                android:textColor="@color/black"
+                android:background="@drawable/edit_bg"
+                android:hint="Enter Skill name" />
+
+            <LinearLayout
+                android:layout_width="336dp"
+                android:layout_height="71dp"
+                android:layout_marginTop="5dp"
+                android:paddingTop="10dp"
+                android:orientation="horizontal"
+                >
+
+
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:text="Beginner"
+                    android:textSize="16sp"
+                    android:buttonTint="@color/black"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content" />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:text="Intermediate"
+                    android:buttonTint="@color/black"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="16sp"
+                    android:layout_height="wrap_content" />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:text="Advance"
+                    android:textSize="16sp"
+                    android:buttonTint="@color/black"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content" />
+
+
+
+
+
+            </LinearLayout>
+
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:text="Delete"
+                android:id="@+id/delete"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:backgroundTint="#EC060E"
+                android:textSize="19sp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.cardview.widget.CardView>

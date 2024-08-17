@@ -163,6 +163,7 @@
                     android:layout_width="wrap_content"
                     android:text="𝐀"
                     android:layout_marginLeft="50dp"
+                    android:buttonTint="@color/black"
                     android:textSize="20sp"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content" />
@@ -171,6 +172,7 @@
                     android:text="𝐁"
                     android:textColor="@color/black"
                     android:textSize="20sp"
+                    android:buttonTint="@color/black"
                     android:layout_height="wrap_content" />
 
                 <CheckBox
@@ -178,11 +180,13 @@
                     android:text="𝐂"
                     android:textSize="20sp"
                     android:textColor="@color/black"
+                    android:buttonTint="@color/black"
                     android:layout_height="wrap_content" />
 
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:text="𝐃"
+                    android:buttonTint="@color/black"
                     android:textSize="20sp"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content" />

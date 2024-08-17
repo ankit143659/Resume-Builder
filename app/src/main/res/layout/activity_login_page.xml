@@ -93,6 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/Password"
         android:layout_marginTop="10dp"
+        android:buttonTint="@color/black"
         android:layout_alignParentStart="true"
         android:layout_marginStart="50dp"
         android:text="Remember me"
