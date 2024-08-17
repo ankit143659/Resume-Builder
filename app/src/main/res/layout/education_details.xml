@@ -43,16 +43,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="𝐃𝐞𝐠𝐫𝐞𝐞 :"
-                    android:layout_marginRight="50dp"
+                    android:layout_marginRight="40dp"
                     android:textColor="@color/black"
                     android:textSize="19sp" />
 
                 <EditText
                     android:layout_width="189dp"
                     android:layout_height="45dp"
-                    android:textColorHint="@color/black"
-                    android:layout_marginLeft="22dp"
+                    android:layout_marginLeft="6dp"
                     android:gravity="center"
+                    android:textColorHint="#867F7F"
+                    android:textColor="@color/black"
                     android:background="@drawable/edit_bg"
                     android:hint="𝐄𝐧𝐭𝐞𝐫 𝐃𝐞𝐠𝐫𝐞𝐞 𝐍𝐚𝐦𝐞" />
 
@@ -72,13 +73,14 @@
                     android:layout_height="wrap_content"
                     android:text="𝐈𝐧𝐬𝐭𝐢𝐭𝐮𝐭𝐞 𝐍𝐚𝐦𝐞:"
                     android:textColor="@color/black"
-                    android:textSize="19sp" />
+                    android:textSize="17sp" />
 
                 <EditText
                     android:layout_width="189dp"
                     android:layout_height="45dp"
-                    android:textColorHint="@color/black"
-                    android:layout_marginLeft="17dp"
+                    android:layout_marginLeft="3dp"
+                    android:textColorHint="#867F7F"
+                    android:textColor="@color/black"
                     android:gravity="center"
                     android:background="@drawable/edit_bg"
                     android:hint="𝐈𝐧𝐬𝐭𝐢𝐭𝐮𝐭𝐞 𝐍𝐚𝐦𝐞" />
@@ -104,9 +106,10 @@
                 <EditText
                     android:layout_width="189dp"
                     android:layout_height="45dp"
-                    android:textColorHint="@color/black"
-                    android:layout_marginLeft="24dp"
+                    android:layout_marginLeft="5dp"
+                    android:textColorHint="#867F7F"
                     android:gravity="center"
+                    android:textColor="@color/black"
                     android:background="@drawable/edit_bg"
                     android:hint="𝐘𝐞𝐚𝐫 𝐎𝐟 𝐏𝐚𝐬𝐬𝐢𝐧𝐠" />
 
@@ -131,8 +134,9 @@
                 <EditText
                     android:layout_width="189dp"
                     android:layout_height="45dp"
-                    android:textColorHint="@color/black"
-                    android:layout_marginLeft="55dp"
+                    android:layout_marginLeft="30dp"
+                    android:textColorHint="#867F7F"
+                    android:textColor="@color/black"
                     android:gravity="center"
                     android:background="@drawable/edit_bg"
                     android:hint="𝐃𝐞𝐠𝐫𝐞𝐞 𝐋𝐨𝐜𝐚𝐭𝐢𝐨𝐧" />
@@ -158,12 +162,14 @@
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:text="𝐀"
-                    android:layout_marginLeft="75dp"
+                    android:layout_marginLeft="50dp"
                     android:textSize="20sp"
+                    android:textColor="@color/black"
                     android:layout_height="wrap_content" />
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:text="𝐁"
+                    android:textColor="@color/black"
                     android:textSize="20sp"
                     android:layout_height="wrap_content" />
 
@@ -171,12 +177,14 @@
                     android:layout_width="wrap_content"
                     android:text="𝐂"
                     android:textSize="20sp"
+                    android:textColor="@color/black"
                     android:layout_height="wrap_content" />
 
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:text="𝐃"
                     android:textSize="20sp"
+                    android:textColor="@color/black"
                     android:layout_height="wrap_content" />
 
 
