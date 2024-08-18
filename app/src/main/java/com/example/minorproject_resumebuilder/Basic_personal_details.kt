@@ -6,8 +6,10 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -32,8 +34,14 @@ class Basic_personal_details : AppCompatActivity() {
         setContentView(R.layout.activity_basic_personal_details)
 
         photo = findViewById(R.id.profilePhoto)
-
+        val save :Button = findViewById(R.id.save)
         val dob :EditText=findViewById(R.id.dob)
+
+        save.setOnClickListener{
+            Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,Create_resume::class.java)
+            startActivity(intent)
+        }
 
         dob.setOnClickListener{
             val datepicker = DatePickerDialog(this,{ _,year,month,dayOfmonth ->

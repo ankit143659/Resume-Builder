@@ -1,11 +1,13 @@
 package com.example.minorproject_resumebuilder
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +35,12 @@ class Skill_details : AppCompatActivity() {
 
         addLayout.setOnClickListener{
             addskills();
+        }
+
+        save.setOnClickListener{
+            Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,Create_resume::class.java)
+            startActivity(intent)
         }
     }
 

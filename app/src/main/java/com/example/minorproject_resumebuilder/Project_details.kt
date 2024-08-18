@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.minorproject_resumebuilder.Create_resume
 import com.example.minorproject_resumebuilder.R
 
 class Project_details : AppCompatActivity() {
@@ -38,6 +40,12 @@ class Project_details : AppCompatActivity() {
 
         addLayout.setOnClickListener{
             addEducation()
+        }
+
+        save.setOnClickListener{
+            Toast.makeText(this,"Successfully filled Data",Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,Create_resume::class.java)
+            startActivity(intent)
         }
 
     }
