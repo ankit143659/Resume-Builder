@@ -19,6 +19,8 @@ class Create_resume : AppCompatActivity() {
         val btn_per = findViewById<LinearLayout>(R.id.personal)
         val btn_edu = findViewById<LinearLayout>(R.id.education)
         val btn_skill = findViewById<LinearLayout>(R.id.skill)
+        val btn_exper = findViewById<LinearLayout>(R.id.experience)
+        val btn_project = findViewById<LinearLayout>(R.id.projects)
 
         btn_per.setOnClickListener{
             val intent = Intent(this,Basic_personal_details::class.java)
@@ -31,6 +33,16 @@ class Create_resume : AppCompatActivity() {
         }
 
         btn_skill.setOnClickListener{
+            val intent = Intent(this,Skill_details::class.java)
+            startActivity(intent)
+        }
+
+        btn_exper.setOnClickListener{
+            val intent = Intent(this,Skill_details::class.java)
+            startActivity(intent)
+        }
+
+        btn_project.setOnClickListener{
             val intent = Intent(this,Skill_details::class.java)
             startActivity(intent)
         }
