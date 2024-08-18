@@ -26,17 +26,27 @@
 
 
 
-            <EditText
+
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
+                app:hintEnabled="true"
+                app:boxBackgroundMode="outline"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:textColorHint="#867F7F"
-                android:textColor="@color/black"
-                android:background="@drawable/edit_bg"
-                android:hint="Enter Skill name" />
+                app:hintTextAppearance="@color/black"
+                app:hintAnimationEnabled="true"
+                android:hint="Enter Skill Name"
+                app:endIconMode="clear_text"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="336dp"

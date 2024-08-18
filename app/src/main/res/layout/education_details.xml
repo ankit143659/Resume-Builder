@@ -7,7 +7,6 @@
     app:cardBackgroundColor="@color/white"
     android:layout_marginLeft="20dp"
     android:layout_marginTop="20dp"
-
     android:layout_marginRight="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.cardview.widget.CardView
@@ -39,51 +38,27 @@
                 android:orientation="horizontal"
                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="𝐃𝐞𝐠𝐫𝐞𝐞 :"
-                    android:layout_marginRight="40dp"
-                    android:textColor="@color/black"
-                    android:textSize="19sp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    app:hintEnabled="true"
+                    app:boxBackgroundMode="outline"
+                    app:hintTextAppearance="@color/black"
+                    app:hintAnimationEnabled="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:hint="𝐃𝐞𝐠𝐫𝐞𝐞 𝐍𝐚𝐦𝐞"
+                    android:singleLine="true"
+                    app:endIconMode="clear_text"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:layout_width="189dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="6dp"
-                    android:gravity="center"
-                    android:textColorHint="#867F7F"
-                    android:textColor="@color/black"
-                    android:background="@drawable/edit_bg"
-                    android:hint="𝐄𝐧𝐭𝐞𝐫 𝐃𝐞𝐠𝐫𝐞𝐞 𝐍𝐚𝐦𝐞" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="336dp"
-                android:gravity="center"
-                android:layout_height="71dp"
-                android:layout_marginTop="1dp"
-                android:orientation="horizontal"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="𝐈𝐧𝐬𝐭𝐢𝐭𝐮𝐭𝐞 𝐍𝐚𝐦𝐞:"
-                    android:textColor="@color/black"
-                    android:textSize="17sp" />
-
-                <EditText
-                    android:layout_width="189dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="3dp"
-                    android:textColorHint="#867F7F"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:background="@drawable/edit_bg"
-                    android:hint="𝐈𝐧𝐬𝐭𝐢𝐭𝐮𝐭𝐞 𝐍𝐚𝐦𝐞" />
 
 
             </LinearLayout>
@@ -96,22 +71,26 @@
                 android:orientation="horizontal"
                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="𝐏𝐚𝐬𝐬𝐢𝐧𝐠 𝐘𝐞𝐚𝐫 :"
-                    android:textColor="@color/black"
-                    android:textSize="19sp" />
 
-                <EditText
-                    android:layout_width="189dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="5dp"
-                    android:textColorHint="#867F7F"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    android:background="@drawable/edit_bg"
-                    android:hint="𝐘𝐞𝐚𝐫 𝐎𝐟 𝐏𝐚𝐬𝐬𝐢𝐧𝐠" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    app:hintEnabled="true"
+                    app:boxBackgroundMode="outline"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    app:hintTextAppearance="@color/black"
+                    app:hintAnimationEnabled="true"
+                    android:hint="𝐈𝐧𝐬𝐭𝐢𝐭𝐮𝐭𝐞 𝐍𝐚𝐦𝐞"
+                    app:endIconMode="clear_text"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
 
 
             </LinearLayout>
@@ -124,22 +103,60 @@
                 android:orientation="horizontal"
                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="𝐋𝐨𝐜𝐚𝐭𝐢𝐨𝐧 :"
-                    android:textColor="@color/black"
-                    android:textSize="19sp" />
 
-                <EditText
-                    android:layout_width="189dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="30dp"
-                    android:textColorHint="#867F7F"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:background="@drawable/edit_bg"
-                    android:hint="𝐃𝐞𝐠𝐫𝐞𝐞 𝐋𝐨𝐜𝐚𝐭𝐢𝐨𝐧" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    app:hintEnabled="true"
+                    app:boxBackgroundMode="outline"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="160dp"
+                    android:hint="𝐏𝐚𝐬𝐬𝐢𝐧𝐠 𝐘𝐞𝐚𝐫"
+                    app:hintTextAppearance="@color/black"
+                    app:hintAnimationEnabled="true"
+                    app:endIconMode="clear_text"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="336dp"
+                android:gravity="center"
+                android:layout_height="71dp"
+                android:layout_marginTop="1dp"
+                android:orientation="horizontal"
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    app:hintEnabled="true"
+                    app:boxBackgroundMode="outline"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:hint="𝐋𝐨𝐜𝐚𝐭𝐢𝐨𝐧"
+                    app:hintTextAppearance="@color/black"
+                    app:hintAnimationEnabled="true"
+                    app:endIconMode="clear_text"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
 
 
             </LinearLayout>
@@ -162,7 +179,7 @@
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:text="𝐀"
-                    android:layout_marginLeft="50dp"
+                    android:layout_marginLeft="20dp"
                     android:buttonTint="@color/black"
                     android:textSize="20sp"
                     android:textColor="@color/black"
