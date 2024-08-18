@@ -1,4 +1,4 @@
-package com.example.minorproject_resumebuilder
+package com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -11,36 +11,42 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.minorproject_resumebuilder.R
 
-class Skill_details : AppCompatActivity() {
-
+class Experience_details : AppCompatActivity() {
     private lateinit var addLayout : Button
     private lateinit var save : Button
     private lateinit var layoutcontainer : LinearLayout
+
+
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_skill_details)
+        setContentView(R.layout.activity_experience_details)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        addLayout=findViewById(R.id.addSkill)
-        layoutcontainer=findViewById(R.id.layoutContainer)
-        save=findViewById(R.id.savebtn)
+
+        addLayout= findViewById(R.id.addEducation)
+        layoutcontainer = findViewById(R.id.layoutContainer)
+        save= findViewById(R.id.savebtn)
 
         addLayout.setOnClickListener{
-            addskills();
+            addEducation()
         }
+
     }
 
-    fun addskills(){
-        val skillAddView : View = LayoutInflater.from(this). inflate(R.layout.education_details,layoutcontainer,false)
+    @SuppressLint("MissingInflatedId")
+    fun addEducation(){
+        val experienceDetailsView : View = LayoutInflater.from(this). inflate(R.layout.experience_details,layoutcontainer,false)
 
 
-        val delete : Button = skillAddView.findViewById(R.id.delete)
+        val delete : Button = experienceDetailsView.findViewById(R.id.delete)
         delete.setOnClickListener{
 
             val dialog = AlertDialog.Builder(this)
@@ -53,7 +59,7 @@ class Skill_details : AppCompatActivity() {
             val alertBox = dialog.create()
 
             yes.setOnClickListener{
-                layoutcontainer.removeView(skillAddView)
+                layoutcontainer.removeView(experienceDetailsView)
                 if(layoutcontainer.childCount==0){
                     save.visibility=View.GONE
                 }
@@ -67,8 +73,7 @@ class Skill_details : AppCompatActivity() {
 
         }
 
-        layoutcontainer.addView(skillAddView)
-        save.visibility= View.VISIBLE
+        layoutcontainer.addView(experienceDetailsView)
+        save.visibility=View.VISIBLE
     }
 }
-
