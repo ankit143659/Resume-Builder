@@ -97,7 +97,7 @@
                             android:layout_height="130dp"
                             android:padding="5dp"
                             android:background="@drawable/card_background"
-                            android:src="@drawable/dawn" />
+                            android:src="@drawable/d" />
 
                         <TextView
                             android:layout_width="wrap_content"
