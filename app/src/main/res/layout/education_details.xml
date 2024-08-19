@@ -54,6 +54,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:inputType="text"
+                        android:textSize="18sp"
                         android:textColor="@color/black"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -88,6 +89,7 @@
                         android:layout_width="match_parent"
                         android:inputType="text"
                         android:singleLine="true"
+                        android:textSize="18sp"
                         android:textColor="@color/black"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -118,6 +120,7 @@
                         android:layout_width="match_parent"
                         android:inputType="date"
                         android:singleLine="true"
+                        android:textSize="18sp"
                         android:textColor="@color/black"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -149,6 +152,7 @@
                         android:layout_width="match_parent"
                         android:inputType="text"
                         android:singleLine="true"
+                        android:textSize="18sp"
                         android:textColor="@color/black"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
