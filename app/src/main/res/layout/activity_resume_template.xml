@@ -51,6 +51,7 @@
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/linear_bg"
                         android:clickable="true"
+                        android:id="@+id/aurora"
                         android:focusable="true"
                         android:orientation="vertical">
 
@@ -84,6 +85,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:id="@+id/dawn"
                         android:clickable="true"
                         android:background="@drawable/linear_bg"
                         android:focusable="true"
@@ -123,6 +125,7 @@
                         android:gravity="center"
                         android:clickable="true"
                         android:background="@drawable/linear_bg"
+                        android:id="@+id/orion"
                         android:focusable="true"
                         android:layout_marginLeft="20dp"
                         android:orientation="vertical">
@@ -166,6 +169,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:clickable="true"
+                        android:id="@+id/luna"
                         android:background="@drawable/linear_bg"
                         android:focusable="true"
                         android:orientation="vertical">
@@ -201,6 +205,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:background="@drawable/linear_bg"
+                        android:id="@+id/celestle"
                         android:layout_marginLeft="20dp"
                         android:clickable="true"
                         android:focusable="true"
@@ -237,6 +242,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:id="@+id/nova"
                         android:clickable="true"
                         android:background="@drawable/linear_bg"
                         android:focusable="true"
@@ -284,6 +290,7 @@
                         android:layout_marginLeft="10dp"
                         android:clickable="true"
                         android:focusable="true"
+                        android:id="@+id/portio"
                         android:background="@drawable/linear_bg"
                         android:orientation="vertical">
 
@@ -319,6 +326,7 @@
                         android:gravity="center"
                         android:background="@drawable/linear_bg"
                         android:clickable="true"
+                        android:id="@+id/vega"
                         android:focusable="true"
                         android:layout_marginLeft="20dp"
                         android:orientation="vertical">
@@ -356,6 +364,7 @@
                         android:gravity="center"
                         android:layout_marginLeft="20dp"
                         android:clickable="true"
+                        android:id="@+id/blance"
                         android:background="@drawable/linear_bg"
                         android:focusable="true"
                         android:orientation="vertical">
@@ -399,6 +408,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:clickable="true"
+                        android:id="@+id/juilet"
                         android:focusable="true"
                         android:background="@drawable/linear_bg"
                         android:orientation="vertical">
@@ -434,6 +444,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:clickable="true"
+                        android:id="@+id/estella"
                         android:background="@drawable/linear_bg"
                         android:focusable="true"
                         android:layout_marginLeft="20dp"
@@ -471,6 +482,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:clickable="true"
+                        android:id="@+id/lyra"
                         android:focusable="true"
                         android:background="@drawable/linear_bg"
                         android:layout_marginLeft="20dp"
