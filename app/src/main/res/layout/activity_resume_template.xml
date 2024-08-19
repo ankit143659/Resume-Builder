@@ -49,6 +49,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
+                        android:background="@drawable/linear_bg"
                         android:clickable="true"
                         android:focusable="true"
                         android:orientation="vertical">
@@ -56,8 +57,9 @@
                     <ImageView
                         android:layout_width="100dp"
                         android:layout_height="130dp"
+                        android:padding="5dp"
                         android:background="@drawable/card_background"
-                        android:src="@drawable/resumr" />
+                        android:src="@drawable/aurora" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -83,6 +85,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:clickable="true"
+                        android:background="@drawable/linear_bg"
                         android:focusable="true"
                         android:layout_marginLeft="20dp"
                         android:orientation="vertical">
@@ -90,8 +93,9 @@
                         <ImageView
                             android:layout_width="100dp"
                             android:layout_height="130dp"
+                            android:padding="5dp"
                             android:background="@drawable/card_background"
-                            android:src="@drawable/resumr" />
+                            android:src="@drawable/dawn" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -118,6 +122,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:clickable="true"
+                        android:background="@drawable/linear_bg"
                         android:focusable="true"
                         android:layout_marginLeft="20dp"
                         android:orientation="vertical">
@@ -125,8 +130,9 @@
                         <ImageView
                             android:layout_width="100dp"
                             android:layout_height="130dp"
+                            android:padding="5dp"
                             android:background="@drawable/card_background"
-                            android:src="@drawable/resumr" />
+                            android:src="@drawable/orion" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -160,14 +166,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:clickable="true"
+                        android:background="@drawable/linear_bg"
                         android:focusable="true"
                         android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="100dp"
                             android:layout_height="130dp"
+                            android:padding="5dp"
                             android:background="@drawable/card_background"
-                            android:src="@drawable/resumr" />
+                            android:src="@drawable/luna" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -192,6 +200,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:background="@drawable/linear_bg"
                         android:layout_marginLeft="20dp"
                         android:clickable="true"
                         android:focusable="true"
@@ -200,8 +209,9 @@
                         <ImageView
                             android:layout_width="100dp"
                             android:layout_height="130dp"
+                            android:padding="5dp"
                             android:background="@drawable/card_background"
-                            android:src="@drawable/resumr" />
+                            android:src="@drawable/ceteleste" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -228,6 +238,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:clickable="true"
+                        android:background="@drawable/linear_bg"
                         android:focusable="true"
                         android:layout_marginLeft="20dp"
                         android:orientation="vertical">
@@ -235,8 +246,9 @@
                         <ImageView
                             android:layout_width="100dp"
                             android:layout_height="130dp"
+                            android:padding="5dp"
                             android:background="@drawable/card_background"
-                            android:src="@drawable/resumr" />
+                            android:src="@drawable/nova" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -272,13 +284,15 @@
                         android:layout_marginLeft="10dp"
                         android:clickable="true"
                         android:focusable="true"
+                        android:background="@drawable/linear_bg"
                         android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="100dp"
                             android:layout_height="130dp"
+                            android:padding="5dp"
                             android:background="@drawable/card_background"
-                            android:src="@drawable/resumr" />
+                            android:src="@drawable/portia" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -303,6 +317,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:background="@drawable/linear_bg"
                         android:clickable="true"
                         android:focusable="true"
                         android:layout_marginLeft="20dp"
@@ -311,8 +326,9 @@
                         <ImageView
                             android:layout_width="100dp"
                             android:layout_height="130dp"
+                            android:padding="5dp"
                             android:background="@drawable/card_background"
-                            android:src="@drawable/resumr" />
+                            android:src="@drawable/vega" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -340,14 +356,16 @@
                         android:gravity="center"
                         android:layout_marginLeft="20dp"
                         android:clickable="true"
+                        android:background="@drawable/linear_bg"
                         android:focusable="true"
                         android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="100dp"
                             android:layout_height="130dp"
+                            android:padding="5dp"
                             android:background="@drawable/card_background"
-                            android:src="@drawable/resumr" />
+                            android:src="@drawable/bianca" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -382,13 +400,15 @@
                         android:layout_marginLeft="10dp"
                         android:clickable="true"
                         android:focusable="true"
+                        android:background="@drawable/linear_bg"
                         android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="100dp"
                             android:layout_height="130dp"
+                            android:padding="5dp"
                             android:background="@drawable/card_background"
-                            android:src="@drawable/resumr" />
+                            android:src="@drawable/juliet" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -414,6 +434,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:clickable="true"
+                        android:background="@drawable/linear_bg"
                         android:focusable="true"
                         android:layout_marginLeft="20dp"
                         android:orientation="vertical">
@@ -421,8 +442,9 @@
                         <ImageView
                             android:layout_width="100dp"
                             android:layout_height="130dp"
+                            android:padding="5dp"
                             android:background="@drawable/card_background"
-                            android:src="@drawable/resumr" />
+                            android:src="@drawable/estella" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -450,14 +472,16 @@
                         android:gravity="center"
                         android:clickable="true"
                         android:focusable="true"
+                        android:background="@drawable/linear_bg"
                         android:layout_marginLeft="20dp"
                         android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="100dp"
                             android:layout_height="130dp"
+                            android:padding="5dp"
                             android:background="@drawable/card_background"
-                            android:src="@drawable/resumr" />
+                            android:src="@drawable/lyra" />
 
                         <TextView
                             android:layout_width="wrap_content"
