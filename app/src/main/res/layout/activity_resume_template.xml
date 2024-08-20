@@ -24,7 +24,9 @@
 
     <Spinner
         android:id="@+id/spinner_items"
-        android:layout_width="250dp"
+        android:layout_width="280dp"
+        android:paddingLeft="10dp"
+        android:background="@drawable/spinner_bg"
         android:layout_height="40dp"
         android:layout_below="@id/a"
         android:layout_centerHorizontal="true"
@@ -42,72 +44,60 @@
             android:orientation="vertical"
             android:padding="2dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+
                         <ImageView
-                            android:layout_width="130dp"
-                            android:layout_height="150dp"
-                            android:layout_marginLeft="25dp"
+                            android:layout_width="250dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="30dp"
+                            android:layout_height="350dp"
                             android:id="@+id/img1"
-                            android:padding="5dp"
                             android:visibility="gone"
-                            android:background="@drawable/card_background"
-                            android:src="@drawable/orion" />
-
-                        <ImageView
-                            android:layout_width="130dp"
-                            android:layout_height="150dp"
                             android:padding="5dp"
-                            android:layout_gravity="end"
-                            android:id="@+id/img2"
-                            android:visibility="gone"
-                            android:layout_marginLeft="40dp"
-                            android:background="@drawable/card_background"
-                            android:src="@drawable/orion" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:visibility="gone"
-                    android:layout_height="150dp"
-                    android:layout_marginLeft="25dp"
-                    android:id="@+id/img3"
-                    android:padding="5dp"
-                    android:background="@drawable/card_background"
-                    android:src="@drawable/orion" />
-
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="150dp"
-                    android:padding="5dp"
-                    android:visibility="gone"
-                    android:layout_gravity="end"
-                    android:id="@+id/img4"
-                    android:layout_marginLeft="40dp"
-                    android:background="@drawable/card_background"
-                    android:src="@drawable/orion" />
-            </LinearLayout>
-
-
-
+                            />
 
             <Button
-                android:id="@+id/save"
+                android:id="@+id/select_img1"
+                android:layout_width="129dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#050A3A"
+                android:visibility="gone"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="Select" />
+
+                        <ImageView
+                            android:layout_width="250dp"
+                            android:layout_gravity="center"
+                            android:layout_height="350dp"
+                            android:visibility="gone"
+                            android:layout_marginTop="30dp"
+                            android:padding="5dp"
+                            android:id="@+id/img2"
+
+                            />
+
+            <Button
+                android:id="@+id/select_img2"
                 android:layout_width="129dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#050A3A"
                 android:textColor="@color/white"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone"
                 android:textSize="20sp"
-                android:text="Save" />
+                android:text="Select" />
+
+
+
+
+
+
+
+
 
 
 

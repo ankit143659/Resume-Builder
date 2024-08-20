@@ -64,6 +64,7 @@
                     android:layout_width="wrap_content"
                     android:text="𝐁𝐞𝐠𝐢𝐧𝐧𝐞𝐫"
                     android:textSize="14sp"
+
                     android:layout_marginLeft="20dp"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content" />

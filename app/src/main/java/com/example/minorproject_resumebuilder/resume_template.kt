@@ -32,13 +32,13 @@ class resume_template : AppCompatActivity() {
         spinnerItems = findViewById(R.id.spinner_items)
         val img1 : ImageView = findViewById(R.id.img1)
         val img2 : ImageView = findViewById(R.id.img2)
-        val img3 : ImageView = findViewById(R.id.img3)
-        val img4 : ImageView = findViewById(R.id.img4)
+        val select_img2 : Button = findViewById(R.id.select_img2)
+        val select_img1 : Button = findViewById(R.id.select_img1)
 
-        val items = arrayOf("Select an item", "MEDICAL", "ENGINEERING", "IT FIELD","UNDER GRADUATE","GRADUATE")
+        val items = arrayOf("CLICK TO CHOOSE TEMPLATE DESIGN", "MEDICAL", "ENGINEERING", "IT FIELD","DIPLOMA","FRESHERS","MANAGEMENT","DESIGNING","BANKING")
 
 
-        val adapter = ArrayAdapter(this,R.layout.simple_spinner_items)
+        val adapter = ArrayAdapter(this,R.layout.simple_spinner_items,items)
 
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -48,39 +48,81 @@ class resume_template : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedItem = parent.getItemAtPosition(position) as String
                 if (position == 1) {
-                    img1.visibility=View.VISIBLE
-                    img2.visibility=View.VISIBLE
-                    img4.visibility=View.GONE
-                    img3.visibility=View.GONE
+
+                    img1.setImageResource(R.drawable.medical_1)
+                    img2.setImageResource(R.drawable.medical_2)
+                    select_img1.visibility=View.VISIBLE
+                    select_img2.visibility=View.VISIBLE
+
                 } else if (position == 2) {
-                    img1.visibility=View.GONE
-                    img2.visibility=View.GONE
-                    img4.visibility=View.VISIBLE
-                    img3.visibility=View.VISIBLE
+                    img1.setImageResource(R.drawable.medical_1)
+                    img2.setImageResource(R.drawable.medical_2)
+                    select_img1.visibility=View.VISIBLE
+                    select_img2.visibility=View.VISIBLE
+                }else if (position == 3) {
+                    img1.setImageResource(R.drawable.engineering_1)
+                    img2.setImageResource(R.drawable.engineering_2)
+                    select_img1.visibility=View.VISIBLE
+                    select_img2.visibility=View.VISIBLE
+                }else if (position == 4) {
+                    img1.setImageResource(R.drawable.it_1)
+                    img2.setImageResource(R.drawable.it_2)
+                    select_img1.visibility=View.VISIBLE
+                    select_img2.visibility=View.VISIBLE
+
+                }else if (position == 5) {
+                    img1.setImageResource(R.drawable.basic_1)
+                    img2.setImageResource(R.drawable.design_1)
+                    select_img1.visibility=View.VISIBLE
+                    select_img2.visibility=View.VISIBLE
+                }else if (position == 6) {
+                    img1.setImageResource(R.drawable.basic_3)
+                    img2.setImageResource(R.drawable.engineering_2)
+                    select_img1.visibility=View.VISIBLE
+                    select_img2.visibility=View.VISIBLE
+                }else if (position == 7) {
+                    img1.setImageResource(R.drawable.design_1)
+                    img2.setImageResource(R.drawable.it_1)
+                    select_img1.visibility=View.VISIBLE
+                    select_img2.visibility=View.VISIBLE
+                }else if (position == 8) {
+                    img1.setImageResource(R.drawable.basic_1)
+                    img2.setImageResource(R.drawable.engineering_1)
+                    select_img1.visibility=View.VISIBLE
+                    select_img2.visibility=View.VISIBLE
                 }
                 else{
                     img1.visibility=View.GONE
                     img2.visibility=View.GONE
-                    img4.visibility=View.GONE
-                    img3.visibility=View.GONE
+                    select_img1.visibility=View.GONE
+                    select_img2.visibility=View.GONE
                 }
+
+
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
 
                 img1.visibility=View.GONE
                 img2.visibility=View.GONE
-                img4.visibility=View.GONE
-                img3.visibility=View.GONE
             }
         }
 
-        val save : Button = findViewById(R.id.save)
-        save.setOnClickListener{
-            Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()
+        select_img1.setOnClickListener{
+            Toast.makeText(this,"Succesfully Created",Toast.LENGTH_SHORT).show()
             val intent = Intent(this,HomePage::class.java)
             startActivity(intent)
-            finish()
         }
+
+
+        select_img2.setOnClickListener{
+            Toast.makeText(this,"Succesfully Created",Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,HomePage::class.java)
+            startActivity(intent)
+        }
+
+
+
     }
 }
