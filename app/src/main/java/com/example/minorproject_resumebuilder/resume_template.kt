@@ -23,8 +23,9 @@ class resume_template : AppCompatActivity() {
         val save : Button = findViewById(R.id.save)
         save.setOnClickListener{
             Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,Create_resume::class.java)
+            val intent = Intent(this,HomePage::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

@@ -26,7 +26,7 @@
                 android:textSize="30sp"
                 android:textColor="@color/black"
                 android:layout_gravity="center"
-                android:text="Project Details">
+                android:text="𝐏𝐫𝐨𝐣𝐞𝐜𝐭 𝐃𝐞𝐭𝐚𝐢𝐥𝐬">
 
             </TextView>
 
@@ -46,7 +46,7 @@
                     app:hintAnimationEnabled="true"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:hint="Project Name"
+                    android:hint="𝐏𝐫𝐨𝐣𝐞𝐜𝐭 𝐍𝐚𝐦𝐞"
                     android:singleLine="true"
                     app:endIconMode="clear_text"
                     android:layout_height="wrap_content">
@@ -81,7 +81,7 @@
                     android:layout_marginRight="20dp"
                     app:hintTextAppearance="@color/black"
                     app:hintAnimationEnabled="true"
-                    android:hint="Your Role"
+                    android:hint="𝐘𝐨𝐮𝐫 𝐑𝐨𝐥𝐞"
                     app:endIconMode="clear_text"
                     android:layout_height="wrap_content">
 
@@ -115,7 +115,7 @@
                 android:layout_marginRight="20dp"
                 app:hintTextAppearance="@color/black"
                 app:hintAnimationEnabled="true"
-                android:hint="Project Url"
+                android:hint="𝐏𝐫𝐨𝐣𝐞𝐜𝐭 𝐔𝐫𝐥"
                 app:endIconMode="clear_text"
                 android:layout_height="wrap_content">
 
@@ -143,7 +143,7 @@
                     app:boxBackgroundMode="outline"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="160dp"
-                    android:hint="Start Date"
+                    android:hint="𝐒𝐭𝐚𝐫𝐭 𝐃𝐚𝐭𝐞"
                     app:hintTextAppearance="@color/black"
                     app:hintAnimationEnabled="true"
                     app:endIconMode="clear_text"
@@ -175,7 +175,7 @@
                     app:boxBackgroundMode="outline"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="160dp"
-                    android:hint="End Date"
+                    android:hint="𝐄𝐧𝐝 𝐃𝐚𝐭𝐞"
                     app:hintTextAppearance="@color/black"
                     app:hintAnimationEnabled="true"
                     app:endIconMode="clear_text"
@@ -207,7 +207,7 @@
                     app:boxBackgroundMode="outline"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:hint="Project Description"
+                    android:hint="𝐏𝐫𝐨𝐣𝐞𝐜𝐭 𝐃𝐞𝐬𝐜𝐫𝐢𝐩𝐭𝐢𝐨𝐧"
                     app:hintTextAppearance="@color/black"
                     app:hintAnimationEnabled="true"
                     app:endIconMode="clear_text"
@@ -230,7 +230,7 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:text="Delete"
+                android:text="𝐃𝐞𝐥𝐞𝐭𝐞"
                 android:id="@+id/delete"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/white"

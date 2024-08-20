@@ -251,7 +251,6 @@
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:buttonTint="@color/black"
                     android:layout_marginRight="0dp"
                     android:layout_marginLeft="25dp"
                     android:text="Male" />
@@ -260,7 +259,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:buttonTint="@color/black"
                     android:layout_marginLeft="15dp"
                     android:textStyle="bold"
                     android:textSize="18sp"

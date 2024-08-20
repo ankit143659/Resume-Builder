@@ -37,17 +37,17 @@
                 android:layout_marginTop="10dp"
                 app:hintTextAppearance="@color/black"
                 app:hintAnimationEnabled="true"
-                android:hint="Enter Skill Name"
+                android:hint="𝐄𝐧𝐭𝐞𝐫 𝐒𝐤𝐢𝐥𝐥 𝐍𝐚𝐦𝐞"
                 app:endIconMode="clear_text"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:inputType="text"
                     android:singleLine="true"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:layout_height="wrap_content" />
+                    android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
@@ -62,15 +62,14 @@
 
                 <CheckBox
                     android:layout_width="wrap_content"
-                    android:text="Beginner"
+                    android:text="𝐁𝐞𝐠𝐢𝐧𝐧𝐞𝐫"
                     android:textSize="14sp"
-                    android:buttonTint="@color/black"
+                    android:layout_marginLeft="20dp"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content" />
                 <CheckBox
                     android:layout_width="wrap_content"
-                    android:text="Intermediate"
-                    android:buttonTint="@color/black"
+                    android:text="𝐈𝐧𝐭𝐞𝐫𝐦𝐞𝐝𝐢𝐚𝐭𝐞"
                     android:textColor="@color/black"
                     android:layout_marginLeft="10dp"
                     android:textSize="14sp"
@@ -78,23 +77,14 @@
 
                 <CheckBox
                     android:layout_width="wrap_content"
-                    android:text="Advance"
+                    android:text="𝐀𝐝𝐯𝐚𝐧𝐜𝐞"
                     android:textSize="14sp"
-                    android:buttonTint="@color/black"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content" />
-
-
-
-
-
             </LinearLayout>
-
-
-
             <Button
                 android:layout_width="wrap_content"
-                android:text="Delete"
+                android:text="𝐃𝐞𝐥𝐞𝐭𝐞"
                 android:id="@+id/delete"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
@@ -104,10 +94,6 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
-
-
-
-
     </androidx.cardview.widget.CardView>
 
 </androidx.cardview.widget.CardView>

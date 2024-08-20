@@ -58,6 +58,7 @@ class home_Main : Fragment() {
                     val intent = Intent(activity,Create_resume::class.java)
                     startActivity(intent)
                     alertDialog.dismiss()
+
                 }
                 else{
                     name.setError("Name required")
@@ -69,6 +70,7 @@ class home_Main : Fragment() {
             }
 
             alertDialog.show()
+
 
         }
 

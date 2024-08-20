@@ -49,6 +49,7 @@ class Create_resume : AppCompatActivity() {
         save.setOnClickListener{
             val intent = Intent(this,resume_template::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

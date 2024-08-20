@@ -15,196 +15,192 @@
         android:layout_height="wrap_content">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:background="@drawable/card_background"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="@color/black"
-            android:layout_gravity="center"
-            android:text="Experience"/>
-
         <LinearLayout
-            android:layout_width="336dp"
-            android:gravity="center"
-            android:layout_height="71dp"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal"
-            >
-
-
-        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            app:hintEnabled="true"
-            app:boxBackgroundMode="outline"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:hint="Enter Job Title"
-            app:hintAnimationEnabled="true"
-            app:hintTextAppearance="@color/black"
-            app:endIconMode="clear_text"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_background"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="5dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:inputType="text"
-                android:singleLine="true"
-                android:textSize="18sp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="𝐄𝐱𝐩𝐞𝐫𝐢𝐞𝐧𝐜𝐞"
                 android:textColor="@color/black"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:textSize="30sp" />
 
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:layout_width="336dp"
-            android:gravity="center"
-            android:layout_height="71dp"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal"
-            >
+            <LinearLayout
+                android:layout_width="336dp"
+                android:layout_height="71dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                app:hintEnabled="true"
-                app:boxBackgroundMode="outline"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:hint="Company Name"
-                app:hintAnimationEnabled="true"
-                app:hintTextAppearance="@color/black"
-                app:endIconMode="clear_text"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:inputType="text"
-                    android:singleLine="true"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:hint="𝐄𝐧𝐭𝐞𝐫 𝐉𝐨𝐛 𝐓𝐢𝐭𝐥𝐞"
+                    app:boxBackgroundMode="outline"
+                    app:endIconMode="clear_text"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
+                    app:hintTextAppearance="@color/black">
 
-        </LinearLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
-            android:layout_width="336dp"
-            android:gravity="center"
-            android:layout_height="71dp"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal"
-            >
+            </LinearLayout>
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                app:hintEnabled="true"
-                app:boxBackgroundMode="outline"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:hint="Company Location"
-                app:hintAnimationEnabled="true"
-                app:hintTextAppearance="@color/black"
-                app:endIconMode="clear_text"
-                android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="336dp"
+                android:layout_height="71dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <com.google.android.material.textfield.TextInputEditText
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:inputType="text"
-                    android:textSize="18sp"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:hint="𝐂𝐨𝐦𝐩𝐚𝐧𝐲 𝐍𝐚𝐦𝐞"
+                    app:boxBackgroundMode="outline"
+                    app:endIconMode="clear_text"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
+                    app:hintTextAppearance="@color/black">
 
-        </LinearLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="336dp"
+                android:layout_height="71dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
 
-        <LinearLayout
-            android:layout_width="336dp"
-            android:gravity="center"
-            android:layout_height="71dp"
-            android:layout_marginTop="1dp"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                app:hintEnabled="true"
-                app:boxBackgroundMode="outline"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="160dp"
-                android:hint="Start Date"
-                app:hintTextAppearance="@color/black"
-                app:hintAnimationEnabled="true"
-                app:endIconMode="clear_text"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:inputType="date"
-                    android:singleLine="true"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:hint="𝐂𝐨𝐦𝐩𝐚𝐧𝐲 𝐋𝐨𝐜𝐚𝐭𝐢𝐨𝐧"
+                    app:boxBackgroundMode="outline"
+                    app:endIconMode="clear_text"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
+                    app:hintTextAppearance="@color/black">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
 
 
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="336dp"
+                android:layout_height="71dp"
+                android:layout_marginTop="1dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-
-        <LinearLayout
-            android:layout_width="336dp"
-            android:gravity="center"
-            android:layout_height="71dp"
-            android:layout_marginTop="1dp"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                app:hintEnabled="true"
-                app:boxBackgroundMode="outline"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="160dp"
-                android:hint="End Date"
-                app:hintTextAppearance="@color/black"
-                app:hintAnimationEnabled="true"
-                app:endIconMode="clear_text"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:inputType="date"
-                    android:singleLine="true"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="160dp"
+                    android:hint="𝐒𝐭𝐚𝐫𝐭 𝐃𝐚𝐭𝐞"
+                    app:boxBackgroundMode="outline"
+                    app:endIconMode="clear_text"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
+                    app:hintTextAppearance="@color/black">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="date"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="336dp"
+                android:layout_height="71dp"
+                android:layout_marginTop="1dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="160dp"
+                    android:hint="𝐄𝐧𝐝 𝐃𝐚𝐭𝐞"
+                    app:boxBackgroundMode="outline"
+                    app:endIconMode="clear_text"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
+                    app:hintTextAppearance="@color/black">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="date"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#EC060E"
+                android:text="𝐃𝐞𝐥𝐞𝐭𝐞"
+                android:textColor="@color/white"
+                android:textSize="19sp" />
 
         </LinearLayout>
-
-
-        <Button
-            android:layout_width="wrap_content"
-            android:text="Delete"
-            android:id="@+id/delete"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:backgroundTint="#EC060E"
-            android:textSize="19sp"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 </androidx.cardview.widget.CardView>

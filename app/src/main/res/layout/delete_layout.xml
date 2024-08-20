@@ -30,7 +30,7 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/black"
             android:gravity="center"
-            android:text="Are sure you want to delete ?"
+            android:text="𝐀𝐫𝐞 𝐲𝐨𝐮 𝐬𝐮𝐫𝐞 𝐲𝐨𝐮 𝐰𝐚𝐧𝐭 𝐭𝐨 𝐝𝐞𝐥𝐞𝐭𝐞 ?"
             android:textSize="23sp" />
 
         <LinearLayout
