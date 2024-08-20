@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:paddingLeft="17dp"
-        android:background="#093889"
+        android:background="@drawable/header_background"
         android:text="Enter Your Details"
         android:textSize="20sp">
     </TextView>
@@ -213,7 +213,7 @@
                 android:layout_height="57dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
-                android:backgroundTint="#093889"
+                android:backgroundTint="#050A3A"
                 android:padding="10dp"
                 android:id="@+id/save"
                 android:text="Save"
