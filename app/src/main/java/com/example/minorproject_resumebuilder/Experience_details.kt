@@ -34,12 +34,12 @@ class Experience_details : AppCompatActivity() {
             insets
         }
 
-        addLayout= findViewById(R.id.addEducation)
+        addLayout= findViewById(R.id.addexperience)
         layoutcontainer = findViewById(R.id.layoutContainer)
         save= findViewById(R.id.savebtn)
 
         addLayout.setOnClickListener{
-            addEducation()
+            addExperience()
         }
 
         save.setOnClickListener{
@@ -51,7 +51,7 @@ class Experience_details : AppCompatActivity() {
     }
 
     @SuppressLint("MissingInflatedId")
-    fun addEducation(){
+    fun addExperience(){
         val experienceDetailsView : View = LayoutInflater.from(this). inflate(R.layout.experience_details,layoutcontainer,false)
 
 
@@ -59,7 +59,7 @@ class Experience_details : AppCompatActivity() {
         delete.setOnClickListener{
 
             val dialog = AlertDialog.Builder(this)
-            val dialogView = LayoutInflater.from(this).inflate(R.layout.log_out,null)
+            val dialogView = LayoutInflater.from(this).inflate(R.layout.delete_layout,null)
             dialog.setView(dialogView)
 
             val yes : Button = dialogView.findViewById(R.id.yes)
@@ -72,6 +72,7 @@ class Experience_details : AppCompatActivity() {
                 if(layoutcontainer.childCount==0){
                     save.visibility=View.GONE
                 }
+                alertBox.dismiss()
             }
 
             no.setOnClickListener{

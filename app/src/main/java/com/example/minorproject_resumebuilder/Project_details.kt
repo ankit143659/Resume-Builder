@@ -34,7 +34,7 @@ class Project_details : AppCompatActivity() {
             insets
         }
 
-        addLayout= findViewById(R.id.addEducation)
+        addLayout= findViewById(R.id.addProjects)
         layoutcontainer = findViewById(R.id.layoutContainer)
         save= findViewById(R.id.savebtn)
 
@@ -59,7 +59,7 @@ class Project_details : AppCompatActivity() {
         delete.setOnClickListener{
 
             val dialog = AlertDialog.Builder(this)
-            val dialogView = LayoutInflater.from(this).inflate(R.layout.log_out,null)
+            val dialogView = LayoutInflater.from(this).inflate(R.layout.delete_layout,null)
             dialog.setView(dialogView)
 
             val yes : Button = dialogView.findViewById(R.id.yes)
@@ -72,6 +72,7 @@ class Project_details : AppCompatActivity() {
                 if(layoutcontainer.childCount==0){
                     save.visibility=View.GONE
                 }
+                alertBox.dismiss()
             }
 
             no.setOnClickListener{

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,7 @@ class Create_resume : AppCompatActivity() {
         val btn_skill = findViewById<LinearLayout>(R.id.skill)
         val btn_exper = findViewById<LinearLayout>(R.id.experience)
         val btn_project = findViewById<LinearLayout>(R.id.projects)
+        val save  : Button = findViewById(R.id.save)
 
         btn_per.setOnClickListener{
             val intent = Intent(this,Basic_personal_details::class.java)
@@ -45,6 +47,10 @@ class Create_resume : AppCompatActivity() {
         btn_project.setOnClickListener{
             val intent = Intent(this,Skill_details::class.java)
             startActivity(intent)
+        }
+
+        save.setOnClickListener{
+
         }
     }
 }

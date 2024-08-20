@@ -45,14 +45,14 @@ class Skill_details : AppCompatActivity() {
     }
 
     fun addskills(){
-        val skillAddView : View = LayoutInflater.from(this). inflate(R.layout.education_details,layoutcontainer,false)
+        val skillAddView : View = LayoutInflater.from(this). inflate(R.layout.skill_details,layoutcontainer,false)
 
 
         val delete : Button = skillAddView.findViewById(R.id.delete)
         delete.setOnClickListener{
 
             val dialog = AlertDialog.Builder(this)
-            val dialogView = LayoutInflater.from(this).inflate(R.layout.log_out,null)
+            val dialogView = LayoutInflater.from(this).inflate(R.layout.delete_layout,null)
             dialog.setView(dialogView)
 
             val yes : Button = dialogView.findViewById(R.id.yes)
@@ -65,6 +65,7 @@ class Skill_details : AppCompatActivity() {
                 if(layoutcontainer.childCount==0){
                     save.visibility=View.GONE
                 }
+                alertBox.dismiss()
             }
 
             no.setOnClickListener{
