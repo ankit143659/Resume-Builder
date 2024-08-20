@@ -50,16 +50,22 @@ class resume_template : AppCompatActivity() {
                 if (position == 1) {
                     img1.setImageResource(R.drawable.medical_1)
                     img2.setImageResource(R.drawable.medical_2)
+                    img1.visibility=View.VISIBLE
+                    img2.visibility=View.VISIBLE
                     select_img1.visibility=View.VISIBLE
                     select_img2.visibility=View.VISIBLE
                 } else if (position == 2) {
                     img1.setImageResource(R.drawable.medical_1)
                     img2.setImageResource(R.drawable.medical_2)
+                    img1.visibility=View.VISIBLE
+                    img2.visibility=View.VISIBLE
                     select_img1.visibility=View.VISIBLE
                     select_img2.visibility=View.VISIBLE
                 }else if (position == 3) {
                     img1.setImageResource(R.drawable.engineering_1)
                     img2.setImageResource(R.drawable.engineering_2)
+                    img1.visibility=View.VISIBLE
+                    img2.visibility=View.VISIBLE
                     select_img1.visibility=View.VISIBLE
                     select_img2.visibility=View.VISIBLE
                 }else if (position == 4) {
@@ -71,21 +77,29 @@ class resume_template : AppCompatActivity() {
                 }else if (position == 5) {
                     img1.setImageResource(R.drawable.basic_1)
                     img2.setImageResource(R.drawable.design_1)
+                    img1.visibility=View.VISIBLE
+                    img2.visibility=View.VISIBLE
                     select_img1.visibility=View.VISIBLE
                     select_img2.visibility=View.VISIBLE
                 }else if (position == 6) {
                     img1.setImageResource(R.drawable.basic_3)
                     img2.setImageResource(R.drawable.engineering_2)
+                    img1.visibility=View.VISIBLE
+                    img2.visibility=View.VISIBLE
                     select_img1.visibility=View.VISIBLE
                     select_img2.visibility=View.VISIBLE
                 }else if (position == 7) {
                     img1.setImageResource(R.drawable.design_1)
                     img2.setImageResource(R.drawable.it_1)
+                    img1.visibility=View.VISIBLE
+                    img2.visibility=View.VISIBLE
                     select_img1.visibility=View.VISIBLE
                     select_img2.visibility=View.VISIBLE
                 }else if (position == 8) {
                     img1.setImageResource(R.drawable.basic_1)
                     img2.setImageResource(R.drawable.engineering_1)
+                    img1.visibility=View.VISIBLE
+                    img2.visibility=View.VISIBLE
                     select_img1.visibility=View.VISIBLE
                     select_img2.visibility=View.VISIBLE
                 }
