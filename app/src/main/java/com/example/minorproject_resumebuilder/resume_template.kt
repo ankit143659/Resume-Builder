@@ -48,12 +48,10 @@ class resume_template : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedItem = parent.getItemAtPosition(position) as String
                 if (position == 1) {
-
                     img1.setImageResource(R.drawable.medical_1)
                     img2.setImageResource(R.drawable.medical_2)
                     select_img1.visibility=View.VISIBLE
                     select_img2.visibility=View.VISIBLE
-
                 } else if (position == 2) {
                     img1.setImageResource(R.drawable.medical_1)
                     img2.setImageResource(R.drawable.medical_2)
