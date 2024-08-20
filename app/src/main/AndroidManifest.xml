@@ -17,6 +17,12 @@
         android:theme="@style/Theme.MinorProject_ResumeBuilder"
         tools:targetApi="31">
         <activity
+            android:name=".project_detailss"
+            android:exported="false" />
+        <activity
+            android:name=".experience_detailss"
+            android:exported="false" />
+        <activity
             android:name=".resume_template"
             android:exported="false" />
         <activity

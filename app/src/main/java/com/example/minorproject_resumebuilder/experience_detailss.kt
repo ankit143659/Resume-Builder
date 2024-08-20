@@ -1,4 +1,4 @@
-package com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder
+package com.example.minorproject_resumebuilder
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -13,49 +13,45 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.minorproject_resumebuilder.Create_resume
-import com.example.minorproject_resumebuilder.R
 
-class Project_details : AppCompatActivity() {
+class experience_detailss : AppCompatActivity() {
+
     private lateinit var addLayout : Button
     private lateinit var save : Button
-    private lateinit var layoutcontainer : LinearLayout
-
-
-
+    private lateinit var layoutcontain : LinearLayout
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_project_details)
+        setContentView(R.layout.activity_experience_detailss)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        addLayout= findViewById(R.id.addProjects)
-        layoutcontainer = findViewById(R.id.layoutContainer)
+        addLayout= findViewById(R.id.addexperience)
+        layoutcontain = findViewById(R.id.layoutContainer)
         save= findViewById(R.id.savebtn)
 
         addLayout.setOnClickListener{
-            addEducation()
+            addExperience()
         }
 
         save.setOnClickListener{
-            Toast.makeText(this,"Successfully filled Data",Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,Create_resume::class.java)
+            Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, Create_resume::class.java)
             startActivity(intent)
         }
 
     }
 
     @SuppressLint("MissingInflatedId")
-    fun addEducation(){
-        val educationDetailsView : View = LayoutInflater.from(this). inflate(R.layout.project,layoutcontainer,false)
+    fun addExperience(){
+        val experienceDetailsView : View = LayoutInflater.from(this). inflate(R.layout.experience_details,layoutcontain,false)
 
 
-        val delete : Button = educationDetailsView.findViewById(R.id.delete)
+        val delete : Button = experienceDetailsView.findViewById(R.id.delete)
         delete.setOnClickListener{
 
             val dialog = AlertDialog.Builder(this)
@@ -68,9 +64,9 @@ class Project_details : AppCompatActivity() {
             val alertBox = dialog.create()
 
             yes.setOnClickListener{
-                layoutcontainer.removeView(educationDetailsView)
-                if(layoutcontainer.childCount==0){
-                    save.visibility=View.GONE
+                layoutcontain.removeView(experienceDetailsView)
+                if(layoutcontain.childCount==0){
+                    save.visibility= View.GONE
                 }
                 alertBox.dismiss()
             }
@@ -83,7 +79,7 @@ class Project_details : AppCompatActivity() {
 
         }
 
-        layoutcontainer.addView(educationDetailsView)
-        save.visibility=View.VISIBLE
+        layoutcontain.addView(experienceDetailsView)
+        save.visibility= View.VISIBLE
     }
 }

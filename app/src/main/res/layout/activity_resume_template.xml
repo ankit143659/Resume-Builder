@@ -34,7 +34,7 @@
             android:padding="10dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
@@ -42,7 +42,7 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
+
                     tools:ignore="Suspicious0dp">
 
                     <LinearLayout
@@ -68,6 +68,7 @@
                         android:gravity="center"
                         android:textStyle="bold"
                         android:textSize="18sp"
+                        android:textColor="@color/black"
                         android:layout_gravity="center_horizontal"
                         android:text="Aurora"/>
 
@@ -78,7 +79,6 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
                     tools:ignore="Suspicious0dp">
 
                     <LinearLayout
@@ -103,6 +103,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:textColor="@color/black"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:layout_gravity="center_horizontal"
@@ -116,7 +117,7 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
+
                     tools:ignore="Suspicious0dp">
 
                     <LinearLayout
@@ -142,6 +143,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textSize="18sp"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:layout_gravity="center_horizontal"
                             android:text="Orion"/>
@@ -153,7 +155,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
@@ -161,7 +163,6 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
                     tools:ignore="Suspicious0dp">
 
                     <LinearLayout
@@ -186,6 +187,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textStyle="bold"
+                            android:textColor="@color/black"
                             android:textSize="18sp"
                             android:layout_gravity="center_horizontal"
                             android:text="Luna"/>
@@ -197,7 +199,6 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
                     tools:ignore="Suspicious0dp">
 
                     <LinearLayout
@@ -223,6 +224,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textSize="18sp"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:layout_gravity="center_horizontal"
                             android:text="Celeste"/>
@@ -235,7 +237,7 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
+
                     tools:ignore="Suspicious0dp">
 
                     <LinearLayout
@@ -261,6 +263,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textSize="18sp"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:layout_gravity="center_horizontal"
                             android:text="Nova"/>
@@ -273,7 +276,7 @@
 
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
@@ -281,7 +284,6 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
                     tools:ignore="Suspicious0dp">
 
                     <LinearLayout
@@ -306,6 +308,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textStyle="bold"
+                            android:textColor="@color/black"
                             android:textSize="18sp"
                             android:layout_gravity="center_horizontal"
                             android:text="Portia"/>
@@ -317,7 +320,6 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
                     tools:ignore="Suspicious0dp">
 
                     <LinearLayout
@@ -344,6 +346,7 @@
                             android:gravity="center"
                             android:textSize="18sp"
                             android:textStyle="bold"
+                            android:textColor="@color/black"
                             android:layout_gravity="center_horizontal"
                             android:text="Vega"/>
 
@@ -355,7 +358,6 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
                     tools:ignore="Suspicious0dp">
 
                     <LinearLayout
@@ -382,6 +384,7 @@
                             android:gravity="center"
                             android:textSize="18sp"
                             android:textStyle="bold"
+                            android:textColor="@color/black"
                             android:layout_gravity="center_horizontal"
                             android:text="Blance"/>
 
@@ -392,7 +395,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
@@ -400,7 +403,6 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
                     tools:ignore="Suspicious0dp">
 
                     <LinearLayout
@@ -424,6 +426,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:textSize="18sp"
                             android:layout_gravity="center_horizontal"
@@ -436,7 +439,6 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
                     tools:ignore="Suspicious0dp">
 
                     <LinearLayout
@@ -461,6 +463,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:textColor="@color/black"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:layout_gravity="center_horizontal"
@@ -474,7 +477,7 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
+
                     tools:ignore="Suspicious0dp">
 
                     <LinearLayout
@@ -500,6 +503,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textSize="18sp"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:layout_gravity="center_horizontal"
                             android:text="Lyra"/>

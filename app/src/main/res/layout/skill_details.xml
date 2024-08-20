@@ -45,6 +45,7 @@
                     android:layout_width="match_parent"
                     android:inputType="text"
                     android:singleLine="true"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -62,7 +63,7 @@
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:text="Beginner"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:buttonTint="@color/black"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content" />
@@ -72,13 +73,13 @@
                     android:buttonTint="@color/black"
                     android:textColor="@color/black"
                     android:layout_marginLeft="10dp"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:layout_height="wrap_content" />
 
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:text="Advance"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:buttonTint="@color/black"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content" />
