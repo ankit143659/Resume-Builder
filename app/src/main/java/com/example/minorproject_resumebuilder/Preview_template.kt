@@ -34,8 +34,7 @@ class Preview_template : AppCompatActivity() {
 
         layoutcontainer = findViewById(R.id.layoutcontainer)
         buttonContainer = findViewById(R.id.buttonContainer)
-        val download : Button = findViewById(R.id.Download)
-        val save : Button = findViewById(R.id.save)
+
 
         if (resumeName =="medical_1"){
             layoutcontainer.visibility=View.VISIBLE
@@ -51,16 +50,6 @@ class Preview_template : AppCompatActivity() {
             buttonContainer.visibility=View.VISIBLE
         }
 
-        download.setOnClickListener{
-            Toast.makeText(this,"Succesfully Downloaded", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,HomePage::class.java)
-            startActivity(intent)
-        }
 
-        save.setOnClickListener{
-            Toast.makeText(this,"Succesfully Saved", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,HomePage::class.java)
-            startActivity(intent)
-        }
     }
 }
