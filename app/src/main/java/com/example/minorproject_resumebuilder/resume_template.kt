@@ -72,6 +72,8 @@ class resume_template : AppCompatActivity() {
                 }else if (position == 4) {
                     img1.setImageResource(R.drawable.basic_3)
                     img2.setImageResource(R.drawable.design_1)
+                    img1.visibility=View.VISIBLE
+                    img2.visibility=View.VISIBLE
                     select_img1.visibility=View.VISIBLE
                     select_img2.visibility=View.VISIBLE
 
