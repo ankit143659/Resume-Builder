@@ -52,6 +52,7 @@
                             android:layout_height="350dp"
                             android:id="@+id/img1"
                             android:visibility="gone"
+                            android:background="@drawable/card_background"
                             android:padding="5dp"
                             />
 

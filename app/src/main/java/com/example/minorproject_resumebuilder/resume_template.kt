@@ -35,6 +35,7 @@ class resume_template : AppCompatActivity() {
         val select_img2 : Button = findViewById(R.id.select_img2)
         val select_img1 : Button = findViewById(R.id.select_img1)
 
+
         val items = arrayOf("CLICK TO CHOOSE TEMPLATE DESIGN", "MEDICAL", "ENGINEERING", "IT FIELD","DIPLOMA","FRESHERS","MANAGEMENT","DESIGNING","BANKING")
 
 
@@ -55,22 +56,22 @@ class resume_template : AppCompatActivity() {
                     select_img1.visibility=View.VISIBLE
                     select_img2.visibility=View.VISIBLE
                 } else if (position == 2) {
-                    img1.setImageResource(R.drawable.medical_1)
-                    img2.setImageResource(R.drawable.medical_2)
-                    img1.visibility=View.VISIBLE
-                    img2.visibility=View.VISIBLE
-                    select_img1.visibility=View.VISIBLE
-                    select_img2.visibility=View.VISIBLE
-                }else if (position == 3) {
                     img1.setImageResource(R.drawable.engineering_1)
                     img2.setImageResource(R.drawable.engineering_2)
                     img1.visibility=View.VISIBLE
                     img2.visibility=View.VISIBLE
                     select_img1.visibility=View.VISIBLE
                     select_img2.visibility=View.VISIBLE
-                }else if (position == 4) {
+                }else if (position == 3) {
                     img1.setImageResource(R.drawable.it_1)
                     img2.setImageResource(R.drawable.it_2)
+                    img1.visibility=View.VISIBLE
+                    img2.visibility=View.VISIBLE
+                    select_img1.visibility=View.VISIBLE
+                    select_img2.visibility=View.VISIBLE
+                }else if (position == 4) {
+                    img1.setImageResource(R.drawable.basic_3)
+                    img2.setImageResource(R.drawable.design_1)
                     select_img1.visibility=View.VISIBLE
                     select_img2.visibility=View.VISIBLE
 
@@ -122,8 +123,10 @@ class resume_template : AppCompatActivity() {
         }
 
         select_img1.setOnClickListener{
-            Toast.makeText(this,"Succesfully Created",Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,HomePage::class.java)
+            Toast.makeText(this,"Succesfully Data Filled",Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,Preview_template::class.java).apply {
+                putExtra("value","medical_1")
+            }
             startActivity(intent)
         }
 
@@ -132,6 +135,7 @@ class resume_template : AppCompatActivity() {
             Toast.makeText(this,"Succesfully Created",Toast.LENGTH_SHORT).show()
             val intent = Intent(this,HomePage::class.java)
             startActivity(intent)
+            finish()
         }
 
 

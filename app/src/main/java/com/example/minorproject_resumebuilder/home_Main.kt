@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import java.text.SimpleDateFormat
 import java.util.*
@@ -53,7 +54,7 @@ class home_Main : Fragment() {
                 datepicker.show()
             }
             create.setOnClickListener{
-                if(name.length()!=0)
+                if(name.length()!=0 && date.length()!=0)
                 {
                     val intent = Intent(activity,Create_resume::class.java)
                     startActivity(intent)
@@ -61,7 +62,7 @@ class home_Main : Fragment() {
 
                 }
                 else{
-                    name.setError("Name required")
+                    Toast.makeText(requireContext(),"Please fill require details",Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -73,9 +74,6 @@ class home_Main : Fragment() {
 
 
         }
-
-
-
         return view
     }
 
