@@ -21,28 +21,40 @@ class Create_resume : AppCompatActivity() {
         val btn_project = findViewById<LinearLayout>(R.id.projects)
         val save  : Button = findViewById(R.id.save)
 
+        val resume_id = intent.getStringExtra("resume_id")
+
         btn_per.setOnClickListener{
-            val intent = Intent(this,Basic_personal_details::class.java)
+            val intent = Intent(this,Basic_personal_details::class.java).apply{
+                putExtra("resume_id",resume_id)
+            }
             startActivity(intent)
         }
 
         btn_edu.setOnClickListener{
-            val intent = Intent(this,Education_details::class.java)
+            val intent = Intent(this,Education_details::class.java).apply{
+                putExtra("resume_id",resume_id)
+            }
             startActivity(intent)
         }
 
         btn_skill.setOnClickListener{
-            val intent = Intent(this,Skill_details::class.java)
+            val intent = Intent(this,Skill_details::class.java).apply{
+                putExtra("resume_id",resume_id)
+            }
             startActivity(intent)
         }
 
         btn_exper.setOnClickListener{
-            val intent = Intent(this,experience_detailss::class.java)
+            val intent = Intent(this,experience_detailss::class.java).apply{
+                putExtra("resume_id",resume_id)
+            }
             startActivity(intent)
         }
 
         btn_project.setOnClickListener{
-            val intent = Intent(this,project_detailss::class.java)
+            val intent = Intent(this,project_detailss::class.java).apply{
+                putExtra("resume_id",resume_id)
+            }
             startActivity(intent)
         }
 

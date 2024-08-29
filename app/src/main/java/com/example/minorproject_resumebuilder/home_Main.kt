@@ -14,14 +14,17 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
 import java.text.SimpleDateFormat
 import java.util.*
 
 class home_Main : Fragment() {
 
     private val calendar = Calendar.getInstance()
-
-
+    private lateinit var share : SharePrefrence
+    private lateinit var user_id : String
+    private lateinit var db : SQLiteHelper
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +32,11 @@ class home_Main : Fragment() {
     ): View? {
         val view : View = inflater.inflate(R.layout.fragment_home__main, container, false)
         val Btn : Button = view.findViewById(R.id.btn_create_cv)
+        share = SharePrefrence(requireContext())
+        user_id= share.getuser_id()
+        db = SQLiteHelper(requireContext())
+        val User_id = user_id.toLong()
+        
         Btn.setOnClickListener {
             val dailog = AlertDialog.Builder(requireContext())
             val dailogView = LayoutInflater.from(requireContext()).inflate(R.layout.resume_info,null)
@@ -38,7 +46,6 @@ class home_Main : Fragment() {
             val cancle : Button= dailogView.findViewById(R.id.no)
             val name : EditText = dailogView.findViewById(R.id.et1)
             val date : TextView = dailogView.findViewById(R.id.et2)
-
             val alertDialog = dailog.create()
 
             date.setOnClickListener{
@@ -53,12 +60,23 @@ class home_Main : Fragment() {
                 )
                 datepicker.show()
             }
+            val Name = name.toString()
+            
+            val Date = date.toString()
             create.setOnClickListener{
                 if(name.length()!=0 && date.length()!=0)
                 {
-                    val intent = Intent(activity,Create_resume::class.java)
-                    startActivity(intent)
-                    alertDialog.dismiss()
+                    val value = db.insertResume(User_id,Name,Date)
+                    if (value!=null){
+                        val intent = Intent(activity,Create_resume::class.java).apply{
+                            putExtra("resume_id",value)
+                        }
+                        startActivity(intent)
+                        alertDialog.dismiss()
+                    }else{
+                        Toast.makeText(requireContext(),"")
+                    }
+                    
 
                 }
                 else{

@@ -21,6 +21,7 @@ class SharePrefrence (context: Context) {
         editor.putString("username",userDetails["username"])
         editor.putString("email",userDetails["email"])
         editor.putString("phone",userDetails["phone"])
+        editor.putString("user_id",userDetails["user_id"])
         editor.apply()
     }
 
@@ -32,5 +33,8 @@ class SharePrefrence (context: Context) {
     }
     fun getphone() : String{
         return prefs.getString("phone","")?:""
+    }
+    fun getuser_id() : String{
+        return prefs.getString("user_d","")?:""
     }
 }

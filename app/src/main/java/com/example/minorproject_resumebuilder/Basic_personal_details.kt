@@ -26,6 +26,7 @@ import java.util.*
 class Basic_personal_details : AppCompatActivity() {
     private val calendar = Calendar.getInstance()
     private lateinit var photo: ImageView
+    private lateinit var db : SQLiteHelper
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,8 +37,18 @@ class Basic_personal_details : AppCompatActivity() {
         photo = findViewById(R.id.profilePhoto)
         val save :Button = findViewById(R.id.save)
         val dob :EditText=findViewById(R.id.dob)
+        val email :EditText=findViewById(R.id.emailId)
+        val fname :EditText=findViewById(R.id.fname)
+        val lname :EditText=findViewById(R.id.lname)
+        val male :CheckBox=findViewById(R.id.male)
+        val female :CheckBox=findViewById(R.id.female)
+        val nationality :EditText=findViewById(R.id.nationality)
+        val phone :EditText=findViewById(R.id.phone)
 
+        db = SQLiteHelper(this)
         save.setOnClickListener{
+
+
             Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()
             val intent = Intent(this,Create_resume::class.java)
             startActivity(intent)
