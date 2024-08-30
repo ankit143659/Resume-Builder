@@ -21,7 +21,7 @@ class Create_resume : AppCompatActivity() {
         val btn_project = findViewById<LinearLayout>(R.id.projects)
         val save  : Button = findViewById(R.id.save)
 
-        val resume_id = intent.getStringExtra("resume_id")?.toLong()
+        val resume_id = intent.getStringExtra("resume_id")?.toInt()
 
         btn_per.setOnClickListener{
             val intent = Intent(this,Basic_personal_details::class.java).apply{
@@ -59,7 +59,9 @@ class Create_resume : AppCompatActivity() {
         }
 
         save.setOnClickListener{
-            val intent = Intent(this,resume_template::class.java)
+            val intent = Intent(this,resume_template::class.java).apply{
+                putExtra("resume_id",resume_id)
+            }
             startActivity(intent)
             finish()
         }

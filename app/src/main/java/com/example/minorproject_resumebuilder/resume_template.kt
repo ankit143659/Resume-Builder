@@ -18,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat
 class resume_template : AppCompatActivity() {
 
     private lateinit var spinnerItems: Spinner
+    var resume_id : Int? = null
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +35,8 @@ class resume_template : AppCompatActivity() {
         val img2 : ImageView = findViewById(R.id.img2)
         val select_img2 : Button = findViewById(R.id.select_img2)
         val select_img1 : Button = findViewById(R.id.select_img1)
-
+        val Resume_id = intent.getStringExtra("resume_id")
+        resume_id = Resume_id?.toInt()
 
         val items = arrayOf("CLICK TO CHOOSE TEMPLATE DESIGN", "MEDICAL", "ENGINEERING", "IT FIELD","DIPLOMA","FRESHERS","MANAGEMENT","DESIGNING","BANKING")
 
@@ -128,6 +130,7 @@ class resume_template : AppCompatActivity() {
             Toast.makeText(this,"Succesfully Data Filled",Toast.LENGTH_SHORT).show()
             val intent = Intent(this,Preview_template::class.java).apply {
                 putExtra("value","medical_1")
+                putExtra("resume_id",resume_id)
             }
             startActivity(intent)
         }

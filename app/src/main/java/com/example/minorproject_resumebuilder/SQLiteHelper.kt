@@ -5,9 +5,15 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.minorproject_resumebuilder.EducationDetail
+import com.example.minorproject_resumebuilder.ExperienceDetail
+import com.example.minorproject_resumebuilder.PersonalDetail
+import com.example.minorproject_resumebuilder.ProjectDetail
+import com.example.minorproject_resumebuilder.SkillDetail
 import java.util.Date
 
 
+@Suppress("UNREACHABLE_CODE")
 class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
@@ -196,8 +202,8 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         return try {
             val values = ContentValues().apply {
                 put("resume_id", resumeId)
-                put("name", fname)
-                put("name", lname)
+                put("fname", fname)
+                put("lname", lname)
                 put("phone", phone)
                 put("email", email)
                 put("nationality", nationality)
@@ -281,6 +287,145 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         }catch (e:Exception){
             false
         }
+
     }
+
+    fun getPersonalDetails(resumeId: Int?): PersonalDetail? {
+        val db = readableDatabase
+        val cursor = db.query(
+            "$TABLE_PERSONAL",
+            null,
+            "resume_id = ?",
+            arrayOf(resumeId.toString()),
+            null,
+            null,
+            null
+        )
+
+        return if (cursor.moveToFirst()) {
+            val fname = cursor.getString(cursor.getColumnIndexOrThrow("Fname"))
+            val lname = cursor.getString(cursor.getColumnIndexOrThrow("Lname"))
+            val phone = cursor.getString(cursor.getColumnIndexOrThrow("phone"))
+            val email = cursor.getString(cursor.getColumnIndexOrThrow("email"))
+            val nationality = cursor.getString(cursor.getColumnIndexOrThrow("nationality"))
+            val gender = cursor.getString(cursor.getColumnIndexOrThrow("gender"))
+            val dateOfBirth = cursor.getString(cursor.getColumnIndexOrThrow("date_of_birth"))
+            val profileImage = cursor.getString(cursor.getColumnIndexOrThrow("profile_image"))
+            cursor.close()
+            PersonalDetail(fname,lname, phone, email, nationality, gender, dateOfBirth, profileImage)
+        } else {
+            cursor.close()
+            null
+        }
+    }
+
+    fun getAllEducationDetails(resumeId: Int?): List<EducationDetail> {
+        val educationDetailsList = mutableListOf<EducationDetail>()
+        val db = readableDatabase
+        val cursor = db.query(
+            "$TABLE_EDUCATION",
+            null,
+            "resume_id = ?",
+            arrayOf(resumeId.toString()),
+            null,
+            null,
+            null
+        )
+
+        with(cursor) {
+            while (moveToNext()) {
+                val Degree_name = getString(getColumnIndexOrThrow("Degree_name"))
+                val institute_name = getString(getColumnIndexOrThrow("Institute_name"))
+                val Location = getString(getColumnIndexOrThrow("Location"))
+                val passingYear = getString(getColumnIndexOrThrow("passing_year"))
+                val grade = getString(getColumnIndexOrThrow("grade"))
+                educationDetailsList.add(EducationDetail(Degree_name,institute_name,Location,passingYear,grade))
+            }
+            close()
+        }
+
+        return educationDetailsList
+    }
+
+    fun getAllSkills(resumeId: Int?): List<SkillDetail> {
+        val skillsList = mutableListOf<SkillDetail>()
+        val db = readableDatabase
+        val cursor = db.query(
+            "$TABLE_SKILL",
+            null,
+            "resume_id = ?",
+            arrayOf(resumeId.toString()),
+            null,
+            null,
+            null
+        )
+
+        with(cursor) {
+            while (moveToNext()) {
+                val skillName = getString(getColumnIndexOrThrow("skill_name"))
+                val strength = getString(getColumnIndexOrThrow("strength"))
+                skillsList.add(SkillDetail(skillName, strength))
+            }
+            close()
+        }
+
+        return skillsList
+    }
+
+    fun getAllExperienceDetails(resumeId: Int?): List<ExperienceDetail> {
+        val experienceList = mutableListOf<ExperienceDetail>()
+        val db = readableDatabase
+        val cursor = db.query(
+            "$TABLE_EXPERIENCE",
+            null,
+            "resume_id = ?",
+            arrayOf(resumeId.toString()),
+            null,
+            null,
+            null
+        )
+
+        with(cursor) {
+            while (moveToNext()) {
+                val companyName = getString(getColumnIndexOrThrow("company_name"))
+                val location = getString(getColumnIndexOrThrow("location"))
+                val yearsOfExperience = getString(getColumnIndexOrThrow("years_of_experience"))
+                experienceList.add(ExperienceDetail(companyName, location, yearsOfExperience))
+            }
+            close()
+        }
+
+        return experienceList
+    }
+
+    fun getAllProjectDetails(resumeId: Int?): List<ProjectDetail> {
+        val projectList = mutableListOf<ProjectDetail>()
+        val db = readableDatabase
+        val cursor = db.query(
+            "$TABLE_PROJECT",
+            null,
+            "resume_id = ?",
+            arrayOf(resumeId.toString()),
+            null,
+            null,
+            null
+        )
+
+        with(cursor) {
+            while (moveToNext()) {
+                val projectName = getString(getColumnIndexOrThrow("project_name"))
+                val projectDescription = getString(getColumnIndexOrThrow("project_description"))
+                val startDate = getString(getColumnIndexOrThrow("start_date"))
+                val endDate = getString(getColumnIndexOrThrow("end_date"))
+                val userRole = getString(getColumnIndexOrThrow("user_role"))
+                val projectUrl = getString(getColumnIndexOrThrow("user_role"))
+                projectList.add(ProjectDetail(projectName, projectDescription, startDate, endDate, userRole,projectUrl))
+            }
+            close()
+        }
+
+        return projectList
+    }
+
 
 }

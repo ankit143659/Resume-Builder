@@ -32,20 +32,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="TONY DICAPRIO"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="Registered Medical Physician"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
+
         </LinearLayout>
     </RelativeLayout>
 
@@ -59,36 +52,12 @@
         android:paddingVertical="8dp">
 
         <TextView
-            android:id="@+id/address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="880 Fitro Street, Little Rock"
-            android:textColor="#10253F"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="jmurray@email.com"
-            android:textColor="#10253F"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+905-487-4653"
-            android:textColor="#10253F"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/website"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="profile.com/jmurray"
-            android:textColor="#10253F"
-            android:textSize="14sp" />
+            android:layout_width="match_parent"
+            android:id="@+id/personalDetails"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 
@@ -124,36 +93,14 @@
                 android:layout_marginBottom="8dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="DEGREE DETAILS"
+                android:id="@+id/educationDetails"
                 android:textColor="#10253F"
                 android:textSize="16sp"
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:layout_marginBottom="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="DEGREE DETAILS"
-                android:textColor="#10253F"
-                android:textSize="16sp"
-                android:layout_marginTop="10dp"
-                android:textStyle="bold"
-                android:layout_marginBottom="4dp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="DEGREE DETAILS"
-                android:textColor="#10253F"
-                android:textSize="16sp"
-                android:layout_marginTop="10dp"
-                android:textStyle="bold"
-                android:layout_marginBottom="4dp" />
-
-
-
 
 
         </LinearLayout>
@@ -177,38 +124,12 @@
                 android:layout_marginBottom="8dp" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Experience Name"
-                android:textColor="#10253F"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Work details"
-                android:textColor="#10253F"
-                android:textSize="8sp"
-                android:layout_marginBottom="16dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SENIOR SOFTWARE ENGINEER"
-                android:textColor="#10253F"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tridometric Enterprise Co. | 2020-2024"
-                android:textColor="#10253F"
-                android:textSize="8sp"
-                android:layout_marginBottom="16dp" />
+                android:layout_width="match_parent"
+                android:id="@+id/experienceDetails"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content" />
 
 
             <TextView
@@ -217,44 +138,36 @@
                 android:text="SKILL"
                 android:textColor="#10253F"
                 android:textSize="14sp"
+                android:layout_marginTop="20dp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
 
             <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/skillDetails"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Skill Name"
+                android:text="PROJECTS"
                 android:textColor="#10253F"
-                android:textSize="10sp"
+                android:textSize="14sp"
+                android:layout_marginTop="20dp"
                 android:textStyle="bold"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="8dp" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Level"
-                android:textColor="#10253F"
-                android:textSize="8sp"
-                android:layout_marginBottom="16dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Skill Name"
-                android:textColor="#10253F"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Level"
-                android:textColor="#10253F"
-                android:textSize="8sp"
-                android:layout_marginBottom="16dp" />
-
-
+                android:layout_width="match_parent"
+                android:id="@+id/projectDetails"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
     </LinearLayout>
