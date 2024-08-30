@@ -48,7 +48,8 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
             CREATE TABLE $TABLE_PERSONAL (
                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
                 resume_id INTEGER, 
-                name TEXT, 
+                fname TEXT, 
+                lname TEXT, 
                 phone TEXT, 
                 email TEXT, 
                 nationality TEXT, 
@@ -64,9 +65,11 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
             CREATE TABLE $TABLE_EDUCATION (
                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
                 resume_id INTEGER, 
-                school_name TEXT, 
+                Degree_name TEXT, 
+                Institute_name TEXT, 
+                Location TEXT, 
                 passing_year TEXT, 
-                grade TEXT,
+                grade TEXT NOT NULL,
                 FOREIGN KEY(resume_id) REFERENCES resumes(id) ON DELETE CASCADE
             )
         """
@@ -100,6 +103,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
                 resume_id INTEGER, 
                 project_name TEXT, 
+                project_Url TEXT, 
                 project_description TEXT, 
                 start_date TEXT, 
                 end_date TEXT, 
@@ -175,7 +179,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     }
 
 
-    fun insertResume(userId: Long, name: String, createdDate: String): Int{
+    fun insertResume(userId: Long, name: String, createdDate: String): Long{
         val db = writableDatabase
 
             val values = ContentValues().apply {
@@ -187,12 +191,13 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
     }
 
-    fun insertPersonalDetails(resumeId: Long, name: String, phone: String, email: String, nationality: String, gender: String, dateOfBirth: String, profileImage: String): Boolean {
+    fun insertPersonalDetails(resumeId: Int?,fname: String,lname: String, phone: String, email: String, nationality: String, gender: String, dateOfBirth: String, profileImage: String): Boolean {
         val db = writableDatabase
         return try {
             val values = ContentValues().apply {
                 put("resume_id", resumeId)
-                put("name", name)
+                put("name", fname)
+                put("name", lname)
                 put("phone", phone)
                 put("email", email)
                 put("nationality", nationality)
@@ -209,12 +214,14 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     }
 
 
-    fun insertEducationDetails(resumeId: Long, schoolName: String, passingYear: String, grade: String): Boolean {
+    fun insertEducationDetails(resumeId: Int?, Degree_Name: String,Institute_Name: String, passingYear: String, grade: String,location: String): Boolean {
         val db = writableDatabase
         return try {
             val values = ContentValues().apply {
                 put("resume_id", resumeId)
-                put("school_name", schoolName)
+                put("Degree_name", Degree_Name)
+                put("Location", location)
+                put("Institute_name", Institute_Name)
                 put("passing_year", passingYear)
                 put("grade", grade)
             }
@@ -226,7 +233,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
     }
 
-    fun insertSkill(resumeId: Long, skillName: String, strength: String): Boolean {
+    fun insertSkill(resumeId: Int?, skillName: String, strength: String): Boolean {
         val db = writableDatabase
         return try {
             val values = ContentValues().apply {
@@ -241,7 +248,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         }
     }
 
-    fun insertExperience(resumeId: Long, companyName: String, location: String, yearsOfExperience: Int): Boolean {
+    fun insertExperience(resumeId: Int?, companyName: String, location: String, yearsOfExperience: String): Boolean {
         val db = writableDatabase
         return try {
             val values = ContentValues().apply {
@@ -257,12 +264,13 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         }
     }
 
-    fun insertProject(resumeId: Long, projectName: String, projectDescription: String, startDate: String, endDate: String, userRole: String):Boolean{
+    fun insertProject(resumeId: Int?, projectName: String, projectDescription: String, projectUrl: String, startDate: String, endDate: String, userRole: String):Boolean{
         val db = writableDatabase
         return try {
             val values = ContentValues().apply {
                 put("resume_id", resumeId)
                 put("project_name", projectName)
+                put("project_Url", projectUrl)
                 put("project_description", projectDescription)
                 put("start_date", startDate)
                 put("end_date", endDate)

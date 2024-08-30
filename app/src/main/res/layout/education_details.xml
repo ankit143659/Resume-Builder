@@ -55,6 +55,7 @@
                         android:layout_width="match_parent"
                         android:inputType="text"
                         android:textSize="18sp"
+                        android:id="@+id/degreeName"
                         android:textColor="@color/black"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -89,6 +90,7 @@
                         android:layout_width="match_parent"
                         android:inputType="text"
                         android:singleLine="true"
+                        android:id="@+id/instituteName"
                         android:textSize="18sp"
                         android:textColor="@color/black"
                         android:layout_height="wrap_content" />
@@ -121,6 +123,7 @@
                         android:inputType="date"
                         android:singleLine="true"
                         android:textSize="18sp"
+                        android:id="@+id/passingYear"
                         android:textColor="@color/black"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -153,6 +156,7 @@
                         android:inputType="text"
                         android:singleLine="true"
                         android:textSize="18sp"
+                        android:id="@+id/Location"
                         android:textColor="@color/black"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -182,11 +186,13 @@
                     android:text="𝐀"
                     android:layout_marginLeft="20dp"
                     android:textSize="20sp"
+                    android:id="@+id/a"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content" />
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:text="𝐁"
+                    android:id="@+id/b"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:layout_height="wrap_content" />
@@ -195,6 +201,7 @@
                     android:layout_width="wrap_content"
                     android:text="𝐂"
                     android:textSize="20sp"
+                    android:id="@+id/c"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content" />
 
@@ -202,6 +209,7 @@
                     android:layout_width="wrap_content"
                     android:text="𝐃"
                     android:textSize="20sp"
+                    android:id="@+id/d"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content" />
             </LinearLayout>

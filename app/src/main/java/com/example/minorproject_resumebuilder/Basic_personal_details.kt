@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
@@ -19,6 +20,8 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,6 +30,7 @@ class Basic_personal_details : AppCompatActivity() {
     private val calendar = Calendar.getInstance()
     private lateinit var photo: ImageView
     private lateinit var db : SQLiteHelper
+    private lateinit var share: SharePrefrence
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,18 +44,52 @@ class Basic_personal_details : AppCompatActivity() {
         val email :EditText=findViewById(R.id.emailId)
         val fname :EditText=findViewById(R.id.fname)
         val lname :EditText=findViewById(R.id.lname)
-        val male :CheckBox=findViewById(R.id.male)
+        val male : CheckBox =findViewById(R.id.male)
         val female :CheckBox=findViewById(R.id.female)
         val nationality :EditText=findViewById(R.id.nationality)
         val phone :EditText=findViewById(R.id.phone)
 
+        var gender : String? = null
+
+        val Resume_id = intent.getStringExtra("resume_id")
+       val resume_id = Resume_id?.toInt()
+        share = SharePrefrence(this)
+
         db = SQLiteHelper(this)
         save.setOnClickListener{
+            val Email = email.text.toString().trim()
+            val Phone = phone.text.toString().trim()
+            val Fname = fname.text.toString().trim()
+            val Lname = lname.text.toString().trim()
+            val Nationality = nationality.text.toString().trim()
+            val dob = dob.text.toString().trim()
 
 
-            Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,Create_resume::class.java)
-            startActivity(intent)
+            if (Email.isEmpty() || Phone.isEmpty() || Fname.isEmpty() || Lname.isEmpty()|| Nationality.isEmpty()){
+                Toast.makeText(this,"Please Fill Require details",Toast.LENGTH_SHORT).show()
+            }else if (!male.isChecked || !female.isChecked){
+                Toast.makeText(this,"Please Fill Require details",Toast.LENGTH_SHORT).show()
+            }else if (male.isChecked && female.isChecked){
+                Toast.makeText(this,"Please Select One gender only",Toast.LENGTH_SHORT).show()
+            }else{
+                if (male.isChecked){
+                    gender = "Male"
+                }
+                else{
+                    gender = "Female"
+                }
+                val value = db.insertPersonalDetails(resume_id,Fname,Lname,Phone,Email,Nationality, gender!!,dob,"profileemage")
+
+                if(value){
+                    Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this,Create_resume::class.java)
+                    startActivity(intent)
+                }else{
+                    Toast.makeText(this,"Failed to save Data", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
         }
 
         dob.setOnClickListener{

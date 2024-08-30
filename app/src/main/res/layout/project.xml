@@ -55,6 +55,7 @@
                         android:layout_width="match_parent"
                         android:inputType="text"
                         android:textSize="18sp"
+                        android:id="@+id/projectName"
                         android:textColor="@color/black"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -88,6 +89,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:inputType="text"
+                        android:id="@+id/projectRole"
                         android:textSize="18sp"
                         android:singleLine="true"
                         android:textColor="@color/black"
@@ -123,6 +125,7 @@
                     android:layout_width="match_parent"
                     android:inputType="text"
                     android:textSize="18sp"
+                    android:id="@+id/projectUrl"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content" />
@@ -153,6 +156,7 @@
                         android:layout_width="match_parent"
                         android:inputType="date"
                         android:textSize="18sp"
+                        android:id="@+id/startDate"
                         android:singleLine="true"
                         android:textColor="@color/black"
                         android:layout_height="wrap_content" />
@@ -186,6 +190,7 @@
                         android:inputType="date"
                         android:singleLine="true"
                         android:textSize="18sp"
+                        android:id="@+id/endDate"
                         android:textColor="@color/black"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -217,6 +222,7 @@
                         android:layout_width="match_parent"
                         android:inputType="text"
                         android:gravity="top"
+                        android:id="@+id/projectDescription"
                         android:textSize="12sp"
                         android:textColor="@color/black"
                         android:layout_height="match_parent" />

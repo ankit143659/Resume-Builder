@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -13,23 +14,24 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
 
 class experience_detailss : AppCompatActivity() {
 
     private lateinit var addLayout : Button
     private lateinit var save : Button
     private lateinit var layoutcontain : LinearLayout
+    private lateinit var db : SQLiteHelper
+    var resume_id : Int? = null
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_experience_detailss)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
+        val Resume_id = intent.getStringExtra("resume_id")
+        resume_id = Resume_id?.toInt()
+        db = SQLiteHelper(this)
         addLayout= findViewById(R.id.addexperience)
         layoutcontain = findViewById(R.id.layoutContainer)
         save= findViewById(R.id.savebtn)
@@ -39,11 +41,28 @@ class experience_detailss : AppCompatActivity() {
         }
 
         save.setOnClickListener{
-            Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, Create_resume::class.java)
-            startActivity(intent)
+            saveDetails()
         }
 
+    }
+
+    private fun saveDetails() {
+        var value : Boolean = false
+        for (i in 0 until layoutcontain.childCount){
+            val educationView = layoutcontain.getChildAt(i)
+            val jobTitle = educationView.findViewById<EditText>(R.id.jobTitle).text.toString()
+            val companyName = educationView.findViewById<EditText>(R.id.companyName).text.toString()
+            val companyLocation = educationView.findViewById<EditText>(R.id.comanyLocation).text.toString()
+            val startDate = educationView.findViewById<EditText>(R.id.startDate).text.toString()
+            value = db.insertExperience(resume_id,companyName,companyLocation,startDate)
+        }
+        if (value){
+            Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,Create_resume::class.java)
+            startActivity(intent)
+        }else{
+            Toast.makeText(this,"Failed to filled Data", Toast.LENGTH_SHORT).show()
+        }
     }
 
     @SuppressLint("MissingInflatedId")

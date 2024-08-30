@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -13,39 +15,70 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
 
 class Education_details : AppCompatActivity() {
     private lateinit var addLayout : Button
     private lateinit var save : Button
     private lateinit var layoutcontainer : LinearLayout
-
-
+    private lateinit var db : SQLiteHelper
+    var resume_id : Int? = null
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_education_details)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
+        val Resume_id = intent.getStringExtra("resume_id")
+         resume_id = Resume_id?.toInt()
         addLayout= findViewById(R.id.addEducation)
         layoutcontainer = findViewById(R.id.layoutContainer)
         save= findViewById(R.id.savebtn)
+        db = SQLiteHelper(this)
 
         addLayout.setOnClickListener{
             addEducation()
         }
 
         save.setOnClickListener{
+            saveDetails()
+        }
+
+    }
+
+    private fun saveDetails() {
+        var value : Boolean = false
+        for (i in 0 until layoutcontainer.childCount){
+            val educationView = layoutcontainer.getChildAt(i)
+            val degreeName = educationView.findViewById<EditText>(R.id.degreeName).text.toString()
+            val instituteName = educationView.findViewById<EditText>(R.id.instituteName).text.toString()
+            val passingYear = educationView.findViewById<EditText>(R.id.passingYear).text.toString()
+            val location = educationView.findViewById<EditText>(R.id.Location).text.toString()
+            val a = educationView.findViewById<CheckBox>(R.id.a)
+            val b = educationView.findViewById<CheckBox>(R.id.b)
+            val c = educationView.findViewById<CheckBox>(R.id.c)
+            val d = educationView.findViewById<CheckBox>(R.id.d)
+
+            var grade : String
+            if (a.isChecked){
+                grade = "A"
+            }else if (b.isChecked){
+                grade = "B"
+            }else if (b.isChecked){
+                grade = "C"
+            }else{
+                grade = "D"
+            }
+           value = db.insertEducationDetails(resume_id,degreeName,location,instituteName,passingYear,grade)
+        }
+        if (value){
             Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()
             val intent = Intent(this,Create_resume::class.java)
             startActivity(intent)
+        }else{
+            Toast.makeText(this,"Failed to filled Data", Toast.LENGTH_SHORT).show()
         }
-
     }
 
     @SuppressLint("MissingInflatedId")

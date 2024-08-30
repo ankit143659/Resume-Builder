@@ -46,6 +46,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:singleLine="true"
+                    android:id="@+id/skillName"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -64,13 +65,14 @@
                     android:layout_width="wrap_content"
                     android:text="𝐁𝐞𝐠𝐢𝐧𝐧𝐞𝐫"
                     android:textSize="14sp"
-
+                    android:id="@+id/begineer"
                     android:layout_marginLeft="20dp"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content" />
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:text="𝐈𝐧𝐭𝐞𝐫𝐦𝐞𝐝𝐢𝐚𝐭𝐞"
+                    android:id="@+id/intermediate"
                     android:textColor="@color/black"
                     android:layout_marginLeft="10dp"
                     android:textSize="14sp"
@@ -79,6 +81,7 @@
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:text="𝐀𝐝𝐯𝐚𝐧𝐜𝐞"
+                    android:id="@+id/advance"
                     android:textSize="14sp"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content" />

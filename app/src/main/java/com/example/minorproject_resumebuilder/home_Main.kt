@@ -74,7 +74,7 @@ class home_Main : Fragment() {
                         startActivity(intent)
                         alertDialog.dismiss()
                     }else{
-                        Toast.makeText(requireContext(),"")
+                        Toast.makeText(requireContext(),"Failed to create Resume",Toast.LENGTH_SHORT).show()
                     }
                     
 
