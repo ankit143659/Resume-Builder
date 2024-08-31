@@ -36,16 +36,18 @@ class home_Main : Fragment() {
         val userId = user_id.toLong()
 
         btn.setOnClickListener {
+            // Setup the dialog
             val dialog = AlertDialog.Builder(requireContext())
             val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.resume_info, null)
-
             dialog.setView(dialogView)
+
             val create: Button = dialogView.findViewById(R.id.create)
             val cancel: Button = dialogView.findViewById(R.id.no)
             val name: EditText = dialogView.findViewById(R.id.et1)
             val date: TextView = dialogView.findViewById(R.id.et2)
             val alertDialog = dialog.create()
 
+            // Setup date picker
             date.setOnClickListener {
                 val datePicker = DatePickerDialog(requireContext(), { _, year, month, dayOfMonth ->
                     val selectedDate = Calendar.getInstance()
@@ -59,6 +61,7 @@ class home_Main : Fragment() {
                 datePicker.show()
             }
 
+            // Handle resume creation
             create.setOnClickListener {
                 val nameText = name.text.toString()
                 val dateText = date.text.toString()
@@ -79,6 +82,7 @@ class home_Main : Fragment() {
                 }
             }
 
+            // Handle dialog cancellation
             cancel.setOnClickListener {
                 alertDialog.dismiss()
             }
