@@ -49,7 +49,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                 FOREIGN KEY(user_id) REFERENCES $TABLE_USERS(id) ON DELETE CASCADE
             )
         """)
-        private const val TABLE_PERSONALl = (
+        private const val TABLE_PERSONAL = (
                 """
             CREATE TABLE $TABLE_PERSONAL (
                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -66,7 +66,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
             )
         """
                 )
-        private const val TABLE_EDUCATIONALL = (
+        private const val TABLE_EDUCATIONAL = (
                 """
             CREATE TABLE $TABLE_EDUCATION (
                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -80,7 +80,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
             )
         """
                 )
-        private const val TABLE_SKILLL = (
+        private const val TABLE_SKILL = (
                 """
             CREATE TABLE $TABLE_SKILL (
                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -103,7 +103,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
             )
         """
                 )
-        private const val TABLE_PROJECTT = (
+        private const val TABLE_PROJECT = (
                 """
             CREATE TABLE $TABLE_PROJECT (
                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -125,11 +125,11 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(TABLE_CREATE)
         db.execSQL(TABLE_RESUMEE)
-        db.execSQL(TABLE_PERSONALl)
-        db.execSQL(TABLE_EDUCATIONALL)
-        db.execSQL(TABLE_SKILLL)
+        db.execSQL(TABLE_PERSONAL)
+        db.execSQL(TABLE_EDUCATIONAL)
+        db.execSQL(TABLE_SKILL)
         db.execSQL(TABLE_EXP)
-        db.execSQL(TABLE_PROJECTT)
+        db.execSQL(TABLE_PROJECT)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -247,7 +247,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                 put("skill_name", skillName)
                 put("strength", strength)
             }
-            val value = db.insert("skills", null, values)
+            val value = db.insert("skill", null, values)
             value !=-1L
         }catch (e:Exception){
             false
