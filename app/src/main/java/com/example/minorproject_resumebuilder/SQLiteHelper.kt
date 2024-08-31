@@ -211,7 +211,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                 put("date_of_birth", dateOfBirth)
                 put("profile_image", profileImage)
             }
-            val value = db.insert("personal_details", null, values)
+            val value = db.insert("personal", null, values)
             value !=-1L
         }catch (e:Exception){
             false
@@ -231,7 +231,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                 put("passing_year", passingYear)
                 put("grade", grade)
             }
-            val value = db.insert("education_details", null, values)
+            val value = db.insert("education", null, values)
             value !=-1L
         }catch (e:Exception){
             false
