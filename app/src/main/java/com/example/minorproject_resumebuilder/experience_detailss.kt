@@ -22,7 +22,7 @@ class experience_detailss : AppCompatActivity() {
     private lateinit var save : Button
     private lateinit var layoutcontain : LinearLayout
     private lateinit var db : SQLiteHelper
-    var resume_id : Int? = null
+    var resume_id : Long? = null
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +30,7 @@ class experience_detailss : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_experience_detailss)
         val Resume_id = intent.getStringExtra("resume_id")
-        resume_id = Resume_id?.toInt()
+        resume_id = Resume_id?.toLong()
         db = SQLiteHelper(this)
         addLayout= findViewById(R.id.addexperience)
         layoutcontain = findViewById(R.id.layoutContainer)

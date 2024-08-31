@@ -23,7 +23,7 @@ class Skill_details : AppCompatActivity() {
     private lateinit var save : Button
     private lateinit var layoutcontainer : LinearLayout
     private lateinit var db : SQLiteHelper
-    var resume_id : Int? = null
+    var resume_id : Long? = null
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,7 @@ class Skill_details : AppCompatActivity() {
         save=findViewById(R.id.savebtn)
         db = SQLiteHelper(this)
         val Resume_id = intent.getStringExtra("resume_id")
-        resume_id = Resume_id?.toInt()
+        resume_id = Resume_id?.toLong()
 
         addLayout.setOnClickListener{
             addskills();

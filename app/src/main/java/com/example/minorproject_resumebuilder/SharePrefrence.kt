@@ -35,6 +35,6 @@ class SharePrefrence (context: Context) {
         return prefs.getString("phone","")?:""
     }
     fun getuser_id() : String{
-        return prefs.getString("user_d","")?:""
+        return prefs.getString("user_id","")?:""
     }
 }

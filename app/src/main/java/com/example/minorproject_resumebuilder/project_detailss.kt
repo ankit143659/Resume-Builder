@@ -22,7 +22,7 @@ class project_detailss : AppCompatActivity() {
     private lateinit var save : Button
     private lateinit var layout : LinearLayout
     private lateinit var db : SQLiteHelper
-    var resume_id : Int? = null
+    var resume_id : Long? = null
 
 
     @SuppressLint("MissingInflatedId")
@@ -31,7 +31,7 @@ class project_detailss : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_project_detailss)
         val Resume_id = intent.getStringExtra("resume_id")
-        resume_id = Resume_id?.toInt()
+        resume_id = Resume_id?.toLong()
         db = SQLiteHelper(this)
 
         addLayout= findViewById(R.id.addProjects)
@@ -58,6 +58,7 @@ class project_detailss : AppCompatActivity() {
             val description = educationView.findViewById<EditText>(R.id.projectDescription).text.toString()
             val startDate = educationView.findViewById<EditText>(R.id.startDate).text.toString()
             val endDate = educationView.findViewById<EditText>(R.id.endDate).text.toString()
+
             value = db.insertProject(resume_id,projectName,description,projectUrl,startDate,endDate,role)
         }
         if (value){

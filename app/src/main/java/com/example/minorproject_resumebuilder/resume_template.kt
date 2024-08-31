@@ -133,6 +133,7 @@ class resume_template : AppCompatActivity() {
                 putExtra("resume_id",resume_id)
             }
             startActivity(intent)
+
         }
 
 
@@ -140,7 +141,7 @@ class resume_template : AppCompatActivity() {
             Toast.makeText(this,"Succesfully Created",Toast.LENGTH_SHORT).show()
             val intent = Intent(this,HomePage::class.java)
             startActivity(intent)
-            finish()
+
         }
 
 

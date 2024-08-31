@@ -24,6 +24,7 @@ import com.example.minorproject_resumebuilder.com.example.minorproject_resumebui
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.properties.Delegates
 
 
 class Basic_personal_details : AppCompatActivity() {
@@ -51,8 +52,7 @@ class Basic_personal_details : AppCompatActivity() {
 
         var gender : String? = null
 
-        val Resume_id = intent.getStringExtra("resume_id")
-       val resume_id = Resume_id?.toInt()
+         val Resume_id = intent.getLongExtra("resume_id",1L)
         share = SharePrefrence(this)
 
         db = SQLiteHelper(this)
@@ -67,7 +67,7 @@ class Basic_personal_details : AppCompatActivity() {
 
             if (Email.isEmpty() || Phone.isEmpty() || Fname.isEmpty() || Lname.isEmpty()|| Nationality.isEmpty()){
                 Toast.makeText(this,"Please Fill Require details",Toast.LENGTH_SHORT).show()
-            }else if (!male.isChecked || !female.isChecked){
+            }else if (!male.isChecked && !female.isChecked){
                 Toast.makeText(this,"Please Fill Require details",Toast.LENGTH_SHORT).show()
             }else if (male.isChecked && female.isChecked){
                 Toast.makeText(this,"Please Select One gender only",Toast.LENGTH_SHORT).show()
@@ -78,7 +78,7 @@ class Basic_personal_details : AppCompatActivity() {
                 else{
                     gender = "Female"
                 }
-                val value = db.insertPersonalDetails(resume_id,Fname,Lname,Phone,Email,Nationality, gender!!,dob,"profileemage")
+                val value = db.insertPersonalDetails(Resume_id,Fname,Lname,Phone,Email,Nationality, gender!!,dob,"profileemage")
 
                 if(value){
                     Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()

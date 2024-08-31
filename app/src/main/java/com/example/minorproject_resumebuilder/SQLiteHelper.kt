@@ -49,7 +49,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                 FOREIGN KEY(user_id) REFERENCES $TABLE_USERS(id) ON DELETE CASCADE
             )
         """)
-        private const val TABLE_PERSONAL = (
+        private const val TABLE_PERSONALl = (
                 """
             CREATE TABLE $TABLE_PERSONAL (
                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -80,7 +80,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
             )
         """
                 )
-        private const val TABLE_SKILL = (
+        private const val TABLE_SKILLl = (
                 """
             CREATE TABLE $TABLE_SKILL (
                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -103,7 +103,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
             )
         """
                 )
-        private const val TABLE_PROJECT = (
+        private const val TABLE_PROJECTt = (
                 """
             CREATE TABLE $TABLE_PROJECT (
                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -125,11 +125,11 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(TABLE_CREATE)
         db.execSQL(TABLE_RESUMEE)
-        db.execSQL(TABLE_PERSONAL)
+        db.execSQL(TABLE_PERSONALl)
         db.execSQL(TABLE_EDUCATIONAL)
-        db.execSQL(TABLE_SKILL)
+        db.execSQL(TABLE_SKILLl)
         db.execSQL(TABLE_EXP)
-        db.execSQL(TABLE_PROJECT)
+        db.execSQL(TABLE_PROJECTt)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -144,7 +144,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     }
 
     fun checkUser(username: String, password: String): Map<String,String>? {
-        val db = this.readableDatabase
+        val db = this.writableDatabase
         val query = "SELECT * FROM $TABLE_USERS WHERE $COLUMN_USERNAME = ? AND $COLUMN_PASSWORD = ?"
         val cursor: Cursor = db.rawQuery(query, arrayOf(username, password))
         var userdetails:Map<String,String>?=null
@@ -197,7 +197,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
     }
 
-    fun insertPersonalDetails(resumeId: Int?,fname: String,lname: String, phone: String, email: String, nationality: String, gender: String, dateOfBirth: String, profileImage: String): Boolean {
+    fun insertPersonalDetails(resumeId: Long?,fname: String,lname: String, phone: String, email: String, nationality: String, gender: String, dateOfBirth: String, profileImage: String): Boolean {
         val db = writableDatabase
         return try {
             val values = ContentValues().apply {
@@ -220,7 +220,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     }
 
 
-    fun insertEducationDetails(resumeId: Int?, Degree_Name: String,Institute_Name: String, passingYear: String, grade: String,location: String): Boolean {
+    fun insertEducationDetails(resumeId: Long?, Degree_Name: String,Institute_Name: String, passingYear: String, grade: String,location: String): Boolean {
         val db = writableDatabase
         return try {
             val values = ContentValues().apply {
@@ -239,7 +239,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
     }
 
-    fun insertSkill(resumeId: Int?, skillName: String, strength: String): Boolean {
+    fun insertSkill(resumeId: Long?, skillName: String, strength: String): Boolean {
         val db = writableDatabase
         return try {
             val values = ContentValues().apply {
@@ -254,7 +254,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         }
     }
 
-    fun insertExperience(resumeId: Int?, companyName: String, location: String, yearsOfExperience: String): Boolean {
+    fun insertExperience(resumeId: Long?, companyName: String, location: String, yearsOfExperience: String): Boolean {
         val db = writableDatabase
         return try {
             val values = ContentValues().apply {
@@ -270,7 +270,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         }
     }
 
-    fun insertProject(resumeId: Int?, projectName: String, projectDescription: String, projectUrl: String, startDate: String, endDate: String, userRole: String):Boolean{
+    fun insertProject(resumeId: Long?, projectName: String, projectDescription: String, projectUrl: String, startDate: String, endDate: String, userRole: String):Boolean{
         val db = writableDatabase
         return try {
             val values = ContentValues().apply {
@@ -282,7 +282,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                 put("end_date", endDate)
                 put("user_role", userRole)
             }
-            val value =  db.insert("projects", null, values)
+            val value =  db.insert("project", null, values)
             value !=-1L
         }catch (e:Exception){
             false
@@ -290,7 +290,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
     }
 
-    fun getPersonalDetails(resumeId: Int?): PersonalDetail? {
+    fun getPersonalDetails(resumeId: Long?): PersonalDetail? {
         val db = readableDatabase
         val cursor = db.query(
             "$TABLE_PERSONAL",
@@ -303,8 +303,8 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         )
 
         return if (cursor.moveToFirst()) {
-            val fname = cursor.getString(cursor.getColumnIndexOrThrow("Fname"))
-            val lname = cursor.getString(cursor.getColumnIndexOrThrow("Lname"))
+            val fname = cursor.getString(cursor.getColumnIndexOrThrow("fname"))
+            val lname = cursor.getString(cursor.getColumnIndexOrThrow("lname"))
             val phone = cursor.getString(cursor.getColumnIndexOrThrow("phone"))
             val email = cursor.getString(cursor.getColumnIndexOrThrow("email"))
             val nationality = cursor.getString(cursor.getColumnIndexOrThrow("nationality"))
@@ -319,7 +319,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         }
     }
 
-    fun getAllEducationDetails(resumeId: Int?): List<EducationDetail> {
+    fun getAllEducationDetails(resumeId: Long?): List<EducationDetail> {
         val educationDetailsList = mutableListOf<EducationDetail>()
         val db = readableDatabase
         val cursor = db.query(
@@ -347,7 +347,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         return educationDetailsList
     }
 
-    fun getAllSkills(resumeId: Int?): List<SkillDetail> {
+    fun getAllSkills(resumeId: Long?): List<SkillDetail> {
         val skillsList = mutableListOf<SkillDetail>()
         val db = readableDatabase
         val cursor = db.query(
@@ -372,7 +372,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         return skillsList
     }
 
-    fun getAllExperienceDetails(resumeId: Int?): List<ExperienceDetail> {
+    fun getAllExperienceDetails(resumeId: Long?): List<ExperienceDetail> {
         val experienceList = mutableListOf<ExperienceDetail>()
         val db = readableDatabase
         val cursor = db.query(
@@ -398,7 +398,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         return experienceList
     }
 
-    fun getAllProjectDetails(resumeId: Int?): List<ProjectDetail> {
+    fun getAllProjectDetails(resumeId: Long?): List<ProjectDetail> {
         val projectList = mutableListOf<ProjectDetail>()
         val db = readableDatabase
         val cursor = db.query(

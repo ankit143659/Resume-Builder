@@ -13,14 +13,17 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.properties.Delegates
 
 class home_Main : Fragment() {
 
     private val calendar = Calendar.getInstance()
-    private lateinit var share: SharePrefrence
-    private lateinit var user_id: String
+    private lateinit var share:SharePrefrence
+    private var user_id by Delegates.notNull<Long>()
     private lateinit var db: SQLiteHelper
 
     @SuppressLint("InflateParams")
@@ -31,12 +34,15 @@ class home_Main : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_home__main, container, false)
         val btn: Button = view.findViewById(R.id.btn_create_cv)
         share = SharePrefrence(requireContext())
-        user_id = share.getuser_id()
+        user_id = share.getuser_id().toLong()
         db = SQLiteHelper(requireContext())
-        val userId = user_id.toLong()
+
+        if (user_id >0) {
+        } else {
+            Toast.makeText(requireContext(), "Invalid user ID", Toast.LENGTH_SHORT).show()
+        }
 
         btn.setOnClickListener {
-            // Setup the dialog
             val dialog = AlertDialog.Builder(requireContext())
             val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.resume_info, null)
             dialog.setView(dialogView)
@@ -47,7 +53,7 @@ class home_Main : Fragment() {
             val date: TextView = dialogView.findViewById(R.id.et2)
             val alertDialog = dialog.create()
 
-            // Setup date picker
+
             date.setOnClickListener {
                 val datePicker = DatePickerDialog(requireContext(), { _, year, month, dayOfMonth ->
                     val selectedDate = Calendar.getInstance()
@@ -61,13 +67,13 @@ class home_Main : Fragment() {
                 datePicker.show()
             }
 
-            // Handle resume creation
+
             create.setOnClickListener {
                 val nameText = name.text.toString()
                 val dateText = date.text.toString()
 
                 if (nameText.isNotEmpty() && dateText.isNotEmpty()) {
-                    val value = db.insertResume(userId, nameText, dateText)
+                    val value : Long = db.insertResume(user_id, nameText, dateText)
                     if (value > 0) {
                         val intent = Intent(activity, Create_resume::class.java).apply {
                             putExtra("resume_id", value)
@@ -82,7 +88,6 @@ class home_Main : Fragment() {
                 }
             }
 
-            // Handle dialog cancellation
             cancel.setOnClickListener {
                 alertDialog.dismiss()
             }
