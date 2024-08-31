@@ -60,14 +60,14 @@ class home_Main : Fragment() {
                 )
                 datepicker.show()
             }
-            val Name = name.toString()
+            val Name = name.text.toString()
             
-            val Date = date.toString()
+            val Date = date.text.toString()
             create.setOnClickListener{
                 if(name.length()!=0 && date.length()!=0)
                 {
                     val value = db.insertResume(User_id,Name,Date)
-                    if (value!=null){
+                    if (value>0){
                         val intent = Intent(activity,Create_resume::class.java).apply{
                             putExtra("resume_id",value)
                         }
