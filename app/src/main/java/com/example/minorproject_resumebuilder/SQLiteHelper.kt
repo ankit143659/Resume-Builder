@@ -20,7 +20,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         private const val DATABASE_VERSION = 1
         private const val DATABASE_NAME = "UserDB.db"
         const val TABLE_USERS = "users"
-        const val TABLE_RESUME = "resume"
+        const val TABLE_RESUME = "resumes"
         const val TABLE_PERSONAL = "personal"
         const val TABLE_EDUCATION = "education"
         const val TABLE_SKILL = "skill"
