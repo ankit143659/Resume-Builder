@@ -64,7 +64,7 @@ class home_Main : Fragment() {
             
             val Date = date.text.toString()
             create.setOnClickListener{
-                if(name.length()!=0 && date.length()!=0)
+                if(Name.isNotEmpty && Date.isNotEmpty)
                 {
                     val value = db.insertResume(User_id,Name,Date)
                     if (value>0){
