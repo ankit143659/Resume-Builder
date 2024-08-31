@@ -418,7 +418,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                 val startDate = getString(getColumnIndexOrThrow("start_date"))
                 val endDate = getString(getColumnIndexOrThrow("end_date"))
                 val userRole = getString(getColumnIndexOrThrow("user_role"))
-                val projectUrl = getString(getColumnIndexOrThrow("user_role"))
+                val projectUrl = getString(getColumnIndexOrThrow("project_Url"))
                 projectList.add(ProjectDetail(projectName, projectDescription, startDate, endDate, userRole,projectUrl))
             }
             close()
