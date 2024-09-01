@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +23,7 @@ import kotlin.properties.Delegates
 class home_Main : Fragment() {
 
     private val calendar = Calendar.getInstance()
-    private lateinit var share:SharePrefrence
+    private lateinit var share: SharePrefrence
     private var user_id by Delegates.notNull<Long>()
     private lateinit var db: SQLiteHelper
 
@@ -33,13 +34,23 @@ class home_Main : Fragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_home__main, container, false)
         val btn: Button = view.findViewById(R.id.btn_create_cv)
+
+        // Initialize SharePrefrence and get the user_id
         share = SharePrefrence(requireContext())
-        user_id = share.getuser_id().toLong()
+        try {
+            user_id = share.getuser_id().toLong()
+        } catch (e: Exception) {
+            Log.e("home_Main", "Error getting user ID", e)
+            Toast.makeText(requireContext(), "Invalid user ID", Toast.LENGTH_SHORT).show()
+            return view
+        }
+
+        // Initialize SQLiteHelper
         db = SQLiteHelper(requireContext())
 
-        if (user_id >0) {
-        } else {
+        if (user_id <= 0) {
             Toast.makeText(requireContext(), "Invalid user ID", Toast.LENGTH_SHORT).show()
+            return view
         }
 
         btn.setOnClickListener {
@@ -53,27 +64,26 @@ class home_Main : Fragment() {
             val date: TextView = dialogView.findViewById(R.id.et2)
             val alertDialog = dialog.create()
 
-
             date.setOnClickListener {
-                val datePicker = DatePickerDialog(requireContext(), { _, year, month, dayOfMonth ->
-                    val selectedDate = Calendar.getInstance()
-                    selectedDate.set(year, month, dayOfMonth)
-                    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                    date.text = dateFormat.format(selectedDate.time)
-                }, calendar.get(Calendar.YEAR),
+                val datePicker = DatePickerDialog(
+                    requireContext(), { _, year, month, dayOfMonth ->
+                        val selectedDate = Calendar.getInstance()
+                        selectedDate.set(year, month, dayOfMonth)
+                        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                        date.text = dateFormat.format(selectedDate.time)
+                    }, calendar.get(Calendar.YEAR),
                     calendar.get(Calendar.MONTH),
                     calendar.get(Calendar.DAY_OF_MONTH)
                 )
                 datePicker.show()
             }
 
-
             create.setOnClickListener {
                 val nameText = name.text.toString()
                 val dateText = date.text.toString()
 
                 if (nameText.isNotEmpty() && dateText.isNotEmpty()) {
-                    val value : Long = db.insertResume(user_id, nameText, dateText)
+                    val value: Long = db.insertResume(user_id, nameText, dateText)
                     if (value > 0) {
                         val intent = Intent(activity, Create_resume::class.java).apply {
                             putExtra("resume_id", value)
@@ -94,6 +104,7 @@ class home_Main : Fragment() {
 
             alertDialog.show()
         }
+
         return view
     }
 }
