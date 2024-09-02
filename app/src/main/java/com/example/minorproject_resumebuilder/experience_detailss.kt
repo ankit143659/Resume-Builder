@@ -22,15 +22,14 @@ class experience_detailss : AppCompatActivity() {
     private lateinit var save : Button
     private lateinit var layoutcontain : LinearLayout
     private lateinit var db : SQLiteHelper
-    var resume_id : Long? = null
+    var Resume_id : Long? = null
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_experience_detailss)
-        val Resume_id = intent.getStringExtra("resume_id")
-        resume_id = Resume_id?.toLong()
+        Resume_id = intent.getLongExtra("resume_id",1L)
         db = SQLiteHelper(this)
         addLayout= findViewById(R.id.addexperience)
         layoutcontain = findViewById(R.id.layoutContainer)
@@ -54,7 +53,7 @@ class experience_detailss : AppCompatActivity() {
             val companyName = educationView.findViewById<EditText>(R.id.companyName).text.toString()
             val companyLocation = educationView.findViewById<EditText>(R.id.comanyLocation).text.toString()
             val startDate = educationView.findViewById<EditText>(R.id.startDate).text.toString()
-            value = db.insertExperience(resume_id,companyName,companyLocation,startDate)
+            value = db.insertExperience(Resume_id,companyName,companyLocation,startDate)
         }
         if (value){
             Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()

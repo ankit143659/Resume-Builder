@@ -35,7 +35,7 @@ class home_Main : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_home__main, container, false)
         val btn: Button = view.findViewById(R.id.btn_create_cv)
 
-        // Initialize SharePrefrence and get the user_id
+
         share = SharePrefrence(requireContext())
         try {
             user_id = share.getuser_id().toLong()
@@ -45,7 +45,7 @@ class home_Main : Fragment() {
             return view
         }
 
-        // Initialize SQLiteHelper
+
         db = SQLiteHelper(requireContext())
 
         if (user_id <= 0) {

@@ -22,7 +22,7 @@ class project_detailss : AppCompatActivity() {
     private lateinit var save : Button
     private lateinit var layout : LinearLayout
     private lateinit var db : SQLiteHelper
-    var resume_id : Long? = null
+    var Resume_id : Long? = null
 
 
     @SuppressLint("MissingInflatedId")
@@ -30,8 +30,7 @@ class project_detailss : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_project_detailss)
-        val Resume_id = intent.getStringExtra("resume_id")
-        resume_id = Resume_id?.toLong()
+        Resume_id = intent.getLongExtra("resume_id",1L)
         db = SQLiteHelper(this)
 
         addLayout= findViewById(R.id.addProjects)
@@ -59,7 +58,7 @@ class project_detailss : AppCompatActivity() {
             val startDate = educationView.findViewById<EditText>(R.id.startDate).text.toString()
             val endDate = educationView.findViewById<EditText>(R.id.endDate).text.toString()
 
-            value = db.insertProject(resume_id,projectName,description,projectUrl,startDate,endDate,role)
+            value = db.insertProject(Resume_id,projectName,description,projectUrl,startDate,endDate,role)
         }
         if (value){
             Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()

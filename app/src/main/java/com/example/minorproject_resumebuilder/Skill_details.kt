@@ -23,7 +23,7 @@ class Skill_details : AppCompatActivity() {
     private lateinit var save : Button
     private lateinit var layoutcontainer : LinearLayout
     private lateinit var db : SQLiteHelper
-    var resume_id : Long? = null
+    var Resume_id : Long? = null
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +38,7 @@ class Skill_details : AppCompatActivity() {
         layoutcontainer=findViewById(R.id.layoutContainer)
         save=findViewById(R.id.savebtn)
         db = SQLiteHelper(this)
-        val Resume_id = intent.getStringExtra("resume_id")
-        resume_id = Resume_id?.toLong()
+        Resume_id = intent.getLongExtra("resume_id",1L)
 
         addLayout.setOnClickListener{
             addskills();
@@ -68,7 +67,7 @@ class Skill_details : AppCompatActivity() {
             else{
                 grade = "Advance"
             }
-            value = db.insertSkill(resume_id,SkillName,grade)
+            value = db.insertSkill(Resume_id,SkillName,grade)
         }
         if (value){
             Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()

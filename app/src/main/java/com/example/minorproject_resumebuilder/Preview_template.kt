@@ -52,7 +52,7 @@ class Preview_template : AppCompatActivity() {
             personalDetail?.let {
                 personalDetails.text = " \nPhone no: ${it.phone}\nEmail id: ${it.email}\n" +
                         "Nationality: ${it.nationality}\nGender: ${it.gender}\nDate of Birth: ${it.dateOfBirth}\nProfile Image: ${it.profileImage}"
-                name.text = "Name: ${it.fname} '' ${it.lname}"
+                name.text = "Name: ${it.fname} ${it.lname}"
             }
 
             val EducationDetails = db.getAllEducationDetails(Resume_id)
