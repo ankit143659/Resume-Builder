@@ -33,6 +33,7 @@ class Preview_template : AppCompatActivity() {
         setContentView(R.layout.activity_preview_template)
         db = SQLiteHelper(this)
         val Resume_id = intent.getLongExtra("resume_id",1L)
+        Toast.makeText(this,"Your resume id is : $Resume_id",Toast.LENGTH_SHORT).show()
 
         val intent = Intent(getIntent())
         val resumeName :String = intent.getStringExtra("value").toString()

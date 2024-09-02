@@ -38,3 +38,7 @@ data class ProjectDetail(
     var userRole: String,
     var projectUrl: String
 )
+
+
+data class Resume(val id: Long, val name: String,val createDate : String)
+

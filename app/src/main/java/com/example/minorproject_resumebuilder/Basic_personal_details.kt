@@ -53,6 +53,7 @@ class Basic_personal_details : AppCompatActivity() {
         var gender : String? = null
 
          val Resume_id = intent.getLongExtra("resume_id",1L)
+        Toast.makeText(this,"Your resume id is : $Resume_id",Toast.LENGTH_SHORT).show()
         share = SharePrefrence(this)
 
         db = SQLiteHelper(this)
@@ -82,8 +83,11 @@ class Basic_personal_details : AppCompatActivity() {
 
                 if(value){
                     Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this,Create_resume::class.java)
+                    val intent = Intent(this,Create_resume::class.java).apply {
+                        putExtra("resume_id",Resume_id)
+                    }
                     startActivity(intent)
+                    finish()
                 }else{
                     Toast.makeText(this,"Failed to save Data", Toast.LENGTH_SHORT).show()
                 }

@@ -31,6 +31,7 @@ class Education_details : AppCompatActivity() {
         setContentView(R.layout.activity_education_details)
 
          Resume_id = intent.getLongExtra("resume_id",1L)
+        Toast.makeText(this,"Your resume id is : $Resume_id",Toast.LENGTH_SHORT).show()
 
         addLayout= findViewById(R.id.addEducation)
         layoutcontainer = findViewById(R.id.layoutContainer)
@@ -74,8 +75,11 @@ class Education_details : AppCompatActivity() {
         }
         if (value){
             Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,Create_resume::class.java)
+            val intent = Intent(this,Create_resume::class.java).apply {
+                putExtra("resume_id",Resume_id)
+            }
             startActivity(intent)
+            finish()
         }else{
             Toast.makeText(this,"Failed to filled Data", Toast.LENGTH_SHORT).show()
         }
