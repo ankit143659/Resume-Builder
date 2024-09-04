@@ -40,6 +40,7 @@ class Basic_personal_details : AppCompatActivity() {
         setContentView(R.layout.activity_basic_personal_details)
 
         photo = findViewById(R.id.profilePhoto)
+        share = SharePrefrence(this)
         val save :Button = findViewById(R.id.save)
         val dob :EditText=findViewById(R.id.dob)
         val email :EditText=findViewById(R.id.emailId)

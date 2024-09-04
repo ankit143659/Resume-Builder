@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
 
 class project_detailss : AppCompatActivity() {
     private lateinit var addLayout : Button
@@ -23,6 +24,7 @@ class project_detailss : AppCompatActivity() {
     private lateinit var layout : LinearLayout
     private lateinit var db : SQLiteHelper
     var Resume_id : Long? = null
+    private lateinit var share : SharePrefrence
 
 
     @SuppressLint("MissingInflatedId")
@@ -30,7 +32,8 @@ class project_detailss : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_project_detailss)
-        Resume_id = intent.getLongExtra("resume_id",1L)
+        share= SharePrefrence(this)
+        Resume_id = share.getResumeId()
         Toast.makeText(this,"Your resume id is : $Resume_id",Toast.LENGTH_SHORT).show()
         db = SQLiteHelper(this)
 

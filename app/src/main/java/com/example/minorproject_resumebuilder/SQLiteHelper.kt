@@ -126,7 +126,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                     CREATE TABLE $TABLE_RESUME_TEMPELATE(
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     resume_id INTEGER, 
-                    template_name TEXT
+                    template_name TEXT,
                     FOREIGN KEY(resume_id) REFERENCES resumes(id) ON DELETE CASCADE
                     )
                 """
