@@ -24,6 +24,7 @@ class Preview_template : AppCompatActivity() {
     private lateinit var buttonContainer : LinearLayout
     private lateinit var db : SQLiteHelper
     private lateinit var share : SharePrefrence
+    private lateinit var resume_Name : String
 
 
 
@@ -32,6 +33,7 @@ class Preview_template : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_preview_template)
+        share = SharePrefrence(this)
         db = SQLiteHelper(this)
         val Resume_id = share.getResumeId()
         Toast.makeText(this,"Your resume id is : $Resume_id",Toast.LENGTH_SHORT).show()
@@ -39,14 +41,14 @@ class Preview_template : AppCompatActivity() {
         val intent = Intent(getIntent())
         val resumeName :String = intent.getStringExtra("value").toString()
 
-        save = findViewById(R.id.save)
-        download = findViewById(R.id.Download)
+
 
         layoutcontainer = findViewById(R.id.layoutcontainer)
         buttonContainer = findViewById(R.id.buttonContainer)
 
 
         if (resumeName =="medical_1"){
+            resume_Name = resumeName
             layoutcontainer.visibility=View.VISIBLE
             val resume_preview : View = LayoutInflater.from(this). inflate(R.layout.medical_1,layoutcontainer,false)
 
@@ -95,11 +97,20 @@ class Preview_template : AppCompatActivity() {
         }
 
         if (layoutcontainer.childCount!=0){
+            save = findViewById(R.id.Save)
+            download = findViewById(R.id.Download)
             buttonContainer.visibility=View.VISIBLE
             save.setOnClickListener{
-                Toast.makeText(this@Preview_template,"Resume Saved successfully",Toast.LENGTH_SHORT).show()
-                val intent = Intent(this@Preview_template,HomePage::class.java)
-                startActivity(intent)
+                val value = db.storeResumeName(Resume_id,resume_Name)
+                if(value){
+                    Toast.makeText(this@Preview_template,"Resume Saved successfully",Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@Preview_template,HomePage::class.java)
+                    startActivity(intent)
+                }
+                else{
+                    Toast.makeText(this@Preview_template,"Resume Saved failed",Toast.LENGTH_SHORT).show()
+                }
+
             }
             download.setOnClickListener{
                 Toast.makeText(this@Preview_template,"Resume Downloaded successfully",Toast.LENGTH_SHORT).show()

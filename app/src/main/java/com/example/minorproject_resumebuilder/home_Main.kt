@@ -11,11 +11,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Recycler
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.ResumeAdapter
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.properties.Delegates
@@ -24,8 +33,12 @@ class home_Main : Fragment() {
 
     private val calendar = Calendar.getInstance()
     private lateinit var share: SharePrefrence
+    private lateinit var adapter: ResumeAdapter
     private var user_id by Delegates.notNull<Long>()
     private lateinit var db: SQLiteHelper
+    private lateinit var recycler: RecyclerView
+    private val resumes = mutableListOf<Resume_data>()
+    private lateinit var imageContainer : LinearLayout
 
     @SuppressLint("InflateParams")
     override fun onCreateView(
@@ -34,7 +47,19 @@ class home_Main : Fragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_home__main, container, false)
         val btn: Button = view.findViewById(R.id.btn_create_cv)
+        recycler = view.findViewById(R.id.recyclerView)
+         imageContainer = view.findViewById(R.id.imageContainer)
+        db = SQLiteHelper(requireContext())
+        recycler.visibility = View.GONE
+        imageContainer.visibility = View.VISIBLE
 
+        recycler.visibility = View.VISIBLE
+        imageContainer.visibility = View.GONE
+
+        adapter = ResumeAdapter(resumes)
+        recycler.adapter = adapter
+        recycler.layoutManager = LinearLayoutManager(requireContext())
+        loadresume()
 
         share = SharePrefrence(requireContext())
         try {
@@ -46,7 +71,7 @@ class home_Main : Fragment() {
         }
 
 
-        db = SQLiteHelper(requireContext())
+
 
         if (user_id <= 0) {
             Toast.makeText(requireContext(), "Invalid user ID", Toast.LENGTH_SHORT).show()
@@ -106,5 +131,23 @@ class home_Main : Fragment() {
         }
 
         return view
+    }
+
+    private fun loadresume() {
+        GlobalScope.launch {
+            val allresumes = db.getAllreumes()
+            if (allresumes!=null){
+                recycler.visibility = View.VISIBLE
+                imageContainer.visibility = View.GONE
+                withContext(Dispatchers.Main){
+                    resumes.clear()
+                    resumes.addAll(allresumes)
+                    adapter.notifyDataSetChanged()
+                }
+            }else{
+                recycler.visibility = View.GONE
+                imageContainer.visibility = View.VISIBLE
+            }
+        }
     }
 }

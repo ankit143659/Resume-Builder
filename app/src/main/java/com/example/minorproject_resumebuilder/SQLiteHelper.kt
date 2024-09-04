@@ -9,7 +9,7 @@ import com.example.minorproject_resumebuilder.EducationDetail
 import com.example.minorproject_resumebuilder.ExperienceDetail
 import com.example.minorproject_resumebuilder.PersonalDetail
 import com.example.minorproject_resumebuilder.ProjectDetail
-import com.example.minorproject_resumebuilder.Resume
+import com.example.minorproject_resumebuilder.Resume_data
 import com.example.minorproject_resumebuilder.SkillDetail
 import java.util.Date
 
@@ -477,17 +477,16 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     }
 
 
-    fun getAllreumes():List<Resume>{
-        val Resumes = mutableListOf<Resume>()
+    fun getAllreumes(): List<Resume_data> {
+        val Resumes = mutableListOf<Resume_data>()
         val db = readableDatabase
         val cursor = db.query(TABLE_RESUME,null,null,null,null,null,null)
 
         with(cursor){
             while (moveToNext()){
-                val id = getString(getColumnIndexOrThrow("id")).toLong()
                 val resumeName = getString(getColumnIndexOrThrow("name"))
                 val createDate = getString(getColumnIndexOrThrow("created_date"))
-                val resumes = Resume(id,resumeName,createDate)
+                val resumes = Resume_data(resumeName,createDate)
                 Resumes.add(0,resumes)
             }
         }
