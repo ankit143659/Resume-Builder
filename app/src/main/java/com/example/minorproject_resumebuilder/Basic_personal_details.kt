@@ -52,7 +52,7 @@ class Basic_personal_details : AppCompatActivity() {
 
         var gender : String? = null
 
-         val Resume_id = intent.getLongExtra("resume_id",1L)
+         val Resume_id = share.getResumeId()
         Toast.makeText(this,"Your resume id is : $Resume_id",Toast.LENGTH_SHORT).show()
         share = SharePrefrence(this)
 

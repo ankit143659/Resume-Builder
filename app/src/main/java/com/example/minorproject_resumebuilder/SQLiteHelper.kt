@@ -27,6 +27,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         const val TABLE_SKILL = "skill"
         const val TABLE_PROJECT = "project"
         const val TABLE_EXPERIENCE = "experience"
+        const val TABLE_RESUME_TEMPELATE = "resume_template"
         private const val COLUMN_ID = "id"
         const val COLUMN_USERNAME = "username"
         const val COLUMN_PASSWORD = "password"
@@ -120,6 +121,17 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         """
                 )
 
+        private const val TABLE_RESUME_TEMPLATE = (
+                """
+                    CREATE TABLE $TABLE_RESUME_TEMPELATE(
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    resume_id INTEGER, 
+                    template_name TEXT
+                    FOREIGN KEY(resume_id) REFERENCES resumes(id) ON DELETE CASCADE
+                    )
+                """
+                )
+
     }
 
 
@@ -131,6 +143,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         db.execSQL(TABLE_SKILLl)
         db.execSQL(TABLE_EXP)
         db.execSQL(TABLE_PROJECTt)
+        db.execSQL(TABLE_RESUME_TEMPLATE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -141,6 +154,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         db.execSQL("DROP TABLE IF EXISTS $TABLE_SKILL")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_EXPERIENCE")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_PROJECT")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_RESUME_TEMPELATE")
         onCreate(db)
     }
 
@@ -289,6 +303,40 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
             false
         }
 
+    }
+
+    fun storeResumeName (resumeId: Long?,template_name : String):Boolean{
+        val db = writableDatabase
+        return try {
+            val values = ContentValues().apply {
+                put("resume_id",resumeId)
+                put("template_name",template_name)
+            }
+            val result = db.insert(TABLE_RESUME_TEMPELATE,null,values)
+            result!=-1L
+        }catch (e:Exception){
+            false
+        }
+    }
+
+    fun getTemplateName(resumeId: Long?):String{
+        val db = readableDatabase
+        val cursor = db.query(
+            "$TABLE_RESUME_TEMPELATE",
+            null,
+            "resume_id = ?",
+            arrayOf(resumeId.toString()),
+            null,
+            null,
+            null
+        )
+        return if (cursor.moveToFirst()){
+            val template_name = cursor.getString(cursor.getColumnIndexOrThrow("template_name"))
+            template_name
+        }else{
+            cursor.close()
+            "medical_1"
+        }
     }
 
     fun getPersonalDetails(resumeId: Long?): PersonalDetail? {

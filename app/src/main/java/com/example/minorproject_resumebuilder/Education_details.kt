@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
 
 class Education_details : AppCompatActivity() {
     private lateinit var addLayout : Button
@@ -23,14 +24,15 @@ class Education_details : AppCompatActivity() {
     private lateinit var layoutcontainer : LinearLayout
     private lateinit var db : SQLiteHelper
     var Resume_id : Long? = null
+    private lateinit var share: SharePrefrence
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_education_details)
-
-         Resume_id = intent.getLongExtra("resume_id",1L)
+        share = SharePrefrence(this)
+         Resume_id = share.getResumeId()
         Toast.makeText(this,"Your resume id is : $Resume_id",Toast.LENGTH_SHORT).show()
 
         addLayout= findViewById(R.id.addEducation)

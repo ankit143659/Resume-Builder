@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
 
 class Skill_details : AppCompatActivity() {
 
@@ -23,22 +24,19 @@ class Skill_details : AppCompatActivity() {
     private lateinit var save : Button
     private lateinit var layoutcontainer : LinearLayout
     private lateinit var db : SQLiteHelper
+    private lateinit var share: SharePrefrence
     var Resume_id : Long? = null
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_skill_details)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+       share = SharePrefrence(this)
         addLayout=findViewById(R.id.addSkill)
         layoutcontainer=findViewById(R.id.layoutContainer)
         save=findViewById(R.id.savebtn)
         db = SQLiteHelper(this)
-        Resume_id = intent.getLongExtra("resume_id",1L)
+        Resume_id =share.getResumeId()
 
         addLayout.setOnClickListener{
             addskills();

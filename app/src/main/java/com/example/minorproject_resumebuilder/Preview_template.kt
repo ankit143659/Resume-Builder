@@ -19,6 +19,7 @@ import com.example.minorproject_resumebuilder.com.example.minorproject_resumebui
 class Preview_template : AppCompatActivity() {
 
     private lateinit var save : Button
+    private lateinit var download : Button
     private lateinit var layoutcontainer : LinearLayout
     private lateinit var buttonContainer : LinearLayout
     private lateinit var db : SQLiteHelper
@@ -32,11 +33,14 @@ class Preview_template : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_preview_template)
         db = SQLiteHelper(this)
-        val Resume_id = intent.getLongExtra("resume_id",1L)
+        val Resume_id = share.getResumeId()
         Toast.makeText(this,"Your resume id is : $Resume_id",Toast.LENGTH_SHORT).show()
 
         val intent = Intent(getIntent())
         val resumeName :String = intent.getStringExtra("value").toString()
+
+        save = findViewById(R.id.save)
+        download = findViewById(R.id.Download)
 
         layoutcontainer = findViewById(R.id.layoutcontainer)
         buttonContainer = findViewById(R.id.buttonContainer)
@@ -92,6 +96,16 @@ class Preview_template : AppCompatActivity() {
 
         if (layoutcontainer.childCount!=0){
             buttonContainer.visibility=View.VISIBLE
+            save.setOnClickListener{
+                Toast.makeText(this@Preview_template,"Resume Saved successfully",Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@Preview_template,HomePage::class.java)
+                startActivity(intent)
+            }
+            download.setOnClickListener{
+                Toast.makeText(this@Preview_template,"Resume Downloaded successfully",Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@Preview_template,HomePage::class.java)
+                startActivity(intent)
+            }
         }
 
 

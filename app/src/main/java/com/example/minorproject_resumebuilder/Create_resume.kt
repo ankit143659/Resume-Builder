@@ -8,8 +8,10 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
 
 class Create_resume : AppCompatActivity() {
+    private lateinit var share : SharePrefrence
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,49 +23,38 @@ class Create_resume : AppCompatActivity() {
         val btn_exper = findViewById<LinearLayout>(R.id.experience)
         val btn_project = findViewById<LinearLayout>(R.id.projects)
         val save  : Button = findViewById(R.id.save)
+        share = SharePrefrence(this)
 
-        val resume_id = intent.getLongExtra("resume_id",1L)
+        val resume_id = share.getResumeId()
         Toast.makeText(this,"Your resume id is : $resume_id",Toast.LENGTH_SHORT).show()
 
         btn_per.setOnClickListener{
-            val intent = Intent(this,Basic_personal_details::class.java).apply{
-                putExtra("resume_id",resume_id)
-            }
+            val intent = Intent(this,Basic_personal_details::class.java)
             startActivity(intent)
         }
 
         btn_edu.setOnClickListener{
-            val intent = Intent(this,Education_details::class.java).apply{
-                putExtra("resume_id",resume_id)
-            }
+            val intent = Intent(this,Education_details::class.java)
             startActivity(intent)
         }
 
         btn_skill.setOnClickListener{
-            val intent = Intent(this,Skill_details::class.java).apply{
-                putExtra("resume_id",resume_id)
-            }
+            val intent = Intent(this,Skill_details::class.java)
             startActivity(intent)
         }
 
         btn_exper.setOnClickListener{
-            val intent = Intent(this,experience_detailss::class.java).apply{
-                putExtra("resume_id",resume_id)
-            }
+            val intent = Intent(this,experience_detailss::class.java)
             startActivity(intent)
         }
 
         btn_project.setOnClickListener{
-            val intent = Intent(this,project_detailss::class.java).apply{
-                putExtra("resume_id",resume_id)
-            }
+            val intent = Intent(this,project_detailss::class.java)
             startActivity(intent)
         }
 
         save.setOnClickListener{
-            val intent = Intent(this,resume_template::class.java).apply{
-                putExtra("resume_id",resume_id)
-            }
+            val intent = Intent(this,resume_template::class.java)
             startActivity(intent)
             finish()
         }

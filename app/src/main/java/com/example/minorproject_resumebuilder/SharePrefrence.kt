@@ -37,4 +37,15 @@ class SharePrefrence (context: Context) {
     fun getuser_id() : String{
         return prefs.getString("user_id","")?:""
     }
+
+    fun storeResumeId(Resume_id : Long){
+        val editor = prefs.edit()
+        editor.putLong("resume_id",Resume_id)
+        editor.apply()
+    }
+
+    fun getResumeId():Long{
+        return prefs.getLong("resume_id",1L)
+    }
+
 }

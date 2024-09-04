@@ -14,28 +14,26 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
 
 class resume_template : AppCompatActivity() {
 
     private lateinit var spinnerItems: Spinner
+    private lateinit var share : SharePrefrence
     var resume_id : Int? = null
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_resume_template)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
+        share = SharePrefrence(this)
         spinnerItems = findViewById(R.id.spinner_items)
         val img1 : ImageView = findViewById(R.id.img1)
         val img2 : ImageView = findViewById(R.id.img2)
+
         val select_img2 : Button = findViewById(R.id.select_img2)
         val select_img1 : Button = findViewById(R.id.select_img1)
-        val Resume_id = intent.getLongExtra("resume_id",1L)
+        val Resume_id = share.getResumeId()
         Toast.makeText(this,"Your resume id is : $Resume_id",Toast.LENGTH_SHORT).show()
 
         val items = arrayOf("CLICK TO CHOOSE TEMPLATE DESIGN", "MEDICAL", "ENGINEERING", "IT FIELD","DIPLOMA","FRESHERS","MANAGEMENT","DESIGNING","BANKING")

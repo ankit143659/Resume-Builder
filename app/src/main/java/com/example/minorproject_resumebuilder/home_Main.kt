@@ -85,9 +85,8 @@ class home_Main : Fragment() {
                 if (nameText.isNotEmpty() && dateText.isNotEmpty()) {
                     val value: Long = db.insertResume(user_id, nameText, dateText)
                     if (value > 0) {
-                        val intent = Intent(activity, Create_resume::class.java).apply {
-                            putExtra("resume_id", value)
-                        }
+                        val intent = Intent(activity, Create_resume::class.java)
+                        share.storeResumeId(value)
                         startActivity(intent)
 
                         alertDialog.dismiss()
