@@ -508,8 +508,14 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         totaldelete+=db.delete(TABLE_RESUME_TEMPELATE,"resume_id=?", arrayOf(resumeId))
 
         totaldelete+=db.delete(TABLE_RESUME,"id=?", arrayOf(resumeId))
+        resetresumeIdSequences()
 
         return totaldelete
+    }
+
+    private fun resetresumeIdSequences() {
+        val db = writableDatabase
+        db.execSQL("DELETE FROM sqlite_sequence WHERE name='resumes'")
     }
 
 
