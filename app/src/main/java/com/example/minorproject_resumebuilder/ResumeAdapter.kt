@@ -49,4 +49,9 @@ class ResumeAdapter(
             notifyItemRemoved(Position)
         }
     }
+
+    fun addResume(resume: Resume_data) {
+        resumes.add(resume)
+        notifyItemInserted(resumes.size - 1)
+    }
 }
