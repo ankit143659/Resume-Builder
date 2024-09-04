@@ -484,15 +484,32 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
         with(cursor){
             while (moveToNext()){
+                val id = getLong(getColumnIndexOrThrow("id")).toString()
                 val resumeName = getString(getColumnIndexOrThrow("name"))
                 val createDate = getString(getColumnIndexOrThrow("created_date"))
-                val resumes = Resume_data(resumeName,createDate)
+                val resumes = Resume_data(id,resumeName,createDate)
                 Resumes.add(0,resumes)
             }
         }
 
         cursor.close()
         return Resumes
+    }
+
+    fun deleteResume(resumeId: String):Int{
+        val db = writableDatabase
+        var totaldelete = 0
+
+        totaldelete+=db.delete(TABLE_PERSONAL,"resume_id=?", arrayOf(resumeId))
+        totaldelete+=db.delete(TABLE_EDUCATION,"resume_id=?", arrayOf(resumeId))
+        totaldelete+=db.delete(TABLE_SKILL,"resume_id=?", arrayOf(resumeId))
+        totaldelete+=db.delete(TABLE_PROJECT,"resume_id=?", arrayOf(resumeId))
+        totaldelete+=db.delete(TABLE_EXPERIENCE,"resume_id=?", arrayOf(resumeId))
+        totaldelete+=db.delete(TABLE_RESUME_TEMPELATE,"resume_id=?", arrayOf(resumeId))
+
+        totaldelete+=db.delete(TABLE_RESUME,"id=?", arrayOf(resumeId))
+
+        return totaldelete
     }
 
 

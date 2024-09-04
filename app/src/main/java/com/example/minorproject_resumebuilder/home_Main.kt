@@ -56,7 +56,9 @@ class home_Main : Fragment() {
         recycler.visibility = View.VISIBLE
         imageContainer.visibility = View.GONE
 
-        adapter = ResumeAdapter(resumes)
+        adapter = ResumeAdapter(resumes){resumeid ->
+            deleteResume(resumeid)
+        }
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(requireContext())
         loadresume()
@@ -131,6 +133,22 @@ class home_Main : Fragment() {
         }
 
         return view
+    }
+
+    private fun deleteResume(resumeid: String) {
+        GlobalScope.launch{
+            val result = db.deleteResume(resumeid)
+            if (result>0){
+                withContext(Dispatchers.Main){
+                    adapter.removeResume(resumeid)
+                    adapter.notifyDataSetChanged()
+                    Toast.makeText(requireContext(),"Resume removed Succesfully",Toast.LENGTH_SHORT).show()
+                }
+            }else{
+                Toast.makeText(requireContext(),"Failed to delete resume",Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
     private fun loadresume() {

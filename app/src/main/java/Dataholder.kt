@@ -40,6 +40,7 @@ data class ProjectDetail(
 )
 
 data class Resume_data(
+    val id : String,
     val name: String,
     val creationDate: String
 )
