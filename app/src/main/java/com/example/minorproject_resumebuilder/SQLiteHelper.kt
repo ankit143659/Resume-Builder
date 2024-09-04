@@ -518,5 +518,163 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         db.execSQL("DELETE FROM sqlite_sequence WHERE name='resumes'")
     }
 
+fun updatePersonalDetails(
+    resumeId: Long?,
+    fname: String,
+    lname: String,
+    phone: String,
+    email: String,
+    nationality: String,
+    gender: String,
+    dateOfBirth: String,
+    profileImage: String
+): Boolean {
+    val db = writableDatabase
+    return try {
+        val values = ContentValues().apply {
+            put("fname", fname)
+            put("lname", lname)
+            put("phone", phone)
+            put("email", email)
+            put("nationality", nationality)
+            put("gender", gender)
+            put("date_of_birth", dateOfBirth)
+            put("profile_image", profileImage)
+        }
+        val rowsUpdated = db.update(
+            TABLE_PERSONAL,
+            values,
+            "resume_id = ?",
+            arrayOf(resumeId.toString())
+        )
+        rowsUpdated > 0
+    } catch (e: Exception) {
+        false
+    } finally {
+        db.close()
+    }
+}
+
+
+fun updateEducationDetails(
+    educationId: Long?,
+    Degree_Name: String,
+    Institute_Name: String,
+    passingYear: String,
+    grade: String,
+    location: String
+): Boolean {
+    val db = writableDatabase
+    return try {
+        val values = ContentValues().apply {
+            put("Degree_name", Degree_Name)
+            put("Institute_name", Institute_Name)
+            put("Location", location)
+            put("passing_year", passingYear)
+            put("grade", grade)
+        }
+        val rowsUpdated = db.update(
+            TABLE_EDUCATION,
+            values,
+            "id = ?",
+            arrayOf(educationId.toString())
+        )
+        rowsUpdated > 0
+    } catch (e: Exception) {
+        false
+    } finally {
+        db.close()
+    }
+}
+
+
+fun updateSkill(
+    skillId: Long?,
+    skillName: String,
+    strength: String
+): Boolean {
+    val db = writableDatabase
+    return try {
+        val values = ContentValues().apply {
+            put("skill_name", skillName)
+            put("strength", strength)
+        }
+        val rowsUpdated = db.update(
+            TABLE_SKILL,
+            values,
+            "id = ?",
+            arrayOf(skillId.toString())
+        )
+        rowsUpdated > 0
+    } catch (e: Exception) {
+        false
+    } finally {
+        db.close()
+    }
+}
+
+
+fun updateExperience(
+    experienceId: Long?,
+    companyName: String,
+    location: String,
+    yearsOfExperience: String
+): Boolean {
+    val db = writableDatabase
+    return try {
+        val values = ContentValues().apply {
+            put("company_name", companyName)
+            put("location", location)
+            put("years_of_experience", yearsOfExperience)
+        }
+        val rowsUpdated = db.update(
+            TABLE_EXPERIENCE,
+            values,
+            "id = ?",
+            arrayOf(experienceId.toString())
+        )
+        rowsUpdated > 0
+    } catch (e: Exception) {
+        false
+    } finally {
+        db.close()
+    }
+}
+
+
+fun updateProject(
+    projectId: Long?,
+    projectName: String,
+    projectDescription: String,
+    projectUrl: String,
+    startDate: String,
+    endDate: String,
+    userRole: String
+): Boolean {
+    val db = writableDatabase
+    return try {
+        val values = ContentValues().apply {
+            put("project_name", projectName)
+            put("project_description", projectDescription)
+            put("project_Url", projectUrl)
+            put("start_date", startDate)
+            put("end_date", endDate)
+            put("user_role", userRole)
+        }
+        val rowsUpdated = db.update(
+            TABLE_PROJECT,
+            values,
+            "id = ?",
+            arrayOf(projectId.toString())
+        )
+        rowsUpdated > 0
+    } catch (e: Exception) {
+        false
+    } finally {
+        db.close()
+    }
+}
+
+
 
 }
