@@ -189,6 +189,7 @@ class home_Main : Fragment() {
                         adapter.notifyDataSetChanged()
                         Toast.makeText(requireContext(),"Resume removed Succesfully",Toast.LENGTH_SHORT).show()
                     }
+                    alertBox.dismiss()
                 }else{
                     Toast.makeText(requireContext(),"Failed to delete resume",Toast.LENGTH_SHORT).show()
                 }
@@ -208,7 +209,7 @@ class home_Main : Fragment() {
     private fun loadresume() {
         GlobalScope.launch {
             val allresumes = db.getAllreumes()
-            if (allresumes!=null){
+            if (allresumes.count()>0){
                 recycler.visibility = View.VISIBLE
                 imageContainer.visibility = View.GONE
                 withContext(Dispatchers.Main){

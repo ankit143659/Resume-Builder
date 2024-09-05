@@ -42,6 +42,7 @@ class HomePage : AppCompatActivity() {
 
         yes.setOnClickListener{
            finishAffinity()
+            alertBox.dismiss()
         }
 
         no.setOnClickListener{
