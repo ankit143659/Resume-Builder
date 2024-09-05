@@ -30,6 +30,7 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/black"
             android:gravity="center"
+            android:id="@+id/t1"
             android:text="𝐀𝐫𝐞 𝐲𝐨𝐮 𝐬𝐮𝐫𝐞 𝐲𝐨𝐮 𝐰𝐚𝐧𝐭 𝐭𝐨 𝐋𝐨𝐠𝐨𝐮𝐭 ?"
             android:textSize="23sp" />
 
