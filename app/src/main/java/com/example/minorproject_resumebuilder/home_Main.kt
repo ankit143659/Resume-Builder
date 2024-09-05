@@ -166,18 +166,42 @@ class home_Main : Fragment() {
 
 
     private fun deleteResume(resumeid: String) {
-        GlobalScope.launch{
-            val result = db.deleteResume(resumeid)
-            if (result>0){
-                withContext(Dispatchers.Main){
-                    adapter.removeResume(resumeid)
-                    adapter.notifyDataSetChanged()
-                    Toast.makeText(requireContext(),"Resume removed Succesfully",Toast.LENGTH_SHORT).show()
+
+        val dialog = AlertDialog.Builder(requireContext())
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.log_out,null)
+        dialog.setView(dialogView)
+
+        val yes : Button = dialogView.findViewById(R.id.yes)
+        val no : Button = dialogView.findViewById(R.id.no)
+        val t1 : TextView = dialogView.findViewById(R.id.t1)
+
+        t1.text = "Are you sure you want to delete this resume ?"
+
+        val alertBox = dialog.create()
+
+        yes.setOnClickListener{
+
+            GlobalScope.launch{
+                val result = db.deleteResume(resumeid)
+                if (result>0){
+                    withContext(Dispatchers.Main){
+                        adapter.removeResume(resumeid)
+                        adapter.notifyDataSetChanged()
+                        Toast.makeText(requireContext(),"Resume removed Succesfully",Toast.LENGTH_SHORT).show()
+                    }
+                }else{
+                    Toast.makeText(requireContext(),"Failed to delete resume",Toast.LENGTH_SHORT).show()
                 }
-            }else{
-                Toast.makeText(requireContext(),"Failed to delete resume",Toast.LENGTH_SHORT).show()
             }
+
         }
+
+        no.setOnClickListener{
+            alertBox.dismiss()
+        }
+
+        alertBox.show()
+
 
     }
 
