@@ -24,10 +24,6 @@ class Create_resume : AppCompatActivity() {
         val btn_project = findViewById<LinearLayout>(R.id.projects)
         val save  : Button = findViewById(R.id.save)
         share = SharePrefrence(this)
-
-        val resume_id = share.getResumeId()
-        Toast.makeText(this,"Your resume id is : $resume_id",Toast.LENGTH_SHORT).show()
-
         btn_per.setOnClickListener{
             val intent = Intent(this,Basic_personal_details::class.java)
             startActivity(intent)

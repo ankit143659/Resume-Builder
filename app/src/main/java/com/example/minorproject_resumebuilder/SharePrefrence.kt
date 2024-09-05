@@ -48,4 +48,13 @@ class SharePrefrence (context: Context) {
         return prefs.getLong("resume_id",1L)
     }
 
+    fun storeTemplateName(resume_name : String){
+        val editor = prefs.edit()
+        editor.putString("template_name",resume_name)
+        editor.apply()
+    }
+    fun getTemplateName():String?{
+        return prefs.getString("template_name","")
+    }
+
 }

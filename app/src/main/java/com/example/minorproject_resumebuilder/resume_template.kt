@@ -33,9 +33,6 @@ class resume_template : AppCompatActivity() {
 
         val select_img2 : Button = findViewById(R.id.select_img2)
         val select_img1 : Button = findViewById(R.id.select_img1)
-        val Resume_id = share.getResumeId()
-        Toast.makeText(this,"Your resume id is : $Resume_id",Toast.LENGTH_SHORT).show()
-
         val items = arrayOf("CLICK TO CHOOSE TEMPLATE DESIGN", "MEDICAL", "ENGINEERING", "IT FIELD","DIPLOMA","FRESHERS","MANAGEMENT","DESIGNING","BANKING")
 
 
@@ -55,6 +52,23 @@ class resume_template : AppCompatActivity() {
                     img2.visibility=View.VISIBLE
                     select_img1.visibility=View.VISIBLE
                     select_img2.visibility=View.VISIBLE
+
+                    select_img1.setOnClickListener{
+                        Toast.makeText(this@resume_template,"Succesfully Data Filled",Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@resume_template,Preview_template::class.java)
+                        share.storeTemplateName("medical_1")
+                        startActivity(intent)
+
+                    }
+
+
+                    select_img2.setOnClickListener{
+                        Toast.makeText(this@resume_template,"Succesfully Created",Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@resume_template,HomePage::class.java)
+                        share.storeTemplateName("medical_2")
+                        startActivity(intent)
+
+                    }
                 } else if (position == 2) {
                     img1.setImageResource(R.drawable.engineering_1)
                     img2.setImageResource(R.drawable.engineering_2)
@@ -62,6 +76,22 @@ class resume_template : AppCompatActivity() {
                     img2.visibility=View.VISIBLE
                     select_img1.visibility=View.VISIBLE
                     select_img2.visibility=View.VISIBLE
+                    select_img1.setOnClickListener{
+                        Toast.makeText(this@resume_template,"Succesfully Data Filled",Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@resume_template,Preview_template::class.java)
+                        share.storeTemplateName("engineering_1")
+                        startActivity(intent)
+
+                    }
+
+
+                    select_img2.setOnClickListener{
+                        Toast.makeText(this@resume_template,"Succesfully Created",Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@resume_template,HomePage::class.java)
+                        share.storeTemplateName("medical_2")
+                        startActivity(intent)
+
+                    }
                 }else if (position == 3) {
                     img1.setImageResource(R.drawable.it_1)
                     img2.setImageResource(R.drawable.it_2)
@@ -123,26 +153,5 @@ class resume_template : AppCompatActivity() {
                 img2.visibility=View.GONE
             }
         }
-
-        select_img1.setOnClickListener{
-            Toast.makeText(this,"Succesfully Data Filled",Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,Preview_template::class.java).apply {
-                putExtra("value","medical_1")
-                putExtra("resume_id",Resume_id)
-            }
-            startActivity(intent)
-
-        }
-
-
-        select_img2.setOnClickListener{
-            Toast.makeText(this,"Succesfully Created",Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,HomePage::class.java)
-            startActivity(intent)
-
-        }
-
-
-
     }
 }

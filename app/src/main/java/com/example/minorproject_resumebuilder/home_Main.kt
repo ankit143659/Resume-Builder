@@ -48,7 +48,7 @@ class home_Main : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_home__main, container, false)
         val btn: Button = view.findViewById(R.id.btn_create_cv)
         recycler = view.findViewById(R.id.recyclerView)
-         imageContainer = view.findViewById(R.id.imageContainer)
+        imageContainer = view.findViewById(R.id.imageContainer)
         db = SQLiteHelper(requireContext())
         recycler.visibility = View.GONE
         imageContainer.visibility = View.VISIBLE
@@ -56,9 +56,10 @@ class home_Main : Fragment() {
         recycler.visibility = View.VISIBLE
         imageContainer.visibility = View.GONE
 
-        adapter = ResumeAdapter(resumes){resumeid ->
-            deleteResume(resumeid)
-        }
+        adapter = ResumeAdapter(resumes,{resumeId ->
+            deleteResume(resumeId)},{resumeId->
+                onclick(resumeId)
+        })
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(requireContext())
         loadresume()
@@ -82,7 +83,8 @@ class home_Main : Fragment() {
 
         btn.setOnClickListener {
             val dialog = AlertDialog.Builder(requireContext())
-            val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.resume_info, null)
+            val dialogView =
+                LayoutInflater.from(requireContext()).inflate(R.layout.resume_info, null)
             dialog.setView(dialogView)
 
             val create: Button = dialogView.findViewById(R.id.create)
@@ -112,16 +114,35 @@ class home_Main : Fragment() {
                 if (nameText.isNotEmpty() && dateText.isNotEmpty()) {
                     val value: Long = db.insertResume(user_id, nameText, dateText)
                     if (value > 0) {
+                        val newResume = Resume_data(
+                            id = value.toString(),
+                            name = nameText,
+                            creationDate = dateText
+                        )
+                       GlobalScope.launch {
+                           withContext(Dispatchers.Main) {
+                               adapter.addResume(newResume)
+                           }
+                       }
+
                         val intent = Intent(activity, Create_resume::class.java)
                         share.storeResumeId(value)
                         startActivity(intent)
 
                         alertDialog.dismiss()
                     } else {
-                        Toast.makeText(requireContext(), "Failed to create Resume", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Failed to create Resume",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 } else {
-                    Toast.makeText(requireContext(), "Please fill required details", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Please fill required details",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
@@ -131,9 +152,18 @@ class home_Main : Fragment() {
 
             alertDialog.show()
         }
-
         return view
     }
+
+    private fun onclick(resumeId: String) {
+        val resumeId = resumeId.toLong()
+        share.storeResumeId(resumeId)
+        share.storeTemplateName(db.getTemplateName(resumeId))
+        val i = Intent(requireContext(),Preview_template::class.java)
+        startActivity(i)
+
+    }
+
 
     private fun deleteResume(resumeid: String) {
         GlobalScope.launch{

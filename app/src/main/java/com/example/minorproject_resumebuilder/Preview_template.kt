@@ -36,10 +36,7 @@ class Preview_template : AppCompatActivity() {
         share = SharePrefrence(this)
         db = SQLiteHelper(this)
         val Resume_id = share.getResumeId()
-        Toast.makeText(this,"Your resume id is : $Resume_id",Toast.LENGTH_SHORT).show()
-
-        val intent = Intent(getIntent())
-        val resumeName :String = intent.getStringExtra("value").toString()
+        val resumeName :String? = share.getTemplateName()
 
 
 
@@ -90,8 +87,50 @@ class Preview_template : AppCompatActivity() {
 
             layoutcontainer.addView(resume_preview)
 
-        }
-        else{
+        }else if (resumeName=="engineering_1"){
+            resume_Name = resumeName
+            layoutcontainer.visibility=View.VISIBLE
+            val resume_preview : View = LayoutInflater.from(this). inflate(R.layout.engineering_1,layoutcontainer,false)
+
+            val personalDetails = resume_preview.findViewById<TextView>(R.id.personalDetails)
+            val name = resume_preview.findViewById<TextView>(R.id.name)
+
+            val personalDetail = db.getPersonalDetails(Resume_id)
+            personalDetail?.let {
+                personalDetails.text = " \nPhone no: ${it.phone}\nEmail id: ${it.email}\n" +
+                        "Nationality: ${it.nationality}\nGender: ${it.gender}\nDate of Birth: ${it.dateOfBirth}\nProfile Image: ${it.profileImage}"
+                name.text = "Name: ${it.fname} ${it.lname}"
+            }
+
+            val EducationDetails = db.getAllEducationDetails(Resume_id)
+            val educationTextView: TextView = resume_preview.findViewById(R.id.educationalDeatils)
+            educationTextView.text = EducationDetails.joinToString(separator = "\n\n\n") {
+                "Degree Name: ${it.Degree_name}\n, Institute Name : ${it.Institute_name}\n,Passing Year: ${it.passingYear}\n, Grade: ${it.grade} "
+            }
+
+
+            val skills = db.getAllSkills(Resume_id)
+            val skillsTextView: TextView = resume_preview.findViewById(R.id.skillDetails)
+            skillsTextView.text = skills.joinToString(separator = "\n\n\n") {
+                "Skill Name: ${it.skillName}, Strength: ${it.strength}"
+            }
+
+            val experiences = db.getAllExperienceDetails(Resume_id)
+            val experienceTextView: TextView = resume_preview.findViewById(R.id.experienceDetails)
+            experienceTextView.text = experiences.joinToString(separator = "\n") {
+                "Company Name: ${it.companyName}, Location: ${it.location}, Years of Experience: ${it.yearsOfExperience}"
+            }
+
+            val projects = db.getAllProjectDetails(Resume_id)
+            val projectsTextView: TextView = resume_preview.findViewById(R.id.projectDetails)
+            projectsTextView.text = projects.joinToString(separator = "\n") {
+                "Project Name: ${it.projectName}, Project Url : ${it.projectUrl}, Start Date: ${it.startDate}, End Date: ${it.endDate}, Role: ${it.userRole},Description: ${it.projectDescription}"
+            }
+
+
+            layoutcontainer.addView(resume_preview)
+
+        }else{
             layoutcontainer.visibility=View.GONE
             buttonContainer.visibility=View.GONE
         }

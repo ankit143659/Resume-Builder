@@ -33,7 +33,6 @@ class experience_detailss : AppCompatActivity() {
         setContentView(R.layout.activity_experience_detailss)
         share = SharePrefrence(this)
         Resume_id = share.getResumeId()
-        Toast.makeText(this,"Your resume id is : $Resume_id",Toast.LENGTH_SHORT).show()
         db = SQLiteHelper(this)
         addLayout= findViewById(R.id.addexperience)
         layoutcontain = findViewById(R.id.layoutContainer)

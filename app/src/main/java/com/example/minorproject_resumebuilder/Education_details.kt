@@ -33,8 +33,6 @@ class Education_details : AppCompatActivity() {
         setContentView(R.layout.activity_education_details)
         share = SharePrefrence(this)
          Resume_id = share.getResumeId()
-        Toast.makeText(this,"Your resume id is : $Resume_id",Toast.LENGTH_SHORT).show()
-
         addLayout= findViewById(R.id.addEducation)
         layoutcontainer = findViewById(R.id.layoutContainer)
         save= findViewById(R.id.savebtn)

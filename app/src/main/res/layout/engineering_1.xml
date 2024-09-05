@@ -22,7 +22,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="16dp" />
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
@@ -35,13 +35,6 @@
                 android:textSize="24sp"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
-            <TextView
-                android:id="@+id/job_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Senior Civil Engineer"
-                android:textSize="18sp"
-                android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -57,6 +50,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/personalDetails"
             android:textColor="#2196F3"
             android:textSize="14sp"
             android:layout_gravity="end" />
@@ -80,6 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:id="@+id/educationalDeatils"
             android:textColor="@color/black"
             android:textSize="14sp" />
     </LinearLayout>
@@ -107,6 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/black"
+                android:id="@+id/skillDetails"
                 android:textSize="14sp" />
         </LinearLayout>
         <LinearLayout
@@ -122,9 +118,10 @@
                 android:textStyle="bold"
                 android:textSize="18sp" />
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:id="@+id/experienceDetails"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -147,13 +144,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:id="@+id/projectDetails"
             android:textColor="@color/black"
             android:textSize="14sp" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+
     </LinearLayout>
 </RelativeLayout>
