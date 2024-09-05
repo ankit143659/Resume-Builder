@@ -189,7 +189,7 @@ class home_Main : Fragment() {
                 imageContainer.visibility = View.GONE
                 withContext(Dispatchers.Main){
                     resumes.clear()
-                    resumes.addAll(allresumes)
+                    resumes.addAll(allresumes.reversed())
                     adapter.notifyDataSetChanged()
                 }
             }else{
