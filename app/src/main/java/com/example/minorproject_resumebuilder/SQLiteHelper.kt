@@ -477,11 +477,10 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     }
 
 
-    fun getResumesByUserId(userId: Long): List<Resume_data> {
+    fun getAllResumes(userId: Long): List<Resume_data> {
     val resumes = mutableListOf<Resume_data>()
     val db = readableDatabase
 
-   
     val selection = "user_id = ?"
     val selectionArgs = arrayOf(userId.toString())
 

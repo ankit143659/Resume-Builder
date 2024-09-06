@@ -50,21 +50,10 @@ class home_Main : Fragment() {
         recycler = view.findViewById(R.id.recyclerView)
         imageContainer = view.findViewById(R.id.imageContainer)
         db = SQLiteHelper(requireContext())
+        share = SharePrefrence(requireContext())
         recycler.visibility = View.GONE
         imageContainer.visibility = View.VISIBLE
 
-        recycler.visibility = View.VISIBLE
-        imageContainer.visibility = View.GONE
-
-        adapter = ResumeAdapter(resumes,{resumeId ->
-            deleteResume(resumeId)},{resumeId->
-                onclick(resumeId)
-        })
-        recycler.adapter = adapter
-        recycler.layoutManager = LinearLayoutManager(requireContext())
-        loadresume()
-
-        share = SharePrefrence(requireContext())
         try {
             user_id = share.getuser_id().toLong()
         } catch (e: Exception) {
@@ -73,8 +62,18 @@ class home_Main : Fragment() {
             return view
         }
 
+        recycler.visibility = View.VISIBLE
+        imageContainer.visibility = View.GONE
 
-
+        adapter = ResumeAdapter(resumes,{resumeId ->
+            deleteResume(resumeId)},{resumeId->
+                onclick(resumeId)
+        },{resumeId ->
+            editResume(resumeId)
+        })
+        recycler.adapter = adapter
+        recycler.layoutManager = LinearLayoutManager(requireContext())
+        loadresume()
 
         if (user_id <= 0) {
             Toast.makeText(requireContext(), "Invalid user ID", Toast.LENGTH_SHORT).show()
@@ -155,6 +154,13 @@ class home_Main : Fragment() {
         return view
     }
 
+    private fun editResume(resumeId: String) {
+        val resume_id = resumeId.toLong()
+        share.storeResumeId(resume_id)
+        val intent = Intent(requireContext(),Create_resume::class.java)
+        startActivity(intent)
+    }
+
     private fun onclick(resumeId: String) {
         val resumeId = resumeId.toLong()
         share.storeResumeId(resumeId)
@@ -208,7 +214,7 @@ class home_Main : Fragment() {
 
     private fun loadresume() {
         GlobalScope.launch {
-            val allresumes = db.getAllreumes(user_id)
+            val allresumes = db.getAllResumes(user_id)
             if (allresumes.count()>0){
                 recycler.visibility = View.VISIBLE
                 imageContainer.visibility = View.GONE

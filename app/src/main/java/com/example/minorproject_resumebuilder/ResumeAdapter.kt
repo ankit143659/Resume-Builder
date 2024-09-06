@@ -13,7 +13,8 @@ import com.example.minorproject_resumebuilder.Resume_data
 class ResumeAdapter(
     private val resumes: MutableList<Resume_data>,
     private val onDelete: (String) -> Unit,
-    private val onClick : (String)->Unit
+    private val onClick : (String)->Unit,
+    private val onEdit : (String)->Unit
 ) : RecyclerView.Adapter<ResumeAdapter.ViewHolder>() {
 
     private lateinit var share : SharePrefrence
@@ -24,7 +25,7 @@ class ResumeAdapter(
         val createDate : TextView = itemView.findViewById(R.id.create_date)
         val resumeId : TextView = itemView.findViewById(R.id.resume_id)
         val deleteButton: Button = itemView.findViewById(R.id.deleteButton)
-        //val editButton: Button = itemView.findViewById(R.id.editButton)
+        val editButton: Button = itemView.findViewById(R.id.editButton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -47,6 +48,9 @@ class ResumeAdapter(
 
         holder.itemView.setOnClickListener {
             onClick(resume.id)
+        }
+        holder.editButton.setOnClickListener{
+            onEdit(resume.id)
         }
 
     }

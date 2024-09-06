@@ -50,13 +50,31 @@ class Basic_personal_details : AppCompatActivity() {
         val female :CheckBox=findViewById(R.id.female)
         val nationality :EditText=findViewById(R.id.nationality)
         val phone :EditText=findViewById(R.id.phone)
-
         var gender : String? = null
-
          val Resume_id = share.getResumeId()
         share = SharePrefrence(this)
-
         db = SQLiteHelper(this)
+
+        val personalDetail = db.getPersonalDetails(Resume_id)
+        if (personalDetail!=null){
+            personalDetail?.let {
+                email.setText(it.email)
+                fname.setText(it.fname)
+                lname.setText(it.lname)
+                dob.setText(it.dateOfBirth)
+                phone.setText(it.phone)
+                if (it.gender=="male"){
+                    male.isChecked
+                }else{
+                    if(it.gender=="female"){
+                        female.isChecked
+                    }else{
+                        Toast.makeText(this,"Cannot Find gender",Toast.LENGTH_SHORT).show()
+                    }
+                }
+                nationality.setText(it.nationality)
+            }
+        }
         save.setOnClickListener{
             val Email = email.text.toString().trim()
             val Phone = phone.text.toString().trim()
