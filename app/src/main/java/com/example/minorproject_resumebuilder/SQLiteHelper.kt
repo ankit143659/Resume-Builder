@@ -477,24 +477,40 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     }
 
 
-    fun getAllreumes(): List<Resume_data> {
-        val Resumes = mutableListOf<Resume_data>()
-        val db = readableDatabase
-        val cursor = db.query(TABLE_RESUME,null,null,null,null,null,null)
+    fun getResumesByUserId(userId: Long): List<Resume_data> {
+    val resumes = mutableListOf<Resume_data>()
+    val db = readableDatabase
 
-        with(cursor){
-            while (moveToNext()){
-                val id = getLong(getColumnIndexOrThrow("id")).toString()
-                val resumeName = getString(getColumnIndexOrThrow("name"))
-                val createDate = getString(getColumnIndexOrThrow("created_date"))
-                val resumes = Resume_data(id,resumeName,createDate)
-                Resumes.add(0,resumes)
-            }
+   
+    val selection = "user_id = ?"
+    val selectionArgs = arrayOf(userId.toString())
+
+    
+    val cursor = db.query(
+        TABLE_RESUME,
+        null, 
+        selection, 
+        selectionArgs,
+        null,
+        null,
+        null
+    )
+
+    with(cursor) {
+        while (moveToNext()) {
+            val id = getLong(getColumnIndexOrThrow("id")).toString()
+            val resumeName = getString(getColumnIndexOrThrow("name"))
+            val createDate = getString(getColumnIndexOrThrow("created_date"))
+            val resume = Resume_data(id, resumeName, createDate)
+            resumes.add(0, resume)
         }
-
-        cursor.close()
-        return Resumes
     }
+
+    cursor.close()
+    return resumes
+}
+
+
 
     fun deleteResume(resumeId: String):Int{
         val db = writableDatabase
