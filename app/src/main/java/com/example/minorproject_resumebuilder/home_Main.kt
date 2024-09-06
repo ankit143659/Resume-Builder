@@ -208,7 +208,7 @@ class home_Main : Fragment() {
 
     private fun loadresume() {
         GlobalScope.launch {
-            val allresumes = db.getAllreumes()
+            val allresumes = db.getAllreumes(user_id)
             if (allresumes.count()>0){
                 recycler.visibility = View.VISIBLE
                 imageContainer.visibility = View.GONE
