@@ -114,6 +114,23 @@ class resume_template : AppCompatActivity() {
                     img2.visibility=View.VISIBLE
                     select_img1.visibility=View.VISIBLE
                     select_img2.visibility=View.VISIBLE
+
+                    select_img1.setOnClickListener{
+                        Toast.makeText(this@resume_template,"Succesfully Data Filled",Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@resume_template,Preview_template::class.java)
+                        share.storeTemplateName("basic_1")
+                        startActivity(intent)
+
+                    }
+
+
+                    select_img2.setOnClickListener{
+                        Toast.makeText(this@resume_template,"Succesfully Created",Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@resume_template,HomePage::class.java)
+                        share.storeTemplateName("basic_2")
+                        startActivity(intent)
+
+                    }
                 }else if (position == 6) {
                     img1.setImageResource(R.drawable.basic_3)
                     img2.setImageResource(R.drawable.engineering_2)
@@ -121,6 +138,24 @@ class resume_template : AppCompatActivity() {
                     img2.visibility=View.VISIBLE
                     select_img1.visibility=View.VISIBLE
                     select_img2.visibility=View.VISIBLE
+
+                    select_img1.setOnClickListener{
+                        Toast.makeText(this@resume_template,"Succesfully Data Filled",Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@resume_template,Preview_template::class.java)
+                        share.storeTemplateName("basic_3")
+                        startActivity(intent)
+
+                    }
+
+
+                    select_img2.setOnClickListener{
+                        Toast.makeText(this@resume_template,"Succesfully Created",Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@resume_template,HomePage::class.java)
+                        share.storeTemplateName("basic_2")
+                        startActivity(intent)
+
+                    }
+
                 }else if (position == 7) {
                     img1.setImageResource(R.drawable.design_1)
                     img2.setImageResource(R.drawable.it_1)

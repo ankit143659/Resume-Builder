@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Header (Name and General Info) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="ARIS MALIGIANNIS"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_weight="2"
+            android:textColor="#2a3d66"/>
+
+        <ImageView
+            android:id="@+id/profile_picture"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/resumr"
+            android:scaleType="centerCrop"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <!-- General Information Section -->
+    <TextView
+        android:id="@+id/general_info_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PERSONAL DETAILS"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:background="#5A5A5A"
+        android:padding="4dp"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/personalDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"/>
+    <TextView
+        android:id="@+id/professional"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="EDUCATION"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:background="#5A5A5A"
+        android:padding="4dp"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/educationalDeatils"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Academic Studies Section -->
+    <TextView
+        android:id="@+id/academic_studies_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SKILLS"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:background="#5A5A5A"
+        android:padding="4dp"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/skillDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Professional Experience Section -->
+    <TextView
+        android:id="@+id/professional_experience_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="EXPERIENCE"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:background="#5A5A5A"
+        android:padding="4dp"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/experienceDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"/>
+    <TextView
+        android:id="@+id/professional_experience_labeluh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PROJECTS"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:background="#5A5A5A"
+        android:padding="4dp"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/projectDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"/>
+
+
+</LinearLayout>
