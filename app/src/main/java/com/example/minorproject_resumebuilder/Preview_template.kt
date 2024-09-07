@@ -75,6 +75,7 @@ class Preview_template : AppCompatActivity() {
             val experiences = db.getAllExperienceDetails(Resume_id)
             val experienceTextView: TextView = resume_preview.findViewById(R.id.experienceDetails)
             experienceTextView.text = experiences.joinToString(separator = "\n\n\n") {
+                "Job Title : ${it.jobTitle}\n"
                 "Company Name: ${it.companyName}\n, Location: ${it.location}\n, Years of Experience: ${it.yearsOfExperience}"
             }
 

@@ -59,12 +59,16 @@ class Skill_details : AppCompatActivity() {
             loadSkillDetails(skill.skillName,skill.strength)
         }
         save.setOnClickListener{
-            updateDeatils()
+            var i =1
+            skillDetails.forEach{skill->
+                updateDeatils(skill.skill_id,i)
+                i++
+            }
         }
 
     }
 
-    private fun updateDeatils() {
+    private fun updateDeatils(id:Long,i:Int) {
         var value = false
         for (i in 0 until layoutcontainer.childCount){
             val SkillView = layoutcontainer.getChildAt(i)
@@ -82,7 +86,7 @@ class Skill_details : AppCompatActivity() {
             else{
                 grade = "Advance"
             }
-            value = db.updateSkill(Resume_id,SkillName,grade)
+            value = db.updateSkill(id,SkillName,grade)
         }
         if (value){
             Toast.makeText(this,"Successfully Updated", Toast.LENGTH_SHORT).show()

@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
@@ -59,21 +60,25 @@ class Education_details : AppCompatActivity() {
     }
 
     private fun loadDeatils() {
-        val educationDeatilsUpdate  =db.getAllEducationDetails(Resume_id)
+        val educationDeatilsUpdate = db.getAllEducationDetails(Resume_id)
 
             educationDeatilsUpdate.forEach{education->
                 loadeducationDeatils(education.Degree_name,education.Institute_name,education.grade,education.Location)
             }
 
-        save.setOnClickListener{
-            updateDeatils()
+        save.setOnClickListener {
+            var i=1
+            educationDeatilsUpdate.forEach{ education->
+                updateDeatils(education.education_id,i)
+                i++
+            }
         }
 
     }
 
-    private fun updateDeatils() {
-        var value : Boolean = false
-        for (i in 0 until layoutcontainer.childCount){
+    private fun updateDeatils(id:Long,i:Int) {
+        var value = false
+
             val educationView = layoutcontainer.getChildAt(i)
             val degreeName = educationView.findViewById<EditText>(R.id.degreeName).text.toString()
             val instituteName = educationView.findViewById<EditText>(R.id.instituteName).text.toString()
@@ -94,13 +99,14 @@ class Education_details : AppCompatActivity() {
             }else{
                 grade = "D"
             }
-            value = db.updateEducationDetails(Resume_id,
+            value = db.updateEducationDetails(id,
                 degreeName,
                 instituteName,
                 passingYear,
                 grade,
                 location)
-        }
+
+
         if (value){
             Toast.makeText(this,"Successfully Updated", Toast.LENGTH_SHORT).show()
             val intent = Intent(this,Create_resume::class.java)

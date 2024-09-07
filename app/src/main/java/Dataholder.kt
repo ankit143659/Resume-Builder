@@ -12,6 +12,7 @@ data class PersonalDetail(
 )
 
 data class EducationDetail(
+    var education_id : Long,
     var Degree_name: String,
     var Institute_name: String,
     var Location: String,
@@ -20,17 +21,21 @@ data class EducationDetail(
 )
 
 data class SkillDetail(
+    var skill_id : Long,
     var skillName: String,
     var strength: String
 )
 
 data class ExperienceDetail(
+    var experience_id : Long,
+    var jobTitle : String,
     var companyName: String,
     var location: String,
     var yearsOfExperience: String
 )
 
 data class ProjectDetail(
+    var project_id : Long,
     var projectName: String,
     var projectDescription: String,
     var startDate: String,

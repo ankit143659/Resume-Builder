@@ -97,7 +97,8 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                 """
             CREATE TABLE $TABLE_EXPERIENCE (
                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                resume_id INTEGER, 
+                resume_id INTEGER,
+                job_title TEXT, 
                 company_name TEXT, 
                 location TEXT, 
                 years_of_experience INTEGER,
@@ -269,11 +270,12 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         }
     }
 
-    fun insertExperience(resumeId: Long?, companyName: String, location: String, yearsOfExperience: String): Boolean {
+    fun insertExperience(resumeId: Long?,jobTitle:String,companyName: String, location: String, yearsOfExperience: String): Boolean {
         val db = writableDatabase
         return try {
             val values = ContentValues().apply {
                 put("resume_id", resumeId)
+                put("job_title", jobTitle)
                 put("company_name", companyName)
                 put("location", location)
                 put("years_of_experience", yearsOfExperience)
@@ -384,11 +386,12 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         with(cursor) {
             while (moveToNext()) {
                 val Degree_name = getString(getColumnIndexOrThrow("Degree_name"))
+                val id = getLong(getColumnIndexOrThrow("id"))
                 val institute_name = getString(getColumnIndexOrThrow("Institute_name"))
                 val Location = getString(getColumnIndexOrThrow("Location"))
                 val passingYear = getString(getColumnIndexOrThrow("passing_year"))
                 val grade = getString(getColumnIndexOrThrow("grade"))
-                educationDetailsList.add(EducationDetail(Degree_name,institute_name,Location,passingYear,grade))
+                educationDetailsList.add(EducationDetail(id,Degree_name,institute_name,Location,passingYear,grade))
             }
             close()
         }
@@ -411,9 +414,10 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
         with(cursor) {
             while (moveToNext()) {
+                val id = getLong(getColumnIndexOrThrow("id"))
                 val skillName = getString(getColumnIndexOrThrow("skill_name"))
                 val strength = getString(getColumnIndexOrThrow("strength"))
-                skillsList.add(SkillDetail(skillName, strength))
+                skillsList.add(SkillDetail(id,skillName, strength))
             }
             close()
         }
@@ -436,10 +440,12 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
         with(cursor) {
             while (moveToNext()) {
+                val id = getLong(getColumnIndexOrThrow("id"))
+                val jobtitle = getString(getColumnIndexOrThrow("job_title"))
                 val companyName = getString(getColumnIndexOrThrow("company_name"))
                 val location = getString(getColumnIndexOrThrow("location"))
                 val yearsOfExperience = getString(getColumnIndexOrThrow("years_of_experience"))
-                experienceList.add(ExperienceDetail(companyName, location, yearsOfExperience))
+                experienceList.add(ExperienceDetail(id,jobtitle,companyName, location, yearsOfExperience))
             }
             close()
         }
@@ -462,13 +468,14 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
         with(cursor) {
             while (moveToNext()) {
+                val id = getLong(getColumnIndexOrThrow("id"))
                 val projectName = getString(getColumnIndexOrThrow("project_name"))
                 val projectDescription = getString(getColumnIndexOrThrow("project_description"))
                 val startDate = getString(getColumnIndexOrThrow("start_date"))
                 val endDate = getString(getColumnIndexOrThrow("end_date"))
                 val userRole = getString(getColumnIndexOrThrow("user_role"))
                 val projectUrl = getString(getColumnIndexOrThrow("project_Url"))
-                projectList.add(ProjectDetail(projectName, projectDescription, startDate, endDate, userRole,projectUrl))
+                projectList.add(ProjectDetail(id,projectName, projectDescription, startDate, endDate, userRole,projectUrl))
             }
             close()
         }
