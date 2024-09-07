@@ -236,7 +236,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     }
 
 
-    fun insertEducationDetails(resumeId: Long?, Degree_Name: String,Institute_Name: String, passingYear: String, grade: String,location: String): Boolean {
+    fun insertEducationDetails(resumeId: Long?, Degree_Name: String,Institute_Name: String,location: String, passingYear: String, grade: String): Boolean {
         val db = writableDatabase
         return try {
             val values = ContentValues().apply {

@@ -60,6 +60,7 @@ class Education_details : AppCompatActivity() {
     }
 
     private fun loadDeatils() {
+        save.visibility=View.VISIBLE
         val educationDeatilsUpdate = db.getAllEducationDetails(Resume_id)
 
         educationDeatilsUpdate.forEach{education->
@@ -140,7 +141,7 @@ class Education_details : AppCompatActivity() {
         degreeName.setText(degreename)
         instituteName.setText(institutename)
         location.setText(Location)
-
+        pas
         layoutcontainer.addView(educationDetailsView)
 
     }
@@ -170,7 +171,7 @@ class Education_details : AppCompatActivity() {
             }else{
                 grade = "D"
             }
-            value = db.insertEducationDetails(Resume_id,degreeName,location,instituteName,passingYear,grade)
+            value = db.insertEducationDetails(Resume_id,degreeName,instituteName,location,passingYear,grade)
         }
         if (value){
             Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()
