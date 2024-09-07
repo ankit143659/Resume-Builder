@@ -25,7 +25,8 @@ class Skill_details : AppCompatActivity() {
     private lateinit var layoutcontainer : LinearLayout
     private lateinit var db : SQLiteHelper
     private lateinit var share: SharePrefrence
-    var Resume_id : Long? = null
+        var Resume_id : Long? = null
+    private lateinit var skillView : View
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +38,11 @@ class Skill_details : AppCompatActivity() {
         save=findViewById(R.id.savebtn)
         db = SQLiteHelper(this)
         Resume_id =share.getResumeId()
+        skillView   =LayoutInflater.from(this). inflate(R.layout.skill_details,layoutcontainer,false)
+        val skillDetails = db.getAllSkills(Resume_id)
+        if (skillDetails!=null){
+            loadDetails()
+        }
 
         addLayout.setOnClickListener{
             addskills();
@@ -47,14 +53,73 @@ class Skill_details : AppCompatActivity() {
         }
     }
 
+    private fun loadDetails() {
+        val skillDetails = db.getAllSkills(Resume_id)
+        skillDetails.forEach{ skill->
+            loadSkillDetails(skill.skillName,skill.strength)
+        }
+        save.setOnClickListener{
+            updateDeatils()
+        }
+
+    }
+
+    private fun updateDeatils() {
+        var value = false
+        for (i in 0 until layoutcontainer.childCount){
+            val SkillView = layoutcontainer.getChildAt(i)
+            val SkillName = SkillView.findViewById<EditText>(R.id.skillName).text.toString()
+            val a = SkillView.findViewById<CheckBox>(R.id.begineer)
+            val b = SkillView.findViewById<CheckBox>(R.id.intermediate)
+            val c = SkillView.findViewById<CheckBox>(R.id.advance)
+
+            var grade : String
+            if (a.isChecked){
+                grade = "Beginner"
+            }else if (b.isChecked){
+                grade = "Intermediate"
+            }
+            else{
+                grade = "Advance"
+            }
+            value = db.updateSkill(Resume_id,SkillName,grade)
+        }
+        if (value){
+            Toast.makeText(this,"Successfully Updated", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,Create_resume::class.java)
+            startActivity(intent)
+        }else{
+            Toast.makeText(this,"Failed to filled Data", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun loadSkillDetails(skillname: String, strength: String) {
+        val skillName = skillView.findViewById<EditText>(R.id.skillName)
+        val a = skillView.findViewById<CheckBox>(R.id.begineer)
+        val b = skillView.findViewById<CheckBox>(R.id.intermediate)
+        val c = skillView.findViewById<CheckBox>(R.id.advance)
+        skillName.setText(skillname)
+        if (strength=="Beginner"){
+            a.isChecked
+        }else if (strength=="Intermediate"){
+            b.isChecked
+        }
+        else{
+            c.isChecked
+        }
+
+        layoutcontainer.addView(skillView)
+
+    }
+
     private fun savedata() {
         var value : Boolean= false
         for (i in 0 until layoutcontainer.childCount){
-            val educationView = layoutcontainer.getChildAt(i)
-            val SkillName = educationView.findViewById<EditText>(R.id.skillName).text.toString()
-            val a = educationView.findViewById<CheckBox>(R.id.begineer)
-            val b = educationView.findViewById<CheckBox>(R.id.intermediate)
-            val c = educationView.findViewById<CheckBox>(R.id.advance)
+            val SkillView = layoutcontainer.getChildAt(i)
+            val SkillName = SkillView.findViewById<EditText>(R.id.skillName).text.toString()
+            val a = SkillView.findViewById<CheckBox>(R.id.begineer)
+            val b = SkillView.findViewById<CheckBox>(R.id.intermediate)
+            val c = SkillView.findViewById<CheckBox>(R.id.advance)
 
             var grade : String
             if (a.isChecked){
@@ -77,10 +142,8 @@ class Skill_details : AppCompatActivity() {
     }
 
     fun addskills(){
-        val skillAddView : View = LayoutInflater.from(this). inflate(R.layout.skill_details,layoutcontainer,false)
 
-
-        val delete : Button = skillAddView.findViewById(R.id.delete)
+        val delete : Button = skillView.findViewById(R.id.delete)
         delete.setOnClickListener{
 
             val dialog = AlertDialog.Builder(this)
@@ -93,7 +156,7 @@ class Skill_details : AppCompatActivity() {
             val alertBox = dialog.create()
 
             yes.setOnClickListener{
-                layoutcontainer.removeView(skillAddView)
+                layoutcontainer.removeView(skillView)
                 if(layoutcontainer.childCount==0){
                     save.visibility=View.GONE
                 }
@@ -108,7 +171,7 @@ class Skill_details : AppCompatActivity() {
 
         }
 
-        layoutcontainer.addView(skillAddView)
+        layoutcontainer.addView(skillView)
         save.visibility= View.VISIBLE
     }
 }

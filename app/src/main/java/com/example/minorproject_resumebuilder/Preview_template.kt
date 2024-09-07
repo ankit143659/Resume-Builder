@@ -69,19 +69,19 @@ class Preview_template : AppCompatActivity() {
             val skills = db.getAllSkills(Resume_id)
             val skillsTextView: TextView = resume_preview.findViewById(R.id.skillDetails)
             skillsTextView.text = skills.joinToString(separator = "\n\n\n") {
-                "Skill Name: ${it.skillName}, Strength: ${it.strength}"
+                "Skill Name: ${it.skillName}\n, Strength: ${it.strength}"
             }
 
             val experiences = db.getAllExperienceDetails(Resume_id)
             val experienceTextView: TextView = resume_preview.findViewById(R.id.experienceDetails)
-            experienceTextView.text = experiences.joinToString(separator = "\n") {
-                "Company Name: ${it.companyName}, Location: ${it.location}, Years of Experience: ${it.yearsOfExperience}"
+            experienceTextView.text = experiences.joinToString(separator = "\n\n\n") {
+                "Company Name: ${it.companyName}\n, Location: ${it.location}\n, Years of Experience: ${it.yearsOfExperience}"
             }
 
             val projects = db.getAllProjectDetails(Resume_id)
             val projectsTextView: TextView = resume_preview.findViewById(R.id.projectDetails)
             projectsTextView.text = projects.joinToString(separator = "\n") {
-                "Project Name: ${it.projectName}, Project Url : ${it.projectUrl}, Start Date: ${it.startDate}, End Date: ${it.endDate}, Role: ${it.userRole},Description: ${it.projectDescription}"
+                "Project Name: ${it.projectName}\n, Project Url : ${it.projectUrl}\n, Start Date: ${it.startDate}\n, End Date: ${it.endDate}\n, Role: ${it.userRole}\n,Description: ${it.projectDescription}"
             }
 
 

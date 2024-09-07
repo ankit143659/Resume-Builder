@@ -25,6 +25,7 @@ class Education_details : AppCompatActivity() {
     private lateinit var db : SQLiteHelper
     var Resume_id : Long? = null
     private lateinit var share: SharePrefrence
+    private lateinit var educationDetailsView   :   View
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +38,12 @@ class Education_details : AppCompatActivity() {
         layoutcontainer = findViewById(R.id.layoutContainer)
         save= findViewById(R.id.savebtn)
         db = SQLiteHelper(this)
+        educationDetailsView = LayoutInflater.from(this). inflate(R.layout.education_details,layoutcontainer,false)
+        val educationDeatilsUpdate  =db.getAllEducationDetails(Resume_id)
+        if (educationDeatilsUpdate!=null){
+            loadDeatils()
+        }
+
 
         addLayout.setOnClickListener{
             addEducation()
@@ -46,7 +53,91 @@ class Education_details : AppCompatActivity() {
             saveDetails()
         }
 
+
+
+
     }
+
+    private fun loadDeatils() {
+        val educationDeatilsUpdate  =db.getAllEducationDetails(Resume_id)
+
+            educationDeatilsUpdate.forEach{education->
+                loadeducationDeatils(education.Degree_name,education.Institute_name,education.grade,education.Location)
+            }
+
+        save.setOnClickListener{
+            updateDeatils()
+        }
+
+    }
+
+    private fun updateDeatils() {
+        var value : Boolean = false
+        for (i in 0 until layoutcontainer.childCount){
+            val educationView = layoutcontainer.getChildAt(i)
+            val degreeName = educationView.findViewById<EditText>(R.id.degreeName).text.toString()
+            val instituteName = educationView.findViewById<EditText>(R.id.instituteName).text.toString()
+            val passingYear = educationView.findViewById<EditText>(R.id.passingYear).text.toString()
+            val location = educationView.findViewById<EditText>(R.id.Location).text.toString()
+            val a = educationView.findViewById<CheckBox>(R.id.a)
+            val b = educationView.findViewById<CheckBox>(R.id.b)
+            val c = educationView.findViewById<CheckBox>(R.id.c)
+            val d = educationView.findViewById<CheckBox>(R.id.d)
+
+            var grade : String
+            if (a.isChecked){
+                grade = "A"
+            }else if (b.isChecked){
+                grade = "B"
+            }else if (c.isChecked){
+                grade = "C"
+            }else{
+                grade = "D"
+            }
+            value = db.updateEducationDetails(Resume_id,
+                degreeName,
+                instituteName,
+                passingYear,
+                grade,
+                location)
+        }
+        if (value){
+            Toast.makeText(this,"Successfully Updated", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,Create_resume::class.java)
+            startActivity(intent)
+            finish()
+        }else{
+            Toast.makeText(this,"Failed to filled Data", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun loadeducationDeatils(degreename: String, institutename: String, Grade: String, Location: String) {
+        val degreeName  =   educationDetailsView.findViewById<EditText>(R.id.degreeName)
+        val instituteName  =   educationDetailsView.findViewById<EditText>(R.id.instituteName)
+        val location  =   educationDetailsView.findViewById<EditText>(R.id.Location)
+        val a = educationDetailsView.findViewById<CheckBox>(R.id.a)
+        val b = educationDetailsView.findViewById<CheckBox>(R.id.b)
+        val c = educationDetailsView.findViewById<CheckBox>(R.id.c)
+        val d = educationDetailsView.findViewById<CheckBox>(R.id.d)
+
+        if (Grade=="A"){
+            a.isChecked
+        }else if (Grade=="B"){
+            b.isChecked
+        }else if (Grade=="C"){
+            c.isChecked
+        }else{
+            d.isChecked
+        }
+
+        degreeName.setText(degreename)
+        instituteName.setText(institutename)
+        location.setText(Location)
+
+        layoutcontainer.addView(educationDetailsView)
+
+    }
+
 
     private fun saveDetails() {
         var value : Boolean = false
@@ -66,7 +157,7 @@ class Education_details : AppCompatActivity() {
                 grade = "A"
             }else if (b.isChecked){
                 grade = "B"
-            }else if (b.isChecked){
+            }else if (c.isChecked){
                 grade = "C"
             }else{
                 grade = "D"
@@ -87,8 +178,6 @@ class Education_details : AppCompatActivity() {
 
     @SuppressLint("MissingInflatedId")
     fun addEducation(){
-        val educationDetailsView : View = LayoutInflater.from(this). inflate(R.layout.education_details,layoutcontainer,false)
-
 
         val delete : Button = educationDetailsView.findViewById(R.id.delete)
         delete.setOnClickListener{
