@@ -2,10 +2,12 @@ package com.example.minorproject_resumebuilder
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -51,12 +53,14 @@ class Preview_template : AppCompatActivity() {
 
             val personalDetails = resume_preview.findViewById<TextView>(R.id.personalDetails)
             val name = resume_preview.findViewById<TextView>(R.id.name)
+            val image =resume_preview.findViewById<ImageView>(R.id.profile_image)
 
             val personalDetail = db.getPersonalDetails(Resume_id)
             personalDetail?.let {
                 personalDetails.text = " \nPhone no: ${it.phone}\nEmail id: ${it.email}\n" +
                         "Nationality: ${it.nationality}\nGender: ${it.gender}\nDate of Birth: ${it.dateOfBirth}\nProfile Image: ${it.profileImage}"
                 name.text = "Name: ${it.fname} ${it.lname}"
+                image.setImageURI(Uri.parse(it.profileImage))
             }
 
             val EducationDetails = db.getAllEducationDetails(Resume_id)
