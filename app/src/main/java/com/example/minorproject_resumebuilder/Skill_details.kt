@@ -70,7 +70,6 @@ class Skill_details : AppCompatActivity() {
 
     private fun updateDeatils(id:Long,i:Int) {
         var value = false
-        for (i in 0 until layoutcontainer.childCount){
             val SkillView = layoutcontainer.getChildAt(i)
             val SkillName = SkillView.findViewById<EditText>(R.id.skillName).text.toString()
             val a = SkillView.findViewById<CheckBox>(R.id.begineer)
@@ -87,7 +86,7 @@ class Skill_details : AppCompatActivity() {
                 grade = "Advance"
             }
             value = db.updateSkill(id,SkillName,grade)
-        }
+        
         if (value){
             Toast.makeText(this,"Successfully Updated", Toast.LENGTH_SHORT).show()
             val intent = Intent(this,Create_resume::class.java)
