@@ -142,7 +142,6 @@ class experience_detailss : AppCompatActivity() {
 
     private fun updateData(id:Long,i:Int){
         var value : Boolean = false
-        for (i in 0 until layoutcontain.childCount){
             val educationView = layoutcontain.getChildAt(i)
             val jobTitle = educationView.findViewById<EditText>(R.id.jobTitle).text.toString()
             val companyName = educationView.findViewById<EditText>(R.id.companyName).text.toString()
@@ -152,7 +151,7 @@ class experience_detailss : AppCompatActivity() {
                 companyName,
                 companyLocation,
                 startDate)
-        }
+        
         if (value){
             Toast.makeText(this,"Successfully Updated", Toast.LENGTH_SHORT).show()
             val intent = Intent(this,Create_resume::class.java)
