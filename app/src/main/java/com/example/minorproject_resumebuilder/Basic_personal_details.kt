@@ -41,13 +41,17 @@ class Basic_personal_details : AppCompatActivity() {
     private lateinit var nationality    :   EditText
     private lateinit var gender:String
     private  var Resume_id  :   Long = 0
+    private lateinit var imageData : Uri
+
+    companion object{
+        const val PICK_IMAGE_REQUEST =1
+    }
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_basic_personal_details)
-
         photo = findViewById(R.id.profilePhoto)
         share = SharePrefrence(this)
         save = findViewById(R.id.save)
@@ -81,9 +85,11 @@ class Basic_personal_details : AppCompatActivity() {
                     }
                 }
                 nationality.setText(it.nationality)
+                photo.setImageURI(Uri.parse(it.profileImage))
             }
             updateDetails()
         }
+
         save.setOnClickListener {
             val Email = email.text.toString().trim()
             val Phone = phone.text.toString().trim()
@@ -114,7 +120,7 @@ class Basic_personal_details : AppCompatActivity() {
                     Nationality,
                     gender!!,
                     dob,
-                    "profileemage"
+                    imageData.toString()
                 )
 
                 if (value) {
@@ -146,17 +152,26 @@ class Basic_personal_details : AppCompatActivity() {
             datepicker.show()
         }
         photo.setOnClickListener {
-
-            imagePickerLauncher.launch("image/*")
+            opengallery()
         }
     }
 
-    private val imagePickerLauncher =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            if (uri != null) {
-                photo.setImageURI(uri)
-            }
+    private fun opengallery() {
+        val i = Intent()
+        i.type = "image/*"
+        i.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(i,"Select Picture"), PICK_IMAGE_REQUEST)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode== PICK_IMAGE_REQUEST && resultCode== RESULT_OK && data!=null && data.data!=null){
+            imageData = data.data!!
+            photo.setImageURI(imageData)
         }
+    }
+
 
     private fun updateDetails(){
         save.setOnClickListener{
@@ -191,7 +206,7 @@ class Basic_personal_details : AppCompatActivity() {
                     Nationality,
                     gender,
                     dob,
-                    "hello")
+                    imageData.toString())
 
                 if (value) {
                     Toast.makeText(this, "Successfully Updated", Toast.LENGTH_SHORT).show()

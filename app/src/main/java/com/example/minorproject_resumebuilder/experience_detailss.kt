@@ -12,154 +12,155 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
 
-class ExperienceDetails : AppCompatActivity() {
+class experience_detailss : AppCompatActivity() {
 
-    private lateinit var addLayout: Button
-    private lateinit var save: Button
-    private lateinit var layoutContainer: LinearLayout
-    private lateinit var db: SQLiteHelper
-    private var resumeId: Long? = null
-    private lateinit var share: SharePrefrence
+    private lateinit var addLayout : Button
+    private lateinit var save : Button
+    private lateinit var layoutcontain : LinearLayout
+    private lateinit var db : SQLiteHelper
+    var Resume_id : Long? = null
+    private lateinit var share : SharePrefrence
+    private lateinit var experienceDetailsView : View
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_experience_detailss)
-        
         share = SharePrefrence(this)
-        resumeId = share.getResumeId()
+        Resume_id = share.getResumeId()
         db = SQLiteHelper(this)
-        
-        addLayout = findViewById(R.id.addexperience)
-        layoutContainer = findViewById(R.id.layoutContainer)
-        save = findViewById(R.id.savebtn)
+        addLayout= findViewById(R.id.addexperience)
+        layoutcontain = findViewById(R.id.layoutContainer)
+        save= findViewById(R.id.savebtn)
 
-        // Load existing experience details if available
-        val experienceDetails = db.getAllExperienceDetails(resumeId)
-        if (experienceDetails != null && experienceDetails.isNotEmpty()) {
-            loadData(experienceDetails)
+        experienceDetailsView = LayoutInflater.from(this). inflate(R.layout.experience_details,layoutcontain,false)
+
+        val experienceDetails = db.getAllExperienceDetails(Resume_id)
+        if(experienceDetails!=null){
+            loadData()
         }
 
-        addLayout.setOnClickListener {
+        addLayout.setOnClickListener{
             addExperience()
         }
 
-        save.setOnClickListener {
+        save.setOnClickListener{
             saveDetails()
         }
+
     }
 
     private fun saveDetails() {
-        var allSaved = true
-
-        for (i in 0 until layoutContainer.childCount) {
-            val experienceView = layoutContainer.getChildAt(i)
-            val jobTitle = experienceView.findViewById<EditText>(R.id.jobTitle).text.toString()
-            val companyName = experienceView.findViewById<EditText>(R.id.companyName).text.toString()
-            val companyLocation = experienceView.findViewById<EditText>(R.id.comanyLocation).text.toString()
-            val startDate = experienceView.findViewById<EditText>(R.id.startDate).text.toString()
-
-            val saved = db.insertExperience(resumeId, jobTitle, companyName, companyLocation, startDate)
-            if (!saved) {
-                allSaved = false
-            }
+        var value : Boolean = false
+        for (i in 0 until layoutcontain.childCount){
+            val educationView = layoutcontain.getChildAt(i)
+            val jobTitle = educationView.findViewById<EditText>(R.id.jobTitle).text.toString()
+            val companyName = educationView.findViewById<EditText>(R.id.companyName).text.toString()
+            val companyLocation = educationView.findViewById<EditText>(R.id.comanyLocation).text.toString()
+            val startDate = educationView.findViewById<EditText>(R.id.startDate).text.toString()
+            value = db.insertExperience(Resume_id,jobTitle,companyName,companyLocation,startDate)
         }
-
-        if (allSaved) {
-            Toast.makeText(this, "Successfully filled Data", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, Create_resume::class.java).apply {
-                putExtra("resume_id", resumeId)
+        if (value){
+            Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,Create_resume::class.java).apply {
+                putExtra("resume_id",Resume_id)
             }
             startActivity(intent)
-            finish()
-        } else {
-            Toast.makeText(this, "Failed to save Data", Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(this,"Failed to filled Data", Toast.LENGTH_SHORT).show()
         }
     }
 
     @SuppressLint("MissingInflatedId")
-    fun addExperience() {
-        val experienceView = LayoutInflater.from(this).inflate(R.layout.experience_details, layoutContainer, false)
+    fun addExperience(){
+        experienceDetailsView = LayoutInflater.from(this). inflate(R.layout.experience_details,layoutcontain,false)
+        val delete : Button = experienceDetailsView.findViewById(R.id.delete)
+        delete.setOnClickListener{
 
-        val deleteButton: Button = experienceView.findViewById(R.id.delete)
-        deleteButton.setOnClickListener {
             val dialog = AlertDialog.Builder(this)
-            val dialogView = LayoutInflater.from(this).inflate(R.layout.delete_layout, null)
+            val dialogView = LayoutInflater.from(this).inflate(R.layout.delete_layout,null)
             dialog.setView(dialogView)
 
-            val yesButton: Button = dialogView.findViewById(R.id.yes)
-            val noButton: Button = dialogView.findViewById(R.id.no)
+            val yes : Button = dialogView.findViewById(R.id.yes)
+            val no : Button = dialogView.findViewById(R.id.no)
 
             val alertBox = dialog.create()
 
-            yesButton.setOnClickListener {
-                layoutContainer.removeView(experienceView)
-                if (layoutContainer.childCount == 0) {
-                    save.visibility = View.GONE
+            yes.setOnClickListener{
+                layoutcontain.removeView(experienceDetailsView)
+                if(layoutcontain.childCount==0){
+                    save.visibility= View.GONE
                 }
                 alertBox.dismiss()
             }
 
-            noButton.setOnClickListener {
+            no.setOnClickListener{
                 alertBox.dismiss()
             }
 
             alertBox.show()
+
         }
 
-        layoutContainer.addView(experienceView)
-        save.visibility = View.VISIBLE
+        layoutcontain.addView(experienceDetailsView)
+        save.visibility= View.VISIBLE
     }
 
-    private fun loadData(experienceDetails: List<Experience>) {
-        experienceDetails.forEach { exp ->
-            loadExperienceData(exp.jobTitle, exp.companyName, exp.location, exp.yearsOfExperience)
+    private fun loadData(){
+        val experienceDetails = db.getAllExperienceDetails(Resume_id)
+        experienceDetails.forEach{exp->
+            loadExperiencedata(exp.jobTitle,exp.companyName,exp.location,exp.yearsOfExperience)
         }
+        save.setOnClickListener{
+            var i =1
+            experienceDetails.forEach{experience->
+                updateData(experience.experience_id,i)
+                i++
+            }
+        }
+
     }
 
-    private fun loadExperienceData(title: String, name: String, location: String, year: String) {
-        val experienceView = LayoutInflater.from(this).inflate(R.layout.experience_details, layoutContainer, false)
-
-        val jobTitle = experienceView.findViewById<EditText>(R.id.jobTitle)
-        val companyName = experienceView.findViewById<EditText>(R.id.companyName)
-        val companyLocation = experienceView.findViewById<EditText>(R.id.comanyLocation)
-        val startDate = experienceView.findViewById<EditText>(R.id.startDate)
+    private fun loadExperiencedata(title:String,name:String,location:String,year:String){
+        experienceDetailsView = LayoutInflater.from(this). inflate(R.layout.experience_details,layoutcontain,false)
+        val jobTitle = experienceDetailsView.findViewById<EditText>(R.id.jobTitle)
+        val companyName = experienceDetailsView.findViewById<EditText>(R.id.companyName)
+        val companyLocation = experienceDetailsView.findViewById<EditText>(R.id.comanyLocation)
+        val startDate = experienceDetailsView.findViewById<EditText>(R.id.startDate)
 
         jobTitle.setText(title)
         companyName.setText(name)
         companyLocation.setText(location)
         startDate.setText(year)
 
-        layoutContainer.addView(experienceView)
+        layoutcontain.addView(experienceDetailsView)
     }
 
-    private fun updateData(id: Long, i: Int) {
-        var updateSuccessful = true
-
-        for (i in 0 until layoutContainer.childCount) {
-            val experienceView = layoutContainer.getChildAt(i)
-            val jobTitle = experienceView.findViewById<EditText>(R.id.jobTitle).text.toString()
-            val companyName = experienceView.findViewById<EditText>(R.id.companyName).text.toString()
-            val companyLocation = experienceView.findViewById<EditText>(R.id.comanyLocation).text.toString()
-            val startDate = experienceView.findViewById<EditText>(R.id.startDate).text.toString()
-
-            val updated = db.updateExperience(id, jobTitle, companyName, companyLocation, startDate)
-            if (!updated) {
-                updateSuccessful = false
-            }
+    private fun updateData(id:Long,i:Int){
+        var value : Boolean = false
+        for (i in 0 until layoutcontain.childCount){
+            val educationView = layoutcontain.getChildAt(i)
+            val jobTitle = educationView.findViewById<EditText>(R.id.jobTitle).text.toString()
+            val companyName = educationView.findViewById<EditText>(R.id.companyName).text.toString()
+            val companyLocation = educationView.findViewById<EditText>(R.id.comanyLocation).text.toString()
+            val startDate = educationView.findViewById<EditText>(R.id.startDate).text.toString()
+            value = db.updateExperience(id,
+                companyName,
+                companyLocation,
+                startDate)
         }
-
-        if (updateSuccessful) {
-            Toast.makeText(this, "Successfully Updated", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, Create_resume::class.java)
+        if (value){
+            Toast.makeText(this,"Successfully Updated", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,Create_resume::class.java)
             startActivity(intent)
-            finish()
-        } else {
-            Toast.makeText(this, "Failed to update Data", Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(this,"Failed to filled Data", Toast.LENGTH_SHORT).show()
         }
     }
 }
