@@ -111,14 +111,14 @@ class Basic_personal_details : AppCompatActivity() {
         //}
     }
 
-    private fun checkAndRequestPermissions() {
+    /*private fun checkAndRequestPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(this,
                 arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), READ_EXTERNAL_STORAGE_REQUEST)
         }
-    }
+    }*/
 
     private fun openGallery() {
         val intent = Intent()

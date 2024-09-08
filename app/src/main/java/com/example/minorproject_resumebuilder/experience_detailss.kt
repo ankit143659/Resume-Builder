@@ -42,11 +42,12 @@ class experience_detailss : AppCompatActivity() {
         experienceDetailsView = LayoutInflater.from(this). inflate(R.layout.experience_details,layoutcontain,false)
 
         val experienceDetails = db.getAllExperienceDetails(Resume_id)
-        if(layoutcontain.childCount!=0){
-            save.visibility=View.VISIBLE
-        }
+
         if(experienceDetails!=null){
             loadData()
+        }
+        if(layoutcontain.childCount!=0){
+            save.visibility=View.VISIBLE
         }
 
         addLayout.setOnClickListener{
@@ -69,13 +70,14 @@ class experience_detailss : AppCompatActivity() {
             val startDate = experienceView.findViewById<EditText>(R.id.startDate).text.toString()
             val expId = experienceView.tag as?Long
 
-            if (expId!=null){
-                updateData(expId,jobTitle,companyName,companyLocation,startDate)
+            val value2 =if (expId!=null){
+                db.updateExperience(expId,companyName,companyLocation,startDate)
             }else{
-               val value2= db.insertExperience(Resume_id,jobTitle,companyName,companyLocation,startDate)
-                if (!value2){
-                    value = false
-                }
+               db.insertExperience(Resume_id,jobTitle,companyName,companyLocation,startDate)
+
+            }
+            if (!value2){
+                value = false
             }
         }
         if (value){
@@ -127,12 +129,12 @@ class experience_detailss : AppCompatActivity() {
     private fun loadData(){
         val experienceDetails = db.getAllExperienceDetails(Resume_id)
         experienceDetails.forEach{exp->
-            loadExperiencedata(exp.jobTitle,exp.companyName,exp.location,exp.yearsOfExperience)
+            loadExperiencedata(exp.jobTitle,exp.companyName,exp.location,exp.yearsOfExperience,exp.experience_id)
         }
 
     }
 
-    private fun loadExperiencedata(title:String,name:String,location:String,year:String){
+    private fun loadExperiencedata(title:String,name:String,location:String,year:String,expId : Long){
         experienceDetailsView = LayoutInflater.from(this). inflate(R.layout.experience_details,layoutcontain,false)
         val jobTitle = experienceDetailsView.findViewById<EditText>(R.id.jobTitle)
         val companyName = experienceDetailsView.findViewById<EditText>(R.id.companyName)
@@ -144,11 +146,9 @@ class experience_detailss : AppCompatActivity() {
         companyLocation.setText(location)
         startDate.setText(year)
 
+        experienceDetailsView.tag = expId
+
         layoutcontain.addView(experienceDetailsView)
-    }
-
-    private fun updateData(id:Long,jobTitle : String, companyName : String, location : String , startDate : String){
-
     }
 
 }

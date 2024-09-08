@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import androidx.core.content.contentValuesOf
 import com.example.minorproject_resumebuilder.EducationDetail
 import com.example.minorproject_resumebuilder.ExperienceDetail
 import com.example.minorproject_resumebuilder.PersonalDetail
@@ -540,6 +541,8 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         db.execSQL("DELETE FROM sqlite_sequence WHERE name='resumes'")
     }
 
+
+
 fun updatePersonalDetails(
     resumeId: Long?,
     fname: String,
@@ -696,6 +699,21 @@ fun updateProject(
         db.close()
     }
 }
+
+    fun updateResumeTemplateName(resumeId: Long?,templateName : String):Boolean{
+        val db = writableDatabase
+        return try {
+            val value = contentValuesOf().apply {
+                put("template_name",templateName)
+            }
+            val rowUpdate = db.update(TABLE_RESUME_TEMPELATE,value,"resumeId=?", arrayOf(resumeId.toString()))
+            rowUpdate>0
+        }catch (e:Exception){
+            false
+        }finally {
+            db.close()
+        }
+    }
 
 
 

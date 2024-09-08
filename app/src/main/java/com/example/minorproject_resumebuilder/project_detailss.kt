@@ -27,8 +27,6 @@ class project_detailss : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_project_detailss)
-
-        // Initialize SharedPreference, Database, and UI components
         share = SharePrefrence(this)
         resumeId = share.getResumeId()
         db = SQLiteHelper(this)
@@ -36,13 +34,18 @@ class project_detailss : AppCompatActivity() {
         addLayout = findViewById(R.id.addProjects)
         save = findViewById(R.id.savebtn)
 
-        // Load existing project details if available
+
         val projectDetails = db.getAllProjectDetails(resumeId)
         if (projectDetails != null && projectDetails.isNotEmpty()) {
             loadData()
         }
 
-        // Set listeners for add and save buttons
+        if (layout.childCount !=0){
+            save.visibility=View.VISIBLE
+        }else{
+            save.visibility = View.GONE
+        }
+
         addLayout.setOnClickListener {
             addProject()
         }
@@ -89,7 +92,7 @@ class project_detailss : AppCompatActivity() {
 
     // Method to save the project details to the database
     private fun saveData() {
-        var isSuccess = false
+        var isSuccess = true
         for (i in 0 until layout.childCount) {
             val projectView = layout.getChildAt(i)
             val projectName = projectView.findViewById<EditText>(R.id.projectName).text.toString()
@@ -99,7 +102,17 @@ class project_detailss : AppCompatActivity() {
             val startDate = projectView.findViewById<EditText>(R.id.startDate).text.toString()
             val endDate = projectView.findViewById<EditText>(R.id.endDate).text.toString()
 
-            isSuccess = db.insertProject(resumeId, projectName, description, projectUrl, startDate, endDate, role)
+            val proId = projectView.tag as? Long
+
+            val value2 = if (proId!=null){
+                db.updateProject(proId,projectName,description,projectUrl,startDate,endDate,role)
+            }else{
+                db.insertProject(resumeId, projectName, description, projectUrl, startDate, endDate, role)
+            }
+
+            if (!value2){
+                isSuccess = false
+            }
         }
 
         if (isSuccess) {
@@ -118,6 +131,7 @@ class project_detailss : AppCompatActivity() {
         val projectDetails = db.getAllProjectDetails(resumeId)
         projectDetails?.forEach { project ->
             loadProjectData(
+                project.project_id,
                 project.projectName,
                 project.projectDescription,
                 project.startDate,
@@ -126,43 +140,10 @@ class project_detailss : AppCompatActivity() {
                 project.projectUrl
             )
         }
-
-        save.setOnClickListener {
-            var i = 0
-            projectDetails?.forEach { project ->
-                updateData(project.project_id, i)
-                i++
-            }
-        }
     }
 
-    // Method to update existing project data in the database
-    private fun updateData(id: Long, index: Int) {
-        val projectViewToUpdate = layout.getChildAt(index)
-        var isSuccess = false
-
-        val projectName = projectViewToUpdate.findViewById<EditText>(R.id.projectName).text.toString()
-        val role = projectViewToUpdate.findViewById<EditText>(R.id.projectRole).text.toString()
-        val projectUrl = projectViewToUpdate.findViewById<EditText>(R.id.projectUrl).text.toString()
-        val description = projectViewToUpdate.findViewById<EditText>(R.id.projectDescription).text.toString()
-        val startDate = projectViewToUpdate.findViewById<EditText>(R.id.startDate).text.toString()
-        val endDate = projectViewToUpdate.findViewById<EditText>(R.id.endDate).text.toString()
-
-        isSuccess = db.updateProject(id, projectName, description, projectUrl, startDate, endDate, role)
-
-        if (isSuccess) {
-            Toast.makeText(this, "Successfully updated Data", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, Create_resume::class.java).apply {
-                putExtra("resume_id", resumeId)
-            }
-            startActivity(intent)
-        } else {
-            Toast.makeText(this, "Failed to update Data", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    // Method to load project data into UI components
     private fun loadProjectData(
+        proId : Long,
         name: String,
         description: String,
         start: String,
@@ -185,6 +166,7 @@ class project_detailss : AppCompatActivity() {
         startDate.setText(start)
         endDate.setText(end)
 
+        newProjectView.tag = proId
         layout.addView(newProjectView)
     }
 }

@@ -31,22 +31,17 @@ class Preview_template : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_preview_template)
 
-        // Initialize shared preferences and SQLite helper
         share = SharePrefrence(this)
         db = SQLiteHelper(this)
-        
-        // Get resume ID and template name from shared preferences
+
         val Resume_id = share.getResumeId()
         val resumeName: String? = share.getTemplateName()
 
-        // Initialize UI elements
         layoutcontainer = findViewById(R.id.layoutcontainer)
         buttonContainer = findViewById(R.id.buttonContainer)
 
-        // Log the Resume_id and resumeName for debugging
         Log.d("Preview_template", "Resume Name: $resumeName, Resume ID: $Resume_id")
 
-        // Check if resume name and ID are valid
         if (resumeName != null && Resume_id != null) {
             loadResumePreview(resumeName, Resume_id)
         } else {
@@ -54,7 +49,6 @@ class Preview_template : AppCompatActivity() {
             buttonContainer.visibility = View.GONE
         }
 
-        // If the layout container has children, set up button listeners
         if (layoutcontainer.childCount != 0) {
             save = findViewById(R.id.Save)
             download = findViewById(R.id.Download)
@@ -67,7 +61,7 @@ class Preview_template : AppCompatActivity() {
         resume_Name = resumeName
         layoutcontainer.visibility = View.VISIBLE
 
-        // Inflate the correct layout based on the resume template name
+
         val resume_preview = when (resumeName) {
             "medical_1" -> LayoutInflater.from(this).inflate(R.layout.medical_1, layoutcontainer, false)
             "engineering_1" -> LayoutInflater.from(this).inflate(R.layout.engineering_1, layoutcontainer, false)
@@ -80,7 +74,6 @@ class Preview_template : AppCompatActivity() {
             }
         }
 
-        // Populate personal details
         val personalDetail = db.getPersonalDetails(Resume_id)
         personalDetail?.let {
             resume_preview.findViewById<TextView>(R.id.personalDetails)?.text = """
@@ -98,41 +91,42 @@ class Preview_template : AppCompatActivity() {
             imageView?.setImageURI(imageUri)
         }
 
-        // Populate education details
         val EducationDetails = db.getAllEducationDetails(Resume_id)
         val educationTextView: TextView = resume_preview.findViewById(R.id.educationDetails)
         educationTextView.text = EducationDetails.joinToString(separator = "\n\n\n") {
             "Degree Name: ${it.Degree_name}\nInstitute Name: ${it.Institute_name}\nPassing Year: ${it.passingYear}\nGrade: ${it.grade}"
         }
 
-        // Populate skills details
         val skills = db.getAllSkills(Resume_id)
         val skillsTextView: TextView = resume_preview.findViewById(R.id.skillDetails)
         skillsTextView.text = skills.joinToString(separator = "\n\n\n") {
             "Skill Name: ${it.skillName}, Strength: ${it.strength}"
         }
 
-        // Populate experience details
         val experiences = db.getAllExperienceDetails(Resume_id)
         val experienceTextView: TextView = resume_preview.findViewById(R.id.experienceDetails)
         experienceTextView.text = experiences.joinToString(separator = "\n\n\n") {
             "Job Title: ${it.jobTitle}\nCompany Name: ${it.companyName}\nLocation: ${it.location}\nYears of Experience: ${it.yearsOfExperience}"
         }
 
-        // Populate project details
         val projects = db.getAllProjectDetails(Resume_id)
         val projectsTextView: TextView = resume_preview.findViewById(R.id.projectDetails)
         projectsTextView.text = projects.joinToString(separator = "\n\n\n") {
             "Project Name: ${it.projectName}\nProject URL: ${it.projectUrl}\nStart Date: ${it.startDate}\nEnd Date: ${it.endDate}\nRole: ${it.userRole}\nDescription: ${it.projectDescription}"
         }
 
-        // Add the inflated layout to the container
         layoutcontainer.addView(resume_preview)
     }
 
     private fun setupButtonListeners(Resume_id: Long) {
         save.setOnClickListener {
-            val value = db.storeResumeName(Resume_id, resume_Name)
+            var value = true
+            if (share.checkUpdateMode()){
+                db.updateResumeTemplateName(Resume_id,resume_Name)
+            }else{
+                 value = db.storeResumeName(Resume_id, resume_Name)
+            }
+
             if (value) {
                 Toast.makeText(this@Preview_template, "Resume saved successfully", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this@Preview_template, HomePage::class.java)

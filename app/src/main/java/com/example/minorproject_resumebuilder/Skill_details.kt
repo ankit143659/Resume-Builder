@@ -40,11 +40,11 @@ class Skill_details : AppCompatActivity() {
         Resume_id =share.getResumeId()
         skillView   =LayoutInflater.from(this). inflate(R.layout.skill_details,layoutcontainer,false)
         val skillDetails = db.getAllSkills(Resume_id)
-        if(layoutcontainer.childCount!=0){
-            save.visibility=View.VISIBLE
-        }
         if (skillDetails!=null){
             loadDetails()
+        }
+        if(layoutcontainer.childCount!=0){
+            save.visibility=View.VISIBLE
         }
 
         addLayout.setOnClickListener{
@@ -60,24 +60,13 @@ class Skill_details : AppCompatActivity() {
         save.visibility = View.VISIBLE
         val skillDetails = db.getAllSkills(Resume_id)
         skillDetails.forEach{ skill->
-            loadSkillDetails(skill.skillName,skill.strength)
+            loadSkillDetails(skill.skillName,skill.strength,skill.skill_id)
         }
 
     }
 
-    private fun updateDeatils(id:Long?,skillName:String,grade:String) {
-       val value = if(id!=null){
-           db.updateSkill(id,skillName,grade)
-       }else{
-           db.insertSkill(Resume_id,skillName,grade)
-       }
 
-        if(!value){
-            Toast.makeText(this,"Failed to save Data", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun loadSkillDetails(skillname: String, strength: String) {
+    private fun loadSkillDetails(skillname: String, strength: String,skillId : Long) {
         skillView   =LayoutInflater.from(this). inflate(R.layout.skill_details,layoutcontainer,false)
         val skillName = skillView.findViewById<EditText>(R.id.skillName)
         val a = skillView.findViewById<CheckBox>(R.id.begineer)
@@ -90,7 +79,7 @@ class Skill_details : AppCompatActivity() {
             "Advance" -> c.isChecked = true
         }
 
-
+        skillView.tag = skillId
         layoutcontainer.addView(skillView)
 
     }
@@ -115,13 +104,13 @@ class Skill_details : AppCompatActivity() {
             else{
                 grade = "Advance"
             }
-            if (skillId!=null){
-                updateDeatils(skillId,SkillName,grade)
+            val value2  = if (skillId!=null){
+                db.updateSkill(skillId,SkillName,grade)
             }else{
-                val value2 = db.insertSkill(Resume_id,SkillName,grade)
-                if (!value2){
-                    value=false
-                }
+                db.insertSkill(Resume_id,SkillName,grade)
+            }
+            if (!value2){
+                value=false
             }
         }
         if (value){
