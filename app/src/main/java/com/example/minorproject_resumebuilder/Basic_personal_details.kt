@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
 import java.io.FileNotFoundException
@@ -63,7 +64,6 @@ class Basic_personal_details : AppCompatActivity() {
         Resume_id = share.getResumeId()
         db = SQLiteHelper(this)
 
-
         checkAndRequestPermissions()
 
         val personalDetail = db.getPersonalDetails(Resume_id)
@@ -82,11 +82,10 @@ class Basic_personal_details : AppCompatActivity() {
             }
             nationality.setText(personalDetail.nationality)
             imageData = Uri.parse(personalDetail.profileImage)
-            photo.setImageURI(Uri.parse(personalDetail.profileImage))
+            photo.setImageURI(imageData)
 
             updateDetails()
         } else {
-
             save.setOnClickListener {
                 saveDetails(male, female)
             }
@@ -127,6 +126,21 @@ class Basic_personal_details : AppCompatActivity() {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == READ_EXTERNAL_STORAGE_REQUEST) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openGallery()
+            } else {
+                Toast.makeText(this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -136,10 +150,10 @@ class Basic_personal_details : AppCompatActivity() {
                 // Logging the URI for debugging
                 Log.d("ImageUri", "Selected Image URI: $imageData")
                 try {
-                    val inputStream = contentResolver.openInputStream(imageData!!)
-                    val bitmap = BitmapFactory.decodeStream(inputStream)
-                    photo.setImageBitmap(bitmap)
-                } catch (e: FileNotFoundException) {
+                    Glide.with(this)
+                        .load(imageData)
+                        .into(photo)
+                } catch (e: Exception) {
                     e.printStackTrace()
                     Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show()
                 }
