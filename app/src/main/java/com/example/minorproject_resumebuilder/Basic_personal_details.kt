@@ -37,7 +37,7 @@ class Basic_personal_details : AppCompatActivity() {
     private lateinit var nationality: EditText
     private lateinit var gender: String
     private var Resume_id: Long = 0
-    private var imageData: Uri? = null  // Initialize as nullable
+    private var imageData: Uri? = null
 
     companion object {
         const val PICK_IMAGE_REQUEST = 1
@@ -63,12 +63,11 @@ class Basic_personal_details : AppCompatActivity() {
         Resume_id = share.getResumeId()
         db = SQLiteHelper(this)
 
-        // Check and request storage permission
+
         checkAndRequestPermissions()
 
         val personalDetail = db.getPersonalDetails(Resume_id)
         if (personalDetail != null) {
-            // Prefill the form with existing data
             email.setText(personalDetail.email)
             fname.setText(personalDetail.fname)
             lname.setText(personalDetail.lname)
@@ -87,7 +86,7 @@ class Basic_personal_details : AppCompatActivity() {
 
             updateDetails()  // Use updateDetails if data is present
         } else {
-            // Use the save button for saving new data
+
             save.setOnClickListener {
                 saveDetails(male, female)
             }
