@@ -82,9 +82,9 @@ class Basic_personal_details : AppCompatActivity() {
             }
             nationality.setText(personalDetail.nationality)
             imageData = Uri.parse(personalDetail.profileImage)
-            photo.setImageURI(imageData)
+            photo.setImageURI(Uri.parse(personalDetail.profileImage))
 
-            updateDetails()  // Use updateDetails if data is present
+            updateDetails()
         } else {
 
             save.setOnClickListener {

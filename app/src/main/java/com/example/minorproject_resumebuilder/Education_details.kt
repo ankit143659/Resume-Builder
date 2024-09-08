@@ -49,53 +49,58 @@ class Education_details : AppCompatActivity() {
         }
 
         save.setOnClickListener {
-            saveDetails()
+            if(educationDetailsUpdate != null){
+                saveDetails()
+            }else{
+
+            }
+
         }
     }
 
     private fun loadDetails() {
-        save.visibility = View.VISIBLE
         val educationDetailsUpdate = db.getAllEducationDetails(Resume_id)
 
         educationDetailsUpdate.forEach { education ->
-            loadeducationDetails(education.Degree_name, education.Institute_name, education.grade, education.Location)
+            loadeducationDetails(education.Degree_name,education.passingYear, education.Institute_name, education.grade, education.Location)
         }
 
-        save.setOnClickListener {
-            var i = 1
-            educationDetailsUpdate.forEach { education ->
-                updateDetails(education.education_id, i)
-                i++
-            }
-        }
     }
 
-    private fun updateDetails(id: Long, i: Int) {
-        val educationView = layoutContainer.getChildAt(i)
-        val degreeName = educationView.findViewById<EditText>(R.id.degreeName).text.toString()
-        val instituteName = educationView.findViewById<EditText>(R.id.instituteName).text.toString()
-        val passingYear = educationView.findViewById<EditText>(R.id.passingYear).text.toString()
-        val location = educationView.findViewById<EditText>(R.id.Location).text.toString()
-        val a = educationView.findViewById<CheckBox>(R.id.a)
-        val b = educationView.findViewById<CheckBox>(R.id.b)
-        val c = educationView.findViewById<CheckBox>(R.id.c)
-        val d = educationView.findViewById<CheckBox>(R.id.d)
+    private fun updateDetails() {
+        save.visibility = View.VISIBLE
+        var value : Boolean = false
+        val educationDetailsUpdate = db.getAllEducationDetails(Resume_id)
+        var i = 1
+        educationDetailsUpdate.forEach { education ->
+            val id = education.education_id
+            val educationView = layoutContainer.getChildAt(i)
+            val degreeName = educationView.findViewById<EditText>(R.id.degreeName).text.toString()
+            val instituteName = educationView.findViewById<EditText>(R.id.instituteName).text.toString()
+            val passingYear = educationView.findViewById<EditText>(R.id.passingYear).text.toString()
+            val location = educationView.findViewById<EditText>(R.id.Location).text.toString()
+            val a = educationView.findViewById<CheckBox>(R.id.a)
+            val b = educationView.findViewById<CheckBox>(R.id.b)
+            val c = educationView.findViewById<CheckBox>(R.id.c)
+            val d = educationView.findViewById<CheckBox>(R.id.d)
 
-        val grade: String = when {
-            a.isChecked -> "A"
-            b.isChecked -> "B"
-            c.isChecked -> "C"
-            else -> "D"
+            val grade: String = when {
+                a.isChecked -> "A"
+                b.isChecked -> "B"
+                c.isChecked -> "C"
+                else -> "D"
+            }
+
+            value = db.updateEducationDetails(
+                id,
+                degreeName,
+                instituteName,
+                passingYear,
+                grade,
+                location
+            )
+            i++
         }
-
-        val value = db.updateEducationDetails(
-            id,
-            degreeName,
-            instituteName,
-            passingYear,
-            grade,
-            location
-        )
 
         if (value) {
             Toast.makeText(this, "Successfully Updated", Toast.LENGTH_SHORT).show()
@@ -107,12 +112,13 @@ class Education_details : AppCompatActivity() {
         }
     }
 
-    private fun loadeducationDetails(degreename: String, institutename: String, Grade: String, Location: String) {
+    private fun loadeducationDetails(degreename: String,PassingYear:String, institutename: String, Grade: String, Location: String) {
         educationDetailsView = LayoutInflater.from(this).inflate(R.layout.education_details, layoutContainer, false)
         val degreeName = educationDetailsView.findViewById<EditText>(R.id.degreeName)
         val instituteName = educationDetailsView.findViewById<EditText>(R.id.instituteName)
         val location = educationDetailsView.findViewById<EditText>(R.id.Location)
         val a = educationDetailsView.findViewById<CheckBox>(R.id.a)
+        val passingYear = educationDetailsView.findViewById<EditText>(R.id.passingYear)
         val b = educationDetailsView.findViewById<CheckBox>(R.id.b)
         val c = educationDetailsView.findViewById<CheckBox>(R.id.c)
         val d = educationDetailsView.findViewById<CheckBox>(R.id.d)
@@ -120,6 +126,7 @@ class Education_details : AppCompatActivity() {
         degreeName.setText(degreename)
         instituteName.setText(institutename)
         location.setText(Location)
+        passingYear.setText(PassingYear)
 
         when (Grade) {
             "A" -> a.isChecked = true
