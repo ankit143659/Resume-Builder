@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -17,10 +18,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
 import java.io.FileNotFoundException
+import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -82,7 +83,7 @@ class Basic_personal_details : AppCompatActivity() {
             }
             nationality.setText(personalDetail.nationality)
             imageData = Uri.parse(personalDetail.profileImage)
-            photo.setImageURI(imageData)
+            loadAndDisplayImage(imageData)
 
             updateDetails()
         } else {
@@ -147,20 +148,29 @@ class Basic_personal_details : AppCompatActivity() {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
             imageData = data.data
             if (imageData != null) {
-                // Logging the URI for debugging
                 Log.d("ImageUri", "Selected Image URI: $imageData")
-                try {
-                    Glide.with(this)
-                        .load(imageData)
-                        .into(photo)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show()
-                }
+                loadAndDisplayImage(imageData)
             } else {
                 Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun loadAndDisplayImage(imageUri: Uri?) {
+        if (imageUri == null) return
+        try {
+            val inputStream: InputStream? = contentResolver.openInputStream(imageUri)
+            val bitmap = BitmapFactory.decodeStream(inputStream)
+            val resizedBitmap = resizeBitmap(bitmap, 500, 500)
+            photo.setImageBitmap(resizedBitmap)
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+            Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun resizeBitmap(bitmap: Bitmap, width: Int, height: Int): Bitmap {
+        return Bitmap.createScaledBitmap(bitmap, width, height, false)
     }
 
     private fun saveDetails(male: CheckBox, female: CheckBox) {
