@@ -40,6 +40,10 @@ class Education_details : AppCompatActivity() {
         educationDetailsView = LayoutInflater.from(this).inflate(R.layout.education_details, layoutContainer, false)
 
         val educationDetailsUpdate = db.getAllEducationDetails(Resume_id)
+
+        if(layoutContainer.childCount!=0){
+            save.visibility=View.VISIBLE
+        }
         if (educationDetailsUpdate != null) {
             loadDetails()
         }
@@ -49,12 +53,7 @@ class Education_details : AppCompatActivity() {
         }
 
         save.setOnClickListener {
-            if(educationDetailsUpdate != null){
-                saveDetails()
-            }else{
-
-            }
-
+            saveDetails()
         }
     }
 
@@ -67,47 +66,14 @@ class Education_details : AppCompatActivity() {
 
     }
 
-    private fun updateDetails() {
-        save.visibility = View.VISIBLE
-        var value : Boolean = false
-        val educationDetailsUpdate = db.getAllEducationDetails(Resume_id)
-        var i = 1
-        educationDetailsUpdate.forEach { education ->
-            val id = education.education_id
-            val educationView = layoutContainer.getChildAt(i)
-            val degreeName = educationView.findViewById<EditText>(R.id.degreeName).text.toString()
-            val instituteName = educationView.findViewById<EditText>(R.id.instituteName).text.toString()
-            val passingYear = educationView.findViewById<EditText>(R.id.passingYear).text.toString()
-            val location = educationView.findViewById<EditText>(R.id.Location).text.toString()
-            val a = educationView.findViewById<CheckBox>(R.id.a)
-            val b = educationView.findViewById<CheckBox>(R.id.b)
-            val c = educationView.findViewById<CheckBox>(R.id.c)
-            val d = educationView.findViewById<CheckBox>(R.id.d)
-
-            val grade: String = when {
-                a.isChecked -> "A"
-                b.isChecked -> "B"
-                c.isChecked -> "C"
-                else -> "D"
-            }
-
-            value = db.updateEducationDetails(
-                id,
-                degreeName,
-                instituteName,
-                passingYear,
-                grade,
-                location
-            )
-            i++
+    private fun updateDetails(id:Long , degreeName : String, insituteName : String, Location : String, passingYear : String,grade : String) {
+       val value =  if (id!=null){
+            db.updateEducationDetails(id,degreeName,insituteName,passingYear,grade,Location)
+        }else{
+            db.insertEducationDetails(Resume_id,degreeName,insituteName,Location,passingYear,grade)
         }
 
-        if (value) {
-            Toast.makeText(this, "Successfully Updated", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, Create_resume::class.java)
-            startActivity(intent)
-            finish()
-        } else {
+        if (!value){
             Toast.makeText(this, "Failed to save Data", Toast.LENGTH_SHORT).show()
         }
     }
@@ -139,7 +105,7 @@ class Education_details : AppCompatActivity() {
     }
 
     private fun saveDetails() {
-        var value: Boolean
+        var value = true
         for (i in 0 until layoutContainer.childCount) {
             val educationView = layoutContainer.getChildAt(i)
             val degreeName = educationView.findViewById<EditText>(R.id.degreeName).text.toString()
@@ -150,6 +116,7 @@ class Education_details : AppCompatActivity() {
             val b = educationView.findViewById<CheckBox>(R.id.b)
             val c = educationView.findViewById<CheckBox>(R.id.c)
             val d = educationView.findViewById<CheckBox>(R.id.d)
+            val eduId = educationView.tag as Long?
 
             val grade: String = when {
                 a.isChecked -> "A"
@@ -157,8 +124,14 @@ class Education_details : AppCompatActivity() {
                 c.isChecked -> "C"
                 else -> "D"
             }
-
-            value = db.insertEducationDetails(Resume_id, degreeName, instituteName, location, passingYear, grade)
+            if (eduId!=null){
+                updateDetails(eduId,degreeName,instituteName,passingYear,location,grade)
+            }else{
+                val value2 = db.insertEducationDetails(Resume_id, degreeName, instituteName, location, passingYear, grade)
+                if (!value2){
+                    value=false
+                }
+            }
 
             if (!value) {
                 Toast.makeText(this, "Failed to save Data", Toast.LENGTH_SHORT).show()

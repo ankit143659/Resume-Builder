@@ -39,7 +39,7 @@ class Basic_personal_details : AppCompatActivity() {
     private lateinit var nationality: EditText
     private lateinit var gender: String
     private var Resume_id: Long = 0
-    private var imageData: Uri? = null
+    //private var imageData: Uri? = null
 
     companion object {
         const val PICK_IMAGE_REQUEST = 1
@@ -65,7 +65,7 @@ class Basic_personal_details : AppCompatActivity() {
         Resume_id = share.getResumeId()
         db = SQLiteHelper(this)
 
-        checkAndRequestPermissions()
+       // checkAndRequestPermissions()
 
         val personalDetail = db.getPersonalDetails(Resume_id)
         if (personalDetail != null) {
@@ -82,8 +82,8 @@ class Basic_personal_details : AppCompatActivity() {
                 Toast.makeText(this, "Cannot Find gender", Toast.LENGTH_SHORT).show()
             }
             nationality.setText(personalDetail.nationality)
-            imageData = Uri.parse(personalDetail.profileImage)
-            loadAndDisplayImage(imageData)
+           // imageData = Uri.parse(personalDetail.profileImage)
+            //loadAndDisplayImage(imageData)
 
             updateDetails()
         } else {
@@ -106,9 +106,9 @@ class Basic_personal_details : AppCompatActivity() {
             datepicker.show()
         }
 
-        photo.setOnClickListener {
-            openGallery()
-        }
+       // photo.setOnClickListener {
+         //   openGallery()
+        //}
     }
 
     private fun checkAndRequestPermissions() {
@@ -142,7 +142,7 @@ class Basic_personal_details : AppCompatActivity() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+   /* override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
@@ -154,9 +154,9 @@ class Basic_personal_details : AppCompatActivity() {
                 Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show()
             }
         }
-    }
+    }*/
 
-    private fun loadAndDisplayImage(imageUri: Uri?) {
+    /*private fun loadAndDisplayImage(imageUri: Uri?) {
         if (imageUri == null) return
         try {
             val inputStream: InputStream? = contentResolver.openInputStream(imageUri)
@@ -167,7 +167,7 @@ class Basic_personal_details : AppCompatActivity() {
             e.printStackTrace()
             Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show()
         }
-    }
+    }*/
 
     private fun resizeBitmap(bitmap: Bitmap, width: Int, height: Int): Bitmap {
         return Bitmap.createScaledBitmap(bitmap, width, height, false)
@@ -203,7 +203,7 @@ class Basic_personal_details : AppCompatActivity() {
                 Nationality,
                 gender,
                 dob,
-                imageData?.toString() ?: "" // Handle null case
+                 "hello" // Handle null case
             )
 
             if (value) {
@@ -253,7 +253,7 @@ class Basic_personal_details : AppCompatActivity() {
                     Nationality,
                     gender,
                     dob,
-                    imageData?.toString() ?: "" // Handle null case
+                    "hello" // Handle null case
                 )
 
                 if (value) {

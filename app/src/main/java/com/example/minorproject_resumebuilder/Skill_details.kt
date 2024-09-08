@@ -40,6 +40,9 @@ class Skill_details : AppCompatActivity() {
         Resume_id =share.getResumeId()
         skillView   =LayoutInflater.from(this). inflate(R.layout.skill_details,layoutcontainer,false)
         val skillDetails = db.getAllSkills(Resume_id)
+        if(layoutcontainer.childCount!=0){
+            save.visibility=View.VISIBLE
+        }
         if (skillDetails!=null){
             loadDetails()
         }
@@ -54,46 +57,23 @@ class Skill_details : AppCompatActivity() {
     }
 
     private fun loadDetails() {
+        save.visibility = View.VISIBLE
         val skillDetails = db.getAllSkills(Resume_id)
         skillDetails.forEach{ skill->
             loadSkillDetails(skill.skillName,skill.strength)
         }
-        save.setOnClickListener{
-            var i =1
-            skillDetails.forEach{skill->
-                updateDeatils(skill.skill_id,i)
-                i++
-            }
-        }
 
     }
 
-    private fun updateDeatils(id:Long,i:Int) {
-        var value = false
-        for (i in 0 until layoutcontainer.childCount){
-            val SkillView = layoutcontainer.getChildAt(i)
-            val SkillName = SkillView.findViewById<EditText>(R.id.skillName).text.toString()
-            val a = SkillView.findViewById<CheckBox>(R.id.begineer)
-            val b = SkillView.findViewById<CheckBox>(R.id.intermediate)
-            val c = SkillView.findViewById<CheckBox>(R.id.advance)
+    private fun updateDeatils(id:Long?,skillName:String,grade:String) {
+       val value = if(id!=null){
+           db.updateSkill(id,skillName,grade)
+       }else{
+           db.insertSkill(Resume_id,skillName,grade)
+       }
 
-            var grade : String
-            if (a.isChecked){
-                grade = "Beginner"
-            }else if (b.isChecked){
-                grade = "Intermediate"
-            }
-            else{
-                grade = "Advance"
-            }
-            value = db.updateSkill(id,SkillName,grade)
-        }
-        if (value){
-            Toast.makeText(this,"Successfully Updated", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,Create_resume::class.java)
-            startActivity(intent)
-        }else{
-            Toast.makeText(this,"Failed to filled Data", Toast.LENGTH_SHORT).show()
+        if(!value){
+            Toast.makeText(this,"Failed to save Data", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -104,14 +84,12 @@ class Skill_details : AppCompatActivity() {
         val b = skillView.findViewById<CheckBox>(R.id.intermediate)
         val c = skillView.findViewById<CheckBox>(R.id.advance)
         skillName.setText(skillname)
-        if (strength=="Beginner"){
-            a.isChecked
-        }else if (strength=="Intermediate"){
-            b.isChecked
+        when(strength){
+            "Begineer" -> a.isChecked = true
+            "Intermediate" -> b.isChecked = true
+            "Advance" -> c.isChecked = true
         }
-        else{
-            c.isChecked
-        }
+
 
         layoutcontainer.addView(skillView)
 
@@ -119,13 +97,14 @@ class Skill_details : AppCompatActivity() {
 
     private fun savedata() {
         skillView   =LayoutInflater.from(this). inflate(R.layout.skill_details,layoutcontainer,false)
-        var value : Boolean= false
+        var value = true
         for (i in 0 until layoutcontainer.childCount){
             val SkillView = layoutcontainer.getChildAt(i)
             val SkillName = SkillView.findViewById<EditText>(R.id.skillName).text.toString()
             val a = SkillView.findViewById<CheckBox>(R.id.begineer)
             val b = SkillView.findViewById<CheckBox>(R.id.intermediate)
             val c = SkillView.findViewById<CheckBox>(R.id.advance)
+            val skillId = SkillView.tag as?Long
 
             var grade : String
             if (a.isChecked){
@@ -136,7 +115,14 @@ class Skill_details : AppCompatActivity() {
             else{
                 grade = "Advance"
             }
-            value = db.insertSkill(Resume_id,SkillName,grade)
+            if (skillId!=null){
+                updateDeatils(skillId,SkillName,grade)
+            }else{
+                val value2 = db.insertSkill(Resume_id,SkillName,grade)
+                if (!value2){
+                    value=false
+                }
+            }
         }
         if (value){
             Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()

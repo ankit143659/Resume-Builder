@@ -57,4 +57,14 @@ class SharePrefrence (context: Context) {
         return prefs.getString("template_name","")
     }
 
+    fun storeUpdateMode(Mode : Boolean){
+        val editor = prefs.edit()
+        editor.putBoolean("updateMode",Mode)
+        editor.apply()
+    }
+
+    fun checkUpdateMode():Boolean{
+        return prefs.getBoolean("updateMode",false)
+    }
+
 }

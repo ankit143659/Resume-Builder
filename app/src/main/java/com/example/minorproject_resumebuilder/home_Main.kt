@@ -54,6 +54,8 @@ class home_Main : Fragment() {
         recycler.visibility = View.GONE
         imageContainer.visibility = View.VISIBLE
 
+        share.storeUpdateMode(false)
+
         try {
             user_id = share.getuser_id().toLong()
         } catch (e: Exception) {
@@ -157,6 +159,7 @@ class home_Main : Fragment() {
     private fun editResume(resumeId: String) {
         val resume_id = resumeId.toLong()
         share.storeResumeId(resume_id)
+        share.storeUpdateMode(true)
         val intent = Intent(requireContext(),Create_resume::class.java)
         startActivity(intent)
     }

@@ -42,6 +42,9 @@ class experience_detailss : AppCompatActivity() {
         experienceDetailsView = LayoutInflater.from(this). inflate(R.layout.experience_details,layoutcontain,false)
 
         val experienceDetails = db.getAllExperienceDetails(Resume_id)
+        if(layoutcontain.childCount!=0){
+            save.visibility=View.VISIBLE
+        }
         if(experienceDetails!=null){
             loadData()
         }
@@ -57,14 +60,23 @@ class experience_detailss : AppCompatActivity() {
     }
 
     private fun saveDetails() {
-        var value : Boolean = false
+        var value = true
         for (i in 0 until layoutcontain.childCount){
-            val educationView = layoutcontain.getChildAt(i)
-            val jobTitle = educationView.findViewById<EditText>(R.id.jobTitle).text.toString()
-            val companyName = educationView.findViewById<EditText>(R.id.companyName).text.toString()
-            val companyLocation = educationView.findViewById<EditText>(R.id.comanyLocation).text.toString()
-            val startDate = educationView.findViewById<EditText>(R.id.startDate).text.toString()
-            value = db.insertExperience(Resume_id,jobTitle,companyName,companyLocation,startDate)
+            val experienceView = layoutcontain.getChildAt(i)
+            val jobTitle = experienceView.findViewById<EditText>(R.id.jobTitle).text.toString()
+            val companyName = experienceView.findViewById<EditText>(R.id.companyName).text.toString()
+            val companyLocation = experienceView.findViewById<EditText>(R.id.comanyLocation).text.toString()
+            val startDate = experienceView.findViewById<EditText>(R.id.startDate).text.toString()
+            val expId = experienceView.tag as?Long
+
+            if (expId!=null){
+                updateData(expId,jobTitle,companyName,companyLocation,startDate)
+            }else{
+               val value2= db.insertExperience(Resume_id,jobTitle,companyName,companyLocation,startDate)
+                if (!value2){
+                    value = false
+                }
+            }
         }
         if (value){
             Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()
@@ -117,13 +129,6 @@ class experience_detailss : AppCompatActivity() {
         experienceDetails.forEach{exp->
             loadExperiencedata(exp.jobTitle,exp.companyName,exp.location,exp.yearsOfExperience)
         }
-        save.setOnClickListener{
-            var i =1
-            experienceDetails.forEach{experience->
-                updateData(experience.experience_id,i)
-                i++
-            }
-        }
 
     }
 
@@ -142,25 +147,8 @@ class experience_detailss : AppCompatActivity() {
         layoutcontain.addView(experienceDetailsView)
     }
 
-    private fun updateData(id:Long,i:Int){
-        var value : Boolean = false
-        for (i in 0 until layoutcontain.childCount){
-            val educationView = layoutcontain.getChildAt(i)
-            val jobTitle = educationView.findViewById<EditText>(R.id.jobTitle).text.toString()
-            val companyName = educationView.findViewById<EditText>(R.id.companyName).text.toString()
-            val companyLocation = educationView.findViewById<EditText>(R.id.comanyLocation).text.toString()
-            val startDate = educationView.findViewById<EditText>(R.id.startDate).text.toString()
-            value = db.updateExperience(id,
-                companyName,
-                companyLocation,
-                startDate)
-        }
-        if (value){
-            Toast.makeText(this,"Successfully Updated", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,Create_resume::class.java)
-            startActivity(intent)
-        }else{
-            Toast.makeText(this,"Failed to filled Data", Toast.LENGTH_SHORT).show()
-        }
+    private fun updateData(id:Long,jobTitle : String, companyName : String, location : String , startDate : String){
+
     }
+
 }

@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
 
-class ProjectDetails : AppCompatActivity() {
+class project_detailss : AppCompatActivity() {
 
     // Declare variables for UI components and database helper
     private lateinit var addLayout: Button
@@ -104,7 +104,7 @@ class ProjectDetails : AppCompatActivity() {
 
         if (isSuccess) {
             Toast.makeText(this, "Successfully filled Data", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, CreateResume::class.java).apply {
+            val intent = Intent(this, Create_resume::class.java).apply {
                 putExtra("resume_id", resumeId)
             }
             startActivity(intent)
@@ -152,7 +152,7 @@ class ProjectDetails : AppCompatActivity() {
 
         if (isSuccess) {
             Toast.makeText(this, "Successfully updated Data", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, CreateResume::class.java).apply {
+            val intent = Intent(this, Create_resume::class.java).apply {
                 putExtra("resume_id", resumeId)
             }
             startActivity(intent)
