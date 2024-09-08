@@ -1,18 +1,25 @@
 package com.example.minorproject_resumebuilder
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
+import java.io.FileNotFoundException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,6 +41,7 @@ class Basic_personal_details : AppCompatActivity() {
 
     companion object {
         const val PICK_IMAGE_REQUEST = 1
+        const val READ_EXTERNAL_STORAGE_REQUEST = 100
     }
 
     @SuppressLint("MissingInflatedId")
@@ -54,6 +62,9 @@ class Basic_personal_details : AppCompatActivity() {
         phone = findViewById(R.id.phone)
         Resume_id = share.getResumeId()
         db = SQLiteHelper(this)
+
+        // Check and request storage permission
+        checkAndRequestPermissions()
 
         val personalDetail = db.getPersonalDetails(Resume_id)
         if (personalDetail != null) {
@@ -101,6 +112,15 @@ class Basic_personal_details : AppCompatActivity() {
         }
     }
 
+    private fun checkAndRequestPermissions() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), READ_EXTERNAL_STORAGE_REQUEST)
+        }
+    }
+
     private fun openGallery() {
         val intent = Intent()
         intent.type = "image/*"
@@ -112,8 +132,21 @@ class Basic_personal_details : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
-            imageData = data.data!!
-            photo.setImageURI(imageData)
+            imageData = data.data
+            if (imageData != null) {
+                // Logging the URI for debugging
+                Log.d("ImageUri", "Selected Image URI: $imageData")
+                try {
+                    val inputStream = contentResolver.openInputStream(imageData!!)
+                    val bitmap = BitmapFactory.decodeStream(inputStream)
+                    photo.setImageBitmap(bitmap)
+                } catch (e: FileNotFoundException) {
+                    e.printStackTrace()
+                    Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
