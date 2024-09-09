@@ -1,12 +1,16 @@
 package com.example.minorproject_resumebuilder
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,13 +20,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.util.BitSet
+import java.io.OutputStream
 
 class Preview_template : AppCompatActivity() {
 
@@ -64,14 +67,15 @@ class Preview_template : AppCompatActivity() {
             buttonContainer.visibility = View.VISIBLE
             setupButtonListeners(Resume_id)
         }
+
+        checkPermissions()
     }
 
     private fun loadResumePreview(resumeName: String, Resume_id: Long) {
         resume_Name = resumeName
         layoutcontainer.visibility = View.VISIBLE
 
-
-         resume_preview = when (resumeName) {
+        resume_preview = when (resumeName) {
             "medical_1" -> LayoutInflater.from(this).inflate(R.layout.medical_1, layoutcontainer, false)
             "engineering_1" -> LayoutInflater.from(this).inflate(R.layout.engineering_1, layoutcontainer, false)
             "basic_1" -> LayoutInflater.from(this).inflate(R.layout.basic_1, layoutcontainer, false)
@@ -126,6 +130,7 @@ class Preview_template : AppCompatActivity() {
 
         layoutcontainer.addView(resume_preview)
     }
+
     private fun setupButtonListeners(Resume_id: Long) {
         save.setOnClickListener {
             var value = true
@@ -146,32 +151,52 @@ class Preview_template : AppCompatActivity() {
         }
 
         download.setOnClickListener {
-                val bitMap = getbitMap(resume_preview)
+            val bitMap = getbitMap(resume_preview)
             saveBitMaptoFile(bitMap,"My_resume.png")
-                Toast.makeText(this@Preview_template, "Resume downloaded successfully", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this@Preview_template, HomePage::class.java)
-                startActivity(intent)
-                finish()
-
-
+            val intent = Intent(this@Preview_template, HomePage::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
-    private fun saveBitMaptoFile(bitMap: Bitmap, fileName: String) {
-        val file = File(Environment.getExternalStorageDirectory(),fileName)
-        try{
-            FileOutputStream(file).use { out ->
-                bitMap.compress(Bitmap.CompressFormat.PNG,100,out)
+    private fun saveBitMaptoFile(bitmap: Bitmap, fileName: String) {
+        val outputStream: OutputStream?
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val contentValues = ContentValues().apply {
+                put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
+                put(MediaStore.Images.Media.MIME_TYPE, "image/png")
+                put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
             }
-        }catch (e:IOException){
+            val imageUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+            outputStream = imageUri?.let { contentResolver.openOutputStream(it) }
+        } else {
+            val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), fileName)
+            outputStream = FileOutputStream(file)
+        }
+
+        try {
+            outputStream?.use { out ->
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
+                Toast.makeText(this, "Resume downloaded successfully", Toast.LENGTH_SHORT).show()
+            }
+        } catch (e: IOException) {
             e.printStackTrace()
+            Toast.makeText(this, "Failed to save image", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun getbitMap(resumePreview: View): Bitmap {
-        val bitmap = Bitmap.createBitmap(resumePreview.width,resumePreview.height,Bitmap.Config.ARGB_8888)
+        val bitmap = Bitmap.createBitmap(resumePreview.width, resumePreview.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         resumePreview.draw(canvas)
         return bitmap
+    }
+
+    private fun checkPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+            }
+        }
     }
 }
