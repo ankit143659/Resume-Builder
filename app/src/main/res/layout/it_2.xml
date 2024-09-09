@@ -1,0 +1,221 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F8FA">
+
+    <!-- Header Background -->
+    <View
+        android:id="@+id/header_background"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="#2B3A4B" />
+
+    <!-- Profile Picture -->
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/resumr" />
+
+    <!-- Name -->
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="STEVEN TERRY"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="26sp"
+        android:layout_toRightOf="@id/profile_image"
+        android:layout_alignBottom="@id/profile_image"
+        android:layout_marginStart="16dp" />
+
+    <!-- Title -->
+    <LinearLayout
+        android:id="@+id/left_panel"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/header_background"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp">
+
+        <
+        <TextView
+            android:id="@+id/skills_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SKILLS"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#2b3a4b"
+            android:layout_marginTop="16dp" />
+
+        <!-- Skills Content -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="• Computer: Word, Excel, PowerPoint\n• Languages: English, Japanese, Chinese"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:layout_marginTop="8dp" />
+
+        <!-- Honors Title -->
+        <TextView
+            android:id="@+id/honors_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HONORS & AWARDS"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#2b3a4b"
+            android:layout_marginTop="16dp" />
+
+        <!-- Honors Content -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2013: TOPCV Scholarship in 2nd semester 2012-2013 and 1st semester 2013-2014."
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:layout_marginTop="8dp" />
+
+        <!-- Certifications Title -->
+        <TextView
+            android:id="@+id/certifications_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CERTIFICATIONS"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#2b3a4b"
+            android:layout_marginTop="16dp" />
+
+        <!-- Certifications Content -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018: TOEIC Certificate with score 800 issued by TOPCV"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:layout_marginTop="8dp" />
+
+        <!-- Interests Title -->
+        <TextView
+            android:id="@+id/interests_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="INTERESTS"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#2b3a4b"
+            android:layout_marginTop="16dp" />
+
+        <!-- Interests Content -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I like soccer, music.."
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+    <!-- Right Content Section -->
+    <LinearLayout
+        android:id="@+id/right_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@id/left_panel"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp">
+
+        <!-- Objective Title -->
+        <TextView
+            android:id="@+id/objective_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OBJECTIVE"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#2b3a4b" />
+
+        <!-- Objective Content -->
+        <TextView
+            android:id="@+id/objective"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:layout_marginTop="8dp" />
+
+        <!-- Education Title -->
+        <TextView
+            android:id="@+id/education_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EDUCATION"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#2b3a4b"
+            android:layout_marginTop="16dp" />
+
+        <!-- Education Content -->
+        <TextView
+            android:id="@+id/education"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TOPCV University - Corporate Administration (2010-2014)\nGPA: 3.4"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:layout_marginTop="8dp" />
+
+        <!-- Work Experience Title -->
+        <TextView
+            android:id="@+id/work_experience_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WORK EXPERIENCE"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#2b3a4b"
+            android:layout_marginTop="16dp" />
+
+        <!-- Work Experience Content -->
+        <TextView
+            android:id="@+id/work_experience"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TopCV JSC - Digital Marketing (2016-Present)"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:layout_marginTop="8dp" />
+
+        <!-- Activities Title -->
+        <TextView
+            android:id="@+id/activities_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ACTIVITIES"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#2b3a4b"
+            android:layout_marginTop="16dp" />
+
+        <!-- Activities Content -->
+        <TextView
+            android:id="@+id/activities"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TOPCV - Education Talk (2013-2017)\nMember of US Ambassador"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+</RelativeLayout>
