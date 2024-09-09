@@ -59,7 +59,6 @@ class Education_details : AppCompatActivity() {
 
     private fun loadDetails() {
         val educationDetailsUpdate = db.getAllEducationDetails(Resume_id)
-
         educationDetailsUpdate.forEach { education ->
             loadeducationDetails(education.education_id,education.Degree_name,education.passingYear, education.Institute_name, education.grade, education.Location)
         }
@@ -90,8 +89,11 @@ class Education_details : AppCompatActivity() {
             "C" -> c.isChecked = true
             "D" -> d.isChecked = true
         }
+
         educationDetailsView.tag = eduId
+
         layoutContainer.addView(educationDetailsView)
+
     }
 
     private fun saveDetails() {
@@ -142,7 +144,7 @@ class Education_details : AppCompatActivity() {
     private fun addEducation() {
         educationDetailsView = LayoutInflater.from(this).inflate(R.layout.education_details, layoutContainer, false)
         val delete: Button = educationDetailsView.findViewById(R.id.delete)
-
+        val layoutId = educationDetailsView.tag as?Long
         delete.setOnClickListener {
             val dialog = AlertDialog.Builder(this)
             val dialogView = LayoutInflater.from(this).inflate(R.layout.delete_layout, null)
@@ -154,6 +156,9 @@ class Education_details : AppCompatActivity() {
             val alertBox = dialog.create()
 
             yes.setOnClickListener {
+                if (layoutId!=null){
+                    db.deleteEducation(layoutId)
+                }
                 layoutContainer.removeView(educationDetailsView)
                 if (layoutContainer.childCount == 0) {
                     save.visibility = View.GONE

@@ -715,6 +715,13 @@ fun updateProject(
         }
     }
 
-
-
+    fun deleteEducation(educationId: Long?):Boolean{
+        val db = writableDatabase
+        return try {
+            val delete = db.delete(TABLE_EDUCATION,"id=?", arrayOf(educationId.toString()))
+            delete >0
+        }catch (e:Exception){
+            false
+        }
+    }
 }

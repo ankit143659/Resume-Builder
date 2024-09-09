@@ -152,7 +152,7 @@ class Preview_template : AppCompatActivity() {
 
         download.setOnClickListener {
             val bitMap = getbitMap(resume_preview)
-            saveBitMaptoFile(bitMap,"My_resume.png")
+            saveBitMaptoFile(bitMap,"ResumeBuilder_Resume")
             val intent = Intent(this@Preview_template, HomePage::class.java)
             startActivity(intent)
             finish()
