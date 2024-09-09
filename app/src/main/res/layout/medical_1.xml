@@ -95,7 +95,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/educationDetails"
+                android:id="@+id/educationalDeatils"
                 android:textColor="#10253F"
                 android:textSize="16sp"
                 android:layout_marginTop="10dp"

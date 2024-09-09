@@ -74,6 +74,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/skillDetails"
             android:padding="8dp" />
     </LinearLayout>
     <TextView
@@ -93,7 +94,7 @@
         android:layout_marginTop="8dp">
 
         <TextView
-            android:id="@+id/experience_date"
+            android:id="@+id/experienceDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -117,7 +118,7 @@
         android:layout_marginTop="8dp">
 
         <TextView
-            android:id="@+id/education_date"
+            android:id="@+id/educationalDeatils"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -141,7 +142,7 @@
         android:layout_marginTop="8dp">
 
         <TextView
-            android:id="@+id/project"
+            android:id="@+id/projectDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"

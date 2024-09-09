@@ -99,6 +99,22 @@ class resume_template : AppCompatActivity() {
                     img2.visibility=View.VISIBLE
                     select_img1.visibility=View.VISIBLE
                     select_img2.visibility=View.VISIBLE
+                    select_img1.setOnClickListener{
+                        Toast.makeText(this@resume_template,"Succesfully Data Filled",Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@resume_template,Preview_template::class.java)
+                        share.storeTemplateName("it_1")
+                        startActivity(intent)
+
+                    }
+
+
+                    select_img2.setOnClickListener{
+                        Toast.makeText(this@resume_template,"Succesfully Created",Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@resume_template,HomePage::class.java)
+                        share.storeTemplateName("medical_2")
+                        startActivity(intent)
+
+                    }
                 }else if (position == 4) {
                     img1.setImageResource(R.drawable.basic_3)
                     img2.setImageResource(R.drawable.design_1)

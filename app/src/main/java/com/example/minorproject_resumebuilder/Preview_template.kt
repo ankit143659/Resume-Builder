@@ -68,7 +68,6 @@ class Preview_template : AppCompatActivity() {
             setupButtonListeners(Resume_id)
         }
 
-        checkPermissions()
     }
 
     private fun loadResumePreview(resumeName: String, Resume_id: Long) {
@@ -80,6 +79,7 @@ class Preview_template : AppCompatActivity() {
             "engineering_1" -> LayoutInflater.from(this).inflate(R.layout.engineering_1, layoutcontainer, false)
             "basic_1" -> LayoutInflater.from(this).inflate(R.layout.basic_1, layoutcontainer, false)
             "basic_3" -> LayoutInflater.from(this).inflate(R.layout.basic_2, layoutcontainer, false)
+            "it_1" -> LayoutInflater.from(this).inflate(R.layout.it_1,layoutcontainer,false)
             else -> {
                 layoutcontainer.visibility = View.GONE
                 buttonContainer.visibility = View.GONE
@@ -105,7 +105,7 @@ class Preview_template : AppCompatActivity() {
         }
 
         val EducationDetails = db.getAllEducationDetails(Resume_id)
-        val educationTextView: TextView = resume_preview.findViewById(R.id.educationDetails)
+        val educationTextView: TextView = resume_preview.findViewById(R.id.educationalDeatils)
         educationTextView.text = EducationDetails.joinToString(separator = "\n\n\n") {
             "Degree Name: ${it.Degree_name}\nInstitute Name: ${it.Institute_name}\nPassing Year: ${it.passingYear}\nGrade: ${it.grade}"
         }
@@ -192,11 +192,5 @@ class Preview_template : AppCompatActivity() {
         return bitmap
     }
 
-    private fun checkPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
-            }
-        }
-    }
+
 }

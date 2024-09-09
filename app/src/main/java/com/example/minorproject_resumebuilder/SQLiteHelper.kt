@@ -706,7 +706,7 @@ fun updateProject(
             val value = contentValuesOf().apply {
                 put("template_name",templateName)
             }
-            val rowUpdate = db.update(TABLE_RESUME_TEMPELATE,value,"resumeId=?", arrayOf(resumeId.toString()))
+            val rowUpdate = db.update(TABLE_RESUME_TEMPELATE,value,"resume_Id=?", arrayOf(resumeId.toString()))
             rowUpdate>0
         }catch (e:Exception){
             false

@@ -50,6 +50,12 @@
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:text="(Example: Dancing, Singing, Programmer)"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:layout_width="336dp"
