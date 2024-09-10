@@ -4,180 +4,191 @@
     android:layout_width="match_parent"
     android:background="@color/white"
     android:layout_height="match_parent"
+    android:padding="10dp"
     android:orientation="vertical">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#10253F"
-        android:paddingBottom="16dp">
-
-        <ImageView
-            android:id="@+id/profile_image"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/resumr"
-            android:contentDescription="Profile Image" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_toEndOf="@id/profile_image"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="TONY DICAPRIO"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-
-        </LinearLayout>
-    </RelativeLayout>
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingVertical="8dp">
+        android:background="@drawable/card_background">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:id="@+id/personalDetails"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:background="#10253F"
+            android:paddingBottom="16dp">
+
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/resumr"
+                android:contentDescription="Profile Image" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@id/profile_image"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="TONY DICAPRIO"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
 
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#10253F"
-        android:layout_marginVertical="16dp" />
+            </LinearLayout>
+        </RelativeLayout>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
 
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#F7D8B7"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="EDUCATION"
-                android:textColor="#10253F"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
+            android:paddingVertical="2dp">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/educationalDeatils"
-                android:textColor="#10253F"
-                android:textSize="16sp"
+                android:id="@+id/personalDetails"
+                android:textSize="12sp"
                 android:layout_marginTop="10dp"
+                android:paddingLeft="30dp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
                 android:textStyle="bold"
-                android:layout_marginBottom="4dp" />
-
-
+                android:layout_height="wrap_content" />
         </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#10253F"
+            android:layout_marginVertical="16dp" />
 
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="EXPERIENCE"
-                android:textColor="#10253F"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="#F7D8B7"
+                android:padding="16dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:id="@+id/experienceDetails"
-                android:textSize="16sp"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/black"
-                android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="𝐄𝐃𝐔𝐂𝐀𝐓𝐈𝐎𝐍"
+                    android:textColor="#10253F"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SKILL"
-                android:textColor="#10253F"
-                android:textSize="14sp"
-                android:layout_marginTop="20dp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:id="@+id/skillDetails"
-                android:textSize="16sp"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/black"
-                android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/educationalDeatils"
+                    android:textColor="#10253F"
+                    android:textSize="11sp"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp" />
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="PROJECTS"
-                android:textColor="#10253F"
-                android:textSize="14sp"
-                android:layout_marginTop="20dp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:id="@+id/projectDetails"
-                android:textSize="16sp"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/black"
-                android:layout_height="wrap_content" />
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="7dp"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="𝐄𝐗𝐏𝐄𝐑𝐈𝐄𝐍𝐂𝐄"
+                    android:textColor="#10253F"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/experienceDetails"
+                    android:textSize="11sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="𝐒𝐊𝐈𝐋𝐋"
+                    android:textColor="#10253F"
+                    android:textSize="10sp"
+                    android:layout_marginTop="20dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/skillDetails"
+                    android:textSize="11sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="𝐏𝐑𝐎𝐉𝐄𝐂𝐓𝐒"
+                    android:textColor="#10253F"
+                    android:textSize="10sp"
+                    android:layout_marginTop="20dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/projectDetails"
+                    android:textSize="11sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
         </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#10253F"
+            android:paddingBottom="16dp">
+
+        </RelativeLayout>
+
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#10253F"
-        android:paddingBottom="16dp">
-
-    </RelativeLayout>
 </LinearLayout>

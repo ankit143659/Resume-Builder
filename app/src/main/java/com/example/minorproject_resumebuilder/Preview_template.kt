@@ -97,7 +97,7 @@ class Preview_template : AppCompatActivity() {
                 Date of Birth: ${it.dateOfBirth}
             """.trimIndent()
 
-            resume_preview.findViewById<TextView>(R.id.name)?.text = "Name: ${it.fname} ${it.lname}"
+            resume_preview.findViewById<TextView>(R.id.name)?.text = "${it.fname} ${it.lname}"
 
             val imageView = resume_preview.findViewById<ImageView>(R.id.profile_image)
             val imageUri = Uri.parse(it.profileImage)
@@ -106,25 +106,25 @@ class Preview_template : AppCompatActivity() {
 
         val EducationDetails = db.getAllEducationDetails(Resume_id)
         val educationTextView: TextView = resume_preview.findViewById(R.id.educationalDeatils)
-        educationTextView.text = EducationDetails.joinToString(separator = "\n\n\n") {
+        educationTextView.text = EducationDetails.joinToString(separator = "\n\n") {
             "Degree Name: ${it.Degree_name}\nInstitute Name: ${it.Institute_name}\nPassing Year: ${it.passingYear}\nGrade: ${it.grade}"
         }
 
         val skills = db.getAllSkills(Resume_id)
         val skillsTextView: TextView = resume_preview.findViewById(R.id.skillDetails)
-        skillsTextView.text = skills.joinToString(separator = "\n\n\n") {
+        skillsTextView.text = skills.joinToString(separator = "\n\n") {
             "Skill Name: ${it.skillName}, Strength: ${it.strength}"
         }
 
         val experiences = db.getAllExperienceDetails(Resume_id)
         val experienceTextView: TextView = resume_preview.findViewById(R.id.experienceDetails)
-        experienceTextView.text = experiences.joinToString(separator = "\n\n\n") {
+        experienceTextView.text = experiences.joinToString(separator = "\n\n") {
             "Job Title: ${it.jobTitle}\nCompany Name: ${it.companyName}\nLocation: ${it.location}\nYears of Experience: ${it.yearsOfExperience}"
         }
 
         val projects = db.getAllProjectDetails(Resume_id)
         val projectsTextView: TextView = resume_preview.findViewById(R.id.projectDetails)
-        projectsTextView.text = projects.joinToString(separator = "\n\n\n") {
+        projectsTextView.text = projects.joinToString(separator = "\n\n") {
             "Project Name: ${it.projectName}\nProject URL: ${it.projectUrl}\nStart Date: ${it.startDate}\nEnd Date: ${it.endDate}\nRole: ${it.userRole}\nDescription: ${it.projectDescription}"
         }
 
