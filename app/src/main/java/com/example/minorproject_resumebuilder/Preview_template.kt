@@ -172,6 +172,7 @@ class Preview_template : AppCompatActivity() {
         }
 
         download.setOnClickListener {
+
             val storeDeatils = db.addDownloadedResume(share.getuser_id().toLong(),Resume_id,share.getResumeName(),share.getCreateDate())
             if (storeDeatils){
                 val bitMap = getBitmapFromView(resume_preview)

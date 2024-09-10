@@ -828,5 +828,33 @@ fun updateProject(
         }
     }
 
+    fun isTableEmpty(): Boolean {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT COUNT(*) FROM $TABLE_DOWNLOAD", null)
+        var isEmpty = false
+        if (cursor.moveToFirst()) {
+            isEmpty = cursor.getInt(0) == 0
+        }
+        cursor.close()
+        return isEmpty
+    }
+
+    fun resetAutoIncrement() {
+        val db = this.writableDatabase
+        db.beginTransaction()
+        try {
+            // Reset auto-increment by using VACUUM when table is empty
+            db.execSQL("DELETE FROM sqlite_sequence WHERE name=$TABLE_DOWNLOAD")
+            db.setTransactionSuccessful()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            db.endTransaction()
+        }
+    }
+
+
+
+
 
 }

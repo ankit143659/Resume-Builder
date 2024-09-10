@@ -68,8 +68,8 @@ class home_Main : Fragment() {
         imageContainer.visibility = View.GONE
 
         adapter = ResumeAdapter(resumes,{resumeId ->
-            deleteResume(resumeId)},{resumeId->
-                onclick(resumeId)
+            deleteResume(resumeId)},{resumeId,resumeName,createDate->
+                onclick(resumeId,resumeName,createDate)
         },{resumeId ->
             editResume(resumeId)
         })
@@ -163,9 +163,10 @@ class home_Main : Fragment() {
         startActivity(intent)
     }
 
-    private fun onclick(resumeId: String) {
+    private fun onclick(resumeId: String,resumeName : String, createDate: String) {
         val resumeId = resumeId.toLong()
         share.storeResumeId(resumeId)
+        share.storeResumeDetails(resumeName,createDate)
         share.storeTemplateName(db.getTemplateName(resumeId))
         val i = Intent(requireContext(),Preview_template::class.java)
         startActivity(i)

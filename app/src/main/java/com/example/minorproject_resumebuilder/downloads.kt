@@ -82,6 +82,9 @@ class downloads : Fragment() {
 
             GlobalScope.launch {
                 val result = db.deleteDownloadedResume(resumeId.toLong())
+                if (db.isTableEmpty()){
+                    db.resetAutoIncrement()
+                }
                 if (result) {
                     withContext(Dispatchers.Main) {
                         adapter.removeResume(resumeId)

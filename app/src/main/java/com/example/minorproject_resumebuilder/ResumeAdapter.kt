@@ -13,7 +13,7 @@ import com.example.minorproject_resumebuilder.Resume_data
 class ResumeAdapter(
     private val resumes: MutableList<Resume_data>,
     private val onDelete: (String) -> Unit,
-    private val onClick : (String)->Unit,
+    private val onClick : (String,String,String)->Unit,
     private val onEdit : (String)->Unit
 ) : RecyclerView.Adapter<ResumeAdapter.ViewHolder>() {
 
@@ -47,7 +47,7 @@ class ResumeAdapter(
         }
 
         holder.itemView.setOnClickListener {
-            onClick(resume.id)
+            onClick(resume.id,resume.name,resume.creationDate)
         }
         holder.editButton.setOnClickListener{
             onEdit(resume.id)
