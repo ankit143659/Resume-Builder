@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
@@ -168,5 +169,42 @@ class project_detailss : AppCompatActivity() {
 
         newProjectView.tag = proId
         layout.addView(newProjectView)
+        val delete: Button = newProjectView.findViewById(R.id.delete)
+        val layoutId = newProjectView.tag as?Long
+        delete.setOnClickListener {
+            val dialog = AlertDialog.Builder(this)
+            val dialogView = LayoutInflater.from(this).inflate(R.layout.delete_layout, null)
+            dialog.setView(dialogView)
+
+            val yes: Button = dialogView.findViewById(R.id.yes)
+            val no: Button = dialogView.findViewById(R.id.no)
+
+            val alertBox = dialog.create()
+
+            yes.setOnClickListener {
+                if (layoutId!=null){
+                    db.deleteProject(layoutId)
+                    layout.removeView(newProjectView)
+                }
+
+                if (layout.childCount == 0) {
+                    save.visibility = View.GONE
+                }
+                alertBox.dismiss()
+                val intent = intent
+                startActivity(intent)
+            }
+
+            no.setOnClickListener {
+                alertBox.dismiss()
+            }
+
+            alertBox.show()
+        }
+
     }
-}
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this,Create_resume::class.java)
+        startActivity(intent)
+    }}

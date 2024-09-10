@@ -724,4 +724,31 @@ fun updateProject(
             false
         }
     }
+    fun deleteExperience(expId: Long?):Boolean{
+        val db = writableDatabase
+        return try {
+            val delete = db.delete(TABLE_EXPERIENCE,"id=?", arrayOf(expId.toString()))
+            delete >0
+        }catch (e:Exception){
+            false
+        }
+    }
+    fun deleteSkill(skillId: Long?):Boolean{
+        val db = writableDatabase
+        return try {
+            val delete = db.delete(TABLE_SKILL,"id=?", arrayOf(skillId.toString()))
+            delete >0
+        }catch (e:Exception){
+            false
+        }
+    }
+    fun deleteProject(proId: Long?):Boolean{
+        val db = writableDatabase
+        return try {
+            val delete = db.delete(TABLE_PROJECT,"id=?", arrayOf(proId.toString()))
+            delete >0
+        }catch (e:Exception){
+            false
+        }
+    }
 }

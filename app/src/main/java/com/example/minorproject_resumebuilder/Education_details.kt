@@ -38,36 +38,6 @@ class Education_details : AppCompatActivity() {
         save = findViewById(R.id.savebtn)
         db = SQLiteHelper(this)
         educationDetailsView = LayoutInflater.from(this).inflate(R.layout.education_details, layoutContainer, false)
-        val delete: Button = educationDetailsView.findViewById(R.id.delete)
-        val layoutId = educationDetailsView.tag as?Long
-        delete.setOnClickListener {
-            val dialog = AlertDialog.Builder(this)
-            val dialogView = LayoutInflater.from(this).inflate(R.layout.delete_layout, null)
-            dialog.setView(dialogView)
-
-            val yes: Button = dialogView.findViewById(R.id.yes)
-            val no: Button = dialogView.findViewById(R.id.no)
-
-            val alertBox = dialog.create()
-
-            yes.setOnClickListener {
-                if (layoutId!=null){
-                    db.deleteEducation(layoutId)
-                }
-                layoutContainer.removeView(educationDetailsView)
-                if (layoutContainer.childCount == 0) {
-                    save.visibility = View.GONE
-                }
-                alertBox.dismiss()
-            }
-
-            no.setOnClickListener {
-                alertBox.dismiss()
-            }
-
-            alertBox.show()
-        }
-
         val educationDetailsUpdate = db.getAllEducationDetails(Resume_id)
 
         if (educationDetailsUpdate != null) {
@@ -97,6 +67,7 @@ class Education_details : AppCompatActivity() {
 
 
     private fun loadeducationDetails(eduId : Long,degreename: String,PassingYear:String, institutename: String, Grade: String, Location: String) {
+        educationDetailsView = LayoutInflater.from(this).inflate(R.layout.education_details, layoutContainer, false)
         val degreeName = educationDetailsView.findViewById<EditText>(R.id.degreeName)
         val instituteName = educationDetailsView.findViewById<EditText>(R.id.instituteName)
         val location = educationDetailsView.findViewById<EditText>(R.id.Location)
@@ -120,8 +91,39 @@ class Education_details : AppCompatActivity() {
 
 
         educationDetailsView.tag = eduId
-
         layoutContainer.addView(educationDetailsView)
+        val delete: Button = educationDetailsView.findViewById(R.id.delete)
+        val layoutId = educationDetailsView.tag as?Long
+        delete.setOnClickListener {
+            val dialog = AlertDialog.Builder(this)
+            val dialogView = LayoutInflater.from(this).inflate(R.layout.delete_layout, null)
+            dialog.setView(dialogView)
+
+            val yes: Button = dialogView.findViewById(R.id.yes)
+            val no: Button = dialogView.findViewById(R.id.no)
+
+            val alertBox = dialog.create()
+
+            yes.setOnClickListener {
+                if (layoutId!=null){
+                    db.deleteEducation(layoutId)
+                    layoutContainer.removeView(educationDetailsView)
+                }
+
+                if (layoutContainer.childCount == 0) {
+                    save.visibility = View.GONE
+                }
+                alertBox.dismiss()
+                val intent = intent
+                startActivity(intent)
+            }
+
+            no.setOnClickListener {
+                alertBox.dismiss()
+            }
+
+            alertBox.show()
+        }
 
     }
 
@@ -204,5 +206,11 @@ class Education_details : AppCompatActivity() {
 
         layoutContainer.addView(educationDetailsView)
         save.visibility = View.VISIBLE
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this,Create_resume::class.java)
+        startActivity(intent)
     }
 }

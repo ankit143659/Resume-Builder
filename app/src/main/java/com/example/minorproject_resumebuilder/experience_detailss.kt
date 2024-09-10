@@ -147,8 +147,45 @@ class experience_detailss : AppCompatActivity() {
         startDate.setText(year)
 
         experienceDetailsView.tag = expId
-
         layoutcontain.addView(experienceDetailsView)
+        val delete: Button = experienceDetailsView.findViewById(R.id.delete)
+        val layoutId = experienceDetailsView.tag as?Long
+        delete.setOnClickListener {
+            val dialog = AlertDialog.Builder(this)
+            val dialogView = LayoutInflater.from(this).inflate(R.layout.delete_layout, null)
+            dialog.setView(dialogView)
+
+            val yes: Button = dialogView.findViewById(R.id.yes)
+            val no: Button = dialogView.findViewById(R.id.no)
+
+            val alertBox = dialog.create()
+
+            yes.setOnClickListener {
+                if (layoutId!=null){
+                    db.deleteExperience(layoutId)
+                    layoutcontain.removeView(experienceDetailsView)
+                }
+
+                if (layoutcontain.childCount == 0) {
+                    save.visibility = View.GONE
+                }
+                alertBox.dismiss()
+                val intent = intent
+                startActivity(intent)
+            }
+
+            no.setOnClickListener {
+                alertBox.dismiss()
+            }
+
+            alertBox.show()
+        }
+
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this,Create_resume::class.java)
+        startActivity(intent)
     }
 
 }
