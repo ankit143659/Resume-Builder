@@ -10,14 +10,14 @@
 
     <TextView
         android:id="@+id/tv_my_recent_cvs"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:paddingTop="20dp"
+        android:background="@drawable/header_background"
+       android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
         android:text="My Recent CVs"
-        android:textColor="@android:color/black"
+        android:textColor="@color/white"
         android:textSize="20sp" />
 
 

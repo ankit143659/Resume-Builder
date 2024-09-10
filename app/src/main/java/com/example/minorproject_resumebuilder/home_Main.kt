@@ -125,11 +125,10 @@ class home_Main : Fragment() {
                                adapter.addResume(newResume)
                            }
                        }
-
+                        share.storeResumeDetails(nameText,dateText)
                         val intent = Intent(activity, Create_resume::class.java)
                         share.storeResumeId(value)
                         startActivity(intent)
-
                         alertDialog.dismiss()
                     } else {
                         Toast.makeText(

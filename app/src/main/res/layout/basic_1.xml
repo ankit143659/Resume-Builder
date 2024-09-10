@@ -6,31 +6,50 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Header (Name, Address, Contact Info) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center">
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="John DOE"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_gravity="center"/>
 
-        <TextView
-            android:id="@+id/personalDetails"
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:background="#BEB66E"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_gravity="center"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:id="@+id/profile_image"
+                android:layout_gravity="start"
+                android:layout_marginLeft="20dp"
+                android:layout_height="70dp">
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/personalDetails"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <TextView
@@ -38,6 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="EDUCATION"
+        android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_marginTop="16dp"/>
@@ -45,13 +65,14 @@
     <TextView
         android:id="@+id/educationalDeatils"
         android:layout_width="match_parent"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:textSize="12sp"
         android:layout_marginTop="4dp"/>
 
     <!-- Skills Section with Vertical Divider -->
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="3"
@@ -59,26 +80,28 @@
 
         <!-- Hard Skills -->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:paddingLeft="10dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="10dp">
 
             <TextView
                 android:id="@+id/hard_skills_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="SKILLS"
+                android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/skillDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"/>
+                android:textColor="@color/black"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <!-- Vertical Divider -->
@@ -97,10 +120,11 @@
 
             <TextView
                 android:id="@+id/work_experience_title"
-                android:layout_width="203dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:text="WORK EXPERIENCE"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -108,12 +132,14 @@
                 android:id="@+id/experienceDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:textSize="12sp"
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
     </LinearLayout>
     <TextView
         android:id="@+id/languages_title"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PROJECTS"
@@ -125,6 +151,7 @@
         android:id="@+id/projectDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:textSize="12sp"
         android:layout_marginTop="4dp"/>
 </LinearLayout>

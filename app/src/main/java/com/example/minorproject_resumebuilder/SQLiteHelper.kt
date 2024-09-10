@@ -12,6 +12,7 @@ import com.example.minorproject_resumebuilder.PersonalDetail
 import com.example.minorproject_resumebuilder.ProjectDetail
 import com.example.minorproject_resumebuilder.Resume_data
 import com.example.minorproject_resumebuilder.SkillDetail
+import com.example.minorproject_resumebuilder.downLoadedData
 import java.util.Date
 
 
@@ -34,6 +35,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         const val COLUMN_PASSWORD = "password"
         const val COLUMN_PHONE = "phone"
         const val COLUMN_EMAIL = "email"
+        const val TABLE_DOWNLOAD = "download"
 
         private const val TABLE_CREATE = (
                 "CREATE TABLE $TABLE_USERS (" +
@@ -134,6 +136,19 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                 """
                 )
 
+        private const val TABLE_DOWNLOADED = (
+                """
+                    CREATE TABLE $TABLE_DOWNLOAD(
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER,
+                    resume_id,
+                    resumeName TEXT,
+                    createDate TEXT,
+                    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+                    )
+                """
+                )
+
     }
 
 
@@ -146,6 +161,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         db.execSQL(TABLE_EXP)
         db.execSQL(TABLE_PROJECTt)
         db.execSQL(TABLE_RESUME_TEMPLATE)
+        db.execSQL(TABLE_DOWNLOADED)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -157,6 +173,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         db.execSQL("DROP TABLE IF EXISTS $TABLE_EXPERIENCE")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_PROJECT")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_RESUME_TEMPELATE")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_DOWNLOAD")
         onCreate(db)
     }
 
@@ -751,4 +768,65 @@ fun updateProject(
             false
         }
     }
+
+    fun addDownloadedResume(user_id : Long?,resumeId: Long?,resumeName : String? , createDate : String?):Boolean{
+      val db= writableDatabase
+      return try {
+          val values = ContentValues().apply {
+              put("user_id",user_id)
+              put("resume_id",resumeId)
+              put("resumeName",resumeName)
+              put("createDate",createDate)
+          }
+          val insertt = db.insert(TABLE_DOWNLOAD,null,values)
+          insertt !=-1L
+      }catch (e:Exception){
+          false
+      }
+    }
+
+
+    fun getAllDownloaded(userId: Long): MutableList<downLoadedData> {
+        val resumes = mutableListOf<downLoadedData>()
+        val db = readableDatabase
+
+        val selection = "user_id = ?"
+        val selectionArgs = arrayOf(userId.toString())
+
+
+        val cursor = db.query(
+            TABLE_DOWNLOAD,
+            null,
+            selection,
+            selectionArgs,
+            null,
+            null,
+            null
+        )
+
+        with(cursor) {
+            while (moveToNext()) {
+                val id = getLong(getColumnIndexOrThrow("id"))
+                val resumeName = getString(getColumnIndexOrThrow("resumeName"))
+                val createDate = getString(getColumnIndexOrThrow("createDate"))
+                val resume = downLoadedData(id, resumeName, createDate)
+                resumes.add(0, resume)
+            }
+        }
+
+        cursor.close()
+        return resumes
+    }
+
+    fun deleteDownloadedResume(proId: Long?):Boolean{
+        val db = writableDatabase
+        return try {
+            val delete = db.delete(TABLE_DOWNLOAD,"id=?", arrayOf(proId.toString()))
+            delete >0
+        }catch (e:Exception){
+            false
+        }
+    }
+
+
 }

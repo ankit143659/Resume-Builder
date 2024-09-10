@@ -50,4 +50,10 @@ data class Resume_data(
     val creationDate: String
 )
 
+data class downLoadedData(
+    val id : Long,
+    val resumeName: String,
+    val createDate : String
+)
+
 

@@ -23,8 +23,8 @@
             android:textColor="#2a3d66"/>
 
         <ImageView
-            android:id="@+id/profile_picture"
-            android:layout_width="100dp"
+            android:id="@+id/profile_image"
+            android:layout_width="0dp"
             android:layout_height="100dp"
             android:src="@drawable/resumr"
             android:scaleType="centerCrop"

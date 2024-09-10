@@ -5,22 +5,18 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
-import java.io.FileNotFoundException
+import java.io.File
+import java.io.FileOutputStream
 import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
@@ -39,7 +35,7 @@ class Basic_personal_details : AppCompatActivity() {
     private lateinit var nationality: EditText
     private lateinit var gender: String
     private var Resume_id: Long = 0
-    //private var imageData: Uri? = null
+    private var imageData: Uri? = null
 
     companion object {
         const val PICK_IMAGE_REQUEST = 1
@@ -65,112 +61,112 @@ class Basic_personal_details : AppCompatActivity() {
         Resume_id = share.getResumeId()
         db = SQLiteHelper(this)
 
-       // checkAndRequestPermissions()
+        // Check and request necessary permissions
+        checkAndRequestPermissions()
 
+        // Load existing personal details if available
         val personalDetail = db.getPersonalDetails(Resume_id)
         if (personalDetail != null) {
-            email.setText(personalDetail.email)
-            fname.setText(personalDetail.fname)
-            lname.setText(personalDetail.lname)
-            dob.setText(personalDetail.dateOfBirth)
-            phone.setText(personalDetail.phone)
-            if (personalDetail.gender == "Male") {
-                male.isChecked = true
-            } else if (personalDetail.gender == "Female") {
-                female.isChecked = true
-            } else {
-                Toast.makeText(this, "Cannot Find gender", Toast.LENGTH_SHORT).show()
-            }
-            nationality.setText(personalDetail.nationality)
-           // imageData = Uri.parse(personalDetail.profileImage)
-            //loadAndDisplayImage(imageData)
-
-            updateDetails()
+            populateFieldsWithExistingData(personalDetail)
         } else {
-            save.setOnClickListener {
-                saveDetails(male, female)
-            }
+            save.setOnClickListener { saveDetails(male, female) }
         }
 
-        dob.setOnClickListener {
-            val datepicker = DatePickerDialog(
-                this, { _, year, month, dayOfMonth ->
-                    val selectDate = Calendar.getInstance()
-                    selectDate.set(year, month, dayOfMonth)
-                    val dateFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
-                    dob.setText(dateFormat.format(selectDate.time))
-                }, calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            )
-            datepicker.show()
-        }
+        // Date picker for DOB
+        dob.setOnClickListener { showDatePicker() }
 
-       // photo.setOnClickListener {
-         //   openGallery()
-        //}
+        // Open gallery to pick image
+        photo.setOnClickListener { openGallery() }
     }
 
-    /*private fun checkAndRequestPermissions() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED) {
+    private fun checkAndRequestPermissions() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+            ) {
+                Toast.makeText(
+                    this,
+                    "Storage permission is needed to load images.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
 
-            ActivityCompat.requestPermissions(this,
-                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), READ_EXTERNAL_STORAGE_REQUEST)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                READ_EXTERNAL_STORAGE_REQUEST
+            )
+        } else {
+            openGallery()
         }
-    }*/
+    }
+
+    private fun showDatePicker() {
+        val datepicker = DatePickerDialog(
+            this,
+            { _, year, month, dayOfMonth ->
+                val selectDate = Calendar.getInstance()
+                selectDate.set(year, month, dayOfMonth)
+                val dateFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
+                dob.setText(dateFormat.format(selectDate.time))
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        datepicker.show()
+    }
 
     private fun openGallery() {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
+        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+            type = "image/*"
+        }
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == READ_EXTERNAL_STORAGE_REQUEST) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                openGallery()
-            } else {
-                Toast.makeText(this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show()
-            }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data?.data != null) {
+            imageData = data.data
+            Log.d("ImageUri", "Selected Image URI: $imageData")
+            loadAndDisplayImage(imageData)
         }
     }
 
-   /* override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
-            imageData = data.data
-            if (imageData != null) {
-                Log.d("ImageUri", "Selected Image URI: $imageData")
-                loadAndDisplayImage(imageData)
-            } else {
-                Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }*/
-
-    /*private fun loadAndDisplayImage(imageUri: Uri?) {
+    private fun loadAndDisplayImage(imageUri: Uri?) {
         if (imageUri == null) return
         try {
             val inputStream: InputStream? = contentResolver.openInputStream(imageUri)
             val bitmap = BitmapFactory.decodeStream(inputStream)
-            val resizedBitmap = resizeBitmap(bitmap, 500, 500)
-            photo.setImageBitmap(resizedBitmap)
-        } catch (e: FileNotFoundException) {
+            photo.setImageBitmap(bitmap)
+        } catch (e: Exception) {
             e.printStackTrace()
             Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show()
         }
-    }*/
+    }
 
-    private fun resizeBitmap(bitmap: Bitmap, width: Int, height: Int): Bitmap {
-        return Bitmap.createScaledBitmap(bitmap, width, height, false)
+    // Copy image to internal storage
+    private fun copyImageToInternalStorage(imageUri: Uri): String? {
+        try {
+            val inputStream: InputStream? = contentResolver.openInputStream(imageUri)
+            val fileName = "profile_${System.currentTimeMillis()}.jpg"
+            val file = File(filesDir, fileName)
+            val outputStream = FileOutputStream(file)
+            inputStream?.copyTo(outputStream)
+            inputStream?.close()
+            outputStream.close()
+            return file.absolutePath
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(this, "Failed to save image", Toast.LENGTH_SHORT).show()
+            return null
+        }
     }
 
     private fun saveDetails(male: CheckBox, female: CheckBox) {
@@ -182,91 +178,104 @@ class Basic_personal_details : AppCompatActivity() {
         val dob = dob.text.toString().trim()
 
         if (Email.isEmpty() || Phone.isEmpty() || Fname.isEmpty() || Lname.isEmpty() || Nationality.isEmpty()) {
-            Toast.makeText(this, "Please Fill Required details", Toast.LENGTH_SHORT).show()
-        } else if (!male.isChecked && !female.isChecked) {
-            Toast.makeText(this, "Please Select a gender", Toast.LENGTH_SHORT).show()
-        } else if (male.isChecked && female.isChecked) {
-            Toast.makeText(this, "Please Select One gender only", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please fill all required details", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        gender = if (male.isChecked) "Male" else "Female"
+
+        // Copy the image to internal storage
+        val profileImagePath = imageData?.let { copyImageToInternalStorage(it) } ?: ""
+
+        val value = db.insertPersonalDetails(
+            Resume_id,
+            Fname,
+            Lname,
+            Phone,
+            Email,
+            Nationality,
+            gender,
+            dob,
+            profileImagePath
+        )
+
+        if (value) {
+            Toast.makeText(this, "Successfully filled data", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, Create_resume::class.java).apply {
+                putExtra(
+                    "resume_id",
+                    Resume_id
+                )
+            })
+            finish()
         } else {
-            gender = if (male.isChecked) {
-                "Male"
-            } else {
-                "Female"
-            }
-
-            val value = db.insertPersonalDetails(
-                Resume_id,
-                Fname,
-                Lname,
-                Phone,
-                Email,
-                Nationality,
-                gender,
-                dob,
-                 "hello" // Handle null case
-            )
-
-            if (value) {
-                Toast.makeText(this, "Successfully filled Data", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, Create_resume::class.java).apply {
-                    putExtra("resume_id", Resume_id)
-                }
-                startActivity(intent)
-                finish()
-            } else {
-                Toast.makeText(this, "Failed to save Data", Toast.LENGTH_SHORT).show()
-            }
+            Toast.makeText(this, "Failed to save data", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun updateDetails() {
-        save.setOnClickListener {
-            val Email = email.text.toString().trim()
-            val Phone = phone.text.toString().trim()
-            val Fname = fname.text.toString().trim()
-            val Lname = lname.text.toString().trim()
-            val Nationality = nationality.text.toString().trim()
-            val dob = dob.text.toString().trim()
+    private fun populateFieldsWithExistingData(personalDetail: PersonalDetail) {
+        email.setText(personalDetail.email)
+        fname.setText(personalDetail.fname)
+        lname.setText(personalDetail.lname)
+        dob.setText(personalDetail.dateOfBirth)
+        phone.setText(personalDetail.phone)
+        nationality.setText(personalDetail.nationality)
 
-            val male: CheckBox = findViewById(R.id.male)
-            val female: CheckBox = findViewById(R.id.female)
-
-            if (Email.isEmpty() || Phone.isEmpty() || Fname.isEmpty() || Lname.isEmpty() || Nationality.isEmpty()) {
-                Toast.makeText(this, "Please Fill Required details", Toast.LENGTH_SHORT).show()
-            } else if (!male.isChecked && !female.isChecked) {
-                Toast.makeText(this, "Please Select a gender", Toast.LENGTH_SHORT).show()
-            } else if (male.isChecked && female.isChecked) {
-                Toast.makeText(this, "Please Select One gender only", Toast.LENGTH_SHORT).show()
+        if (personalDetail.profileImage != null) {
+            val imageFile = File(personalDetail.profileImage)
+            if (imageFile.exists()) {
+                val bitmap = BitmapFactory.decodeFile(imageFile.absolutePath)
+                photo.setImageBitmap(bitmap)
             } else {
-                gender = if (male.isChecked) {
-                    "Male"
-                } else {
-                    "Female"
-                }
-
-                val value = db.updatePersonalDetails(
-                    Resume_id,
-                    Fname,
-                    Lname,
-                    Phone,
-                    Email,
-                    Nationality,
-                    gender,
-                    dob,
-                    "hello" // Handle null case
-                )
-
-                if (value) {
-                    Toast.makeText(this, "Successfully Updated", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, Create_resume::class.java).apply {
-                        putExtra("resume_id", Resume_id)
-                    }
-                    startActivity(intent)
-                    finish()
-                } else {
-                    Toast.makeText(this, "Failed to update Data", Toast.LENGTH_SHORT).show()
-                }
+                Toast.makeText(this, "Image file not found", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        if (personalDetail.gender == "Male") findViewById<CheckBox>(R.id.male).isChecked = true
+        else if (personalDetail.gender == "Female") findViewById<CheckBox>(R.id.female).isChecked =
+            true
+
+        save.setOnClickListener { personalDetail.profileImage?.let { it1 -> updateDetails(it1) } }
+    }
+
+    private fun updateDetails(existingImagePath: String) {
+        val Email = email.text.toString().trim()
+        val Phone = phone.text.toString().trim()
+        val Fname = fname.text.toString().trim()
+        val Lname = lname.text.toString().trim()
+        val Nationality = nationality.text.toString().trim()
+        val dob = dob.text.toString().trim()
+
+        gender = if (findViewById<CheckBox>(R.id.male).isChecked) "Male" else "Female"
+        val profileImagePath: String = if (imageData != null) {
+            imageData?.let { copyImageToInternalStorage(it) } ?: ""
+        } else {
+            existingImagePath
+        }
+
+        val value = db.updatePersonalDetails(
+            Resume_id,
+            Fname,
+            Lname,
+            Phone,
+            Email,
+            Nationality,
+            gender,
+            dob,
+            profileImagePath
+        )
+
+        if (value) {
+            Toast.makeText(this, "Successfully updated", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, Create_resume::class.java).apply {
+                putExtra(
+                    "resume_id",
+                    Resume_id
+                )
+            })
+            finish()
+        } else {
+            Toast.makeText(this, "Failed to update data", Toast.LENGTH_SHORT).show()
         }
     }
 }

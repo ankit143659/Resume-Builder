@@ -67,4 +67,19 @@ class SharePrefrence (context: Context) {
         return prefs.getBoolean("updateMode",false)
     }
 
+    fun storeResumeDetails(resumeName : String, createDate : String){
+        val editor = prefs.edit()
+        editor.putString("resumeName",resumeName)
+        editor.putString("createDate",createDate)
+        editor.apply()
+    }
+
+    fun getResumeName (): String?{
+        return prefs.getString("resumeName","")
+    }
+
+    fun getCreateDate (): String?{
+        return prefs.getString("createDate","")
+    }
+
 }

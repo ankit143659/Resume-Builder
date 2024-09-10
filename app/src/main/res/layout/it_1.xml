@@ -24,7 +24,7 @@
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 
-            </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_below="@id/header_section"
@@ -58,6 +58,7 @@
             android:layout_width="0dp"
             android:layout_height="120dp"
             android:layout_weight="1"
+            android:id="@+id/profile_image"
             android:src="@drawable/resumr"
             android:scaleType="centerCrop"
             android:layout_marginStart="16dp"

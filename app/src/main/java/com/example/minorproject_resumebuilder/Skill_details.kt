@@ -40,13 +40,12 @@ class Skill_details : AppCompatActivity() {
         Resume_id =share.getResumeId()
         skillView   =LayoutInflater.from(this). inflate(R.layout.skill_details,layoutcontainer,false)
         val skillDetails = db.getAllSkills(Resume_id)
-        if (skillDetails!=null){
-            loadDetails()
-        }
         if(layoutcontainer.childCount!=0){
             save.visibility=View.VISIBLE
         }
-
+        if (skillDetails!=null){
+            loadDetails()
+        }
         addLayout.setOnClickListener{
             addskills();
         }

@@ -55,4 +55,12 @@ class Create_resume : AppCompatActivity() {
             finish()
         }
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val i = Intent(this,HomePage::class.java)
+        startActivity(i)
+        finish()
+    }
+
 }
