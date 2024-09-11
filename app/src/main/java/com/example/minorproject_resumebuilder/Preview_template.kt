@@ -83,6 +83,7 @@ class Preview_template : AppCompatActivity() {
             "engineering_1" -> LayoutInflater.from(this).inflate(R.layout.engineering_1, layoutcontainer, false)
             "engineering_2" -> LayoutInflater.from(this).inflate(R.layout.engineering_2, layoutcontainer, false)
             "basic_1" -> LayoutInflater.from(this).inflate(R.layout.basic_1, layoutcontainer, false)
+            "design_1" -> LayoutInflater.from(this).inflate(R.layout.design_1, layoutcontainer, false)
             "basic_3" -> LayoutInflater.from(this).inflate(R.layout.basic_2, layoutcontainer, false)
             "it_1" -> LayoutInflater.from(this).inflate(R.layout.it_1, layoutcontainer, false)
             else -> {

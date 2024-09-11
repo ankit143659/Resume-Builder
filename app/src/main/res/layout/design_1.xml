@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="#FFFFFF"
+    android:padding="16dp">
+
+    <!-- Left Section (Profile) -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="#2F3E4E"
+        android:padding="16dp">
+
+
+        <ImageView
+            android:layout_width="60dp"
+            android:id="@+id/profile_image"
+            android:layout_height="60dp"/>
+
+        <!-- Name -->
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="𝐌𝐚𝐱𝐰𝐞𝐥𝐥 𝐏𝐫𝐢𝐦𝐞"
+            android:textSize="10sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <!-- Job Title -->
+        <TextView
+            android:id="@+id/job_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="𝐆𝐫𝐚𝐩𝐡𝐢𝐜 𝐃𝐞𝐬𝐢𝐠𝐧𝐞𝐫"
+            android:textSize="10sp"
+            android:textColor="#FFFFFF"
+            android:paddingTop="8dp" />
+
+        <!-- Contact Information -->
+        <TextView
+            android:id="@+id/contact_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="#FFFFFF"
+            android:paddingTop="16dp" />
+
+    </LinearLayout>
+
+    <!-- Right Section (Experience, Education, Skills) -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Experience Section -->
+        <TextView
+            android:id="@+id/experience_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="𝐄𝐗𝐏𝐄𝐑𝐈𝐄𝐍𝐂𝐄"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:paddingBottom="8dp" />
+
+        <!-- Experience Details -->
+        <TextView
+            android:id="@+id/experienceDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="#000000"
+            android:paddingBottom="16dp" />
+
+        <!-- Education Section -->
+        <TextView
+            android:id="@+id/education_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="𝐄𝐃𝐔𝐂𝐀𝐓𝐈𝐎𝐍"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:paddingBottom="8dp" />
+
+        <!-- Education Details -->
+        <TextView
+            android:id="@+id/educationalDeatils"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="#000000"
+            android:paddingBottom="16dp" />
+
+        <!-- Skills Section -->
+        <TextView
+            android:id="@+id/skills_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="𝐒𝐊𝐈𝐋𝐋𝐒"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:paddingBottom="8dp" />
+        <TextView
+            android:id="@+id/skillDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="#000000"
+            android:paddingBottom="16dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="𝐏𝐑𝐎𝐉𝐄𝐂𝐓𝐒"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:paddingBottom="8dp" />
+        <TextView
+            android:id="@+id/projectDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="#000000"
+            android:paddingBottom="16dp" />
+    </LinearLayout>
+
+</LinearLayout>
