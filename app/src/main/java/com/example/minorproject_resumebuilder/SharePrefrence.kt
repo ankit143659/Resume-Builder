@@ -82,4 +82,14 @@ class SharePrefrence (context: Context) {
         return prefs.getString("createDate","")
     }
 
+    fun storeProfileImage(image : String){
+        val editor = prefs.edit()
+        editor.putString("profileImage",image)
+        editor.apply()
+    }
+
+    fun getProfileImage():String?{
+        return prefs.getString("profileImage","")
+    }
+
 }

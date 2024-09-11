@@ -45,6 +45,8 @@ class experience_detailss : AppCompatActivity() {
 
         if(experienceDetails!=null){
             loadData()
+        }else{
+            save.visibility = View.GONE
         }
         if(layoutcontain.childCount!=0){
             save.visibility=View.VISIBLE

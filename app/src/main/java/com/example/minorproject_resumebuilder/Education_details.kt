@@ -45,6 +45,8 @@ class Education_details : AppCompatActivity() {
         }
         if(layoutContainer.childCount!=0){
             save.visibility=View.VISIBLE
+        }else{
+            save.visibility = View.GONE
         }
 
         addLayout.setOnClickListener {
