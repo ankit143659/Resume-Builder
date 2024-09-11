@@ -29,39 +29,38 @@
                 android:id="@+id/profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#0D8EB5"
-                android:text="Andrew Kevin"
-                android:textSize="24sp"
+                android:textColor="#10253F"
+                android:text="𝐀𝐧𝐝𝐫𝐞𝐰 𝐄𝐝𝐰𝐚𝐫𝐝"
+                android:textSize="10sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/profile_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Human Capital Manager"
-                android:textSize="16sp" />
+                android:text="𝐇𝐮𝐦𝐚𝐧 𝐂𝐚𝐩𝐢𝐭𝐚𝐥 𝐌𝐚𝐧𝐚𝐠𝐞𝐫"
+                android:textSize="10sp" />
         </LinearLayout>
     </LinearLayout>
 
     <!-- Contact Information -->
     <TextView
         android:id="@+id/personalDetails"
-        android:layout_width="wrap_content"
-        android:background="#58747D"
+        android:layout_width="match_parent"
+        android:background="#408BE7"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_height="wrap_content"
-        android:text="info@resumekraft.com • 202-555-0120 • Chicago, Illinois, US"
-        android:textSize="14sp"
+        android:textSize="10sp"
         android:layout_marginTop="8dp" />
 
     <!-- Skills Section -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SKILLS"
-        android:textColor="#0D8EB5"
-        android:textSize="18sp"
+        android:text="𝐒𝐊𝐈𝐋𝐋𝐒"
+        android:textColor="#10253F"
+        android:textSize="10sp"
         android:textStyle="bold"
         android:layout_marginTop="24dp" />
 
@@ -74,15 +73,16 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="10sp"
             android:id="@+id/skillDetails"
             android:padding="8dp" />
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="EXPERIENCE"
-        android:textColor="#0D8EB5"
-        android:textSize="18sp"
+        android:text="𝐄𝐗𝐏𝐄𝐑𝐈𝐄𝐍𝐂𝐄"
+        android:textColor="#10253F"
+        android:textSize="10sp"
         android:textStyle="bold"
         android:layout_marginTop="24dp" />
 
@@ -97,7 +97,7 @@
             android:id="@+id/experienceDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:textSize="10sp"
             android:textStyle="italic" />
 
         </LinearLayout>
@@ -105,9 +105,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="EDUCATION"
-        android:textColor="#0D8EB5"
-        android:textSize="18sp"
+        android:text="𝐄𝐃𝐔𝐂𝐀𝐓𝐈𝐎𝐍"
+        android:textColor="#10253F"
+        android:textSize="10sp"
         android:textStyle="bold"
         android:layout_marginTop="24dp" />
 
@@ -121,7 +121,7 @@
             android:id="@+id/educationalDeatils"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:textSize="10sp"
             android:textStyle="italic" />
 
        </LinearLayout>
@@ -129,9 +129,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PROJECT"
-        android:textSize="18sp"
-        android:textColor="#0D8EB5"
+        android:text="𝐏𝐑𝐎𝐉𝐄𝐂𝐓"
+        android:textSize="10sp"
+        android:textColor="#10253F"
         android:textStyle="bold"
         android:layout_marginTop="24dp" />
 
@@ -145,7 +145,7 @@
             android:id="@+id/projectDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:textSize="10sp"
             android:textStyle="italic" />
 
     </LinearLayout>

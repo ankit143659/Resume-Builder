@@ -36,8 +36,8 @@
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Edward Hloomstrong"
-                    android:textSize="22sp"
+                    android:text="𝐄𝐝𝐰𝐚𝐫𝐝 𝐇𝐥𝐨𝐨𝐦𝐬𝐭𝐫𝐨𝐧𝐠"
+                    android:textSize="10sp"
                     android:textStyle="bold" />
 
 
@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:paddingTop="4dp" />
             </LinearLayout>
         </LinearLayout>
@@ -65,9 +65,9 @@
                 android:id="@+id/professionalAttributesLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Education"
-                android:textSize="16sp"
-                android:textColor="#2196F3"
+                android:text="𝐄𝐝𝐮𝐜𝐚𝐭𝐢𝐨𝐧"
+                android:textSize="10sp"
+                android:textColor="#10253F"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
 
@@ -95,9 +95,9 @@
                 android:id="@+id/professionalAttri"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Skill"
-                android:textSize="16sp"
-                android:textColor="#2196F3"
+                android:text="𝐒𝐤𝐢𝐥𝐥"
+                android:textSize="10sp"
+                android:textColor="#10253F"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
 
@@ -124,9 +124,9 @@
                 android:id="@+id/profeLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Experience"
-                android:textColor="#2196F3"
-                android:textSize="16sp"
+                android:text="𝐄𝐱𝐩𝐞𝐫𝐢𝐞𝐧𝐜𝐞"
+                android:textColor="#10253F"
+                android:textSize="10sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
 
@@ -153,9 +153,9 @@
                 android:id="@+id/professionalsLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Project"
-                android:textSize="16sp"
-                android:textColor="#2196F3"
+                android:text="𝐏𝐫𝐨𝐣𝐞𝐜𝐭"
+                android:textSize="10sp"
+                android:textColor="#10253F"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
 

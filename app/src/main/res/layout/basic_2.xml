@@ -16,8 +16,8 @@
             android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="ARIS MALIGIANNIS"
-            android:textSize="24sp"
+            android:text="𝐀𝐑𝐈𝐒 𝐌𝐀𝐋𝐈𝐆𝐈𝐀𝐍𝐍𝐈𝐒"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:layout_weight="2"
             android:textColor="#2a3d66"/>
@@ -36,8 +36,9 @@
         android:id="@+id/general_info_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PERSONAL DETAILS"
+        android:text="𝐏𝐄𝐑𝐒𝐎𝐍𝐀𝐋 𝐃𝐄𝐓𝐀𝐈𝐋𝐒"
         android:textStyle="bold"
+        android:textSize="10sp"
         android:textColor="#FFFFFF"
         android:gravity="center"
         android:background="#5A5A5A"
@@ -48,15 +49,16 @@
         android:id="@+id/personalDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="10sp"
         android:layout_marginTop="8dp"/>
     <TextView
         android:id="@+id/professional"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="EDUCATION"
+        android:text="𝐄𝐃𝐔𝐂𝐀𝐓𝐈𝐎𝐍"
         android:textStyle="bold"
         android:gravity="center"
+        android:textSize="10sp"
         android:textColor="#FFFFFF"
         android:background="#5A5A5A"
         android:padding="4dp"
@@ -66,7 +68,7 @@
         android:id="@+id/educationalDeatils"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="10sp"
         android:layout_marginTop="8dp"/>
 
     <!-- Academic Studies Section -->
@@ -74,9 +76,10 @@
         android:id="@+id/academic_studies_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SKILLS"
+        android:text="𝐒𝐊𝐈𝐋𝐋𝐒"
         android:gravity="center"
         android:textStyle="bold"
+        android:textSize="10sp"
         android:textColor="#FFFFFF"
         android:background="#5A5A5A"
         android:padding="4dp"
@@ -86,7 +89,7 @@
         android:id="@+id/skillDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="10sp"
         android:layout_marginTop="8dp"/>
 
     <!-- Professional Experience Section -->
@@ -94,9 +97,10 @@
         android:id="@+id/professional_experience_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="EXPERIENCE"
+        android:text="𝐄𝐗𝐏𝐄𝐑𝐈𝐄𝐍𝐂𝐄"
         android:textStyle="bold"
         android:gravity="center"
+        android:textSize="10sp"
         android:textColor="#FFFFFF"
         android:background="#5A5A5A"
         android:padding="4dp"
@@ -106,15 +110,16 @@
         android:id="@+id/experienceDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="10sp"
         android:layout_marginTop="8dp"/>
     <TextView
         android:id="@+id/professional_experience_labeluh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PROJECTS"
+        android:text="𝐏𝐑𝐎𝐉𝐄𝐂𝐓𝐒"
         android:textStyle="bold"
         android:gravity="center"
+        android:textSize="10sp"
         android:textColor="#FFFFFF"
         android:background="#5A5A5A"
         android:padding="4dp"
@@ -124,7 +129,7 @@
         android:id="@+id/projectDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="10sp"
         android:layout_marginTop="8dp"/>
 
 

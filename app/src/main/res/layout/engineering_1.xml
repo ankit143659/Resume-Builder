@@ -11,8 +11,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="#2196F3"
+        android:background="@drawable/header_background"
         android:padding="16dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="𝐀𝐧𝐝𝐫𝐞𝐰 𝐄𝐝𝐰𝐚𝐫𝐝"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
         <ImageView
             android:id="@+id/profile_image"
             android:layout_width="80dp"
@@ -21,21 +37,7 @@
             android:scaleType="centerCrop"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="16dp" />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center_vertical">
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Andrew Edward"
-                android:textSize="24sp"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
-        </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
         android:id="@+id/contact_info"
@@ -51,8 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/personalDetails"
-            android:textColor="#2196F3"
-            android:textSize="14sp"
+            android:textColor="#10253F"
+            android:textSize="10sp"
             android:layout_gravity="end" />
     </LinearLayout>
 
@@ -66,17 +68,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EDUCATION DETAILS"
-            android:textColor="#2196F3"
+            android:text="𝐄𝐃𝐔𝐂𝐀𝐓𝐈𝐎𝐍 𝐃𝐄𝐓𝐀𝐈𝐋𝐒"
+            android:textColor="#10253F"
             android:textStyle="bold"
-            android:textSize="18sp" />
+            android:textSize="10sp" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:id="@+id/educationalDeatils"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="10sp" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/skills_languages_section"
@@ -93,18 +95,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SKILLS"
-                android:textColor="#2196F3"
+                android:text="𝐒𝐊𝐈𝐋𝐋𝐒"
+                android:textColor="#10253F"
                 android:textStyle="bold"
-                android:textSize="18sp" />
+                android:textSize="10sp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/black"
                 android:id="@+id/skillDetails"
-                android:textSize="14sp" />
+                android:textSize="10sp" />
         </LinearLayout>
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="#000" />
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -113,17 +121,17 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="EXPERINCE"
-                android:textColor="#2196F3"
+                android:text="𝐄𝐗𝐏𝐄𝐑𝐈𝐄𝐍𝐂𝐄"
+                android:textColor="#10253F"
                 android:textStyle="bold"
-                android:textSize="18sp" />
+                android:textSize="10sp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:id="@+id/experienceDetails"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="10sp" />
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -136,17 +144,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PROJECTS"
-            android:textColor="#2196F3"
+            android:text="𝐏𝐑𝐎𝐉𝐄𝐂𝐓𝐒"
+            android:textColor="#10253F"
             android:textStyle="bold"
-            android:textSize="18sp" />
+            android:textSize="10sp" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:id="@+id/projectDetails"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="10sp" />
 
     </LinearLayout>
 </RelativeLayout>
