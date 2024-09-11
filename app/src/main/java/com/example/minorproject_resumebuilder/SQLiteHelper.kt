@@ -42,7 +42,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                         "$COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "$COLUMN_USERNAME TEXT UNIQUE, " +
                         "$COLUMN_PASSWORD TEXT, " +
-                        "$COLUMN_PHONE TEXT, " +
+                        "$COLUMN_PHONE TEXT UNIQUE, " +
                         "$COLUMN_EMAIL TEXT UNIQUE);")
 
         private const val TABLE_RESUMEE = ("""

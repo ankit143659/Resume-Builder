@@ -186,6 +186,7 @@ class Profile : Fragment() {
 
         yes.setOnClickListener {
             prefrence.setLoggedIn(false)
+            prefrence.storeProfileImage(R.id.logo.toString())
             val intent = Intent(activity, LoginPage::class.java)
             startActivity(intent)
             alertBox.dismiss()
