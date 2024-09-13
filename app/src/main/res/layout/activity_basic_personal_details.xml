@@ -186,7 +186,7 @@
                     android:layout_marginTop="5dp"
                     android:src="@drawable/baseline_flag_24" />
 
-                <EditText
+                <Spinner
                     android:layout_width="229dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"

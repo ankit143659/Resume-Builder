@@ -32,8 +32,9 @@ class Basic_personal_details : AppCompatActivity() {
     private lateinit var fname: EditText
     private lateinit var lname: EditText
     private lateinit var phone: EditText
-    private lateinit var nationality: EditText
+    private lateinit var nationality: Spinner
     private lateinit var gender: String
+    private lateinit var adapter: Adapter
     private var Resume_id: Long = 0
     private var imageData: Uri? = null
 
@@ -42,7 +43,7 @@ class Basic_personal_details : AppCompatActivity() {
         const val READ_EXTERNAL_STORAGE_REQUEST = 100
     }
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_basic_personal_details)
@@ -63,6 +64,13 @@ class Basic_personal_details : AppCompatActivity() {
 
         // Check and request necessary permissions
         checkAndRequestPermissions()
+
+        val items= arrayOf("Nationality","Indian","Non Indian")
+         adapter=ArrayAdapter(this,R.layout.simple_spinner_items,items)
+        (adapter as ArrayAdapter<*>).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        nationality.adapter= adapter as ArrayAdapter<*>
+
 
         // Load existing personal details if available
         val personalDetail = db.getPersonalDetails(Resume_id)
@@ -174,7 +182,7 @@ class Basic_personal_details : AppCompatActivity() {
         val Phone = phone.text.toString().trim()
         val Fname = fname.text.toString().trim()
         val Lname = lname.text.toString().trim()
-        val Nationality = nationality.text.toString().trim()
+        val Nationality = nationality.toString()
         val dob = dob.text.toString().trim()
 
         if (Email.isEmpty() || Phone.isEmpty() || Fname.isEmpty() || Lname.isEmpty() || Nationality.isEmpty()) {
@@ -214,12 +222,15 @@ class Basic_personal_details : AppCompatActivity() {
     }
 
     private fun populateFieldsWithExistingData(personalDetail: PersonalDetail) {
+        val items= arrayOf("Nationality","Indian","Non Indian")
         email.setText(personalDetail.email)
         fname.setText(personalDetail.fname)
         lname.setText(personalDetail.lname)
         dob.setText(personalDetail.dateOfBirth)
         phone.setText(personalDetail.phone)
-        nationality.setText(personalDetail.nationality)
+        val position=items.indexOf(personalDetail.nationality)
+
+
 
         if (personalDetail.profileImage != null) {
             val imageFile = File(personalDetail.profileImage)
@@ -243,7 +254,7 @@ class Basic_personal_details : AppCompatActivity() {
         val Phone = phone.text.toString().trim()
         val Fname = fname.text.toString().trim()
         val Lname = lname.text.toString().trim()
-        val Nationality = nationality.text.toString().trim()
+        val Nationality = nationality.toString().trim()
         val dob = dob.text.toString().trim()
 
         gender = if (findViewById<CheckBox>(R.id.male).isChecked) "Male" else "Female"
