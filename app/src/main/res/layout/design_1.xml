@@ -44,7 +44,7 @@
 
         <!-- Contact Information -->
         <TextView
-            android:id="@+id/contact_info"
+            android:id="@+id/personalDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="10sp"
