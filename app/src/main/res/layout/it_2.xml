@@ -1,0 +1,166 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <!-- Left Sidebar (Contact and Personal Details) -->
+
+    <!-- Right Content (Summary, Experience, Education) -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Profile Image -->
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/resumr"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:contentDescription="Profile Picture" />
+
+            <!-- Name and Title -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Richard Scott"
+                    android:textStyle="bold"
+                    android:textSize="10sp"
+                    android:textColor="#000000" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Summary Section -->
+        <TextView
+            android:id="@+id/summary_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Education"
+            android:textStyle="bold"
+            android:textSize="10sp"
+            android:textColor="#1E3D8C"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/educationalDeatils"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="#555555"
+            android:layout_marginTop="8dp" />
+
+        <!-- Experience Section -->
+        <TextView
+            android:id="@+id/experience_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Experience"
+            android:textStyle="bold"
+            android:textSize="10sp"
+            android:textColor="#1E3D8C"
+            android:layout_marginTop="16dp" />
+
+
+            <TextView
+                android:id="@+id/experienceDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="10sp"
+                android:textColor="#000000" />
+
+
+            <TextView
+                android:id="@+id/experience_titjgjle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Projects"
+                android:textStyle="bold"
+                android:textSize="10sp"
+                android:textColor="#1E3D8C"
+                android:layout_marginTop="16dp" />
+
+
+
+                <TextView
+                    android:id="@+id/projectDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="10sp"
+                    android:textColor="#000000" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="#1E3D8C"
+        android:padding="16dp">
+
+        <!-- Contact Section -->
+        <TextView
+            android:id="@+id/contact_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact"
+            android:textStyle="bold"
+            android:textSize="10sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/personalDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="0dp" />
+
+       <!-- Personal Skills Section -->
+        <TextView
+            android:id="@+id/skills_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SKILLS"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textSize="10sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/skillDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="8dp" />
+
+       </LinearLayout>
+
+
+</LinearLayout>

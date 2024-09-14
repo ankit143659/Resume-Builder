@@ -86,6 +86,7 @@ class Preview_template : AppCompatActivity() {
             "design_1" -> LayoutInflater.from(this).inflate(R.layout.design_1, layoutcontainer, false)
             "basic_3" -> LayoutInflater.from(this).inflate(R.layout.basic_2, layoutcontainer, false)
             "it_1" -> LayoutInflater.from(this).inflate(R.layout.it_1, layoutcontainer, false)
+            "it_2" -> LayoutInflater.from(this).inflate(R.layout.it_2, layoutcontainer, false)
             else -> {
                 layoutcontainer.visibility = View.GONE
                 buttonContainer.visibility = View.GONE
