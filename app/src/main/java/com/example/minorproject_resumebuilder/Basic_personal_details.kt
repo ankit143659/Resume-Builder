@@ -34,7 +34,7 @@ class Basic_personal_details : AppCompatActivity() {
     private lateinit var phone: EditText
     private lateinit var nationality: Spinner
     private lateinit var gender: String
-    private lateinit var adapter: Adapter
+    private lateinit var adapter: ArrayAdapter<String>
     private var Resume_id: Long = 0
     private var imageData: Uri? = null
 
@@ -65,12 +65,11 @@ class Basic_personal_details : AppCompatActivity() {
         // Check and request necessary permissions
         checkAndRequestPermissions()
 
-        val items= arrayOf("Nationality","Indian","Non Indian")
-         adapter=ArrayAdapter(this,R.layout.simple_spinner_items,items)
-        (adapter as ArrayAdapter<*>).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-        nationality.adapter= adapter as ArrayAdapter<*>
-
+        // Set up spinner
+        val items = resources.getStringArray(R.array.nationality_items)
+        adapter = ArrayAdapter(this, R.layout.simple_spinner_items, items)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        nationality.adapter = adapter
 
         // Load existing personal details if available
         val personalDetail = db.getPersonalDetails(Resume_id)
@@ -159,7 +158,6 @@ class Basic_personal_details : AppCompatActivity() {
         }
     }
 
-    // Copy image to internal storage
     private fun copyImageToInternalStorage(imageUri: Uri): String? {
         try {
             val inputStream: InputStream? = contentResolver.openInputStream(imageUri)
@@ -182,7 +180,7 @@ class Basic_personal_details : AppCompatActivity() {
         val Phone = phone.text.toString().trim()
         val Fname = fname.text.toString().trim()
         val Lname = lname.text.toString().trim()
-        val Nationality = nationality.toString()
+        val Nationality = nationality.selectedItem.toString().trim() // Get spinner value
         val dob = dob.text.toString().trim()
 
         if (Email.isEmpty() || Phone.isEmpty() || Fname.isEmpty() || Lname.isEmpty() || Nationality.isEmpty()) {
@@ -210,10 +208,7 @@ class Basic_personal_details : AppCompatActivity() {
         if (value) {
             Toast.makeText(this, "Successfully filled data", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, Create_resume::class.java).apply {
-                putExtra(
-                    "resume_id",
-                    Resume_id
-                )
+                putExtra("resume_id", Resume_id)
             })
             finish()
         } else {
@@ -222,16 +217,20 @@ class Basic_personal_details : AppCompatActivity() {
     }
 
     private fun populateFieldsWithExistingData(personalDetail: PersonalDetail) {
-        val items= arrayOf("Nationality","Indian","Non Indian")
         email.setText(personalDetail.email)
         fname.setText(personalDetail.fname)
         lname.setText(personalDetail.lname)
         dob.setText(personalDetail.dateOfBirth)
         phone.setText(personalDetail.phone)
-        val position=items.indexOf(personalDetail.nationality)
 
+        // Set the nationality spinner to the correct value
+        val nationalityList = resources.getStringArray(R.array.nationality_items)
+        val nationalityIndex = nationalityList.indexOf(personalDetail.nationality)
+        if (nationalityIndex >= 0) {
+            nationality.setSelection(nationalityIndex)
+        }
 
-
+        // Set profile image, gender, and other fields as before
         if (personalDetail.profileImage != null) {
             val imageFile = File(personalDetail.profileImage)
             if (imageFile.exists()) {
@@ -242,9 +241,11 @@ class Basic_personal_details : AppCompatActivity() {
             }
         }
 
-        if (personalDetail.gender == "Male") findViewById<CheckBox>(R.id.male).isChecked = true
-        else if (personalDetail.gender == "Female") findViewById<CheckBox>(R.id.female).isChecked =
-            true
+        if (personalDetail.gender == "Male") {
+            findViewById<CheckBox>(R.id.male).isChecked = true
+        } else if (personalDetail.gender == "Female") {
+            findViewById<CheckBox>(R.id.female).isChecked = true
+        }
 
         save.setOnClickListener { personalDetail.profileImage?.let { it1 -> updateDetails(it1) } }
     }
@@ -254,15 +255,18 @@ class Basic_personal_details : AppCompatActivity() {
         val Phone = phone.text.toString().trim()
         val Fname = fname.text.toString().trim()
         val Lname = lname.text.toString().trim()
-        val Nationality = nationality.toString().trim()
+        val Nationality = nationality.selectedItem.toString().trim() // Get spinner value
         val dob = dob.text.toString().trim()
 
-        gender = if (findViewById<CheckBox>(R.id.male).isChecked) "Male" else "Female"
-        val profileImagePath: String = if (imageData != null) {
-            imageData?.let { copyImageToInternalStorage(it) } ?: ""
-        } else {
-            existingImagePath
+        if (Email.isEmpty() || Phone.isEmpty() || Fname.isEmpty() || Lname.isEmpty() || Nationality.isEmpty()) {
+            Toast.makeText(this, "Please fill all required details", Toast.LENGTH_SHORT).show()
+            return
         }
+
+        gender = if (findViewById<CheckBox>(R.id.male).isChecked) "Male" else "Female"
+
+        // Check if a new image is selected, otherwise use existing one
+        val profileImagePath = imageData?.let { copyImageToInternalStorage(it) } ?: existingImagePath
 
         val value = db.updatePersonalDetails(
             Resume_id,
@@ -277,12 +281,9 @@ class Basic_personal_details : AppCompatActivity() {
         )
 
         if (value) {
-            Toast.makeText(this, "Successfully updated", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Successfully updated data", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, Create_resume::class.java).apply {
-                putExtra(
-                    "resume_id",
-                    Resume_id
-                )
+                putExtra("resume_id", Resume_id)
             })
             finish()
         } else {
