@@ -57,7 +57,7 @@ class Preview_template : AppCompatActivity() {
 
         Log.d("Preview_template", "Resume Name: $resumeName, Resume ID: $Resume_id")
 
-        if (resumeName != null && Resume_id != null) {
+        if (resumeName != null) {
             loadResumePreview(resumeName, Resume_id)
         } else {
             Toast.makeText(this, "Failed to load resume. Invalid resume ID or name.", Toast.LENGTH_SHORT).show()
@@ -84,7 +84,7 @@ class Preview_template : AppCompatActivity() {
             "engineering_2" -> LayoutInflater.from(this).inflate(R.layout.engineering_2, layoutcontainer, false)
             "basic_1" -> LayoutInflater.from(this).inflate(R.layout.basic_1, layoutcontainer, false)
             "design_1" -> LayoutInflater.from(this).inflate(R.layout.design_1, layoutcontainer, false)
-            "basic_3" -> LayoutInflater.from(this).inflate(R.layout.basic_2, layoutcontainer, false)
+            "basic_2" -> LayoutInflater.from(this).inflate(R.layout.basic_2, layoutcontainer, false)
             "it_1" -> LayoutInflater.from(this).inflate(R.layout.it_1, layoutcontainer, false)
             "it_2" -> LayoutInflater.from(this).inflate(R.layout.it_2, layoutcontainer, false)
             else -> {

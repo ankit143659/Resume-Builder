@@ -162,8 +162,8 @@ class resume_template : AppCompatActivity() {
 
                     select_img2.setOnClickListener{
                         Toast.makeText(this@resume_template,"Succesfully Created",Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@resume_template,HomePage::class.java)
-                        share.storeTemplateName("basic_2")
+                        val intent = Intent(this@resume_template,Preview_template::class.java)
+                        share.storeTemplateName("design_1")
                         startActivity(intent)
 
                     }
