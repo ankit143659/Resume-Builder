@@ -41,16 +41,16 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                 "CREATE TABLE $TABLE_USERS (" +
                         "$COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "$COLUMN_USERNAME TEXT UNIQUE, " +
-                        "$COLUMN_PASSWORD TEXT, " +
-                        "$COLUMN_PHONE TEXT UNIQUE, " +
-                        "$COLUMN_EMAIL TEXT UNIQUE);")
+                        "$COLUMN_PASSWORD TEXT NOT NULL, " +
+                        "$COLUMN_PHONE TEXT UNIQUE NOT NULL, " +
+                        "$COLUMN_EMAIL TEXT UNIQUE NOT NULL);")
 
         private const val TABLE_RESUMEE = ("""
             CREATE TABLE $TABLE_RESUME (
                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                user_id INTEGER, 
-                name TEXT, 
-                created_date TEXT,
+                user_id INTEGER NOT NULL, 
+                name TEXT NOT NULL, 
+                created_date TEXT NOT NULL  ,
                 FOREIGN KEY(user_id) REFERENCES $TABLE_USERS(id) ON DELETE CASCADE
             )
         """)
