@@ -110,6 +110,7 @@ class home_Main : Fragment() {
             }
 
             create.setOnClickListener {
+                share.storePersonalDetails(false)
                 val nameText = name.text.toString()
                 val dateText = date.text.toString()
 
@@ -157,6 +158,7 @@ class home_Main : Fragment() {
     }
 
     private fun editResume(resumeId: String) {
+        share.storePersonalDetails(true)
         val resume_id = resumeId.toLong()
         share.storeResumeId(resume_id)
         share.storeUpdateMode(true)

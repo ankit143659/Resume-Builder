@@ -50,9 +50,16 @@ class Create_resume : AppCompatActivity() {
         }
 
         save.setOnClickListener{
-            val intent = Intent(this,resume_template::class.java)
-            startActivity(intent)
-            finish()
+            val value : Boolean  = share.checkEdit()
+
+            if (value){
+                val intent = Intent(this,resume_template::class.java)
+                startActivity(intent)
+                finish()
+            }else{
+                Toast.makeText(this,"Plaese fill Personal Details atleast",Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 

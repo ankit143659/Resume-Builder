@@ -92,4 +92,14 @@ class SharePrefrence (context: Context) {
         return prefs.getString("profileImage","")
     }
 
+    fun storePersonalDetails(edit:Boolean){
+        val editor = prefs.edit()
+        editor.putBoolean("isEdit",edit)
+        editor.apply()
+    }
+
+    fun checkEdit():Boolean{
+        return prefs.getBoolean("isEdit",false)
+    }
+
 }

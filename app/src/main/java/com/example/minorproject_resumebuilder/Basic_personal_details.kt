@@ -206,10 +206,9 @@ class Basic_personal_details : AppCompatActivity() {
         )
 
         if (value) {
+            share.storePersonalDetails(true)
             Toast.makeText(this, "Successfully filled data", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, Create_resume::class.java).apply {
-                putExtra("resume_id", Resume_id)
-            })
+            startActivity(Intent(this, Create_resume::class.java))
             finish()
         } else {
             Toast.makeText(this, "Failed to save data", Toast.LENGTH_SHORT).show()
@@ -281,10 +280,9 @@ class Basic_personal_details : AppCompatActivity() {
         )
 
         if (value) {
+            share.storePersonalDetails(true)
             Toast.makeText(this, "Successfully updated data", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, Create_resume::class.java).apply {
-                putExtra("resume_id", Resume_id)
-            })
+            startActivity(Intent(this, Create_resume::class.java))
             finish()
         } else {
             Toast.makeText(this, "Failed to update data", Toast.LENGTH_SHORT).show()

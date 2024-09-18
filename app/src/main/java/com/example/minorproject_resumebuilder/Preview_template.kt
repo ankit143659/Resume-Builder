@@ -175,13 +175,25 @@ class Preview_template : AppCompatActivity() {
 
         download.setOnClickListener {
 
+            var value = true
+            if (share.checkUpdateMode()) {
+                db.updateResumeTemplateName(Resume_id, resume_Name)
+            } else {
+                value = db.storeResumeName(Resume_id, resume_Name)
+            }
+
             val storeDeatils = db.addDownloadedResume(share.getuser_id().toLong(),Resume_id,share.getResumeName(),share.getCreateDate())
             if (storeDeatils){
-                val bitMap = getBitmapFromView(resume_preview)
-                saveBitmapToFile(bitMap, "ResumeBuilder_Resume")
-                val intent = Intent(this@Preview_template, HomePage::class.java)
-                startActivity(intent)
-                finish()
+                if (value){
+                    val bitMap = getBitmapFromView(resume_preview)
+                    saveBitmapToFile(bitMap, "ResumeBuilder_Resume")
+                    val intent = Intent(this@Preview_template, HomePage::class.java)
+                    startActivity(intent)
+                    finish()
+                }else{
+                    Toast.makeText(this@Preview_template, "Resume save failed", Toast.LENGTH_SHORT).show()
+                }
+
             }else{
                 Toast.makeText(this@Preview_template, "Resume save failed", Toast.LENGTH_SHORT).show()
             }
