@@ -16,6 +16,7 @@ import com.example.minorproject_resumebuilder.com.example.minorproject_resumebui
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
 
 class LoginPage : AppCompatActivity() {
+
     private lateinit var dbHelper: SQLiteHelper
     private lateinit var prefrence: SharePrefrence
 

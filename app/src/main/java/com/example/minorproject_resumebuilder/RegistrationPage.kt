@@ -13,7 +13,8 @@ import android.widget.Toast
 import android.util.Patterns
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
 
-class RegistrationPage : AppCompatActivity() {
+class
+RegistrationPage : AppCompatActivity() {
     private lateinit var dbHelper: SQLiteHelper
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
