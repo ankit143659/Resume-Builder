@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.LinearLayout
 import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
 
 class MainActivity : AppCompatActivity() {
@@ -19,10 +20,10 @@ class MainActivity : AppCompatActivity() {
 
 
         continuee.setOnClickListener{
-            val I=Intent(this@MainActivity,Continue_page::class.java)
+            val I =Intent(this@MainActivity,Continue_page::class.java)
             startActivity(I)
         }
-        
+
     }
 
 }

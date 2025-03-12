@@ -102,4 +102,11 @@ class SharePrefrence (context: Context) {
         return prefs.getBoolean("isEdit",false)
     }
 
+    fun setDarkModeEnabled(isEnabled: Boolean) {
+        prefs.edit().putBoolean("isDarkMode", isEnabled).apply()
+    }
+
+    fun isDarkModeEnabled(): Boolean {
+        return prefs.getBoolean("isDarkMode", false)
+    }
 }

@@ -45,7 +45,7 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:backgroundTint="#F44336"
+                android:backgroundTint="#BC4747"
                 android:id="@+id/recover"
                 android:text="𝐑𝐞𝐜𝐨𝐯𝐞𝐫"
                 android:textColor="@color/white"

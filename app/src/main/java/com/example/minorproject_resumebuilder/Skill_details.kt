@@ -5,194 +5,175 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
-import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
-class Skill_details : AppCompatActivity() {
+class SkillDetailsActivity : AppCompatActivity() {
 
-    private lateinit var addLayout : Button
-    private lateinit var save : Button
-    private lateinit var layoutcontainer : LinearLayout
-    private lateinit var db : SQLiteHelper
-    private lateinit var share: SharePrefrence
-    var Resume_id : Long? = null
-    private lateinit var skillView : View
+    private lateinit var addSkillButton: Button
+    private lateinit var saveButton: Button
+    private lateinit var layoutContainer: LinearLayout
+    private lateinit var firestore: FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
+    private var userId: String? = null
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_skill_details)
-        share = SharePrefrence(this)
-        addLayout=findViewById(R.id.addSkill)
-        layoutcontainer=findViewById(R.id.layoutContainer)
-        save=findViewById(R.id.savebtn)
-        db = SQLiteHelper(this)
-        Resume_id =share.getResumeId()
-        skillView   =LayoutInflater.from(this). inflate(R.layout.skill_details,layoutcontainer,false)
-        val skillDetails = db.getAllSkills(Resume_id)
-        if (skillDetails!=null){
-            loadDetails()
-        }
-        if(layoutcontainer.childCount!=0){
-            save.visibility=View.VISIBLE
-        }else{
-            save.visibility = View.GONE
-        }
-        addLayout.setOnClickListener{
-            addskills();
+
+        addSkillButton = findViewById(R.id.addSkill)
+        layoutContainer = findViewById(R.id.layoutContainer)
+        saveButton = findViewById(R.id.savebtn)
+
+        firestore = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
+        userId = auth.currentUser?.uid
+
+        if (userId != null) {
+            loadSkills()
         }
 
-        save.setOnClickListener{
-            savedata()
+        updateSaveButtonVisibility()
+
+        addSkillButton.setOnClickListener {
+            addSkillView()
+        }
+
+        saveButton.setOnClickListener {
+            saveSkillsToFirebase()
         }
     }
 
-    private fun loadDetails() {
-        save.visibility = View.VISIBLE
-        val skillDetails = db.getAllSkills(Resume_id)
-        skillDetails.forEach{ skill->
-            loadSkillDetails(skill.skillName,skill.strength,skill.skill_id)
+    private fun addSkillView(skillName: String = "", strength: String = "", skillId: String? = null) {
+        val skillView = LayoutInflater.from(this).inflate(R.layout.skill_details, layoutContainer, false)
+        val skillEditText = skillView.findViewById<EditText>(R.id.skillName)
+        val beginnerCheckBox = skillView.findViewById<CheckBox>(R.id.begineer)
+        val intermediateCheckBox = skillView.findViewById<CheckBox>(R.id.intermediate)
+        val advancedCheckBox = skillView.findViewById<CheckBox>(R.id.advance)
+        val deleteButton = skillView.findViewById<Button>(R.id.delete)
+
+        skillEditText.setText(skillName)
+        when (strength) {
+            "Beginner" -> beginnerCheckBox.isChecked = true
+            "Intermediate" -> intermediateCheckBox.isChecked = true
+            "Advanced" -> advancedCheckBox.isChecked = true
         }
 
+        skillView.tag = skillId // Store Firestore document ID
+
+        deleteButton.setOnClickListener {
+            showDeleteDialog(skillView, skillId)
+        }
+
+        layoutContainer.addView(skillView)
+        updateSaveButtonVisibility()
     }
 
+    private fun saveSkillsToFirebase() {
+        if (userId == null) return
 
-    private fun loadSkillDetails(skillname: String, strength: String,skillId : Long) {
-        skillView   =LayoutInflater.from(this). inflate(R.layout.skill_details,layoutcontainer,false)
-        val skillName = skillView.findViewById<EditText>(R.id.skillName)
-        val a = skillView.findViewById<CheckBox>(R.id.begineer)
-        val b = skillView.findViewById<CheckBox>(R.id.intermediate)
-        val c = skillView.findViewById<CheckBox>(R.id.advance)
-        skillName.setText(skillname)
-        when(strength){
-            "Begineer" -> a.isChecked = true
-            "Intermediate" -> b.isChecked = true
-            "Advance" -> c.isChecked = true
-        }
+        val skillsCollection = firestore.collection("users").document(userId!!).collection("skills")
+        var isSuccess = true
 
-        skillView.tag = skillId
-        layoutcontainer.addView(skillView)
-        val delete: Button = skillView.findViewById(R.id.delete)
-        val layoutId = skillView.tag as?Long
-        delete.setOnClickListener {
-            val dialog = AlertDialog.Builder(this)
-            val dialogView = LayoutInflater.from(this).inflate(R.layout.delete_layout, null)
-            dialog.setView(dialogView)
+        for (i in 0 until layoutContainer.childCount) {
+            val skillView = layoutContainer.getChildAt(i)
+            val skillName = skillView.findViewById<EditText>(R.id.skillName).text.toString()
+            val beginnerCheckBox = skillView.findViewById<CheckBox>(R.id.begineer)
+            val intermediateCheckBox = skillView.findViewById<CheckBox>(R.id.intermediate)
+            val advancedCheckBox = skillView.findViewById<CheckBox>(R.id.advance)
 
-            val yes: Button = dialogView.findViewById(R.id.yes)
-            val no: Button = dialogView.findViewById(R.id.no)
+            val skillId = skillView.tag as? String ?: skillsCollection.document().id
+            val skillStrength = when {
+                beginnerCheckBox.isChecked -> "Beginner"
+                intermediateCheckBox.isChecked -> "Intermediate"
+                else -> "Advanced"
+            }
 
-            val alertBox = dialog.create()
+            val skillData = mapOf(
+                "skillName" to skillName,
+                "strength" to skillStrength
+            )
 
-            yes.setOnClickListener {
-                if (layoutId!=null){
-                    db.deleteSkill(layoutId)
-                    layoutcontainer.removeView(skillView)
+            skillsCollection.document(skillId)
+                .set(skillData)
+                .addOnFailureListener {
+                    isSuccess = false
                 }
+        }
 
-                if (layoutcontainer.childCount == 0) {
-                    save.visibility = View.GONE
+        if (isSuccess) {
+            Toast.makeText(this, "Skills saved successfully", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, Create_resume::class.java))
+            finish()
+        } else {
+            Toast.makeText(this, "Failed to save skills", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun loadSkills() {
+        if (userId == null) return
+
+        firestore.collection("users").document(userId!!)
+            .collection("skills")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val skillName = document.getString("skillName") ?: ""
+                    val strength = document.getString("strength") ?: ""
+                    addSkillView(skillName, strength, document.id)
                 }
-                alertBox.dismiss()
-                val intent = intent
-                startActivity(intent)
             }
-
-            no.setOnClickListener {
-                alertBox.dismiss()
+            .addOnFailureListener {
+                Toast.makeText(this, "Failed to load skills", Toast.LENGTH_SHORT).show()
             }
-
-            alertBox.show()
-        }
-
-
     }
 
-    private fun savedata() {
-        skillView   =LayoutInflater.from(this). inflate(R.layout.skill_details,layoutcontainer,false)
-        var value = true
-        for (i in 0 until layoutcontainer.childCount){
-            val SkillView = layoutcontainer.getChildAt(i)
-            val SkillName = SkillView.findViewById<EditText>(R.id.skillName).text.toString()
-            val a = SkillView.findViewById<CheckBox>(R.id.begineer)
-            val b = SkillView.findViewById<CheckBox>(R.id.intermediate)
-            val c = SkillView.findViewById<CheckBox>(R.id.advance)
-            val skillId = SkillView.tag as?Long
+    private fun showDeleteDialog(skillView: View, skillId: String?) {
+        val dialog = AlertDialog.Builder(this)
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.delete_layout, null)
+        dialog.setView(dialogView)
 
-            var grade : String
-            if (a.isChecked){
-                grade = "Beginner"
-            }else if (b.isChecked){
-                grade = "Intermediate"
+        val yesButton: Button = dialogView.findViewById(R.id.yes)
+        val noButton: Button = dialogView.findViewById(R.id.no)
+
+        val alertBox = dialog.create()
+
+        yesButton.setOnClickListener {
+            if (skillId != null && userId != null) {
+                firestore.collection("users").document(userId!!)
+                    .collection("skills").document(skillId)
+                    .delete()
+                    .addOnSuccessListener {
+                        layoutContainer.removeView(skillView)
+                        updateSaveButtonVisibility()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Failed to delete skill", Toast.LENGTH_SHORT).show()
+                    }
+            } else {
+                layoutContainer.removeView(skillView)
+                updateSaveButtonVisibility()
             }
-            else{
-                grade = "Advance"
-            }
-            val value2  = if (skillId!=null){
-                db.updateSkill(skillId,SkillName,grade)
-            }else{
-                db.insertSkill(Resume_id,SkillName,grade)
-            }
-            if (!value2){
-                value=false
-            }
+            alertBox.dismiss()
         }
-        if (value){
-            Toast.makeText(this,"Successfully filled Data", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,Create_resume::class.java)
-            startActivity(intent)
-        }else{
-            Toast.makeText(this,"Failed to filled Data", Toast.LENGTH_SHORT).show()
+
+        noButton.setOnClickListener {
+            alertBox.dismiss()
         }
+
+        alertBox.show()
     }
 
-    fun addskills(){
-        skillView   =LayoutInflater.from(this). inflate(R.layout.skill_details,layoutcontainer,false)
-        val delete : Button = skillView.findViewById(R.id.delete)
-        delete.setOnClickListener{
-
-            val dialog = AlertDialog.Builder(this)
-            val dialogView = LayoutInflater.from(this).inflate(R.layout.delete_layout,null)
-            dialog.setView(dialogView)
-
-            val yes : Button = dialogView.findViewById(R.id.yes)
-            val no : Button = dialogView.findViewById(R.id.no)
-
-            val alertBox = dialog.create()
-
-            yes.setOnClickListener{
-                layoutcontainer.removeView(skillView)
-                if(layoutcontainer.childCount==0){
-                    save.visibility=View.GONE
-                }
-                alertBox.dismiss()
-            }
-
-            no.setOnClickListener{
-                alertBox.dismiss()
-            }
-
-            alertBox.show()
-
-        }
-
-        layoutcontainer.addView(skillView)
-        save.visibility= View.VISIBLE
+    private fun updateSaveButtonVisibility() {
+        saveButton.visibility = if (layoutContainer.childCount > 0) View.VISIBLE else View.GONE
     }
+
     override fun onBackPressed() {
         super.onBackPressed()
-        val intent = Intent(this,Create_resume::class.java)
-        startActivity(intent)
+        startActivity(Intent(this, Create_resume::class.java))
     }
 }
-

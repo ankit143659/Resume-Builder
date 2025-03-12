@@ -240,7 +240,7 @@
                 android:id="@+id/delete"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/white"
-                android:backgroundTint="#EC060E"
+                android:backgroundTint="#BC4747"
                 android:textSize="19sp"
                 android:layout_height="wrap_content" />
         </LinearLayout>

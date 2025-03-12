@@ -5,10 +5,7 @@
 
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
-
-
-
-
+    
     <style name="Theme.MinorProject_ResumeBuilder" parent="Base.Theme.MinorProject_ResumeBuilder" >
     </style>
 </resources>

@@ -1,100 +1,112 @@
 package com.example.minorproject_resumebuilder
 
-
 import android.annotation.SuppressLint
-import android.content.ContentValues
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import android.util.Patterns
-import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
-class
-RegistrationPage : AppCompatActivity() {
-    private lateinit var dbHelper: SQLiteHelper
+class RegistrationPage : AppCompatActivity() {
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_page)
-        val login: Button =findViewById(R.id.buttonRegister);
-        val regis: TextView =findViewById(R.id.textViewLogin);
-        dbHelper=SQLiteHelper(this)
 
-        val Username : EditText = findViewById(R.id.editTextUsername)
-        val emailId : EditText = findViewById(R.id.editTextEmail)
-        val Password : EditText = findViewById(R.id.editTextPassword)
-        val phone : EditText = findViewById(R.id.ph)
+        val register: Button = findViewById(R.id.buttonRegister)
+        val login: TextView = findViewById(R.id.textViewLogin)
 
+        val username: EditText = findViewById(R.id.editTextUsername)
+        val emailId: EditText = findViewById(R.id.editTextEmail)
+        val password: EditText = findViewById(R.id.editTextPassword)
+        val phone: EditText = findViewById(R.id.ph)
 
+        auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
 
-        login.setOnClickListener{
+        register.setOnClickListener {
+            val usernameText = username.text.toString().trim()
+            val emailText = emailId.text.toString().trim()
+            val passwordText = password.text.toString().trim()
+            val phoneText = phone.text.toString().trim()
 
-            val username = Username.text.toString()
-            val password = Password.text.toString()
-            val email = emailId.text.toString()
-            val Phone = phone.text.toString()
+            if (!validateInputs(usernameText, emailText, passwordText, phoneText)) return@setOnClickListener
 
+            registerUser(usernameText, emailText, passwordText, phoneText)
+        }
 
-            if(Username.length()<3 && Username.length()>15 || emailId.length()==0 || Password.length()==0){
-                Username.setError("Username required")
-                emailId.setError("EmailId required")
-                Password.setError("Password required")
-            }else if(phone.length()!=10){
-                phone.setError("10 digit phone number allowed")
-            }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                emailId.setError("Invalid Email Format")
-            }else if (!password.matches(Regex(".*[A-Z].*"))){
-                Password.setError("Passwor must contain a Capital Letter,small letter.digits and atleast a single special Charachter")
-            }else if (!password.matches(Regex(".*[a-z].*"))){
-                Password.setError("Passwor must contain a Capital Letter,small letter.digits and atleast a single special Charachter")
-            }else if (!password.matches(Regex(".*[0-9].*"))){
-                Password.setError("Passwor must contain a Capital Letter,small letter.digits and atleast a single special Charachter")
-            }else if (!password.matches(Regex(".*[!@#$%^&*()_+=|<>{}\\[\\]~-].*"))){
-                Password.setError("Passwor must contain a Capital Letter,small letter.digits and atleast a single special Charachter")
-            }/*else if (!username.matches(Regex(".^[a-zA-z0-9]+$"))){
-                Username.setError("Username can contain only letters and alphabets")
-            }*/
+        login.setOnClickListener {
+            startActivity(Intent(this, LoginPage::class.java))
+        }
+    }
 
-            else{
-                if (addUser(username, password, Phone, email)) {
-                    Toast.makeText(this, "SuccessFully Register", Toast.LENGTH_SHORT).show()
-                    val I= Intent(this,LoginPage::class.java)
-                    startActivity(I)
-                    finish()
+    private fun validateInputs(username: String, email: String, password: String, phone: String): Boolean {
+        if (username.length !in 3..15) {
+            showError(findViewById(R.id.editTextUsername), "Username must be 3-15 characters")
+            return false
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            showError(findViewById(R.id.editTextEmail), "Invalid email format")
+            return false
+        }
+        if (phone.length != 10) {
+            showError(findViewById(R.id.ph), "Phone number must be 10 digits")
+            return false
+        }
+        if (!password.matches(Regex(".*[A-Z].*")) ||
+            !password.matches(Regex(".*[a-z].*")) ||
+            !password.matches(Regex(".*[0-9].*")) ||
+            !password.matches(Regex(".*[!@#\$%^&*()_+=|<>{}\\[\\]~-].*"))
+        ) {
+            showError(findViewById(R.id.editTextPassword), "Password must include uppercase, lowercase, digit, and special character")
+            return false
+        }
+        return true
+    }
+
+    private fun showError(editText: EditText, message: String) {
+        editText.error = message
+        editText.requestFocus()
+    }
+
+    private fun registerUser(username: String, email: String, password: String, phone: String) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val userId = auth.currentUser?.uid ?: return@addOnCompleteListener
+                    saveUserData(userId, username, email, phone)
                 } else {
-                    Toast.makeText(this, "User already exists or error!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Registration failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
-
-
             }
-
-        }
-        regis.setOnClickListener{
-            val I= Intent(this,LoginPage::class.java)
-            startActivity(I)
-        }
-
     }
 
-    private fun addUser(username: String, password: String, phone: String, email: String): Boolean {
-        val db = dbHelper.writableDatabase
-        return try {
-            val values = ContentValues().apply {
-                put(SQLiteHelper.COLUMN_USERNAME, username)
-                put(SQLiteHelper.COLUMN_PASSWORD, password)
-                put(SQLiteHelper.COLUMN_PHONE, phone)
-                put(SQLiteHelper.COLUMN_EMAIL, email)
+    private fun saveUserData(userId: String, username: String, email: String, phone: String) {
+        val userMap = hashMapOf(
+            "userId" to userId,
+            "username" to username,
+            "email" to email,
+            "phone" to phone
+        )
+
+        firestore.collection("users").document(userId)
+            .set(userMap)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Successfully Registered", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, LoginPage::class.java))
+                finish()
             }
-            val result = db.insert(SQLiteHelper.TABLE_USERS, null, values)
-            result != -1L
-        } catch (e: Exception) {
-            false
-        }
+            .addOnFailureListener {
+                Toast.makeText(this, "Failed to save user data", Toast.LENGTH_SHORT).show()
+            }
     }
-
-
 }

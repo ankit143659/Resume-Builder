@@ -35,7 +35,7 @@ class Create_resume : AppCompatActivity() {
         }
 
         btn_skill.setOnClickListener{
-            val intent = Intent(this,Skill_details::class.java)
+            val intent = Intent(this,SkillDetail::class.java)
             startActivity(intent)
         }
 
@@ -45,7 +45,7 @@ class Create_resume : AppCompatActivity() {
         }
 
         btn_project.setOnClickListener{
-            val intent = Intent(this,project_detailss::class.java)
+            val intent = Intent(this,ProjectDetail::class.java)
             startActivity(intent)
         }
 

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <!-- FrameLayout to Overlay Elements -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Custom Background View -->
+        <View
+            android:id="@+id/customView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custome_view" />
+
+        <!-- Admin Title -->
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="190dp"
+            android:layout_marginLeft="130dp"
+            android:text="ADMIN"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            android:textColor="@color/white" />
+
+        <!-- Username Label -->
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="222dp"
+            android:layout_height="52dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="300dp"
+            android:text="USERNAME"
+            android:textSize="20dp"
+            android:textColor="@color/white" />
+
+        <!-- Password Label -->
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="222dp"
+            android:layout_height="52dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="370dp"
+            android:text="PASSWORD"
+            android:textSize="20dp"
+            android:textColor="@color/white" />
+
+        <!-- Login Button -->
+        <Button
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LOGIN"
+            android:backgroundTint="#032E63"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="450dp" />
+
+    </FrameLayout>
+
+</LinearLayout>

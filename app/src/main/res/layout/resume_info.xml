@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/create"
                 android:textColor="@color/white"
-                android:backgroundTint="#E20808"
+                android:backgroundTint="#BC4747"
                 android:text="𝐂𝐫𝐞𝐚𝐭𝐞"
                 android:textSize="20sp" />
 

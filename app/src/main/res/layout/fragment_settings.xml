@@ -36,6 +36,7 @@
 
     <!-- Profile Section -->
     <TextView
+        android:id="@+id/profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Profile"
@@ -71,8 +72,10 @@
             android:gravity="center_vertical" />
 
         <Switch
+            android:id="@+id/switchtheme"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:checked="false"/>
     </LinearLayout>
 
     <!-- Other Menu Items -->
@@ -145,5 +148,12 @@
         android:drawableEnd="@drawable/baseline_star_24"
         android:gravity="center_vertical"
         android:layout_marginTop="8dp" />
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/white" />
 
 </LinearLayout>

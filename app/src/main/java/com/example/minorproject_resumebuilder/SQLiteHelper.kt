@@ -20,9 +20,10 @@ import java.util.Date
 class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 2
         private const val DATABASE_NAME = "UserDB.db"
         const val TABLE_USERS = "users"
+        //const val TABLE_ADMIN = "admin"
         const val TABLE_RESUME = "resumes"
         const val TABLE_PERSONAL = "personal"
         const val TABLE_EDUCATION = "education"
@@ -36,6 +37,8 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         const val COLUMN_PHONE = "phone"
         const val COLUMN_EMAIL = "email"
         const val TABLE_DOWNLOAD = "download"
+        //const val COLUMN_ADMIN_USERNAME = "admin_username"
+        //const val COLUMN_ADMIN_PASSWORD = "admin_password"
 
         private const val TABLE_CREATE = (
                 "CREATE TABLE $TABLE_USERS (" +
@@ -43,7 +46,9 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                         "$COLUMN_USERNAME TEXT UNIQUE, " +
                         "$COLUMN_PASSWORD TEXT NOT NULL, " +
                         "$COLUMN_PHONE TEXT UNIQUE NOT NULL, " +
-                        "$COLUMN_EMAIL TEXT UNIQUE NOT NULL);")
+                        "$COLUMN_EMAIL TEXT UNIQUE NOT NULL);" +
+                        "isAdmin INTEGER DEFAULT 0);"
+        )
 
         private const val TABLE_RESUMEE = ("""
             CREATE TABLE $TABLE_RESUME (
@@ -54,6 +59,15 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                 FOREIGN KEY(user_id) REFERENCES $TABLE_USERS(id) ON DELETE CASCADE
             )
         """)
+
+        /*private const val TABLE_CREATE_ADMIN = ("""
+            CREATE TABLE $TABLE_ADMIN (
+                $COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $COLUMN_ADMIN_USERNAME TEXT UNIQUE NOT NULL,
+                $COLUMN_ADMIN_PASSWORD TEXT NOT NULL
+            )
+        """)*/
+
         private const val TABLE_PERSONALl = (
                 """
             CREATE TABLE $TABLE_PERSONAL (
@@ -148,13 +162,14 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                     )
                 """
                 )
-
     }
+
 
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(TABLE_CREATE)
         db.execSQL(TABLE_RESUMEE)
+       // db.execSQL(TABLE_CREATE_ADMIN)
         db.execSQL(TABLE_PERSONALl)
         db.execSQL(TABLE_EDUCATIONAL)
         db.execSQL(TABLE_SKILLl)
@@ -166,6 +181,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS $TABLE_USERS")
+       // db.execSQL("DROP TABLE IF EXISTS $TABLE_ADMIN")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_RESUME")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_PERSONAL")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_EDUCATION")
@@ -177,6 +193,29 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         onCreate(db)
     }
 
+    /*fun insertAdmin(username: String, password: String): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_ADMIN_USERNAME, username)
+            put(COLUMN_ADMIN_PASSWORD, password)
+        }
+        val result = db.insert(TABLE_ADMIN, null, values)
+        db.close()
+        return result != -1L
+    }
+
+    fun checkAdmin(username: String, password: String): Boolean {
+        val db = this.readableDatabase
+        val query = "SELECT * FROM $TABLE_ADMIN WHERE $COLUMN_ADMIN_USERNAME = ? AND $COLUMN_ADMIN_PASSWORD = ?"
+        val cursor = db.rawQuery(query, arrayOf(username, password))
+
+        val isAdmin = cursor.count > 0
+        cursor.close()
+        db.close()
+
+        return isAdmin
+    }*/
+
     fun checkUser(username: String, password: String): Map<String,String>? {
         val db = this.writableDatabase
         val query = "SELECT * FROM $TABLE_USERS WHERE $COLUMN_USERNAME = ? AND $COLUMN_PASSWORD = ?"
@@ -186,6 +225,7 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
             val email = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL))
             val phone = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PHONE))
             val user_id = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ID))
+           // val isAdmin = cursor.getInt(cursor.getColumnIndexOrThrow("isAdmin")) == 1
 
             userdetails= mapOf(
                 "username" to username,

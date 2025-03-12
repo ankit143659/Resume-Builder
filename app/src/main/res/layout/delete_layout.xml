@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/yes"
                 android:textColor="@color/white"
-                android:backgroundTint="#E20808"
+                android:backgroundTint="#CE5555"
                 android:text="𝐘𝐞𝐬"
                 android:textSize="20sp" />
 

@@ -48,6 +48,7 @@ class Profile : Fragment() {
         val btn: Button = view.findViewById(R.id.logout)
         val name: TextView = view.findViewById(R.id.name)
         val email: TextView = view.findViewById(R.id.email)
+        val txtUsername: TextView = view.findViewById(R.id.txtUsername)
         val phone: TextView = view.findViewById(R.id.phone)
         photo = view.findViewById(R.id.profile)
         profile = view.findViewById(R.id.profile_picture)
@@ -61,7 +62,12 @@ class Profile : Fragment() {
         name.text = Name
         email.text = Email
         phone.text = Phone
+// Get username from arguments (data from Settings Fragment)
+        val username = arguments?.getString("username") ?: "Guest"
+        txtUsername.text = "Welcome, $username"
 
+        // Show toast message
+        Toast.makeText(requireContext(), "Welcome, $username", Toast.LENGTH_SHORT).show()
         checkAndRequestPermissions()
 
         photo.setOnClickListener {

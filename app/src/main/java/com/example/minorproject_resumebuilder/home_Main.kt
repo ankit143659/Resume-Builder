@@ -3,6 +3,7 @@ package com.example.minorproject_resumebuilder
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +17,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
@@ -33,7 +35,7 @@ import kotlin.properties.Delegates
 class home_Main : Fragment() {
 
     private val calendar = Calendar.getInstance()
-    private lateinit var share: SharePrefrence
+    private lateinit var SharePrefrence : SharePrefrence
     private lateinit var adapter: ResumeAdapter
     private var user_id by Delegates.notNull<Long>()
     private lateinit var db: SQLiteHelper
@@ -46,19 +48,22 @@ class home_Main : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
+
         val view: View = inflater.inflate(R.layout.fragment_home__main, container, false)
         val btn: Button = view.findViewById(R.id.btn_create_cv)
         recycler = view.findViewById(R.id.recyclerView)
         imageContainer = view.findViewById(R.id.imageContainer)
         db = SQLiteHelper(requireContext())
-        share = SharePrefrence(requireContext())
+        SharePrefrence = SharePrefrence(requireContext())
         recycler.visibility = View.GONE
         imageContainer.visibility = View.VISIBLE
 
-        share.storeUpdateMode(false)
+        SharePrefrence.storeUpdateMode(false)
 
         try {
-            user_id = share.getuser_id().toLong()
+            user_id = SharePrefrence.getuser_id().toLong()
         } catch (e: Exception) {
             Log.e("home_Main", "Error getting user ID", e)
             Toast.makeText(requireContext(), "Invalid user ID", Toast.LENGTH_SHORT).show()
@@ -110,7 +115,7 @@ class home_Main : Fragment() {
             }
 
             create.setOnClickListener {
-                share.storePersonalDetails(false)
+                SharePrefrence.storePersonalDetails(false)
                 val nameText = name.text.toString()
                 val dateText = date.text.toString()
 
@@ -127,9 +132,9 @@ class home_Main : Fragment() {
                                adapter.addResume(newResume)
                            }
                        }
-                        share.storeResumeDetails(nameText,dateText)
+                        SharePrefrence.storeResumeDetails(nameText,dateText)
                         val intent = Intent(activity, Create_resume::class.java)
-                        share.storeResumeId(value)
+                        SharePrefrence.storeResumeId(value)
                         startActivity(intent)
                         alertDialog.dismiss()
                     } else {
@@ -158,19 +163,19 @@ class home_Main : Fragment() {
     }
 
     private fun editResume(resumeId: String) {
-        share.storePersonalDetails(true)
+        SharePrefrence.storePersonalDetails(true)
         val resume_id = resumeId.toLong()
-        share.storeResumeId(resume_id)
-        share.storeUpdateMode(true)
+        SharePrefrence.storeResumeId(resume_id)
+        SharePrefrence.storeUpdateMode(true)
         val intent = Intent(requireContext(),Create_resume::class.java)
         startActivity(intent)
     }
 
     private fun onclick(resumeId: String,resumeName : String, createDate: String) {
         val resumeId = resumeId.toLong()
-        share.storeResumeId(resumeId)
-        share.storeResumeDetails(resumeName,createDate)
-        share.storeTemplateName(db.getTemplateName(resumeId))
+        SharePrefrence.storeResumeId(resumeId)
+        SharePrefrence.storeResumeDetails(resumeName,createDate)
+        SharePrefrence.storeTemplateName(db.getTemplateName(resumeId))
         val i = Intent(requireContext(),Preview_template::class.java)
         startActivity(i)
 

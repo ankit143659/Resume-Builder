@@ -11,39 +11,38 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SQLiteHelper
-import com.example.minorproject_resumebuilder.com.example.minorproject_resumebuilder.SharePrefrence
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
-class project_detailss : AppCompatActivity() {
+class ProjectDetailsActivity : AppCompatActivity() {
 
-    // Declare variables for UI components and database helper
     private lateinit var addLayout: Button
     private lateinit var save: Button
     private lateinit var layout: LinearLayout
-    private lateinit var db: SQLiteHelper
-    private var resumeId: Long? = null
-    private lateinit var share: SharePrefrence
+    private lateinit var firestore: FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
+    private var userId: String? = null
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_project_detailss)
-        share = SharePrefrence(this)
-        resumeId = share.getResumeId()
-        db = SQLiteHelper(this)
+
         layout = findViewById(R.id.layoutContainer)
         addLayout = findViewById(R.id.addProjects)
         save = findViewById(R.id.savebtn)
 
+        firestore = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
+        userId = auth.currentUser?.uid
 
-        val projectDetails = db.getAllProjectDetails(resumeId)
-        if (projectDetails != null && projectDetails.isNotEmpty()) {
+        if (userId != null) {
             loadData()
         }
 
-        if (layout.childCount !=0){
-            save.visibility=View.VISIBLE
-        }else{
+        if (layout.childCount != 0) {
+            save.visibility = View.VISIBLE
+        } else {
             save.visibility = View.GONE
         }
 
@@ -56,43 +55,23 @@ class project_detailss : AppCompatActivity() {
         }
     }
 
-    // Method to add a new project layout dynamically
     private fun addProject() {
         val newProjectView = LayoutInflater.from(this).inflate(R.layout.project, layout, false)
         val delete: Button = newProjectView.findViewById(R.id.delete)
 
-        // Set listener for delete button in each project view
         delete.setOnClickListener {
-            val dialog = android.app.AlertDialog.Builder(this)
-            val dialogView = LayoutInflater.from(this).inflate(R.layout.delete_layout, null)
-            dialog.setView(dialogView)
-
-            val yes: Button = dialogView.findViewById(R.id.yes)
-            val no: Button = dialogView.findViewById(R.id.no)
-
-            val alertBox = dialog.create()
-
-            yes.setOnClickListener {
-                layout.removeView(newProjectView)
-                if (layout.childCount == 0) {
-                    save.visibility = View.GONE
-                }
-                alertBox.dismiss()
-            }
-
-            no.setOnClickListener {
-                alertBox.dismiss()
-            }
-
-            alertBox.show()
+            showDeleteDialog(newProjectView, null)
         }
 
         layout.addView(newProjectView)
         save.visibility = View.VISIBLE
     }
 
-    // Method to save the project details to the database
     private fun saveData() {
+        if (userId == null) return
+
+        val projectsCollection = firestore.collection("users").document(userId!!).collection("projects")
+
         var isSuccess = true
         for (i in 0 until layout.childCount) {
             val projectView = layout.getChildAt(i)
@@ -103,48 +82,59 @@ class project_detailss : AppCompatActivity() {
             val startDate = projectView.findViewById<EditText>(R.id.startDate).text.toString()
             val endDate = projectView.findViewById<EditText>(R.id.endDate).text.toString()
 
-            val proId = projectView.tag as? Long
+            val projectId = projectView.tag as? String ?: projectsCollection.document().id
 
-            val value2 = if (proId!=null){
-                db.updateProject(proId,projectName,description,projectUrl,startDate,endDate,role)
-            }else{
-                db.insertProject(resumeId, projectName, description, projectUrl, startDate, endDate, role)
-            }
+            val projectData = mapOf(
+                "projectName" to projectName,
+                "role" to role,
+                "projectUrl" to projectUrl,
+                "description" to description,
+                "startDate" to startDate,
+                "endDate" to endDate
+            )
 
-            if (!value2){
-                isSuccess = false
-            }
+            projectsCollection.document(projectId)
+                .set(projectData)
+                .addOnFailureListener {
+                    isSuccess = false
+                }
         }
 
         if (isSuccess) {
-            Toast.makeText(this, "Successfully filled Data", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, Create_resume::class.java).apply {
-                putExtra("resume_id", resumeId)
-            }
-            startActivity(intent)
+            Toast.makeText(this, "Successfully saved projects", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, Create_resume::class.java))
+            finish()
         } else {
-            Toast.makeText(this, "Failed to fill Data", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Failed to save projects", Toast.LENGTH_SHORT).show()
         }
     }
 
-    // Method to load existing project data from the database
     private fun loadData() {
-        val projectDetails = db.getAllProjectDetails(resumeId)
-        projectDetails?.forEach { project ->
-            loadProjectData(
-                project.project_id,
-                project.projectName,
-                project.projectDescription,
-                project.startDate,
-                project.endDate,
-                project.userRole,
-                project.projectUrl
-            )
-        }
+        if (userId == null) return
+
+        firestore.collection("users").document(userId!!)
+            .collection("projects")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    loadProjectData(
+                        document.id,
+                        document.getString("projectName") ?: "",
+                        document.getString("description") ?: "",
+                        document.getString("startDate") ?: "",
+                        document.getString("endDate") ?: "",
+                        document.getString("role") ?: "",
+                        document.getString("projectUrl") ?: ""
+                    )
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Failed to load projects", Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun loadProjectData(
-        proId : Long,
+        projectId: String,
         name: String,
         description: String,
         start: String,
@@ -167,44 +157,53 @@ class project_detailss : AppCompatActivity() {
         startDate.setText(start)
         endDate.setText(end)
 
-        newProjectView.tag = proId
+        newProjectView.tag = projectId
         layout.addView(newProjectView)
+
         val delete: Button = newProjectView.findViewById(R.id.delete)
-        val layoutId = newProjectView.tag as?Long
         delete.setOnClickListener {
-            val dialog = AlertDialog.Builder(this)
-            val dialogView = LayoutInflater.from(this).inflate(R.layout.delete_layout, null)
-            dialog.setView(dialogView)
+            showDeleteDialog(newProjectView, projectId)
+        }
+    }
 
-            val yes: Button = dialogView.findViewById(R.id.yes)
-            val no: Button = dialogView.findViewById(R.id.no)
+    private fun showDeleteDialog(projectView: View, projectId: String?) {
+        val dialog = AlertDialog.Builder(this)
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.delete_layout, null)
+        dialog.setView(dialogView)
 
-            val alertBox = dialog.create()
+        val yes: Button = dialogView.findViewById(R.id.yes)
+        val no: Button = dialogView.findViewById(R.id.no)
 
-            yes.setOnClickListener {
-                if (layoutId!=null){
-                    db.deleteProject(layoutId)
-                    layout.removeView(newProjectView)
-                }
+        val alertBox = dialog.create()
 
-                if (layout.childCount == 0) {
-                    save.visibility = View.GONE
-                }
-                alertBox.dismiss()
-                val intent = intent
-                startActivity(intent)
+        yes.setOnClickListener {
+            if (projectId != null && userId != null) {
+                firestore.collection("users").document(userId!!)
+                    .collection("projects").document(projectId)
+                    .delete()
+                    .addOnSuccessListener {
+                        layout.removeView(projectView)
+                        if (layout.childCount == 0) save.visibility = View.GONE
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Failed to delete project", Toast.LENGTH_SHORT).show()
+                    }
+            } else {
+                layout.removeView(projectView)
+                if (layout.childCount == 0) save.visibility = View.GONE
             }
-
-            no.setOnClickListener {
-                alertBox.dismiss()
-            }
-
-            alertBox.show()
+            alertBox.dismiss()
         }
 
+        no.setOnClickListener {
+            alertBox.dismiss()
+        }
+
+        alertBox.show()
     }
+
     override fun onBackPressed() {
         super.onBackPressed()
-        val intent = Intent(this,Create_resume::class.java)
-        startActivity(intent)
-    }}
+        startActivity(Intent(this, Create_resume::class.java))
+    }
+}

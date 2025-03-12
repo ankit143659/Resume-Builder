@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/header_background"
+        android:background="@drawable/btn_bg"
         android:padding="16dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -25,7 +25,17 @@
             android:src="@mipmap/ic_launcher"
             app:civ_border_color="@color/white"
             app:civ_border_width="5dp" />
-
+        <TextView
+            android:id="@+id/txtUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="Welcome, User"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
         <Button
             android:id="@+id/profile"
             android:layout_width="wrap_content"
@@ -33,7 +43,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="#A60606"
+            android:backgroundTint="#BC4747"
             android:text="Change Profile"
             android:textColor="@color/white"
             android:textSize="16sp"
@@ -155,7 +165,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="70dp"
-        android:backgroundTint="#A60606"
+        android:backgroundTint="#BC4747"
         android:text="LOG OUT"
         android:textColor="@color/white"
         android:textSize="16sp"

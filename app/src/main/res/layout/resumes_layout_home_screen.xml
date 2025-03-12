@@ -93,7 +93,7 @@
             android:text="Delete"
             android:textColor="@color/white"
             android:id="@+id/deleteButton"
-            android:backgroundTint="#F10606"
+            android:backgroundTint="#BC4747"
             android:textSize="18sp"
             android:layout_height="wrap_content" />
 
