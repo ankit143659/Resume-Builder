@@ -201,7 +201,7 @@ class Basic_personal_details : AppCompatActivity() {
                     if (genderValue == "Male") findViewById<CheckBox>(R.id.male).isChecked = true
                     else findViewById<CheckBox>(R.id.female).isChecked = true
                     val imageUrl = document.getString("profileImageUrl")
-                    if (!imageUrl.isNullOrEmpty()) Glide.with(this).load(imageUrl).into(photo)
+
                 }
             }
     }

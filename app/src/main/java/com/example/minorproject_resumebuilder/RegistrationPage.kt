@@ -1,6 +1,5 @@
 package com.example.minorproject_resumebuilder
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
@@ -17,7 +16,6 @@ class RegistrationPage : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_page)
@@ -39,9 +37,9 @@ class RegistrationPage : AppCompatActivity() {
             val passwordText = password.text.toString().trim()
             val phoneText = phone.text.toString().trim()
 
-            if (!validateInputs(usernameText, emailText, passwordText, phoneText)) return@setOnClickListener
-
-            registerUser(usernameText, emailText, passwordText, phoneText)
+            if (validateInputs(usernameText, emailText, passwordText, phoneText)) {
+                registerUser(usernameText, emailText, passwordText, phoneText)
+            }
         }
 
         login.setOnClickListener {
@@ -50,27 +48,35 @@ class RegistrationPage : AppCompatActivity() {
     }
 
     private fun validateInputs(username: String, email: String, password: String, phone: String): Boolean {
-        if (username.length !in 3..15) {
-            showError(findViewById(R.id.editTextUsername), "Username must be 3-15 characters")
-            return false
+        when {
+            username.length !in 3..15 -> {
+                showError(findViewById(R.id.editTextUsername), "Username must be 3-15 characters")
+                return false
+            }
+            !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                showError(findViewById(R.id.editTextEmail), "Invalid email format")
+                return false
+            }
+            phone.length != 10 || !phone.matches(Regex("[0-9]+")) -> {
+                showError(findViewById(R.id.ph), "Phone number must be 10 digits")
+                return false
+            }
+            password.length < 8 -> {
+                showError(findViewById(R.id.editTextPassword), "Password must be at least 8 characters")
+                return false
+            }
+            !password.matches(Regex(".*[A-Z].*")) ||
+                    !password.matches(Regex(".*[a-z].*")) ||
+                    !password.matches(Regex(".*[0-9].*")) ||
+                    !password.matches(Regex(".*[!@#\$%^&*()_+=|<>{}\\[\\]~-].*")) -> {
+                showError(
+                    findViewById(R.id.editTextPassword),
+                    "Password must include uppercase, lowercase, digit, and special character"
+                )
+                return false
+            }
+            else -> return true
         }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            showError(findViewById(R.id.editTextEmail), "Invalid email format")
-            return false
-        }
-        if (phone.length != 10) {
-            showError(findViewById(R.id.ph), "Phone number must be 10 digits")
-            return false
-        }
-        if (!password.matches(Regex(".*[A-Z].*")) ||
-            !password.matches(Regex(".*[a-z].*")) ||
-            !password.matches(Regex(".*[0-9].*")) ||
-            !password.matches(Regex(".*[!@#\$%^&*()_+=|<>{}\\[\\]~-].*"))
-        ) {
-            showError(findViewById(R.id.editTextPassword), "Password must include uppercase, lowercase, digit, and special character")
-            return false
-        }
-        return true
     }
 
     private fun showError(editText: EditText, message: String) {
